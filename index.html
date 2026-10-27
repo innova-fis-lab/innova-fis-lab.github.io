@@ -11,7 +11,7 @@ button:disabled{opacity:.6}#msg{min-height:1.4em;margin-top:14px;color:#c0392b;f
 <p>Web en revisión, solo para los miembros del grupo. Escribe la contraseña para entrar. Acceso válido hasta el domingo 2 de noviembre.</p>
 <form id="f"><label for="pw">Contraseña</label><input id="pw" type="password" autocomplete="current-password" autofocus required><button id="b" type="submit">Entrar</button></form><div id="msg"></div></div>
 <script>
-const CFG={"salt": "7c4e04e06d3f5bf2f0af23507cd5893c", "iter": 310000};
+const CFG={"salt": "2832e78c5ddd17f2054bd72a209820d6", "iter": 310000};
 let BASE="/";
 async function findBase(){const d=location.pathname.split("/").slice(0,-1);for(let i=1;i<=d.length;i++){const pre=d.slice(0,i).join("/")+"/";try{const r=await fetch(pre+"check.bin",{cache:"no-cache"});if(r.ok&&(r.headers.get("content-type")||"").indexOf("html")<0){BASE=pre;return}}catch(e){}}}
 function hex(h){return new Uint8Array(h.match(/../g).map(x=>parseInt(x,16)))}
@@ -22,9 +22,10 @@ if(Date.now()>EXP){document.getElementById("f").style.display="none";msg.textCon
 if(!("serviceWorker" in navigator)||!window.crypto||!crypto.subtle){msg.textContent="Este navegador no permite abrir la web. Prueba con Chrome, Edge, Firefox o Safari actualizados."}
 document.getElementById("f").addEventListener("submit",async e=>{e.preventDefault();b.disabled=true;msg.style.color="#5b6676";msg.textContent="Comprobando…";
  try{await findBase();const base=await crypto.subtle.importKey("raw",new TextEncoder().encode(document.getElementById("pw").value),"PBKDF2",false,["deriveKey"]);
-  const k=await crypto.subtle.deriveKey({name:"PBKDF2",salt:hex(CFG.salt),iterations:CFG.iter,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
-  const c=new Uint8Array(await (await fetch(BASE+"check.bin",{cache:"no-cache"})).arrayBuffer());
-  await crypto.subtle.decrypt({name:"AES-GCM",iv:c.slice(0,12)},k,c.slice(12));
+  const kp=await crypto.subtle.deriveKey({name:"PBKDF2",salt:hex(CFG.salt),iterations:CFG.iter,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
+  const c=new Uint8Array(await (await fetch(BASE+"pc0.bin",{cache:"no-cache"})).arrayBuffer());
+  const raw=await crypto.subtle.decrypt({name:"AES-GCM",iv:c.slice(0,12)},kp,c.slice(12));
+  const k=await crypto.subtle.importKey("raw",raw,"AES-GCM",false,["decrypt"]);
   await save(k);
   const reg=await navigator.serviceWorker.register(BASE+"sw.js",{scope:BASE});await navigator.serviceWorker.ready;
   if(reg.active)reg.active.postMessage("forget");
