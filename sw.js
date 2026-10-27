@@ -10,7 +10,7 @@ self.addEventListener("install",e=>self.skipWaiting());
 self.addEventListener("activate",e=>e.waitUntil((async()=>{for(const n of await caches.keys())if(n!=="ifl-"+VER)await caches.delete(n);await self.clients.claim()})()));
 self.addEventListener("message",e=>{if(e.data==="forget"){KEY=null;IDX=null}});
 self.addEventListener("fetch",e=>{const u=new URL(e.request.url);if(u.origin!==location.origin||e.request.method!=="GET"||!u.pathname.startsWith(BASE))return;
- let rel=decodeURIComponent(u.pathname.slice(BASE.length));if(OWN.has(rel)||/^p[cvd]\d+\.bin$/.test(rel))return;
+ let rel=decodeURIComponent(u.pathname.slice(BASE.length));if(OWN.has(rel)||/^p[cvd]\d+\.bin$/.test(rel)||/^alumnos(\/|$)/.test(rel))return;
  e.respondWith((async()=>{if(Date.now()>EXP)return fetch(BASE+"acceso.html");const k=await getKey();if(!k)return fetch(BASE+"acceso.html");
   try{const ix=await getIdx(k);if(rel===""||rel.endsWith("/"))rel+="index.html";if(!ix[rel]&&ix[rel+".html"])rel+=".html";
    const ent=ix[rel];if(!ent)return new Response("No encontrado",{status:404});
