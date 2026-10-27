@@ -1,5 +1,5 @@
 const MIME={html:"text/html; charset=utf-8",css:"text/css",js:"text/javascript",json:"application/json",png:"image/png",jpg:"image/jpeg",jpeg:"image/jpeg",gif:"image/gif",svg:"image/svg+xml",woff2:"font/woff2",woff:"font/woff",pdf:"application/pdf",txt:"text/plain; charset=utf-8",docx:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"};
-const VER="9960abf7";const BASE=new URL(self.registration.scope).pathname;const OWN=new Set(["sw.js","acceso.html","check.bin","idx.bin"]);
+const VER="c90123f5";const BASE=new URL(self.registration.scope).pathname;const OWN=new Set(["sw.js","acceso.html","check.bin","idx.bin"]);
 let KEY=null,IDX=null;const PACKS={};const EXP=Date.UTC(2026,10,2,23,0,0);
 function idb(){return new Promise((res,rej)=>{const r=indexedDB.open("ifl",1);r.onupgradeneeded=()=>r.result.createObjectStore("k");r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
 async function getKey(){if(KEY)return KEY;const db=await idb();return new Promise(res=>{const t=db.transaction("k").objectStore("k").get("key");t.onsuccess=()=>{KEY=t.result||null;res(KEY)};t.onerror=()=>res(null)})}
