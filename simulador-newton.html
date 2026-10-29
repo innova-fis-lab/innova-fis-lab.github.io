@@ -1,0 +1,1513 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="snav-css">
+  .snav { display: block; margin: 0; position: sticky; top: 0; z-index: 50; background: #ffffff; border-bottom: 1px solid #e2e6eb; }
+  .snav .in { width: 100%; max-width: 1100px; margin: 0 auto; padding: 10px 28px; display: flex; align-items: center; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; }
+  .snav .br { display: flex; align-items: center; gap: 10px; color: #1b2430; text-decoration: none; font-family: "InterD","InterT",sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: .02em; }
+  .snav .bl { display: flex; align-items: center; gap: 8px 18px; flex-wrap: wrap; }
+  .snav .fi { color: #5b6676; font-size: .85rem; text-underline-offset: 3px; }
+  .snav .fi:hover { color: #1b2430; }
+  .snav nav { display: flex; gap: 2px 22px; flex-wrap: wrap; }
+  .snav nav a { color: #5b6676; text-decoration: none; font-size: .93rem; font-weight: 600; padding: 4px 0; border-bottom: 2px solid transparent; }
+  .snav nav a:hover { color: #1b2430; }
+  .snav nav a[aria-current="page"] { color: #1b2430; border-bottom-color: #1b2430; }
+  .sfoot { border-top: 1px solid #e2e6eb; color: #5b6676; font-size: .88rem; }
+  .sfoot .in { max-width: 1100px; margin: 0 auto; padding: 22px 28px 30px; display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; }
+  .sfoot a { color: inherit; }
+  .itabs { display: inline-flex; gap: 8px; margin: 0 0 14px; }
+  .itabs a { display: inline-flex; align-items: center; gap: 10px; padding: 6px 16px 6px 8px; border: 1.5px solid #e2e6eb; border-radius: 12px; background: #fff; font-size: .95rem; font-weight: 600; color: #5b6676; text-decoration: none; }
+  .itabs a:hover { border-color: #b9c3ce; color: #1b2430; }
+  .itabs a[aria-current="page"] { border-color: #1f4e79; background: #eaf1f8; color: #163a5c; }
+  .itabs .ii { width: 44px; height: 32px; border-radius: 8px; background: #f6f7f9; display: grid; place-items: center; }
+  .itabs a[aria-current="page"] .ii { background: #fff; }
+  .itabs .ii svg { width: 34px; height: 26px; }
+  @media (max-width: 640px) { .snav .in, .sfoot .in { padding-left: 16px; padding-right: 16px; } }
+</style>
+</head><body>
+<!--snav--><header class="snav"><div class="in" style="max-width:1520px"><div class="bl"><a class="br" href="index.html"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#070c15"/><rect x="7" y="7" width="2.4" height="20" fill="#7a5cff"/><rect x="11.5" y="7" width="2.4" height="20" fill="#2fb7e8"/><rect x="17" y="7" width="2.4" height="20" fill="#57d163"/><rect x="21" y="7" width="2.4" height="20" fill="#f4a62a"/><rect x="25.5" y="7" width="2.4" height="20" fill="#ff4d4d"/></svg>INNOVA-FIS-LAB</a></div><nav aria-label="Secciones de la web"><a href="index.html">Inicio</a><a href="laboratorios.html" aria-current="page">Laboratorios</a><a href="calibre.html">Instrumentos de medida</a><a href="errores.html">Errores</a><a href="novedades.html">Novedades</a></nav></div></header><!--/snav-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>Simulación: leyes de Newton · INNOVA-FIS-LAB</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=STIX+Two+Text:ital@1&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']] },
+  svg: { fontCache: 'global' },
+  options: { enableMenu: false }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+/* Layout: banco de laboratorio a escala (carril arriba, caída de m1 a la derecha, contadores debajo) junto a la tabla de medidas */
+:root{
+  --bg:#edf1f4; --surface:#ffffff; --surface-2:#f5f7f9; --ink:#17202b; --muted:#5a6775; --line:#d2dae2;
+  --accent:#1d5fa8; --accent-ink:#ffffff; --accent-soft:#e2ebf6;
+  --bench-t:#cddfeb; --bench-f:#9db4c5; --bench-r:#8ca5b8; --bench-e:#7891a5; --floor:#ddd6c9;
+  --case-t:#eef1f4; --case-f:#dce1e6; --case-r:#bcc4cc; --case-e:#8e99a4; --case-panel:#cfd6dd; --case-acc:#2f6fb3;
+  --go-1:#2fae57; --go-2:#1d7a3b; --stop-1:#de3b30; --stop-2:#9b241c;
+  --lead-r:#d8352a; --lead-b:#2563c9; --lead-y:#f0bd2a; --lead-k:#25282c; --pwr:#2fb35a;
+  --alu-t:#eef1f4; --alu-f1:#d8dee4; --alu-f2:#b1bbc5; --alu-r:#a2adb8; --alu-e:#7a8794;
+  --anod-t:#89aedb; --anod-f1:#4f82bf; --anod-f2:#2c5a93; --anod-r:#254b7a;
+  --blk-t:#59606a; --blk-f:#272b31; --blk-r:#181b1f; --blk-e:#111316;
+  --stl-t:#b4bcc4; --stl-f:#868f99; --stl-r:#6b757f; --stl-e:#5a636d;
+  --rod-1:#6d7883; --rod-2:#eaedf0; --brass-1:#8c6a36; --brass-2:#e6cc93; --brass-t:#ecd6a3;
+  --rub:#30353b; --hole:#76838f; --beam:#ff3b2a;
+  --alu-top:#e6eaee; --alu-side:#c6cfd8; --alu-low:#a2aeba; --steel:#56606b; --housing:#22262c; --housing-2:#4a525c;
+  --anod:#3f6ea8; --anod-top:#7ba1cf; --anod-low:#2a5084; --hose:#3c4248; --bench-top:#e7ecf0;
+  --alu:#c5ced7; --alu-edge:#7d8a97; --bench:#d6dde4; --bench-edge:#9ba7b3;
+  --glider:#2a4a72; --flag:#3b4654; --gate:#2b2f35; --rubber:#3a3f46;
+  --thread:#2f3337; --mass:#9a7f52; --mass-edge:#5f4c2e;
+  --led:#ff3b2a; --led-off:rgba(255,59,42,.10); --display:#1e1314; --device:#e1e6eb; --device-edge:#a9b3bd;
+  --warn:#a84a14; --warn-soft:#fbede3; --ok:#2c7a4c; --ok-soft:#e5f3ea;
+  --f-ui:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-num:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --f-math:"STIX Two Text", "Times New Roman", Times, serif;
+}
+@media (prefers-color-scheme: dark) and (max-width: 0px){
+  :root:not([data-theme="light"]){
+    --bg:#0f141a; --surface:#171e27; --surface-2:#1c2530; --ink:#e2e8ee; --muted:#95a3b2; --line:#2c3846;
+    --accent:#6ea6e8; --accent-ink:#0b1622; --accent-soft:#1d2d42;
+    --bench-t:#23303c; --bench-f:#1a242e; --bench-r:#151d25; --bench-e:#3a4a59; --floor:#201f1c;
+    --case-t:#56616d; --case-f:#434d58; --case-r:#353e48; --case-e:#6e7a87; --case-panel:#3b444e; --case-acc:#4f8fd6;
+    --lead-r:#e2493d; --lead-b:#4a82e0; --lead-y:#f2c64a; --lead-k:#0d0f11; --pwr:#46c873;
+    --alu-t:#bcc5ce; --alu-f1:#9ca7b2; --alu-f2:#7a8692; --alu-r:#6b7783; --alu-e:#505c68;
+    --anod-t:#82a7d4; --anod-f1:#4a7ab6; --anod-f2:#2d5a92; --anod-r:#234978;
+    --blk-t:#626a75; --blk-f:#262a30; --blk-r:#17191d; --blk-e:#7a838e;
+    --stl-t:#a0a9b2; --stl-f:#77818b; --stl-r:#5f6973; --stl-e:#454e58;
+    --rod-1:#5b6570; --rod-2:#cfd6dc; --brass-1:#86663a; --brass-2:#dcc08a; --brass-t:#e2ca97;
+    --rub:#4b5159; --hole:#4f5b67; --beam:#ff4636;
+    --alu-top:#8b97a4; --alu-side:#66737f; --alu-low:#4c5764; --steel:#9aa4ae; --housing:#0b0d10; --housing-2:#6b7480;
+    --anod:#4f80bd; --anod-top:#8aaed9; --anod-low:#345a8f; --hose:#8a939c; --bench-top:#36414d;
+    --alu:#5c6976; --alu-edge:#9aa6b2; --bench:#2a343f; --bench-edge:#4c5866;
+    --glider:#7398c6; --flag:#a9b5c2; --gate:#d4dbe2; --rubber:#8a939c;
+    --thread:#d6dbe0; --mass:#b99a68; --mass-edge:#e0c79c;
+    --led:#ff4636; --led-off:rgba(255,70,54,.12); --display:#0b0707; --device:#222b35; --device-edge:#3c4856;
+    --warn:#eb9a63; --warn-soft:#3a2518; --ok:#6cc392; --ok-soft:#18301f;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f141a; --surface:#171e27; --surface-2:#1c2530; --ink:#e2e8ee; --muted:#95a3b2; --line:#2c3846;
+  --accent:#6ea6e8; --accent-ink:#0b1622; --accent-soft:#1d2d42;
+  --bench-t:#23303c; --bench-f:#1a242e; --bench-r:#151d25; --bench-e:#3a4a59; --floor:#201f1c;
+  --case-t:#56616d; --case-f:#434d58; --case-r:#353e48; --case-e:#6e7a87; --case-panel:#3b444e; --case-acc:#4f8fd6;
+  --lead-r:#e2493d; --lead-b:#4a82e0; --lead-y:#f2c64a; --lead-k:#0d0f11; --pwr:#46c873;
+  --alu-t:#bcc5ce; --alu-f1:#9ca7b2; --alu-f2:#7a8692; --alu-r:#6b7783; --alu-e:#505c68;
+  --anod-t:#82a7d4; --anod-f1:#4a7ab6; --anod-f2:#2d5a92; --anod-r:#234978;
+  --blk-t:#626a75; --blk-f:#262a30; --blk-r:#17191d; --blk-e:#7a838e;
+  --stl-t:#a0a9b2; --stl-f:#77818b; --stl-r:#5f6973; --stl-e:#454e58;
+  --rod-1:#5b6570; --rod-2:#cfd6dc; --brass-1:#86663a; --brass-2:#dcc08a; --brass-t:#e2ca97;
+  --rub:#4b5159; --hole:#4f5b67; --beam:#ff4636;
+  --alu-top:#8b97a4; --alu-side:#66737f; --alu-low:#4c5764; --steel:#9aa4ae; --housing:#0b0d10; --housing-2:#6b7480;
+  --anod:#4f80bd; --anod-top:#8aaed9; --anod-low:#345a8f; --hose:#8a939c; --bench-top:#36414d;
+  --alu:#5c6976; --alu-edge:#9aa6b2; --bench:#2a343f; --bench-edge:#4c5866;
+  --glider:#7398c6; --flag:#a9b5c2; --gate:#d4dbe2; --rubber:#8a939c;
+  --thread:#d6dbe0; --mass:#b99a68; --mass-edge:#e0c79c;
+  --led:#ff4636; --led-off:rgba(255,70,54,.12); --display:#0b0707; --device:#222b35; --device-edge:#3c4856;
+  --warn:#eb9a63; --warn-soft:#3a2518; --ok:#6cc392; --ok-soft:#18301f;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font-family:var(--f-ui); font-size:15px; line-height:1.5}
+.page{max-width:1520px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:12px 40px}
+
+header{display:grid; gap:4px; margin-bottom:18px}
+.eyebrow{font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+h1{font-size:clamp(22px, 2.4vw, 30px); line-height:1.15; margin:0; font-weight:700; text-wrap:balance}
+header p{margin:4px 0 0; color:var(--ink); font-size:16px}
+.mi{font-family:var(--f-math); font-size:1.12em}
+
+.main{display:grid; gap:18px; grid-template-columns:minmax(0,1fr)}
+@media (min-width:1180px){ .main{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); align-items:start} }
+
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px}
+.bench{padding:14px}
+
+/* Escena: misma escala en el SVG del carril y en el de la caída (columnas 1500 : 300 mm) */
+.rig{display:grid; grid-template-columns:minmax(0,1500fr) minmax(0,300fr); grid-template-areas:"rail rail" "panel fall" "datos fall"; grid-template-rows:auto auto 1fr; column-gap:0}
+.rig svg.scene{display:block; width:100%; height:auto}
+#railSvg{grid-area:rail}
+#fallSvg{grid-area:fall; align-self:start}
+.panel{grid-area:panel; align-self:start; padding:16px 14px 0 0; display:grid; gap:12px; min-width:0}
+.datos{grid-area:datos; align-self:start; padding:25px 14px 0 0; min-width:0}
+@media (max-width:760px){
+  .rig{grid-template-areas:"rail rail" "panel fall" "datos datos"}
+  .panel{padding:12px 0 0}
+}
+
+/* SVG */
+.m-bench-t{fill:var(--bench-t)} .m-bench-f{fill:var(--bench-f)} .m-bench-r{fill:var(--bench-r)}
+[class^="m-bench"]{stroke:var(--bench-e); stroke-width:1.2; stroke-linejoin:round}
+.floor{fill:var(--floor)}
+.m-case-t{fill:var(--case-t)} .m-case-f{fill:var(--case-f)} .m-case-r{fill:var(--case-r)}
+[class^="m-case"]{stroke:var(--case-e); stroke-width:1.2; stroke-linejoin:round}
+.c-panel{fill:var(--case-panel); stroke:var(--case-e); stroke-width:1}
+.c-acc{fill:var(--case-acc)}
+.c-txt{font:600 15px var(--f-ui); fill:var(--ink); letter-spacing:.06em}
+.c-ttl{font:700 17px var(--f-ui); fill:var(--ink); letter-spacing:.12em}
+.c-lbl{font:600 18px var(--f-ui); fill:var(--ink); letter-spacing:.04em}
+.c-big{font:600 28px var(--f-ui); fill:var(--ink)}
+.c-bigit{font-family:var(--f-math); font-style:italic; font-weight:400; font-size:34px}
+.c-it{font-family:var(--f-math); font-style:italic; font-weight:400; font-size:15px}
+.pbtn{cursor:pointer}
+.pbtn .pb-top, .pbtn .pb-side{stroke-width:1.2}
+.pbtn.go .pb-top{fill:var(--go-1); stroke:var(--go-2)} .pbtn.go .pb-side{fill:var(--go-2); stroke:var(--go-2)}
+.pbtn.stop .pb-top{fill:var(--stop-1); stroke:var(--stop-2)} .pbtn.stop .pb-side{fill:var(--stop-2); stroke:var(--stop-2)}
+.pbtn.off{cursor:not-allowed; opacity:.4}
+.pbtn.press{transform:translateY(4px)}
+.pbtn:focus{outline:none}
+.pbtn:focus-visible .pb-top{stroke:var(--accent); stroke-width:3.5}
+.c-btn{fill:var(--case-r); stroke:var(--case-e); stroke-width:1}
+.lead{fill:none; stroke-width:3.4; stroke-linecap:round; stroke-linejoin:round}
+.lead.r{stroke:var(--lead-r)} .lead.b{stroke:var(--lead-b)} .lead.y{stroke:var(--lead-y)} .lead.k{stroke:var(--lead-k)}
+.plug.r{fill:var(--lead-r)} .plug.b{fill:var(--lead-b)} .plug.y{fill:var(--lead-y)} .plug.k{fill:var(--lead-k)}
+.pwr{fill:var(--pwr)}
+.horizon{stroke:var(--bench-e); stroke-width:1.5}
+.m-alu-t{fill:var(--alu-t)} .m-alu-f{fill:url(#gAlu)} .m-alu-r{fill:var(--alu-r)}
+.m-flag-t{fill:var(--alu-t)} .m-flag-f{fill:var(--alu-t)} .m-flag-r{fill:var(--alu-f2)}
+[class^="m-alu"], [class^="m-flag"]{stroke:var(--alu-e); stroke-width:1.2; stroke-linejoin:round}
+.m-anod-t{fill:var(--anod-t)} .m-anod-f{fill:url(#gAnod)} .m-anod-r{fill:var(--anod-r)}
+[class^="m-anod"]{stroke:var(--anod-r); stroke-width:1; stroke-linejoin:round}
+.m-blk-t{fill:var(--blk-t)} .m-blk-f{fill:var(--blk-f)} .m-blk-r{fill:var(--blk-r)}
+[class^="m-blk"]{stroke:var(--blk-e); stroke-width:1; stroke-linejoin:round}
+.m-stl-t{fill:var(--stl-t)} .m-stl-f{fill:var(--stl-f)} .m-stl-r{fill:var(--stl-r)}
+[class^="m-stl"]{stroke:var(--stl-e); stroke-width:1; stroke-linejoin:round}
+.m-rub-t, .m-rub-f, .m-rub-r{fill:var(--lead-r); stroke:#8f2018; stroke-width:1}
+.rod{fill:url(#gRod)} .rod-t{fill:var(--stl-t)}
+.mag{fill:url(#gMag)} .mag-r{fill:var(--blk-t); stroke:var(--blk-e); stroke-width:1}
+.brass{fill:url(#gBrass); stroke:var(--brass-1); stroke-width:1}
+.brass-t{fill:var(--brass-t); stroke:var(--brass-1); stroke-width:1}
+.hole{fill:var(--hole)}
+.ghole{fill:var(--anod-r); stroke:var(--anod-t); stroke-width:1}
+.hose{fill:none; stroke:var(--hose); stroke-width:10; stroke-linecap:round}
+.cable{fill:none; stroke:var(--blk-f); stroke-width:3.5; stroke-linecap:round}
+.beam{stroke:var(--beam); stroke-width:1.6; stroke-dasharray:3 3; opacity:.85}
+.led{fill:var(--led-off); stroke:var(--led); stroke-width:1.2}
+.led.on{fill:var(--led)}
+.pul{fill:var(--alu-t); stroke:var(--alu-e); stroke-width:2}
+.pul.warn{stroke:var(--warn); stroke-width:4}
+.pul-back{fill:var(--alu-r); stroke:var(--alu-e); stroke-width:1.5}
+.groove{fill:none; stroke:var(--alu-e); stroke-width:1.5}
+.spoke{stroke:var(--alu-e); stroke-width:3; stroke-linecap:round}
+.hook{fill:none; stroke:var(--stl-f); stroke-width:3}
+.s-scale{font:500 24px var(--f-num); fill:var(--ink)}
+.s-tick{stroke:var(--alu-edge); stroke-width:2}
+.s-tick.major{stroke:var(--ink); stroke-width:2.4}
+.s-label{font:500 23px var(--f-ui); fill:var(--muted)}
+.s-dim{stroke:var(--accent); stroke-width:2.4; fill:none}
+.s-dimext{stroke:var(--accent); stroke-width:1.5; stroke-dasharray:5 5; fill:none}
+.s-dimtext{font:600 34px var(--f-ui); fill:var(--accent)}
+.s-it{font-family:var(--f-math); font-style:italic; font-weight:400; font-size:38px}
+.s-thread{stroke:var(--thread); stroke-width:3.4; fill:none; stroke-linecap:round}
+.s-floor{stroke:var(--bench-edge); stroke-width:4}
+.s-ptr{fill:var(--accent)}
+.s-ptr.start{fill:var(--anod-f1)}
+.s-small{font:500 28px var(--f-ui); fill:var(--muted)}
+
+/* Contador */
+.cap{font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:-6px}
+.device{background:var(--device); border:1px solid var(--device-edge); border-radius:8px; padding:10px 12px; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+.counter{display:grid; gap:4px; min-width:0}
+.counter .lbl{font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
+.counter .lbl b{color:var(--ink); font-weight:700}
+.counter .read{display:flex; align-items:flex-end; gap:6px}
+.counter svg{width:100%; max-width:176px; height:auto; display:block}
+.counter .unit{font:500 14px var(--f-num); color:var(--muted); padding-bottom:4px}
+.counter .sub{font-size:12px; color:var(--muted)}
+.seg{fill:var(--led-off)}
+.seg.on{fill:var(--led)}
+.dispbg{fill:var(--display)}
+
+.ctl{display:grid; gap:8px}
+.ctl-row{display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px}
+.ctl label.t, .ctl .t{font-size:13px; font-weight:600}
+.readout{font:500 14px var(--f-num); font-variant-numeric:tabular-nums; color:var(--ink)}
+.readout .s{font-family:var(--f-math); font-style:italic; font-size:17px}
+input[type=range]{width:100%; accent-color:var(--accent)}
+.chips{display:flex; flex-wrap:wrap; gap:6px; align-items:center}
+.chips .t{font-size:13px; color:var(--muted); font-weight:500; margin-right:2px}
+button{font:inherit; cursor:pointer}
+.chip{font:500 13px var(--f-num); padding:3px 9px; border-radius:999px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.chip.all{margin-left:10px; background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-family:var(--f-ui); font-weight:600; padding:3px 14px}
+.chip.rst{margin-left:4px; background:var(--surface); border-color:var(--stop-1); color:var(--stop-1); font-family:var(--f-ui); font-weight:600; padding:3px 14px}
+.chip.done{border-color:var(--ok); box-shadow:inset 0 0 0 1px var(--ok)}
+.nudge{font:500 12px var(--f-num); padding:3px 8px; border-radius:6px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink)}
+.btn{padding:9px 16px; border-radius:7px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink); font-weight:600; font-size:14px}
+.btn.go{background:var(--go-1); border-color:var(--go-2); color:#fff}
+.btn.stop{background:var(--stop-1); border-color:var(--stop-2); color:#fff}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn:disabled, .chip:disabled, .nudge:disabled{opacity:.45; cursor:not-allowed}
+.btn:focus-visible, .chip:focus-visible, .nudge:focus-visible, input:focus-visible, .linkbtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.switch{display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:500}
+.switch input{width:16px; height:16px; accent-color:var(--accent)}
+.status:empty{display:none}
+.status{font-size:13.5px; padding:8px 10px; border-radius:7px; background:var(--surface-2); border:1px solid var(--line); min-height:40px}
+.status.ok{background:var(--ok-soft); border-color:var(--ok); color:var(--ink)}
+.status.warn{background:var(--warn-soft); border-color:var(--warn); color:var(--ink)}
+.status b{font-variant-numeric:tabular-nums}
+
+.datos h3, .tablecard h2{margin:0; font-size:14px; font-weight:700}
+.datos dl{display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 12px; margin:8px 0 0; font-size:13.5px}
+.datos dt{color:var(--muted)}
+.datos dd{margin:0; font-variant-numeric:tabular-nums}
+.datos .eqs{margin-top:10px; font-size:14px; display:flex; flex-wrap:wrap; gap:6px 22px; color:var(--ink)}
+.linkbtn{background:none; border:none; padding:0; color:var(--accent); font-weight:600; font-size:13.5px; text-decoration:underline; text-underline-offset:2px}
+
+/* Tabla */
+.tablecard{padding:14px; display:grid; gap:12px; min-width:0}
+.tablecard .head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 16px; align-items:baseline}
+.tablecard .head p{margin:2px 0 0; font-size:13px; color:var(--muted)}
+.tools{display:flex; flex-wrap:wrap; gap:6px 8px; align-items:center}
+.tools .btn{padding:6px 11px; font-size:13px}
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:8px}
+table{border-collapse:collapse; width:100%; min-width:560px; font-size:13px}
+th, td{border-bottom:1px solid var(--line); padding:7px 8px; text-align:right; vertical-align:middle}
+th{background:var(--surface-2); font-weight:600; font-size:12.5px; vertical-align:bottom; text-align:center; line-height:1.25}
+th .u{display:block; font-weight:500; color:var(--muted); font-size:11.5px; margin-top:2px}
+th + th, td + td{border-left:1px solid var(--line)}
+td{font-family:var(--f-num); font-variant-numeric:tabular-nums; white-space:nowrap}
+td.trio > span{display:block; line-height:1.45}
+td.trio span.empty{color:var(--line)}
+td.calc{background:color-mix(in srgb, var(--accent-soft) 45%, transparent)}
+tr.active td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+tr.active td{background:color-mix(in srgb, var(--accent-soft) 55%, transparent)}
+tbody tr:last-child td{border-bottom:none}
+td .pm{color:var(--muted)}
+td.del{text-align:center; padding:4px}
+td.del button{border:none; background:none; color:var(--muted); font-size:16px; line-height:1; padding:4px 6px; border-radius:5px}
+td.del button:hover{color:var(--warn); background:var(--warn-soft)}
+.emptyrow td{text-align:center; font-family:var(--f-ui); color:var(--muted); padding:22px 12px; white-space:normal}
+table.nocalc .calc{display:none}
+.note{font-size:12.5px; color:var(--muted); margin:0}
+.log h3{margin:0 0 6px; font-size:13px; font-weight:700}
+.log ol{list-style:none; margin:0; padding:0; display:grid; gap:3px; font:13px var(--f-num); font-variant-numeric:tabular-nums}
+.log li{display:flex; gap:10px; flex-wrap:wrap}
+.log li .n{color:var(--muted); min-width:2.6em}
+.log li.bad{color:var(--warn)}
+.log li.skip{color:var(--muted)}
+.log .none{font-size:13px; color:var(--muted); font-family:var(--f-ui)}
+.confirm{color:var(--warn); border-color:var(--warn)}
+.copied{font-size:12.5px; color:var(--ok)}
+textarea.fallback{width:100%; min-height:90px; font:12px var(--f-num)}
+mjx-container{color:inherit}
+
+.datos{position:relative}
+.helpbtn{margin-left:auto; width:38px; height:38px; flex:none; border-radius:50%; border:2px solid var(--accent); background:var(--surface); color:var(--accent); font:700 24px var(--f-ui); line-height:1; display:grid; place-items:center}
+.helpbtn:hover, .helpbtn[aria-expanded="true"]{background:var(--accent); color:var(--accent-ink)}
+.helpbtn:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+.helppop{position:absolute; left:10px; right:10px; top:var(--hp-top, 120px); z-index:20; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 16px; box-shadow:0 10px 30px rgba(15,25,40,.18); font-size:14px; line-height:1.5}
+.hp-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:15px}
+.hp-x{border:none; background:none; font-size:22px; line-height:1; color:var(--muted); padding:2px 6px; border-radius:5px}
+.hp-x:hover{background:var(--surface-2); color:var(--ink)}
+.helppop ol{margin:0 0 10px; padding-left:20px; display:grid; gap:4px}
+.helppop dl{display:grid; grid-template-columns:auto minmax(0,1fr); gap:6px 12px; margin:0; padding-top:10px; border-top:1px solid var(--line)}
+.helppop dt{font-weight:600; text-align:right}
+.helppop dd{margin:0}
+.helppop p{margin:0 0 8px}
+.hp-eqs{display:flex; flex-wrap:wrap; gap:6px 28px; align-items:center; margin:4px 0 8px; font-size:15px}
+.hp-small{font-size:13px; color:var(--muted)}
+.hp-key{background:var(--accent-soft); border-radius:7px; padding:8px 10px}
+.helppop{max-height:min(78vh, 760px); overflow:auto}
+.tablecard{position:relative}
+.toprow{display:flex; flex-wrap:wrap; align-items:center; gap:8px 18px}
+.parts{display:inline-flex; border:1px solid var(--accent); border-radius:8px; overflow:hidden}
+.partbtn{border:none; background:var(--surface); color:var(--accent); font-weight:600; font-size:13px; padding:4px 12px}
+.partbtn + .partbtn{border-left:1px solid var(--accent)}
+.partbtn[aria-selected="true"]{background:var(--accent); color:var(--accent-ink)}
+.partbtn:disabled{opacity:.5; cursor:not-allowed}
+.partbtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+body[data-part="1"] .p2only, body[data-part="2"] .p1only{display:none !important}
+.fits{grid-template-columns:minmax(0,1fr) !important; max-width:1040px}
+.fit{grid-template-columns:minmax(0,1fr) 300px; column-gap:56px; align-items:center}
+.fits .fit{column-gap:72px}
+.fitside{display:grid; gap:22px; align-content:center}
+.fittog{justify-self:center; font-size:14px}
+.fit h3{grid-column:1 / -1}
+@media (max-width:700px){ .fit{grid-template-columns:minmax(0,1fr)} }
+.tablecard{position:relative}
+.tablecard > .head{padding-right:50px}
+.tablecard.max > .head h2{font-size:18px}
+.maxbtn{position:absolute; top:12px; right:12px; width:38px; height:38px; border-radius:8px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink); display:grid; place-items:center; padding:0}
+.maxbtn svg{width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.maxbtn:hover{border-color:var(--accent); color:var(--accent)}
+.maxbtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.tablecard.max{position:fixed; inset:0; z-index:50; border-radius:0; border:none; overflow:auto; padding-top:max(20px, env(safe-area-inset-top, 0px)); padding-bottom:max(20px, env(safe-area-inset-bottom, 0px)); padding-left:max(24px, env(safe-area-inset-left, 0px)); padding-right:max(24px, env(safe-area-inset-right, 0px)); align-content:start}
+.tablecard.max .maxbtn{top:max(16px, env(safe-area-inset-top, 0px)); right:max(20px, env(safe-area-inset-right, 0px))}
+.tablecard.max table{font-size:16px}
+.tablecard.max th{font-size:15px}
+body.tablemax{overflow:hidden}
+.bench{position:relative}
+.scenetop{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 -5.2%; position:relative; z-index:5}
+.stitle{font-size:clamp(15px, 1.4vw, 19px); font-weight:700; color:var(--ink); letter-spacing:.01em}
+/* Ajuste */
+.fitcard{grid-column:1 / -1; padding:14px; display:grid; gap:14px; min-width:0}
+.fitcard .head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 16px; align-items:baseline}
+.fitcard h2{margin:0; font-size:14px; font-weight:700}
+.fitcard .head p{margin:2px 0 0; font-size:13px; color:var(--muted); max-width:75ch}
+.fits{display:grid; gap:18px; grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){ .fits{grid-template-columns:repeat(2, minmax(0,1fr))} }
+.fit{display:grid; gap:8px; align-content:start; min-width:0}
+.fit h3{margin:0; font-size:18px; font-weight:600}
+.chart{width:100%; height:auto; display:block; background:var(--surface-2); border:1px solid var(--line); border-radius:8px}
+.c-grid{stroke:var(--line); stroke-width:1}
+.c-axis{stroke:var(--muted); stroke-width:1.4}
+.c-tick{font:12px var(--f-num); fill:var(--muted)}
+.c-title{font:500 13px var(--f-ui); fill:var(--ink)}
+.c-title .it{font-family:var(--f-math); font-style:italic; font-size:15px}
+.c-pt{fill:var(--surface-2); stroke:var(--accent); stroke-width:1.6}
+.c-err{stroke:var(--accent); stroke-width:2}
+.c-dot{fill:var(--stop-1)}
+.c-line{stroke:var(--ink); stroke-width:1.8; fill:none}
+.c-zero{stroke:var(--muted); stroke-width:1; stroke-dasharray:4 4}
+.c-empty{font:13px var(--f-ui); fill:var(--muted)}
+.res{display:grid; grid-template-columns:auto minmax(0,1fr); gap:7px 14px; margin:0; font-size:14px}
+.res dt{font-family:var(--f-math); font-style:italic; font-size:20px}
+.res dt sub{font-style:normal; font-size:11px}
+.res dd{margin:0; font-family:var(--f-num); font-variant-numeric:tabular-nums; font-size:16px; align-self:center}
+.res dd .pm{color:var(--muted)}
+.res .sep{grid-column:1 / -1; border-top:1px solid var(--line); margin:3px 0}
+.res .msg{grid-column:1 / -1; font-family:var(--f-ui); color:var(--muted); font-size:13px}
+.fitcard.nofit .c-line, .fitcard.nofit .res{visibility:hidden}
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto} }
+</style>
+
+<div class="page">
+
+  <div class="main">
+    <section class="card bench" aria-label="Montaje experimental">
+      <div class="scenetop">
+        <span class="stitle">Leyes de Newton</span>
+        <div class="parts" role="tablist" aria-label="Parte de la práctica">
+          <button class="partbtn" id="part1" role="tab" data-part="1">1.ª parte</button>
+          <button class="partbtn" id="part2" role="tab" data-part="2">2.ª parte</button>
+        </div>
+        <button class="helpbtn" id="helpBtn" aria-expanded="false" aria-controls="helpPop" title="Ayuda">?</button>
+      </div>
+      <div class="rig">
+        <!-- Carril, deslizador, disparador, puerta y polea (unidades: mm) -->
+        <svg id="railSvg" class="scene" viewBox="0 -200 1800 650" role="img" aria-label="Carril de aire sobre la mesa con deslizador, disparador magnético, puerta fotoeléctrica y polea">
+          <defs>
+            <linearGradient id="gAlu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--alu-f1)"/><stop offset="1" style="stop-color:var(--alu-f2)"/></linearGradient>
+            <linearGradient id="gAnod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--anod-f1)"/><stop offset="1" style="stop-color:var(--anod-f2)"/></linearGradient>
+            <linearGradient id="gRod" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--rod-1)"/><stop offset=".35" style="stop-color:var(--rod-2)"/><stop offset="1" style="stop-color:var(--rod-1)"/></linearGradient>
+            <linearGradient id="gMag" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--blk-f)"/><stop offset=".3" style="stop-color:var(--blk-t)"/><stop offset="1" style="stop-color:var(--blk-r)"/></linearGradient>
+            <linearGradient id="gBrass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" style="stop-color:var(--brass-1)"/><stop offset=".35" style="stop-color:var(--brass-2)"/><stop offset="1" style="stop-color:var(--brass-1)"/></linearGradient>
+          </defs>
+          <g id="benchG"></g>
+          <g id="rigG" transform="translate(0,-45)">
+          <g id="sceneBack"></g>
+          <g id="timerG"></g>
+          <g id="cablesBack"></g>
+          <g id="gateBack"></g>
+          <g id="sceneMid"></g>
+          <g id="pulleyG"></g>
+          <g id="gateMid"></g>
+          <g id="gliderG"><g id="gliderBody"></g></g>
+          <g id="dsG" aria-hidden="true"></g>
+          <path id="threadH" class="s-thread" d=""/>
+          <line id="threadVtop" class="s-thread" x1="0" y1="0" x2="0" y2="0"/>
+          <g id="massTop"></g>
+          <g id="gateFront"></g>
+          <g id="dimG">
+            <line id="ext1" class="s-dimext" x1="0" y1="0" x2="0" y2="0"/>
+            <line id="ext2" class="s-dimext" x1="0" y1="0" x2="0" y2="0"/>
+            <path id="dimLine" class="s-dim" d=""/>
+            <path id="dimArrows" fill="var(--accent)" d=""/>
+            <text id="dimText" class="s-dimtext" x="0" y="26" text-anchor="middle"><tspan class="s-it">s</tspan><tspan id="dimVal"> = 35,0 cm</tspan></text>
+          </g>
+          <path class="s-ptr start" d="M260 243 l-8 12 h16 z"/>
+          <path id="gatePtr" class="s-ptr" d=""/>
+          <text class="s-small" x="128" y="140" text-anchor="middle">disparador</text>
+          </g>
+          <g id="frontG"></g>
+        </svg>
+
+        <!-- Caída de la masa colgante, misma escala -->
+        <svg id="fallSvg" class="scene" viewBox="1500 450 300 860" role="img" aria-label="Portapesas colgando de la polea junto al extremo de la mesa">
+          <g id="fallBack"></g>
+          <text class="s-small" x="1700" y="1262">suelo</text>
+          <g transform="translate(0,-45)">
+            <line id="threadV" class="s-thread" x1="0" y1="0" x2="0" y2="0"/>
+            <g id="massG"></g>
+          </g>
+        </svg>
+
+        <div class="panel">
+
+          <div class="ctl">
+            <div class="ctl-row" style="justify-content:space-between">
+              <span class="ctl-row" style="gap:6px 22px"><label class="t" for="gate">Puerta fotoeléctrica</label><label class="switch"><input type="checkbox" id="slow"> Cámara lenta (×0,2)</label></span>
+              <span class="readout" id="gateReadout"></span>
+            </div>
+            <input type="range" id="gate" min="50" max="90" step="10" value="50" aria-describedby="gateReadout">
+            <div class="ctl-row">
+              <div class="chips" id="chips"><span class="t"><i style="font-family:var(--f-math)">s</i> (cm)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="datos">
+          <dl>
+            <dt>Masa colgante</dt><dd>\(m_1\) = 20 g + 1 g del portapesas = 21 g</dd>
+            <dt>Deslizador</dt><dd>\(m_2\) = 400 g, sin pesas</dd>
+            <dt class="p2only">Pantalla</dt><dd class="p2only" id="dsCell"><button class="linkbtn" id="calibre">Medir Δs con el calibre</button></dd>
+          </dl>
+          <div class="eqs">
+            <span>\(a=\dfrac{m_1 g}{m_1+m_2}\)</span>
+            <span class="p1only">\(s=\tfrac12\,a\,t'^2\)</span>
+            <span class="p2only">\(v=a\,t'\)</span>
+            <span class="p2only">\(v\simeq \Delta s/\overline{\Delta t}\)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card tablecard" aria-label="Tabla de medidas">
+      <div class="head">
+        <div>
+          <h2>Tabla de medidas</h2>
+          <button class="maxbtn" id="maxBtn" aria-pressed="false" aria-label="Ampliar la tabla a pantalla completa" title="Ampliar"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="maxIcon" d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
+          <p>De 30 a 70 cm en pasos de 10 cm, tres lanzamientos por posición.</p>
+        </div>
+        <div class="tools">
+          <label class="switch"><input type="checkbox" id="showCalc" checked> Columnas calculadas</label>
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table id="tbl">
+          <thead>
+            <tr>
+              <th>\(s\,(\pm\varepsilon_s)\)<span class="u">cm</span></th>
+              <th>\(t_{1,2,3}\,(\pm\varepsilon_{t_i})\)<span class="u">s</span></th>
+              <th class="calc">\(\bar t\,(\pm\varepsilon_{\bar t})\)<span class="u">s</span></th>
+              <th>\(\Delta t_{1,2,3}\,(\pm\varepsilon_{\Delta t_i})\)<span class="u">s</span></th>
+              <th class="calc">\(\overline{\Delta t}\,(\pm\varepsilon_{\overline{\Delta t}})\)<span class="u">s</span></th>
+              <th class="calc">\(t'=\bar t+\overline{\Delta t}/2\)<span class="u">s</span></th>
+              <th class="calc p1only">\(t'^2\,(\pm\varepsilon_{t'^2})\)<span class="u">s²</span></th>
+              <th class="calc p2only">\(v=\Delta s/\overline{\Delta t}\)<span class="u">m/s</span></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="tools" hidden>
+        <button class="btn" id="copy">Copiar tabla</button>
+        <button class="btn" id="undo">Borrar última medida</button>
+        <button class="btn" id="clear">Vaciar tabla</button>
+        <span class="copied" id="copied" aria-live="polite"></span>
+      </div>
+      <div id="fallbackBox" hidden><textarea class="fallback" id="fallbackTa" readonly></textarea></div>
+      <div class="helppop" id="helpPop" role="dialog" aria-label="Ayuda" hidden>
+            <div class="hp-head"><b>Qué ocurre en el experimento</b><button class="hp-x" id="helpClose" aria-label="Cerrar ayuda">×</button></div>
+            <div class="p1only">
+              <p>La masa colgante \(m_1\) cae y, a través del hilo y la polea, arrastra al deslizador \(m_2\), que flota sobre el colchón de aire sin apenas rozamiento. La única fuerza que acelera el conjunto es el peso \(m_1 g\), que es constante, así que el deslizador parte del reposo y se mueve con <b>movimiento rectilíneo uniformemente acelerado</b> (MRUA) de aceleración</p>
+              <div class="hp-eqs"><span>\(a=\dfrac{m_1\,g}{m_1+m_2}\)</span></div>
+              <p>Por ser un MRUA que parte del reposo, el espacio recorrido crece con el cuadrado del tiempo:</p>
+              <div class="hp-eqs"><span>\(s=\tfrac12\,a\,t^2\)</span></div>
+              <p class="hp-small">\(m_1\): masa colgante (21 g) · \(m_2\): masa del deslizador (400 g) · \(g\): gravedad · \(a\): aceleración del deslizador · \(s\): espacio recorrido · \(t\): tiempo empleado.</p>
+              <div class="hp-head" style="margin-top:12px"><b>Objetivo</b></div>
+              <p>Comprobar que \(s\) es proporcional a \(t^2\), obtener \(a\) y, a partir de ella, la aceleración de la gravedad \(g\).</p>
+              <p class="hp-key">Vamos a calcular \(a\) mediante un <b>ajuste lineal de \(s\) frente a \(t^2\)</b>. Para ello hay que medir, para varias distancias \(s\), el tiempo que tarda el deslizador en recorrerlas.</p>
+              <div class="hp-head" style="margin-top:12px"><b>Cómo medir</b></div>
+              <ol>
+                <li>Coloca la puerta fotoeléctrica con el deslizador o con los botones de \(s\) (30 a 70 cm).</li>
+                <li>Pulsa el botón verde <b>SOLTAR</b> de la mesa (o la barra espaciadora). El contador da \(t\) y \(\Delta t\), que se anotan solos en la tabla.</li>
+                <li>Haz tres lanzamientos en cada posición para obtener la media.</li>
+                <li>Con varias posiciones medidas aparecen la gráfica y los resultados del ajuste.</li>
+              </ol>
+              <dl>
+                <dt>\(s\)</dt><dd>Distancia del centro de la pantalla en reposo a la puerta fotoeléctrica.</dd>
+                <dt>\(t\)</dt><dd>Contador izquierdo: desde que se suelta el deslizador hasta que la pantalla empieza a tapar el haz.</dd>
+                <dt>\(\Delta t\)</dt><dd>Contador derecho: tiempo que la pantalla tarda en atravesar el haz.</dd>
+                <dt>\(t'\)</dt><dd>\(t'=\bar t+\overline{\Delta t}/2\): instante en que el centro de la pantalla pasa por la puerta. Es el tiempo que corresponde a \(s\).</dd>
+              </dl>
+            </div>
+            <div class="p2only">
+              <p>La masa colgante \(m_1\) cae y, a través del hilo y la polea, arrastra al deslizador \(m_2\), que flota sobre el colchón de aire sin apenas rozamiento. La única fuerza que acelera el conjunto es el peso \(m_1 g\), que es constante, así que el deslizador parte del reposo y se mueve con <b>movimiento rectilíneo uniformemente acelerado</b> (MRUA) de aceleración</p>
+              <div class="hp-eqs"><span>\(a=\dfrac{m_1\,g}{m_1+m_2}\)</span></div>
+              <p>Por ser un MRUA que parte del reposo, la velocidad crece linealmente con el tiempo:</p>
+              <div class="hp-eqs"><span>\(v=a\,t\)</span></div>
+              <p class="hp-small">\(m_1\): masa colgante (21 g) · \(m_2\): masa del deslizador (400 g) · \(g\): gravedad · \(a\): aceleración del deslizador · \(v\): velocidad · \(t\): tiempo empleado.</p>
+              <div class="hp-head" style="margin-top:12px"><b>Objetivo</b></div>
+              <p>Comprobar que \(v\) es proporcional a \(t\), obtener \(a\) y, a partir de ella, la aceleración de la gravedad \(g\).</p>
+              <p class="hp-key">Vamos a calcular \(a\) mediante un <b>ajuste lineal de \(v\) frente a \(t\)</b>. Para ello hay que medir la velocidad del deslizador en varios instantes, con la puerta en distintas posiciones.</p>
+              <div class="hp-head" style="margin-top:12px"><b>Cómo medir</b></div>
+              <ol>
+                <li>Mide la anchura de la pantalla, \(\Delta s\), con <b>Medir Δs con el calibre</b>.</li>
+                <li>Coloca la puerta fotoeléctrica con el deslizador o con los botones de \(s\) (30 a 70 cm).</li>
+                <li>Pulsa el botón verde <b>SOLTAR</b> de la mesa (o la barra espaciadora). El contador da \(t\) y \(\Delta t\), que se anotan solos en la tabla.</li>
+                <li>Haz tres lanzamientos en cada posición para obtener la media.</li>
+                <li>Con varias posiciones medidas aparecen la gráfica y los resultados del ajuste.</li>
+              </ol>
+              <dl>
+                <dt>\(\Delta s\)</dt><dd>Anchura de la pantalla que lleva el deslizador.</dd>
+                <dt>\(t\)</dt><dd>Contador izquierdo: desde que se suelta el deslizador hasta que la pantalla empieza a tapar el haz.</dd>
+                <dt>\(\Delta t\)</dt><dd>Contador derecho: tiempo que la pantalla tarda en atravesar el haz.</dd>
+                <dt>\(v\)</dt><dd>\(v=\Delta s/\overline{\Delta t}\): velocidad al cruzar la puerta. Como \(\Delta t\) es pequeño, es prácticamente la velocidad instantánea.</dd>
+                <dt>\(t'\)</dt><dd>\(t'=\bar t+\overline{\Delta t}/2\): instante en que el centro de la pantalla pasa por la puerta, al que se asigna \(v\).</dd>
+              </dl>
+            </div>
+          </div>
+    </section>
+
+    <section class="card fitcard" aria-label="Ajuste por mínimos cuadrados">
+      <div class="head">
+        <div>
+          <h2>Ajuste lineal por mínimos cuadrados</h2>
+          <p>Se recalcula con cada lanzamiento a partir de la tabla; hacen falta al menos tres posiciones de la puerta.</p>
+        </div>
+      </div>
+      <div class="fits">
+        <div class="fit p1only">
+          <h3>Espacio frente al cuadrado del tiempo · \(s=A_1\,t'^2+B_1\)</h3>
+          <svg id="chart1" class="chart" viewBox="0 0 560 360" role="img" aria-label="Gráfica de s frente a t' al cuadrado"></svg>
+          <div class="fitside"><label class="switch fittog p1only"><input type="checkbox" class="showFit" data-p="1"> Mostrar recta y resultados</label><dl class="res" id="res1"></dl></div>
+        </div>
+        <div class="fit p2only">
+          <h3>Velocidad frente al tiempo · \(v=A_2\,t'+B_2\)</h3>
+          <svg id="chart2" class="chart" viewBox="0 0 560 360" role="img" aria-label="Gráfica de v frente a t'"></svg>
+          <div class="fitside"><label class="switch fittog p2only"><input type="checkbox" class="showFit" data-p="2"> Mostrar recta y resultados</label><dl class="res" id="res2"></dl></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- Física del montaje ---------- */
+const P = {
+  m1: 0.021, m2: 0.400,      // kg
+  mPulley: 0.002,            // masa equivalente de la polea I/r^2
+  fric: 0.0006,              // N, rozamiento residual del colchón de aire
+  g: 9.80,
+  ds: 0.10003,               // anchura real de la pantalla (m)
+  dsRead: 0.10005, dsErr: 0.00005,   // lectura del calibre (m)
+  x0: 260,                   // centro de la pantalla en reposo (mm en el dibujo) = 20,0 cm
+  start: 20.0,               // cm en la regla
+  Dfloor: 0.800,             // m que baja m1 hasta tocar el suelo
+  Dbump: 1.19                // m hasta el tope del carril
+};
+P.a0 = (P.m1*P.g - P.fric)/(P.m1 + P.m2 + P.mPulley);
+
+function gauss(){ let u=0,v=0; while(!u) u=Math.random(); while(!v) v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+
+function makeLaunch(sCm, pumpOn){
+  const L = { sCm, pump: pumpOn };
+  if(!pumpOn){ L.a = 0; return L; }
+  L.fail = Math.random() < 0.045;                       // hilo fuera de la acanaladura
+  L.a = P.a0*(1 + 0.002*gauss())*(L.fail ? 0.93 : 1);
+  L.tau = Math.max(0.006, 0.018 + 0.003*gauss());       // retardo de liberación del imán
+  L.tf = L.tau + Math.sqrt(2*P.Dfloor/L.a);
+  L.vf = L.a*(L.tf - L.tau);
+  L.tb = L.tf + (P.Dbump - P.Dfloor)/L.vf;
+  const s = sCm/100;
+  L.tLead = timeAt(L, s - P.ds/2);
+  L.tTrail = timeAt(L, s + P.ds/2);
+  // contadores de 1 ms: la fase del reloj respecto a cada flanco es aleatoria
+  const ph1 = Math.random(), ph2 = Math.random();
+  L.c1 = Math.floor(L.tLead*1000 + ph1)/1000;
+  L.c2 = Math.max(0, (Math.floor(L.tTrail*1000 + ph2) - Math.floor(L.tLead*1000 + ph2))/1000);
+  return L;
+}
+function posAt(L, t){
+  if(!L.a || t <= L.tau) return 0;
+  if(t < L.tf) return 0.5*L.a*(t - L.tau)**2;
+  if(t < L.tb) return P.Dfloor + L.vf*(t - L.tf);
+  return P.Dbump;
+}
+function timeAt(L, d){
+  if(d <= P.Dfloor) return L.tau + Math.sqrt(2*Math.max(d,0)/L.a);
+  return L.tf + (d - P.Dfloor)/L.vf;
+}
+
+/* ---------- Formato ---------- */
+const fx = (x, dec) => x.toFixed(Math.max(0,dec)).replace('.', ',');
+function roundPair(v, e){
+  // error con una sola cifra significativa; la magnitud se corta en la misma posición decimal
+  if(!(e > 0)) return { v: fx(v, 3), e: '' };
+  let p = Math.floor(Math.log10(e));
+  if(Math.round(e/Math.pow(10, p)) >= 10) p += 1;          // 0,96 → 1
+  const q = Math.pow(10, p);
+  const er = Math.round(e/q)*q, vr = Math.round(v/q)*q;
+  return { v: fx(vr, -p), e: fx(er, -p) };
+}
+function stats(arr, res){
+  const n = arr.length; const m = arr.reduce((a,b)=>a+b,0)/n;
+  let eps = res;
+  if(n >= 2){
+    const sd = Math.sqrt(arr.reduce((a,x)=>a+(x-m)**2,0)/(n-1));
+    eps = Math.max(3*sd/Math.sqrt(n), res);
+  }
+  return { m, eps };
+}
+
+/* ---------- Displays de 7 segmentos ---------- */
+const SEGMAP = {'0':'abcdef','1':'bc','2':'abged','3':'abgcd','4':'fgbc','5':'afgcd','6':'afgedc','7':'abc','8':'abcdefg','9':'abcfgd','-':'g',' ':''};
+function buildDisplay(svg, n){
+  const T = 6, x0=7, x1=31, y0=6, y1=33, y2=60, gp=1.6;
+  const H = (a,b,y) => `${a},${y} ${a+T/2},${y-T/2} ${b-T/2},${y-T/2} ${b},${y} ${b-T/2},${y+T/2} ${a+T/2},${y+T/2}`;
+  const V = (x,a,b) => `${x},${a} ${x+T/2},${a+T/2} ${x+T/2},${b-T/2} ${x},${b} ${x-T/2},${b-T/2} ${x-T/2},${a+T/2}`;
+  const segs = { a:H(x0+gp,x1-gp,y0), g:H(x0+gp,x1-gp,y1), d:H(x0+gp,x1-gp,y2), f:V(x0,y0+gp,y1-gp), b:V(x1,y0+gp,y1-gp), e:V(x0,y1+gp,y2-gp), c:V(x1,y1+gp,y2-gp) };
+  const W = n*42 + 14;
+  svg.setAttribute('viewBox', `0 0 ${W} 74`);
+  let html = `<rect class="dispbg" x="0" y="0" width="${W}" height="74" rx="6"/>`;
+  for(let i=0;i<n;i++){
+    html += `<g transform="translate(${i*42+9},5) skewX(-6)">`;
+    for(const k in segs) html += `<polygon class="seg" data-d="${i}" data-s="${k}" points="${segs[k]}"/>`;
+    html += `<circle class="seg" data-d="${i}" data-s="p" cx="${x1+6}" cy="${y2}" r="3.2"/></g>`;
+  }
+  svg.innerHTML = html;
+  const digits = [];
+  for(let i=0;i<n;i++){
+    const o = {};
+    svg.querySelectorAll(`[data-d="${i}"]`).forEach(el => o[el.dataset.s] = el);
+    digits.push(o);
+  }
+  return digits;
+}
+function setDisplay(digits, str){
+  const cells = [];
+  for(const ch of str){
+    if(ch === '.' && cells.length) cells[cells.length-1].dp = true;
+    else cells.push({ ch, dp:false });
+  }
+  while(cells.length < digits.length) cells.unshift({ ch:' ', dp:false });
+  digits.forEach((dg, i) => {
+    const c = cells[i]; const on = SEGMAP[c.ch] || '';
+    for(const k of 'abcdefg') dg[k].classList.toggle('on', on.includes(k));
+    dg.p.classList.toggle('on', c.dp);
+  });
+}
+const fmtC1 = t => { t = Math.min(t, 9.999); return (Math.floor(t*1000+1e-9)/1000).toFixed(3); };
+const fmtC2 = fmtC1;
+
+/* ---------- Referencias DOM ---------- */
+const $ = id => document.getElementById(id);
+let D1 = null, D2 = null;   // displays del contador de la mesa (se crean con la escena)
+const gateInp = $('gate'), statusEl = $('status');
+
+/* ---------- Estado ---------- */
+let state = 'ready';      // ready | running | done | returning
+let L = null, sim = 0, last = null, d = 0, retFrom = 0, retT = 0;
+let launchNo = 0;
+let store = { p1: { rows: {}, history: [] }, p2: { rows: {}, history: [] }, part: 1, log: [], calibre: false, showCalc: true, gate: 50.0 };
+try { const raw = localStorage.getItem('carril-newton-v2'); if(raw) store = Object.assign(store, JSON.parse(raw)); } catch(e){}
+if(store['rows']){ store.p1 = { rows: store['rows'], history: store['history'] || [] }; delete store['rows']; delete store['history']; }
+store.p1 = store.p1 || { rows: {}, history: [] }; store.p2 = store.p2 || { rows: {}, history: [] };
+let part = store.part === 2 ? 2 : 1;
+const cur = () => store['p' + part];
+launchNo = store.log.length ? store.log[0].n : 0;
+function save(){ try { localStorage.setItem('carril-newton-v2', JSON.stringify(store)); } catch(e){} }
+
+/* ---------- Dibujo de la escena: proyección axonométrica (vista frontal algo elevada) ----------
+   x: a lo largo del carril (mm), Y: altura hacia abajo (mm), Z: profundidad hacia el fondo (mm).
+   El fondo se ve desplazado a la derecha y hacia arriba; la regla está en la cara frontal (Z = 0). */
+const KZ = 0.30, CZ = 0.22;
+const pr = (x, Y, Z) => [x + CZ*Z, Y - KZ*Z];
+const ptsS = a => a.map(p => p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ');
+const pg = (a, cls) => `<polygon class="${cls}" points="${ptsS(a)}"/>`;
+function box(x0,x1,Y0,Y1,Z0,Z1,m,faces){
+  faces = faces || 'trf'; let h = '';
+  if(faces.includes('t')) h += pg([pr(x0,Y0,Z0),pr(x1,Y0,Z0),pr(x1,Y0,Z1),pr(x0,Y0,Z1)], `m-${m}-t`);
+  if(faces.includes('r')) h += pg([pr(x1,Y0,Z0),pr(x1,Y0,Z1),pr(x1,Y1,Z1),pr(x1,Y1,Z0)], `m-${m}-r`);
+  if(faces.includes('f')) h += pg([pr(x0,Y0,Z0),pr(x1,Y0,Z0),pr(x1,Y1,Z0),pr(x0,Y1,Z0)], `m-${m}-f`);
+  return h;
+}
+function vrod(x, r, Y0, Y1, Z){
+  const [cx, y0] = pr(x, Y0, Z), y1 = pr(x, Y1, Z)[1];
+  return `<rect class="rod" x="${(cx-r).toFixed(1)}" y="${y0.toFixed(1)}" width="${2*r}" height="${(y1-y0).toFixed(1)}"/><ellipse class="rod-t" cx="${cx.toFixed(1)}" cy="${y0.toFixed(1)}" rx="${r}" ry="${(r*0.45).toFixed(1)}"/>`;
+}
+function disc(xc, r, Y0, Y1, Z, cls){   // cilindro vertical corto (pesa)
+  const [cx, y0] = pr(xc, Y0, Z), y1 = pr(xc, Y1, Z)[1], ry = r*0.42;
+  return `<path class="${cls}" d="M${cx-r},${y0} V${y1} A${r},${ry} 0 0 0 ${cx+r},${y1} V${y0} Z"/><ellipse class="${cls}-t" cx="${cx}" cy="${y0}" rx="${r}" ry="${ry.toFixed(1)}"/>`;
+}
+function legs(){
+  return box(1560,1588,328,1178,770,796,'stl','rf') + box(1560,1588,328,1178,-370,-344,'stl','rf');
+}
+function massSvg(){
+  const [cx] = pr(1646, 0, 30);
+  let h = disc(1646, 17, 373, 385, 30, 'brass') + disc(1646, 17, 361, 373, 30, 'brass') + disc(1646, 22, 356, 361, 30, 'brass');
+  const [rx, ry] = pr(1646, 337, 30);
+  h += `<line class="hook" x1="${cx}" y1="${ry+6}" x2="${cx}" y2="${pr(0,356,30)[1]-6}"/><circle class="hook" cx="${rx}" cy="${ry}" r="6"/>`;
+  // dibujo ampliado ×1,7 desde el gancho para que se vea bien al caer
+  h = `<g transform="translate(${rx},${ry-6}) scale(1.7) translate(${-rx},${-(ry-6)})">${h}</g>`;
+  h += `<text class="s-small" x="${cx-44}" y="${pr(0,400,30)[1]}" text-anchor="end"><tspan class="s-it" style="font-size:34px">m</tspan><tspan style="font-size:21px" dy="6">1</tspan></text>`;
+  return h;
+}
+function lead(world, col, noPlug){
+  const P = world.map(w => pr(w[0], w[1], w[2]));
+  let d = `M${P[0][0].toFixed(1)},${P[0][1].toFixed(1)}`;
+  for(let i=0;i<P.length-1;i++){
+    const p0 = P[i-1] || P[i], p1 = P[i], p2 = P[i+1], p3 = P[i+2] || P[i+1];
+    const c1 = [p1[0] + (p2[0]-p0[0])/6, p1[1] + (p2[1]-p0[1])/6], c2 = [p2[0] - (p3[0]-p1[0])/6, p2[1] - (p3[1]-p1[1])/6];
+    d += ` C${c1[0].toFixed(1)},${c1[1].toFixed(1)} ${c2[0].toFixed(1)},${c2[1].toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`;
+  }
+  const e = P[P.length-1];
+  if(noPlug) return `<path class="lead ${col}" d="${d}"/>`;
+  return `<path class="lead ${col}" d="${d}"/><circle class="plug ${col}" cx="${e[0].toFixed(1)}" cy="${e[1].toFixed(1)}" r="4.6"/><circle cx="${e[0].toFixed(1)}" cy="${e[1].toFixed(1)}" r="1.6" fill="var(--blk-f)"/>`;
+}
+/* Contador digital sobre la mesa, detrás del carril (x 1180..1460, Y 200..300, Z 520..640) */
+const TZ = 740, SOCK_Y = 280, SOCK_T = [1104, 1120], SOCK_G = [1300, 1316, 1332];
+const TDX = 130;   // desplazamiento del contador hacia la izquierda (mm)
+function timerSvg(){
+  const f = (x, Y) => pr(x, Y, TZ);
+  let h = box(1084, 1496, 300, 306, TZ+10, TZ+130, 'stl', 'f');      // patas
+  h += box(1080, 1500, 128, 300, TZ, TZ+140, 'case');
+  const a = f(1088, 134), b = f(1492, 294);
+  h += `<rect class="c-panel" x="${a[0]}" y="${a[1]}" width="${b[0]-a[0]}" height="${b[1]-a[1]}" rx="4"/>`;
+  h += `<rect class="c-acc" x="${a[0]}" y="${a[1]}" width="${b[0]-a[0]}" height="7" rx="3"/>`;
+  const t0 = f(1098, 158); h += `<text class="c-ttl" x="${t0[0]}" y="${t0[1]}">CONTADOR DIGITAL</text>`;
+  const pl = f(1478, 152); h += `<circle class="pwr" cx="${pl[0]}" cy="${pl[1]}" r="3.4"/>`;
+  for(const [i, x] of [[1, 1098], [2, 1290]]){
+    const w0 = f(x, 166);
+    h += `<svg id="sdisp${i}" x="${w0[0]}" y="${w0[1]}" width="176" height="72" preserveAspectRatio="xMidYMid meet"></svg>`;
+    const l0 = f(x + 88, 266);
+    h += `<text class="c-big" x="${l0[0]}" y="${l0[1]}" text-anchor="middle">${i === 1 ? '<tspan class="c-bigit">t</tspan> (s)' : 'Δ<tspan class="c-bigit">t</tspan> (s)'}</text>`;
+  }
+  const k = f(1480, 214); h += `<circle class="c-btn" cx="${k[0]}" cy="${k[1]}" r="8"/><line x1="${k[0]}" y1="${k[1]}" x2="${k[0]+4}" y2="${k[1]-6}" stroke="var(--ink)" stroke-width="2"/>`;
+  const cols = { 1104:'r', 1120:'b', 1300:'y', 1316:'r', 1332:'b' };
+  for(const x of [...SOCK_T, ...SOCK_G]){ const c = f(x, SOCK_Y); h += `<circle class="plug ${cols[x]}" cx="${c[0]}" cy="${c[1]}" r="4.6"/><circle cx="${c[0]}" cy="${c[1]}" r="2" fill="var(--blk-f)"/>`; }
+  const st = f(1134, 284), sg = f(1346, 284);
+  h += `<text class="c-txt" x="${st[0]}" y="${st[1]}">START</text><text class="c-txt" x="${sg[0]}" y="${sg[1]}">STOP · PUERTA</text>`;
+  return `<g transform="translate(${-TDX},0)">${h}</g>`;
+}
+/* Caja de pulsadores del disparador, delante del carril */
+function pushButton(id, x, label, cls){
+  const [cx, cy] = pr(x, 244, -262), r = 30, ry = 12, hgt = 14;
+  return `<g id="${id}" class="pbtn ${cls}" role="button" tabindex="0" aria-label="${label}">`
+    + `<ellipse class="pb-side" cx="${cx}" cy="${cy+2}" rx="${r+6}" ry="${ry+3}" style="opacity:.55"/>`
+    + `<path class="pb-side" d="M${cx-r},${cy-hgt} V${cy} A${r},${ry} 0 0 0 ${cx+r},${cy} V${cy-hgt} Z"/>`
+    + `<ellipse class="pb-top" cx="${cx}" cy="${cy-hgt}" rx="${r}" ry="${ry}"/></g>`;
+}
+function ctrlBoxSvg(){
+  let h = lead([[120,282,-262],[86,299,-276],[56,299,-150],[80,290,-60],[100,262,-10],[118,252,10]], 'k', true);
+  h += box(120, 330, 244, 300, -330, -196, 'case');
+  const t1 = pr(225, 286, -330);
+  h += `<text class="c-lbl" style="font-size:22px" x="${t1[0]}" y="${t1[1]}" text-anchor="middle">SOLTAR</text>`;
+  h += pushButton('pbGo', 225, 'Soltar el deslizador', 'go');
+  return h;
+}
+(function buildStatic(){
+  // fondo: patas y mesa
+  $('benchG').innerHTML = legs() + box(-140, 1600, 300, 328, -390, 1270, 'bench');
+  let h = '';
+  // manguera del soplante
+  const n = pr(36, 218, 30);
+  h += `<path class="hose" d="M${n[0]},${n[1]} C${n[0]-30},${n[1]} ${n[0]-34},${n[1]+40} ${n[0]-38},${n[1]+70} S${n[0]-60},${n[1]+86} -20,${n[1]+88}"/>`;
+  // patas regulables del carril
+  for(const x of [100, 1500]) h += vrod(x, 4, 240, 294, 30) + box(x-13, x+13, 294, 300, 18, 42, 'stl');
+  // soporte del disparador
+  h += box(98, 152, 294, 300, 8, 52, 'stl') + vrod(125, 4, 196, 294, 30);
+  $('sceneBack').innerHTML = h;
+  // contador y cables fijos (disparador y alimentación)
+  $('timerG').innerHTML = timerSvg();
+  $('frontG').innerHTML = ctrlBoxSvg();
+  let c = '';
+  c += lead([[1500-TDX,262,TZ+100],[1530-TDX,299,TZ+170],[1545-TDX,300,1000],[1560-TDX,300,1100]], 'k', true);
+  SOCK_T.map(v => v - TDX).forEach((x, i) => {
+    const dz = i*8, col = i ? 'b' : 'r';
+    c += lead([[104,184+i*3,30],[86,184,60+dz],[70,230,160+dz],[60,298,330+dz],[120,299,600+dz],[520,299,630+dz],[1000,299,640+dz],[x-8,299,655+dz],[x,292,TZ-20],[x,SOCK_Y,TZ]], col);
+  });
+  $('cablesBack').innerHTML = c;
+
+  // carril con orificios, regla, tapas, tope, pinza de la polea, disparador
+  h = box(60, 1560, 200, 240, 0, 60, 'alu', 'tf');
+  for(const Z of [15, 45]) for(let x=72; x<1556; x+=20){ const [hx, hy] = pr(x, 200, Z); h += `<ellipse class="hole" cx="${hx.toFixed(1)}" cy="${hy.toFixed(1)}" rx="1.8" ry="0.9"/>`; }
+  for(let cm=0; cm<=150; cm++){
+    const x = 60 + cm*10, len = cm%10===0 ? 15 : (cm%5===0 ? 10 : 5);
+    h += `<line class="s-tick${cm%10===0?' major':''}" x1="${x}" y1="240" x2="${x}" y2="${240-len}"/>`;
+    if(cm%10===0) h += `<text class="s-scale" x="${cm===0 ? x+3 : cm===150 ? x-3 : x}" y="221" text-anchor="${cm===0 ? 'start' : cm===150 ? 'end' : 'middle'}">${cm}</text>`;
+  }
+  h += box(48, 60, 194, 246, -4, 64, 'stl') + box(1560, 1572, 194, 246, -4, 64, 'stl');
+  h += box(32, 48, 213, 223, 25, 35, 'stl', 'tf');
+  h += box(1538, 1552, 180, 200, 22, 38, 'rub');
+  h += box(1572, 1594, 190, 252, 8, 52, 'stl') + box(1594, 1621, 206, 214, 26, 34, 'stl');
+  // disparador: imán cilíndrico con cable
+  const m0 = pr(104, 184, 30), m1 = pr(168, 184, 30);
+  h += `<rect class="mag" x="${m0[0]}" y="${m0[1]-12}" width="${m1[0]-m0[0]}" height="24" rx="3"/><ellipse class="mag-r" cx="${m1[0]}" cy="${m1[1]}" rx="4" ry="12"/>`;
+  $('sceneMid').innerHTML = h;
+
+  // polea (plano Z = 30, se ve de frente)
+  const pb = pr(1620, 210, 36), pc = pr(1620, 210, 30);
+  $('pulleyG').innerHTML = `<circle class="pul-back" cx="${pb[0]}" cy="${pb[1]}" r="26"/><circle id="pulley" class="pul" cx="${pc[0]}" cy="${pc[1]}" r="26"/><circle class="groove" cx="${pc[0]}" cy="${pc[1]}" r="21"/><g id="spokes"></g><circle class="m-stl-t" cx="${pc[0]}" cy="${pc[1]}" r="6" style="stroke:var(--stl-e)"/>`;
+
+  // deslizador en reposo (centro de la pantalla en x = 260)
+  const U = [[-8,170],[68,170],[68,206],[62,206],[62,197],[-2,197],[-2,206],[-8,206]].map(([Z,Y]) => pr(352, Y, Z));
+  h = box(168, 352, 170, 206, -8, 68, 'anod', 't') + pg(U, 'm-anod-r') + box(168, 352, 170, 206, -8, 68, 'anod', 'f');
+  const lip = pr(168, 198, -8), lip2 = pr(352, 198, -8);
+  h += `<line x1="${lip[0]}" y1="${lip[1]}" x2="${lip2[0]}" y2="${lip2[1]}" stroke="var(--anod-r)" stroke-width="1.2"/>`;
+  for(const x of [212, 308]){ const [gx, gy] = pr(x, 186, -8); h += `<circle class="ghole" cx="${gx}" cy="${gy}" r="4.5"/>`; }
+  h += box(210, 310, 106, 164, 29, 31, 'flag') + box(248, 272, 164, 170, 22, 38, 'stl');
+  const k0 = pr(352, 184, 30), k1 = pr(360, 184, 30);
+  h += `<line class="hook" x1="${k0[0]}" y1="${k0[1]}" x2="${k1[0]}" y2="${k1[1]}"/><circle class="hook" cx="${k1[0]+3}" cy="${k1[1]}" r="3.2" style="stroke-width:2.2"/>`;
+  $('gliderBody').innerHTML = h;
+  // cota de la anchura de la pantalla, solo con el deslizador en reposo
+  const dl = pr(210, 146, 30), dr = pr(310, 146, 30), dt = pr(260, 133, 30);
+  $('dsG').innerHTML = `<line class="s-dim" x1="${dl[0]+11}" y1="${dl[1]}" x2="${dr[0]-11}" y2="${dr[1]}"/>`
+    + `<path fill="var(--accent)" d="M${dl[0]+1},${dl[1]} l12,-5.5 v11 z M${dr[0]-1},${dr[1]} l-12,-5.5 v11 z"/>`
+    + `<text class="s-dimtext" style="font-size:28px" x="${dt[0]}" y="${dt[1]}" text-anchor="middle">Δ<tspan class="s-it" style="font-size:32px">s</tspan></text>`;
+
+  // masa colgante y mesa vista desde la caída
+  $('massTop').innerHTML = massSvg();
+  $('massG').innerHTML = massSvg();
+  $('fallBack').innerHTML = `<rect class="floor" x="1500" y="${1178-KZ*1200}" width="300" height="700"/><line class="horizon" x1="1500" y1="${1178-KZ*1200}" x2="1800" y2="${1178-KZ*1200}"/>` + legs();
+})();
+
+D1 = buildDisplay($('sdisp1'), 4); D2 = buildDisplay($('sdisp2'), 4);
+
+function gateX(){ return 60 + parseFloat(gateInp.value)*10; }
+function drawGate(){
+  const G = parseFloat(gateInp.value), xg = gateX(), s = G - P.start;
+  // soporte detrás del carril
+  let gc = '';
+  SOCK_G.map(v => v - TDX).forEach((x, i) => {
+    const dz = i*6, col = ['y','r','b'][i];
+    gc += lead([[xg-6+i*6,72,86],[xg+6+i*4,62,150+dz],[xg+24+i*6,90,420+dz],[xg+60+i*8,298,600+dz],[(xg+60+x)/2,299,630+dz],[x-6,299,655+dz],[x,292,TZ-20],[x,SOCK_Y,TZ]], col);
+  });
+  $('gateBack').innerHTML = gc + box(xg-26, xg+26, 294, 300, 90, 132, 'stl') + vrod(xg, 4, 66, 294, 111) + box(xg-5, xg+5, 70, 80, 88, 111, 'stl');
+  // brazo trasero de la horquilla y tramo trasero del haz
+  const b0 = pr(xg, 130, 78), b1 = pr(xg, 130, 30), b2 = pr(xg, 130, -18);
+  $('gateMid').innerHTML = box(xg-12, xg+12, 82, 150, 78, 90, 'blk') + `<line class="beam" x1="${b0[0]}" y1="${b0[1]}" x2="${b1[0]}" y2="${b1[1]}"/>`;
+  // puente, brazo delantero, LED y cable
+  const led = pr(xg, 70, -20), c0 = pr(xg+4, 70, 70);
+  $('gateFront').innerHTML = `<line class="beam" x1="${b2[0]}" y1="${b2[1]}" x2="${b1[0]}" y2="${b1[1]}"/>`
+    + box(xg-12, xg+12, 70, 82, -30, 90, 'blk') + box(xg-12, xg+12, 82, 150, -30, -18, 'blk')
+    + `<ellipse id="led" class="led" cx="${led[0]}" cy="${led[1]}" rx="5" ry="2.4"/>`;
+  $('gatePtr').setAttribute('d', `M${xg} 243 l-8 12 h16 z`);
+  // cota s en el plano de la pantalla (Z = 30)
+  const xa = pr(P.x0, 0, 30)[0], xb = pr(xg, 0, 30)[0], yD = 36;
+  const f = pr(P.x0, 106, 30), gt = pr(xg, 70, 30);
+  $('ext1').setAttribute('x1', xa); $('ext1').setAttribute('x2', xa); $('ext1').setAttribute('y1', f[1]-3); $('ext1').setAttribute('y2', yD-8);
+  $('ext2').setAttribute('x1', xb); $('ext2').setAttribute('x2', xb); $('ext2').setAttribute('y1', gt[1]-14); $('ext2').setAttribute('y2', yD-8);
+  $('dimLine').setAttribute('d', `M${xa+14},${yD} H${xb-14}`);
+  $('dimArrows').setAttribute('d', `M${xa},${yD} l16,-7 v14 z M${xb},${yD} l-16,-7 v14 z`);
+  $('dimText').setAttribute('x', (xa+xb)/2);
+  $('dimVal').textContent = ` = ${fx(s,1)} cm`;
+  $('gateReadout').innerHTML = `<span class="s">s</span> = ${fx(s,1)} cm`;
+  document.querySelectorAll('#chips .chip[data-s]').forEach(c => c.setAttribute('aria-pressed', Math.abs(parseFloat(c.dataset.s) - s) < 0.05 ? 'true' : 'false'));
+  renderTable();
+}
+function drawScene(){
+  const dx = d*1000, lift = -3;
+  $('gliderG').setAttribute('transform', `translate(${dx},${lift})`);
+  $('dsG').setAttribute('transform', `translate(0,${lift})`);
+  $('dsG').setAttribute('visibility', part === 2 && state === 'ready' && d === 0 ? 'visible' : 'hidden');
+  const drop = Math.min(d, P.Dfloor)*1000;
+  $('massTop').setAttribute('transform', `translate(0,${drop})`);
+  $('massG').setAttribute('transform', `translate(0,${drop})`);
+  const pc = pr(1620, 210, 30), tx = pc[0] + 26, ring = pr(1646, 331, 30)[1] + drop;
+  for(const id of ['threadVtop', 'threadV']){
+    const el = $(id); el.setAttribute('x1', tx); el.setAttribute('x2', tx); el.setAttribute('y1', pc[1]); el.setAttribute('y2', ring);
+  }
+  const hk = pr(366, 184, 30), hx = hk[0] + dx, hy = hk[1] + lift, top = pc[1] - 26;
+  const slack = Math.max(0, d - P.Dfloor)*1000, sag = Math.min(70, slack*0.35);
+  $('threadH').setAttribute('d', `M${hx},${hy} Q${(hx+pc[0])/2},${(hy+top)/2 + 2*sag} ${pc[0]},${top}`);
+  const ang = (Math.min(d, P.Dfloor)/0.026)*180/Math.PI;
+  let sp = '';
+  for(let k=0;k<6;k++){ const a = (ang + k*60)*Math.PI/180; sp += `<line class="spoke" x1="${pc[0]+7*Math.cos(a)}" y1="${pc[1]+7*Math.sin(a)}" x2="${pc[0]+20*Math.cos(a)}" y2="${pc[1]+20*Math.sin(a)}"/>`; }
+  $('spokes').innerHTML = sp;
+  const s = (parseFloat(gateInp.value) - P.start)/100;
+  const blocked = d > s - P.ds/2 && d < s + P.ds/2;
+  const led = $('led'); if(led) led.classList.toggle('on', blocked);
+}
+
+/* ---------- Mensajes ---------- */
+function setStatus(){}
+function readyMsg(){ setStatus(''); }
+
+function setControls(){
+  const busy = state === 'running' || state === 'returning';
+  gateInp.disabled = busy;
+  document.querySelectorAll('#chips .chip').forEach(c => c.disabled = busy);
+  $('dsG').setAttribute('visibility', part === 2 && state === 'ready' ? 'visible' : 'hidden');
+  document.querySelectorAll('.partbtn').forEach(b => b.disabled = busy);
+  const g = $('pbGo'), off = state !== 'ready';
+  g.classList.toggle('off', off); g.setAttribute('aria-disabled', off ? 'true' : 'false');
+}
+function pressSvg(id, fn){
+  const g = $(id);
+  const act = () => { if(g.classList.contains('off')) return; g.classList.add('press'); setTimeout(() => g.classList.remove('press'), 160); fn(); };
+  g.addEventListener('click', act);
+  g.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); act(); } });
+}
+
+/* ---------- Animación ---------- */
+function launch(){
+  if(state !== 'ready') return;
+  const sCm = Math.round((parseFloat(gateInp.value) - P.start)*10)/10;
+  L = makeLaunch(sCm, true);
+  sim = 0; last = null; state = 'running';
+  setDisplay(D1, '0.000'); setDisplay(D2, '0.000');
+  $('pulley').classList.remove('warn');
+  setStatus('');
+  setControls();
+  requestAnimationFrame(frame);
+}
+function frame(ts){
+  if(state !== 'running') return;
+  if(last === null) last = ts;
+  const dt = Math.min(0.05, (ts - last)/1000); last = ts;
+  sim += dt*($('slow').checked ? 0.2 : 1);
+  if(!L.pump){
+    d = 0; drawScene();
+    setDisplay(D1, fmtC1(sim));
+    if(sim > 1.2 && !L.warned){
+      L.warned = true;
+      setStatus('El deslizador no se mueve: con la bomba apagada el rozamiento con el carril lo retiene. El contador 1 sigue corriendo. Pulsa el rojo <b>RECUPERAR</b> y enciende la bomba.', 'warn');
+      setControls();
+    }
+    requestAnimationFrame(frame); return;
+  }
+  d = posAt(L, sim);
+  if(L.fail && sim > L.tau + 0.15) $('pulley').classList.add('warn');
+  drawScene();
+  setDisplay(D1, sim < L.tLead ? fmtC1(sim) : fmtC1(L.c1));
+  // contador 2: cuenta mientras la pantalla tapa el haz y se detiene cuando acaba de pasar
+  setDisplay(D2, sim >= L.tTrail ? fmtC2(L.c2) : sim >= L.tLead ? fmtC2(sim - L.tLead) : '0.000');
+  if(sim >= L.tb + 0.12){ finish(); return; }
+  requestAnimationFrame(frame);
+}
+function finish(){
+  state = 'done';
+  launchNo++;
+  const sKey = fx(L.sCm, 1);
+  const entry = { n: launchNo, s: L.sCm, t: L.c1, dt: L.c2 };
+  if(L.fail){
+    entry.bad = true;
+    setStatus(`El hilo se ha salido de la acanaladura de la polea durante el lanzamiento. Lanzamiento <b>no válido</b>, no se anota. Repítelo cuando el deslizador vuelva al disparador.`, 'warn');
+  } else {
+    const key = L.sCm.toFixed(1);
+    const row = cur().rows[key] || (cur().rows[key] = { s: L.sCm, t: [], dt: [] });
+    if(row.t.length >= 3){
+      entry.skip = true;
+      setStatus(`Leído t = <b>${fx(L.c1,3)} s</b>, Δt = <b>${fx(L.c2,3)} s</b>. La fila <i>s</i> = ${sKey} cm ya tiene tres medidas, así que no se anota. Cambia la posición de la puerta.`, 'warn');
+    } else {
+      row.t.push(L.c1); row.dt.push(L.c2);
+      cur().history.push(key);
+      setStatus(`Anotado en la fila <i>s</i> = ${sKey} cm (${row.t.length} de 3): t = <b>${fx(L.c1,3)} s</b>, Δt = <b>${fx(L.c2,3)} s</b>.`, 'ok');
+    }
+  }
+  store.log.unshift(entry); store.log = store.log.slice(0, 40);
+  save(); renderTable(); renderLog(); setControls();
+  setTimeout(goBack, 1000);   // la masa queda 1 s en el suelo y el deslizador vuelve solo
+}
+function goBack(){
+  if(state !== 'done') return;
+  state = 'returning'; retFrom = d; retT = 0; last = null;
+  setControls();
+  requestAnimationFrame(retFrame);
+}
+function retFrame(ts){
+  if(last === null) last = ts;
+  const dt = Math.min(0.05, (ts-last)/1000); last = ts;
+  retT += dt/0.9;
+  const k = Math.min(1, retT);
+  d = retFrom*(1 - (1 - Math.cos(Math.PI*k))/2);
+  drawScene();
+  if(k < 1){ requestAnimationFrame(retFrame); return; }
+  d = 0; drawScene();
+  $('pulley').classList.remove('warn');
+  state = 'ready'; L = null; setControls();
+}
+
+/* ---------- Tabla ---------- */
+function cellPair(arr, res, scale){
+  const st = stats(arr, res);
+  const r = roundPair(st.m*scale, st.eps*scale);
+  return { st, html: `${r.v} <span class="pm">± ${r.e}</span>` };
+}
+function trio(arr, dec){
+  let h = '';
+  for(let i=0;i<3;i++) h += arr[i] !== undefined ? `<span>${fx(arr[i], dec)} <span class="pm">± 0,001</span></span>` : `<span class="empty">·</span>`;
+  return h;
+}
+function rowCalc(row){
+  if(!row.t.length) return null;
+  const T = stats(row.t, 0.001), DT = stats(row.dt, 0.001);
+  const tp = T.m + DT.m/2, etp = T.eps + DT.eps/2;
+  const v = P.dsRead/DT.m, ev = v*(P.dsErr/P.dsRead + DT.eps/DT.m);
+  return { T, DT, tp, etp, tp2: tp*tp, etp2: 2*tp*etp, v, ev };
+}
+function renderTable(){
+  const tb = $('tbody');
+  const keys = Object.keys(cur().rows).sort((a,b)=>parseFloat(a)-parseFloat(b));
+  const curS = Math.round((parseFloat(gateInp.value) - P.start)*10)/10;
+  $('tbl').classList.toggle('nocalc', !store.showCalc);
+  if(!keys.length){
+    tb.innerHTML = `<tr class="emptyrow"><td colspan="8">Todavía no hay lanzamientos en esta parte. Cada lanzamiento escribe t y Δt en la fila de su posición; con tres lanzamientos la fila queda completa.</td></tr>`;
+  } else {
+    tb.innerHTML = keys.map(k => {
+      const row = cur().rows[k], c = rowCalc(row);
+      const tbar = c ? roundPair(c.T.m, c.T.eps) : null;
+      const dtbar = c ? roundPair(c.DT.m, c.DT.eps) : null;
+      const vr = c && store.calibre ? roundPair(c.v, c.ev) : null;
+      const tpr = c ? roundPair(c.tp, c.etp) : null;
+      const tp2r = c ? roundPair(c.tp2, c.etp2) : null;
+      const pm = r => r ? `${r.v} <span class="pm">± ${r.e}</span>` : '';
+      return `<tr class="${Math.abs(row.s - curS) < 0.05 ? 'active' : ''}">
+        <td>${fx(row.s,1)} <span class="pm">± 0,1</span></td>
+        <td class="trio">${trio(row.t,3)}</td>
+        <td class="calc">${pm(tbar)}</td>
+        <td class="trio">${trio(row.dt,3)}</td>
+        <td class="calc">${pm(dtbar)}</td>
+        <td class="calc">${pm(tpr)}</td>
+        <td class="calc p1only">${pm(tp2r)}</td>
+        <td class="calc p2only">${vr ? pm(vr) : '<span class="pm">mide Δs</span>'}</td>
+      </tr>`;
+    }).join('');
+  }
+  // chips completados
+  document.querySelectorAll('#chips .chip[data-s]').forEach(ch => {
+    const r = cur().rows[parseFloat(ch.dataset.s).toFixed(1)];
+    ch.classList.toggle('done', !!(r && r.t.length >= 3));
+  });
+  renderFit();
+}
+function renderLog(){
+  const ol = $('log'); if(!ol) return;
+  if(!store.log.length){ ol.innerHTML = `<li class="none">Aún no hay lanzamientos.</li>`; return; }
+  ol.innerHTML = store.log.slice(0, 8).map(e => {
+    const cls = e.bad ? 'bad' : (e.skip ? 'skip' : '');
+    const tail = e.bad ? 'no válido, hilo fuera de la polea' : (e.skip ? 'no anotado, fila completa' : '');
+    return `<li class="${cls}"><span class="n">n.º ${e.n}</span><span>s = ${fx(e.s,1)} cm</span><span>t = ${fx(e.t,3)} s</span><span>Δt = ${fx(e.dt,3)} s</span>${tail ? `<span>${tail}</span>` : ''}</li>`;
+  }).join('');
+}
+
+/* ---------- Controles ---------- */
+const chipsEl = $('chips');
+for(let s=30; s<=70; s+=10){
+  const b = document.createElement('button');
+  b.className = 'chip'; b.dataset.s = s; b.textContent = s; b.setAttribute('aria-pressed','false');
+  b.setAttribute('aria-label', `Colocar la puerta en s = ${s} cm`);
+  b.addEventListener('click', () => { gateInp.value = (s + P.start).toFixed(1); onGate(); });
+  chipsEl.appendChild(b);
+}
+{
+  const all = document.createElement('button');
+  all.className = 'chip all'; all.id = 'measureAll'; all.textContent = 'Medir todo';
+  all.setAttribute('aria-label', 'Hacer automáticamente tres lanzamientos en cada posición de 30 a 70 cm');
+  all.addEventListener('click', () => {
+    if(state !== 'ready' && state !== 'done') return;
+    if(part === 2 && !store.calibre){ store.calibre = true; showCalibre(); }
+    for(let sc = 30; sc <= 70; sc += 10){
+      const key = sc.toFixed(1);
+      const row = cur().rows[key] || (cur().rows[key] = { s: sc, t: [], dt: [] });
+      while(row.t.length < 3){
+        const Lm = makeLaunch(sc, true);
+        if(Lm.fail) continue;                       // lanzamiento no válido: se repite
+        row.t.push(Lm.c1); row.dt.push(Lm.c2); cur().history.push(key);
+      }
+    }
+    save(); renderTable();
+  });
+  chipsEl.appendChild(all);
+  const rst = document.createElement('button');
+  rst.className = 'chip rst'; rst.id = 'resetAll'; rst.textContent = 'Reset';
+  rst.setAttribute('aria-label', 'Borrar todas las medidas de la tabla de esta parte');
+  let armed = false, tmr = null;
+  rst.addEventListener('click', () => {
+    if(state !== 'ready' && state !== 'done') return;
+    if(!armed){ armed = true; rst.textContent = '¿Borrar la tabla?'; tmr = setTimeout(() => { armed = false; rst.textContent = 'Reset'; }, 3000); return; }
+    clearTimeout(tmr); armed = false; rst.textContent = 'Reset';
+    store['p' + part] = { rows: {}, history: [] };
+    save(); renderTable();
+  });
+  chipsEl.appendChild(rst);
+}
+function onGate(){ store.gate = parseFloat(gateInp.value); save(); drawGate(); drawScene(); }
+gateInp.addEventListener('input', onGate);
+pressSvg('pbGo', launch);
+document.addEventListener('keydown', e => {
+  if(e.key !== ' ' || e.target.closest('input,button,textarea')) return;
+  e.preventDefault();
+  if(state === 'ready') launch();
+});
+
+$('showCalc').checked = store.showCalc;
+$('showCalc').addEventListener('change', e => { store.showCalc = e.target.checked; save(); renderTable(); });
+
+$('tbody').addEventListener('click', e => {
+  const b = e.target.closest('button[data-k]'); if(!b) return;
+  const k = b.dataset.k;
+  delete cur().rows[k];
+  cur().history = cur().history.filter(h => h !== k);
+  save(); renderTable();
+});
+$('undo').addEventListener('click', () => {
+  const k = cur().history.pop(); if(!k || !cur().rows[k]) { renderTable(); return; }
+  const r = cur().rows[k]; r.t.pop(); r.dt.pop();
+  if(!r.t.length) delete cur().rows[k];
+  save(); renderTable();
+});
+let clearArmed = false, clearTimer = null;
+$('clear').addEventListener('click', e => {
+  const b = e.currentTarget;
+  if(!clearArmed){
+    clearArmed = true; b.textContent = 'Pulsa otra vez para vaciar'; b.classList.add('confirm');
+    clearTimer = setTimeout(() => { clearArmed = false; b.textContent = 'Vaciar tabla'; b.classList.remove('confirm'); }, 3000);
+    return;
+  }
+  clearTimeout(clearTimer); clearArmed = false; b.textContent = 'Vaciar tabla'; b.classList.remove('confirm');
+  store['p' + part] = { rows: {}, history: [] }; store.log = []; launchNo = 0;
+  save(); renderTable(); renderLog();
+});
+
+function tsv(){
+  const head = ['s (cm)','t1 (s)','t2 (s)','t3 (s)','t media (s)','err t media (s)','Δt1 (s)','Δt2 (s)','Δt3 (s)','Δt media (s)','err Δt media (s)',"t' (s)","err t' (s)"]
+    .concat(part === 1 ? ["t'^2 (s^2)","err t'^2 (s^2)"] : ['v (m/s)','err v (m/s)']);
+  const keys = Object.keys(cur().rows).sort((a,b)=>parseFloat(a)-parseFloat(b));
+  const lines = [head.join('\t')];
+  for(const k of keys){
+    const r = cur().rows[k], c = rowCalc(r);
+    const t3 = [0,1,2].map(i => r.t[i] !== undefined ? fx(r.t[i],3) : '');
+    const d3 = [0,1,2].map(i => r.dt[i] !== undefined ? fx(r.dt[i],3) : '');
+    const a = roundPair(c.T.m, c.T.eps), b = roundPair(c.DT.m, c.DT.eps), p = roundPair(c.tp, c.etp);
+    const last = part === 1 ? roundPair(c.tp2, c.etp2) : (store.calibre ? roundPair(c.v, c.ev) : { v:'', e:'' });
+    lines.push([fx(r.s,1), ...t3, a.v, a.e, ...d3, b.v, b.e, p.v, p.e, last.v, last.e].join('\t'));
+  }
+  return lines.join('\n');
+}
+/* ---------- Ajuste por mínimos cuadrados ---------- */
+function linfit(pts){
+  const n = pts.length;
+  let Sx=0, Sy=0, Sxx=0, Sxy=0, Syy=0;
+  for(const p of pts){ Sx+=p.x; Sy+=p.y; Sxx+=p.x*p.x; Sxy+=p.x*p.y; Syy+=p.y*p.y; }
+  const D = n*Sxx - Sx*Sx;
+  const A = (n*Sxy - Sx*Sy)/D, B = (Sxx*Sy - Sx*Sxy)/D;
+  let SS = 0; for(const p of pts) SS += (p.y - A*p.x - B)**2;
+  const sig = Math.sqrt(SS/(n-2));
+  const eA = sig*Math.sqrt(n/D), eB = sig*Math.sqrt(Sxx/D);
+  const r = (n*Sxy - Sx*Sy)/Math.sqrt((n*Sxx - Sx*Sx)*(n*Syy - Sy*Sy));
+  return { A, B, eA, eB, r, n };
+}
+function niceStep(range){
+  const raw = range/5, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw/p;
+  return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10)*p;
+}
+function drawChart(svg, pts, fit, xT, yT){
+  const W=560, H=360, ml=64, mr=18, mt=16, mb=52, pw=W-ml-mr, ph=H-mt-mb;
+  if(pts.length < 3){
+    svg.innerHTML = `<text class="c-empty" x="${W/2}" y="${H/2}" text-anchor="middle">Faltan datos: se necesitan al menos tres posiciones de la puerta (llevas ${pts.length}).</text>`;
+    return;
+  }
+  const xa = Math.min(...pts.map(p=>p.x-p.ex)), xb = Math.max(...pts.map(p=>p.x+p.ex));
+  const padX = (xb - xa)*0.08 || Math.abs(xb)*0.05;
+  const xs = niceStep(xb - xa + 2*padX), x0 = Math.floor((xa - padX)/xs)*xs, xm = Math.ceil((xb + padX)/xs)*xs;
+  const fy = x => fit.A*x + fit.B;
+  const ya = Math.min(...pts.map(p=>p.y-p.ey), fy(x0), fy(xm)), yb = Math.max(...pts.map(p=>p.y+p.ey), fy(x0), fy(xm));
+  const padY = (yb - ya)*0.06;
+  const ys = niceStep(yb - ya + 2*padY); let yLo = Math.floor((ya - padY)/ys)*ys, yHi = Math.ceil((yb + padY)/ys)*ys;
+  const X = x => ml + (x - x0)/(xm - x0)*pw, Y = y => mt + (yHi - y)/(yHi - yLo)*ph;
+  const dec = st => Math.max(0, -Math.floor(Math.log10(st) + 1e-9));
+  let h = '';
+  for(let v=x0; v<=xm+xs*1e-6; v+=xs) h += `<line class="c-grid" x1="${X(v)}" y1="${mt}" x2="${X(v)}" y2="${mt+ph}"/><text class="c-tick" x="${X(v)}" y="${mt+ph+17}" text-anchor="middle">${fx(Math.abs(v)<1e-12?0:v, dec(xs))}</text>`;
+  for(let v=yLo; v<=yHi+ys*1e-6; v+=ys) h += `<line class="c-grid" x1="${ml}" y1="${Y(v)}" x2="${ml+pw}" y2="${Y(v)}"/><text class="c-tick" x="${ml-7}" y="${Y(v)+4}" text-anchor="end">${fx(Math.abs(v)<1e-12?0:v, dec(ys))}</text>`;
+  h += `<line class="c-axis" x1="${ml}" y1="${mt}" x2="${ml}" y2="${mt+ph}"/><line class="c-axis" x1="${ml}" y1="${mt+ph}" x2="${ml+pw}" y2="${mt+ph}"/>`;
+  h += `<text class="c-title" x="${ml+pw/2}" y="${H-10}" text-anchor="middle">${xT}</text>`;
+  h += `<text class="c-title" transform="translate(16,${mt+ph/2}) rotate(-90)" text-anchor="middle">${yT}</text>`;
+  h += `<line class="c-line" x1="${X(x0)}" y1="${Y(fy(x0))}" x2="${X(xm)}" y2="${Y(fy(xm))}"/>`;
+  // barras de error horizontales y verticales de cada dato, siempre dibujadas
+  for(const p of pts){
+    const cx = X(p.x), cy = Y(p.y);
+    const dy = Math.abs(Y(p.y+p.ey) - cy), dx = Math.abs(X(p.x+p.ex) - cx);
+    h += `<line class="c-err" x1="${cx}" y1="${cy-dy}" x2="${cx}" y2="${cy+dy}"/><line class="c-err" x1="${cx-5}" y1="${cy-dy}" x2="${cx+5}" y2="${cy-dy}"/><line class="c-err" x1="${cx-5}" y1="${cy+dy}" x2="${cx+5}" y2="${cy+dy}"/>`;
+    h += `<line class="c-err" x1="${cx-dx}" y1="${cy}" x2="${cx+dx}" y2="${cy}"/><line class="c-err" x1="${cx-dx}" y1="${cy-5}" x2="${cx-dx}" y2="${cy+5}"/><line class="c-err" x1="${cx+dx}" y1="${cy-5}" x2="${cx+dx}" y2="${cy+5}"/>`;
+    h += `<circle class="c-dot" cx="${cx}" cy="${cy}" r="2.6"/>`;
+  }
+  svg.innerHTML = h;
+}
+const sym = (b, i) => `<dt>${b}<sub>${i}</sub></dt>`;
+const pmv = (v, e, unit) => { const r = roundPair(v, e); return `<dd>${r.v} <span class="pm">± ${r.e}</span> ${unit}</dd>`; };
+function renderFit(){
+  const keys = Object.keys(cur().rows).sort((a,b)=>parseFloat(a)-parseFloat(b));
+  const rows = keys.map(k => ({ s: cur().rows[k].s/100, c: rowCalc(cur().rows[k]) })).filter(r => r.c);
+  const k = (P.m1 + P.m2)/P.m1;
+  const wait = `<div class="msg">Los resultados aparecen con tres posiciones medidas.</div>`;
+  if(part === 1){
+    const p1 = rows.map(r => ({ x: r.c.tp2, ex: r.c.etp2, y: r.s, ey: 0.001 }));
+    const f1 = p1.length >= 3 ? linfit(p1) : null;
+    drawChart($('chart1'), p1, f1, `t′² (s²)`, `s (m)`);
+    $('res1').innerHTML = f1 ? [
+      sym('A',1) + pmv(f1.A, f1.eA, 'm/s²'), sym('B',1) + pmv(f1.B, f1.eB, 'm'), sym('r',1) + `<dd>${fx(f1.r, 5)}</dd>`,
+      `<div class="sep"></div>`,
+      sym('a',1) + pmv(2*f1.A, 2*f1.eA, 'm/s²'), sym('g',1) + pmv(2*f1.A*k, 2*f1.eA*k, 'm/s²')
+    ].join('') : wait;
+    return;
+  }
+  if(!store.calibre){
+    $('chart2').innerHTML = `<text class="c-empty" x="280" y="180" text-anchor="middle">Mide primero la anchura Δs de la pantalla con el calibre.</text>`;
+    $('res2').innerHTML = `<div class="msg">Sin Δs no se puede calcular v.</div>`;
+    return;
+  }
+  const p2 = rows.map(r => ({ x: r.c.tp, ex: r.c.etp, y: r.c.v, ey: r.c.ev }));
+  const f2 = p2.length >= 3 ? linfit(p2) : null;
+  drawChart($('chart2'), p2, f2, `t′ (s)`, `v (m/s)`);
+  $('res2').innerHTML = f2 ? [
+    sym('A',2) + pmv(f2.A, f2.eA, 'm/s²'), sym('B',2) + pmv(f2.B, f2.eB, 'm/s'), sym('r',2) + `<dd>${fx(f2.r, 5)}</dd>`,
+    `<div class="sep"></div>`,
+    sym('a',2) + pmv(f2.A, f2.eA, 'm/s²'), sym('g',2) + pmv(f2.A*k, f2.eA*k, 'm/s²')
+  ].join('') : wait;
+}
+document.querySelectorAll('.showFit').forEach(c => {
+  c.checked = store.showFit === true;
+  c.addEventListener('change', e => {
+    store.showFit = e.target.checked; save();
+    document.querySelectorAll('.showFit').forEach(o => o.checked = e.target.checked);
+    document.querySelector('.fitcard').classList.toggle('nofit', !e.target.checked);
+  });
+});
+document.querySelector('.fitcard').classList.toggle('nofit', store.showFit !== true);
+$('copy').addEventListener('click', () => {
+  const text = tsv();
+  const done = () => { $('copied').textContent = 'Copiada. Pégala en la hoja de cálculo.'; setTimeout(() => $('copied').textContent = '', 3500); };
+  const fail = () => { $('fallbackBox').hidden = false; const ta = $('fallbackTa'); ta.value = text; ta.focus(); ta.select(); $('copied').textContent = 'Selecciona el texto y cópialo.'; };
+  try { navigator.clipboard.writeText(text).then(done, fail); } catch(e){ fail(); }
+});
+
+function showCalibre(){ $('dsCell').innerHTML = `Δs = 100,05 mm ± 0,05 mm <span style="color:var(--muted)">(calibre, nonio de 0,05 mm)</span>`; }
+$('calibre').addEventListener('click', () => { store.calibre = true; save(); showCalibre(); renderTable(); });
+if(store.calibre) showCalibre();
+
+
+/* Parte de la práctica */
+function setPart(n){
+  part = n; store.part = n; save();
+  document.body.dataset.part = String(n);
+  document.querySelectorAll('.partbtn').forEach(b => b.setAttribute('aria-selected', b.dataset.part === String(n) ? 'true' : 'false'));
+  renderTable(); drawScene(); setControls();
+}
+document.querySelectorAll('.partbtn').forEach(b => b.addEventListener('click', () => { if(state === 'ready' || state === 'done') setPart(parseInt(b.dataset.part, 10)); }));
+document.body.dataset.part = String(part);
+document.querySelectorAll('.partbtn').forEach(b => b.setAttribute('aria-selected', b.dataset.part === String(part) ? 'true' : 'false'));
+
+/* Tabla a pantalla completa */
+(function(){
+  const card = document.querySelector('.tablecard'), btn = $('maxBtn'), icon = $('maxIcon');
+  const set = on => {
+    card.classList.toggle('max', on); document.body.classList.toggle('tablemax', on);
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.setAttribute('aria-label', on ? 'Volver la tabla a su sitio' : 'Ampliar la tabla a pantalla completa');
+    btn.title = on ? 'Reducir' : 'Ampliar';
+    icon.setAttribute('d', on ? 'M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5' : 'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5');
+  };
+  btn.addEventListener('click', () => set(!card.classList.contains('max')));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && card.classList.contains('max')) set(false); });
+})();
+
+/* Ayuda */
+(function(){
+  const btn = $('helpBtn'), pop = $('helpPop');
+  const set = open => {
+    if(open){
+      // se despliega sobre la tabla, justo debajo de su cabecera, para que se vean las magnitudes que se miden
+      const card = document.querySelector('.tablecard'), th = document.querySelector('#tbl thead');
+      const top = th.getBoundingClientRect().bottom - card.getBoundingClientRect().top + 8;
+      pop.style.setProperty('--hp-top', top + 'px');
+    }
+    pop.hidden = !open; btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  };
+  btn.addEventListener('click', e => { e.stopPropagation(); set(pop.hidden); });
+  $('helpClose').addEventListener('click', () => { set(false); btn.focus(); });
+  document.addEventListener('click', e => { if(!pop.hidden && !pop.contains(e.target)) set(false); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && !pop.hidden){ set(false); btn.focus(); } });
+})();
+/* ---------- Inicio ---------- */
+{
+  // solo las cinco posiciones de la práctica: s = 30, 40, 50, 60 y 70 cm
+  const OK = ['30.0','40.0','50.0','60.0','70.0'];
+  for(const k of ['p1','p2']){
+    for(const key of Object.keys(store[k].rows)) if(!OK.includes(key)) delete store[k].rows[key];
+    store[k].history = store[k].history.filter(h => OK.includes(h));
+  }
+  const g = Math.round(((store.gate || 50) - 50)/10)*10 + 50;
+  gateInp.value = String(Math.min(90, Math.max(50, g)));
+  save();
+}
+setDisplay(D1, '0.000'); setDisplay(D2, '0.000');
+drawGate(); drawScene(); renderLog(); setControls(); readyMsg();
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--sfoot--><footer class="sfoot"><div class="in" style="max-width:1520px"><span>INNOVA-FIS-LAB · Grupo de Innovación Docente en Laboratorios de Física · Universidad Rey Juan Carlos</span><span>Materiales con licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span></div></footer><!--/sfoot-->
+</body></html>
