@@ -29,6 +29,10 @@ document.getElementById("f").addEventListener("submit",async e=>{e.preventDefaul
   await save(k);
   const reg=await navigator.serviceWorker.register(BASE+"sw.js",{scope:BASE});await navigator.serviceWorker.ready;
   if(reg.active)reg.active.postMessage("forget");
-  msg.textContent="Abriendo… (la primera vez tarda unos segundos)";const dest=(location.pathname===BASE+"acceso.html")?BASE:location.pathname+location.search+location.hash;location.replace(dest);
+  if(!navigator.serviceWorker.controller){await new Promise(r=>{navigator.serviceWorker.addEventListener("controllerchange",r,{once:true});setTimeout(r,4000)})}
+  msg.textContent="Abriendo… (la primera vez tarda unos segundos)";
+  const dest=(location.pathname===BASE+"acceso.html")?BASE:location.pathname+location.search;
+  setTimeout(()=>location.reload(),20000);
+  if(location.hash)location.replace(dest+(dest.indexOf("?")<0?"?":"&")+"r="+Date.now()+location.hash);else if(dest===location.pathname+location.search)location.reload();else location.replace(dest);
  }catch(err){msg.style.color="#c0392b";msg.textContent="Contraseña incorrecta.";b.disabled=false}});
 </script></body></html>
