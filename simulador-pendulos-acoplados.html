@@ -81,7 +81,7 @@
   @media (max-width: 640px) { .snav .in, .sfoot .in { padding-left: 16px; padding-right: 16px; } }
 </style>
 </head><body>
-<!--snav--><header class="snav"><div class="in" style="max-width:1520px"><div class="bl"><a class="br" href="index.html"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#070c15"/><rect x="7" y="7" width="2.4" height="20" fill="#7a5cff"/><rect x="11.5" y="7" width="2.4" height="20" fill="#2fb7e8"/><rect x="17" y="7" width="2.4" height="20" fill="#57d163"/><rect x="21" y="7" width="2.4" height="20" fill="#f4a62a"/><rect x="25.5" y="7" width="2.4" height="20" fill="#ff4d4d"/></svg>INNOVA-FIS-LAB</a></div><nav aria-label="Secciones de la web"><a href="index.html">Inicio</a><a href="calibre.html">Instrumentos de medida</a><a href="errores.html">Errores</a><a href="colaboracion.html">Colaboración</a><a href="novedades.html">Novedades</a></nav></div></header><!--/snav-->
+<!--snav--><header class="snav"><div class="in" style="max-width:1520px"><div class="bl"><a class="br" href="index.html"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#070c15"/><rect x="7" y="7" width="2.4" height="20" fill="#7a5cff"/><rect x="11.5" y="7" width="2.4" height="20" fill="#2fb7e8"/><rect x="17" y="7" width="2.4" height="20" fill="#57d163"/><rect x="21" y="7" width="2.4" height="20" fill="#f4a62a"/><rect x="25.5" y="7" width="2.4" height="20" fill="#ff4d4d"/></svg>INNOVA-FIS-LAB</a></div><nav aria-label="Secciones de la web"><a href="index.html">Inicio</a><a href="laboratorios.html" aria-current="page">Laboratorios</a><a href="calibre.html">Instrumentos de medida</a><a href="errores.html">Errores</a><a href="novedades.html">Novedades</a></nav></div></header><!--/snav-->
 
 
 
@@ -524,19 +524,22 @@ body.tablemax{overflow:hidden}
 .t-grid{stroke:var(--line); stroke-width:1}
 .t-tick{font:11.5px var(--f-num); fill:var(--muted)}
 .t-lbl{font:600 12.5px var(--f-ui)}
-.t-x1{fill:none; stroke:var(--accent); stroke-width:1.8}
+.t-x1{fill:none; stroke:#2f78d4; stroke-width:1.8}
 .t-x2{fill:none; stroke:#d9820b; stroke-width:1.8}
-.t-l1{fill:var(--accent)} .t-l2{fill:#d9820b}
+.t-l1{fill:#2f78d4} .t-l2{fill:#d9820b}
 .t-mark{stroke:var(--stop-1); stroke-width:1.2; stroke-dasharray:3 3}
 .stage{display:grid; gap:14px; grid-template-columns:minmax(0,1fr); align-items:start}
 @media (min-width:720px){ .stage{grid-template-columns:minmax(0,1.75fr) minmax(250px,1fr)} }
 .side{display:grid; gap:12px; align-content:start}
 .side .chips{margin-top:6px}
-.sw{background:var(--device); border:1px solid var(--device-edge); border-radius:8px; padding:10px 12px; display:grid; gap:8px; align-content:start}
+.sw{background:var(--device); border:1px solid var(--device-edge); border-radius:8px; padding:8px 10px; display:grid; gap:6px; align-content:start}
 .sw .top{display:flex; align-items:center; justify-content:space-between; gap:8px}
 .sw .lbl{font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
 .sw .disp{display:flex; align-items:flex-end; gap:8px}
-.sw .disp svg{width:100%; max-width:240px; height:auto; display:block}
+.sw .disp svg{width:100%; max-width:190px; height:auto; display:block}
+.leftcol{display:grid; gap:10px; align-content:start; min-width:0}
+.sw .status{margin:0; padding:6px 8px; font-size:13px}
+.sw .status:empty{display:none}
 .sw .unit{font:500 14px var(--f-num); color:var(--muted); padding-bottom:6px}
 .sw .btns{display:flex; flex-wrap:wrap; gap:8px}
 .sw .btns .btn{padding:7px 14px}
@@ -573,10 +576,11 @@ body[data-part="1"] .p2only, body[data-part="2"] .p1only{display:none !important
 
       <div class="pa-grid">
         <div class="stage">
+          <div class="leftcol">
           <div class="viewwrap">
             <svg id="scene" viewBox="0 0 640 520" role="img" aria-label="Dos péndulos colgados de un soporte, unidos por un hilo del que cuelga una pesa. Arrastra para girar la vista.">
               <defs>
-                <radialGradient id="gBob" cx="35%" cy="32%" r="70%"><stop offset="0" style="stop-color:var(--brass-t)"/><stop offset=".55" style="stop-color:var(--brass-2)"/><stop offset="1" style="stop-color:var(--brass-1)"/></radialGradient>
+                <radialGradient id="gB1" cx="35%" cy="32%" r="70%"><stop offset="0" stop-color="#cfe2fb"/><stop offset=".55" stop-color="#4f8fe0"/><stop offset="1" stop-color="#1f5fb0"/></radialGradient><radialGradient id="gB2" cx="35%" cy="32%" r="70%"><stop offset="0" stop-color="#fde3bd"/><stop offset=".55" stop-color="#ec9a2e"/><stop offset="1" stop-color="#b8680a"/></radialGradient>
               </defs>
               <g id="sceneG"></g>
             </svg>
@@ -586,6 +590,10 @@ body[data-part="1"] .p2only, body[data-part="2"] .p1only{display:none !important
               <button class="chip" data-view="persp">3D</button>
             </div>
             <div class="viewhint">Arrastra para girar la vista</div>
+          </div>
+          <div class="trace">
+            <svg id="traceSvg" viewBox="0 0 900 150" role="img" aria-label="Desplazamiento horizontal de cada masa frente al tiempo"></svg>
+          </div>
           </div>
 
           <div class="side">
@@ -614,15 +622,12 @@ body[data-part="1"] .p2only, body[data-part="2"] .p1only{display:none !important
                 <button class="btn" id="swReset">A cero</button>
               </div>
               <div class="dest" id="destTxt"></div>
-              <div class="note">También con la tecla <span class="kbd">espacio</span>. Cuenta el tiempo de la simulación, así que sirve igual a otra velocidad.</div>
+              <div class="status" id="status" aria-live="polite"></div>
+              <div class="note">También con la tecla <span class="kbd">espacio</span>.</div>
             </div>
-            <div class="status" id="status" aria-live="polite"></div>
           </div>
         </div>
 
-        <div class="trace">
-          <svg id="traceSvg" viewBox="0 0 900 150" role="img" aria-label="Desplazamiento horizontal de cada masa frente al tiempo"></svg>
-        </div>
 
         <div class="datos" style="padding:0">
           <dl>
@@ -921,7 +926,7 @@ function drawScene(){
     add((pv[2]+bp[2])/2, `<line class="v-thread" x1="${f1(pv[0])}" y1="${f1(pv[1])}" x2="${f1(bp[0])}" y2="${f1(bp[1])}"/>`);
     add(pv[2]-0.02, `<rect class="v-clamp" x="${f1(pv[0]-7)}" y="${f1(pv[1]-6)}" width="14" height="12" rx="2"/>`);
     const r = SC*0.016;
-    add(bp[2], `<circle cx="${f1(bp[0])}" cy="${f1(bp[1])}" r="${f1(r)}" fill="url(#gBob)" stroke="var(--brass-1)" stroke-width="1"/><text class="v-lbl" x="${f1(bp[0]+r+5)}" y="${f1(bp[1]-r+2)}">${i}</text>`);
+    add(bp[2], `<circle cx="${f1(bp[0])}" cy="${f1(bp[1])}" r="${f1(r)}" fill="url(#gB${i})" stroke="${i===1?'#1f5fb0':'#b8680a'}" stroke-width="1"/><text class="v-lbl" x="${f1(bp[0]+r+5)}" y="${f1(bp[1]-r+2)}">${i}</text>`);
     if(held && !running){
       const th = i===1 ? S.th1 : S.th2;
       const e0 = i === 1 ? eqNow() : -eqNow(), xe = x0 + P.L*Math.sin(e0);
@@ -981,7 +986,7 @@ function animCam(){ if(running) return; if(camStep()){ drawScene(); requestAnima
 /* ---------- Gráfica de desplazamientos ---------- */
 const tsvg = $('traceSvg');
 function drawTrace(){
-  const cw = tsvg.clientWidth || 900, W = cw < 640 ? 560 : 900, H = cw < 640 ? 190 : 150;
+  const cw = tsvg.clientWidth || 900, W = Math.round(Math.max(560, cw)), H = cw < 640 ? 190 : 170;
   tsvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
   const _u=0, ml=46, mr=14, mt=14, mb=26, pw=W-ml-mr, ph=H-mt-mb;
   const tEnd = Math.max(WIN, S.t), t0 = tEnd - WIN;
