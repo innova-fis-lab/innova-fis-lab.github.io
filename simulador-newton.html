@@ -97,6 +97,10 @@
 .vlb .bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:#dfe5ec}
 .vlb .bar::before{content:"";position:absolute;left:0;right:0;top:-8px;bottom:-8px}
 .vlb .tm{min-width:88px;text-align:right;font-variant-numeric:tabular-nums}
+.vlb .fs{width:30px;height:30px;border:0;background:transparent;cursor:pointer;padding:0;display:grid;place-items:center}
+.vlb .fs svg{width:18px;height:18px;stroke:#dfe5ec;fill:none;stroke-width:2}
+.vlb .vw:fullscreen{width:100vw;height:100vh;border-radius:0;display:flex;flex-direction:column}
+.vlb .vw:fullscreen video{flex:1;min-height:0;aspect-ratio:auto;object-fit:contain}
 .vlb .x{position:absolute;top:12px;right:16px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#111;font:700 26px/44px sans-serif;cursor:pointer}</style></head><body>
 <!--snav--><header class="snav"><div class="in" style="max-width:1520px"><div class="bl"><a class="br" href="index.html"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#070c15"/><rect x="7" y="7" width="2.4" height="20" fill="#7a5cff"/><rect x="11.5" y="7" width="2.4" height="20" fill="#2fb7e8"/><rect x="17" y="7" width="2.4" height="20" fill="#57d163"/><rect x="21" y="7" width="2.4" height="20" fill="#f4a62a"/><rect x="25.5" y="7" width="2.4" height="20" fill="#ff4d4d"/></svg>INNOVA-FIS-LAB</a></div><nav aria-label="Secciones de la web"><a href="index.html">Inicio</a><a href="calibre.html">Instrumentos de medida</a><a href="errores.html">Errores</a><a href="colaboracion.html">Colaboración</a><a href="novedades.html">Novedades</a></nav></div></header><!--/snav-->
 
@@ -1529,16 +1533,16 @@ drawGate(); drawScene(); renderLog(); setControls(); readyMsg();
 
 
 <!--sfoot--><footer class="sfoot"><div class="in" style="max-width:1520px"><span>INNOVA-FIS-LAB · Grupo de Innovación Docente en Laboratorios de Física · Universidad Rey Juan Carlos</span><span>Materiales con licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span></div></footer><!--/sfoot-->
-<script id="vlbjs">(function(){var box=document.createElement("div");box.className="vlb";box.innerHTML='<button class="x" aria-label="Cerrar vídeo">×</button><div class="vw"><video playsinline></video><div class="cb"><button class="pp" aria-label="Reproducir o pausar"></button><div class="bar"><i></i></div><span class="tm">0:00 / 0:00</span></div></div>';document.body.appendChild(box);
+<script id="vlbjs">(function(){var box=document.createElement("div");box.className="vlb";box.innerHTML='<button class="x" aria-label="Cerrar vídeo">×</button><div class="vw"><video playsinline></video><div class="cb"><button class="pp" aria-label="Reproducir o pausar"></button><div class="bar"><i></i></div><span class="tm">0:00 / 0:00</span><button class="fs" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></div>';document.body.appendChild(box);
 var v=box.querySelector("video"),pp=box.querySelector(".pp"),bar=box.querySelector(".bar"),fill=bar.querySelector("i"),tm=box.querySelector(".tm");
 function f(t){t=Math.floor(t||0);return Math.floor(t/60)+":"+("0"+t%60).slice(-2)}
 function upd(){var d=v.duration||0;fill.style.width=(d?100*v.currentTime/d:0)+"%";tm.textContent=f(v.currentTime)+" / "+f(d);pp.classList.toggle("on",!v.paused)}
 ["timeupdate","play","pause","loadedmetadata","ended"].forEach(function(e){v.addEventListener(e,upd)});
 function tog(){if(v.paused)v.play();else v.pause()}
-pp.addEventListener("click",tog);v.addEventListener("click",tog);
+pp.addEventListener("click",tog);var vw=box.querySelector(".vw");box.querySelector(".fs").addEventListener("click",function(){if(document.fullscreenElement){document.exitFullscreen();return}if(vw.requestFullscreen)vw.requestFullscreen().catch(function(){});else if(vw.webkitRequestFullscreen)vw.webkitRequestFullscreen();else if(v.webkitEnterFullscreen)v.webkitEnterFullscreen()});v.addEventListener("dblclick",function(){box.querySelector(".fs").click()});v.addEventListener("click",tog);
 var drag=false;function seek(e){var r=bar.getBoundingClientRect(),x=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));if(v.duration)v.currentTime=x*v.duration;upd()}
 bar.addEventListener("pointerdown",function(e){drag=true;bar.setPointerCapture(e.pointerId);seek(e)});bar.addEventListener("pointermove",function(e){if(drag)seek(e)});bar.addEventListener("pointerup",function(){drag=false});
-function close(){v.pause();v.removeAttribute("src");v.load();box.classList.remove("on");upd()}
+function close(){if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){});v.pause();v.removeAttribute("src");v.load();box.classList.remove("on");upd()}
 function open(src){v.src=src;box.classList.add("on");var p=v.play();if(p&&p.catch)p.catch(function(){v.muted=true;v.play().catch(function(){})});}
 document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".vthumb");if(b){e.preventDefault();open(b.getAttribute("data-src"));}});
 box.addEventListener("click",function(e){if(e.target===box||e.target.classList.contains("x"))close()});
