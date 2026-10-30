@@ -82,14 +82,22 @@
 </style>
 <style id="vlbcss">.vthumb{display:block;position:relative;width:100%;padding:0;border:1px solid #d5dbe3;border-radius:8px;overflow:hidden;background:#eef3f9;cursor:pointer;aspect-ratio:16/9}
 .vthumb .vt{position:absolute;left:0;top:0;right:0;padding:8% 8% 0;text-align:left;font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:4px}.vthumb .va{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5b6676}.vthumb .vb{font-size:19px;font-weight:800;line-height:1.1;color:#17324d}.vthumb .vc{font-size:12px;font-weight:600;color:#1b7a43}
-.vthumb .pl{position:absolute;right:10px;bottom:10px;width:38px;height:38px;border-radius:50%;background:#17324d;display:grid;place-items:center;box-shadow:0 2px 8px #0003}
-.vthumb .pl::after{content:"";border-left:13px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
-.vthumb:hover .pl{transform:scale(1.08)}
+.vthumb .pl{position:absolute;right:12px;bottom:12px;width:30px;height:30px;border-radius:50%;border:1.5px solid #9aa7b6;background:#fff;display:grid;place-items:center;transition:border-color .15s}
+.vthumb .pl::after{content:"";border-left:9px solid #7a8696;border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;margin-left:2px;transition:border-left-color .15s}
+.vthumb:hover{border-color:#b9c4d2}.vthumb:hover .pl{border-color:#17324d}.vthumb:hover .pl::after{border-left-color:#17324d}
 .vlb{position:fixed;inset:0;background:rgba(5,10,20,.75);display:none;align-items:center;justify-content:center;z-index:99999}
 .vlb.on{display:flex}
-.vlb video{width:min(86vw,1100px,calc(78vh*16/9));max-height:78vh;aspect-ratio:16/9;background:#000;border-radius:8px}
-.vlb .x{position:absolute;top:12px;right:16px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#111;font:700 26px/44px sans-serif;cursor:pointer}
-.appvid{display:flex;gap:14px;align-items:center;margin-top:14px}.appvid > div{flex:0 0 260px}.appvid p{margin:0;font-size:13.5px;color:var(--muted);line-height:1.5}</style></head><body>
+.vlb .vw{width:min(86vw,1100px,calc(74vh*16/9));background:#000;border-radius:8px;overflow:hidden}
+.vlb video{display:block;width:100%;aspect-ratio:16/9;background:#000;cursor:pointer}
+.vlb .cb{display:flex;align-items:center;gap:12px;padding:8px 14px;background:#111821;color:#dfe5ec;font:600 13px Inter,sans-serif}
+.vlb .pp{width:30px;height:30px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
+.vlb .pp::after{content:"";border-left:11px solid #dfe5ec;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+.vlb .pp.on::after{border:0;margin:0;width:10px;height:13px;background:linear-gradient(90deg,#dfe5ec 0 35%,transparent 35% 65%,#dfe5ec 65%)}
+.vlb .bar{flex:1;height:5px;border-radius:3px;background:#3a4553;position:relative;cursor:pointer}
+.vlb .bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:#dfe5ec}
+.vlb .bar::before{content:"";position:absolute;left:0;right:0;top:-8px;bottom:-8px}
+.vlb .tm{min-width:88px;text-align:right;font-variant-numeric:tabular-nums}
+.vlb .x{position:absolute;top:12px;right:16px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#111;font:700 26px/44px sans-serif;cursor:pointer}</style></head><body>
 <!--snav--><header class="snav"><div class="in" style="max-width:1520px"><div class="bl"><a class="br" href="index.html"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#070c15"/><rect x="7" y="7" width="2.4" height="20" fill="#7a5cff"/><rect x="11.5" y="7" width="2.4" height="20" fill="#2fb7e8"/><rect x="17" y="7" width="2.4" height="20" fill="#57d163"/><rect x="21" y="7" width="2.4" height="20" fill="#f4a62a"/><rect x="25.5" y="7" width="2.4" height="20" fill="#ff4d4d"/></svg>INNOVA-FIS-LAB</a></div><nav aria-label="Secciones de la web"><a href="index.html">Inicio</a><a href="calibre.html">Instrumentos de medida</a><a href="errores.html">Errores</a><a href="colaboracion.html">Colaboración</a><a href="novedades.html">Novedades</a></nav></div></header><!--/snav-->
 
 
@@ -1521,11 +1529,17 @@ drawGate(); drawScene(); renderLog(); setControls(); readyMsg();
 
 
 <!--sfoot--><footer class="sfoot"><div class="in" style="max-width:1520px"><span>INNOVA-FIS-LAB · Grupo de Innovación Docente en Laboratorios de Física · Universidad Rey Juan Carlos</span><span>Materiales con licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span></div></footer><!--/sfoot-->
-<script id="vlbjs">(function(){var box=document.createElement("div");box.className="vlb";box.innerHTML='<button class="x" aria-label="Cerrar vídeo">×</button><video controls playsinline></video>';document.body.appendChild(box);var v=box.querySelector("video");
-function close(){v.pause();v.removeAttribute("src");v.load();box.classList.remove("on");if(document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen().catch(function(){})}
+<script id="vlbjs">(function(){var box=document.createElement("div");box.className="vlb";box.innerHTML='<button class="x" aria-label="Cerrar vídeo">×</button><div class="vw"><video playsinline></video><div class="cb"><button class="pp" aria-label="Reproducir o pausar"></button><div class="bar"><i></i></div><span class="tm">0:00 / 0:00</span></div></div>';document.body.appendChild(box);
+var v=box.querySelector("video"),pp=box.querySelector(".pp"),bar=box.querySelector(".bar"),fill=bar.querySelector("i"),tm=box.querySelector(".tm");
+function f(t){t=Math.floor(t||0);return Math.floor(t/60)+":"+("0"+t%60).slice(-2)}
+function upd(){var d=v.duration||0;fill.style.width=(d?100*v.currentTime/d:0)+"%";tm.textContent=f(v.currentTime)+" / "+f(d);pp.classList.toggle("on",!v.paused)}
+["timeupdate","play","pause","loadedmetadata","ended"].forEach(function(e){v.addEventListener(e,upd)});
+function tog(){if(v.paused)v.play();else v.pause()}
+pp.addEventListener("click",tog);v.addEventListener("click",tog);
+var drag=false;function seek(e){var r=bar.getBoundingClientRect(),x=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));if(v.duration)v.currentTime=x*v.duration;upd()}
+bar.addEventListener("pointerdown",function(e){drag=true;bar.setPointerCapture(e.pointerId);seek(e)});bar.addEventListener("pointermove",function(e){if(drag)seek(e)});bar.addEventListener("pointerup",function(){drag=false});
+function close(){v.pause();v.removeAttribute("src");v.load();box.classList.remove("on");upd()}
 function open(src){v.src=src;box.classList.add("on");var p=v.play();if(p&&p.catch)p.catch(function(){v.muted=true;v.play().catch(function(){})});}
 document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".vthumb");if(b){e.preventDefault();open(b.getAttribute("data-src"));}});
 box.addEventListener("click",function(e){if(e.target===box||e.target.classList.contains("x"))close()});
-document.addEventListener("keydown",function(e){if(e.key==="Escape"&&box.classList.contains("on"))close()});
-
-v.addEventListener("webkitendfullscreen",close);})();</script></body></html>
+document.addEventListener("keydown",function(e){if(!box.classList.contains("on"))return;if(e.key==="Escape")close();else if(e.key===" "){e.preventDefault();tog()}});})();</script></body></html>
