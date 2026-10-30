@@ -1,0 +1,1322 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style id="snav-css">
+  .snav { display: block; margin: 0; position: sticky; top: 0; z-index: 50; background: #ffffff; border-bottom: 1px solid #e2e6eb; }
+  .snav .in { width: 100%; max-width: 1100px; margin: 0 auto; padding: 10px 28px; display: flex; align-items: center; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; }
+  .snav .br { display: flex; align-items: center; gap: 10px; color: #1b2430; text-decoration: none; font-family: "InterD","InterT",sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: .02em; }
+  .snav .bl { display: flex; align-items: center; gap: 8px 18px; flex-wrap: wrap; }
+  .snav .fi { color: #5b6676; font-size: .85rem; text-underline-offset: 3px; }
+  .snav .fi:hover { color: #1b2430; }
+  .snav nav { display: flex; gap: 2px 22px; flex-wrap: wrap; }
+  .snav nav a { color: #5b6676; text-decoration: none; font-size: .93rem; font-weight: 600; padding: 4px 0; border-bottom: 2px solid transparent; }
+  .snav nav a:hover { color: #1b2430; }
+  .snav nav a[aria-current="page"] { color: #1b2430; border-bottom-color: #1b2430; }
+  .sfoot { border-top: 1px solid #e2e6eb; color: #5b6676; font-size: .88rem; }
+  .sfoot .in { max-width: 1100px; margin: 0 auto; padding: 22px 28px 30px; display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; }
+  .sfoot a { color: inherit; }
+  .itabs { display: inline-flex; gap: 8px; margin: 0 0 14px; }
+  .itabs a { display: inline-flex; align-items: center; gap: 10px; padding: 6px 16px 6px 8px; border: 1.5px solid #e2e6eb; border-radius: 12px; background: #fff; font-size: .95rem; font-weight: 600; color: #5b6676; text-decoration: none; }
+  .itabs a:hover { border-color: #b9c3ce; color: #1b2430; }
+  .itabs a[aria-current="page"] { border-color: #1f4e79; background: #eaf1f8; color: #163a5c; }
+  .itabs .ii { width: 44px; height: 32px; border-radius: 8px; background: #f6f7f9; display: grid; place-items: center; }
+  .itabs a[aria-current="page"] .ii { background: #fff; }
+  .itabs .ii svg { width: 34px; height: 26px; }
+  @media (max-width: 640px) { .snav .in, .sfoot .in { padding-left: 16px; padding-right: 16px; } }
+</style>
+</head><body>
+<!--snav--><header class="snav"><div class="in" style="max-width:1520px"><div class="bl"><a class="br" href="index.html"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#070c15"/><rect x="7" y="7" width="2.4" height="20" fill="#7a5cff"/><rect x="11.5" y="7" width="2.4" height="20" fill="#2fb7e8"/><rect x="17" y="7" width="2.4" height="20" fill="#57d163"/><rect x="21" y="7" width="2.4" height="20" fill="#f4a62a"/><rect x="25.5" y="7" width="2.4" height="20" fill="#ff4d4d"/></svg>INNOVA-FIS-LAB</a></div><nav aria-label="Secciones de la web"><a href="index.html">Inicio</a><a href="laboratorios.html" aria-current="page">Laboratorios</a><a href="calibre.html">Instrumentos de medida</a><a href="errores.html">Errores</a><a href="novedades.html">Novedades</a></nav></div></header><!--/snav-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>Simulación: péndulos acoplados · INNOVA-FIS-LAB</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=STIX+Two+Text:ital@1&display=swap">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(', '\\)']] },
+  svg: { fontCache: 'global' },
+  options: { enableMenu: false }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<style>
+/* Layout: banco de laboratorio a escala (carril arriba, caída de m1 a la derecha, contadores debajo) junto a la tabla de medidas */
+:root{
+  --bg:#edf1f4; --surface:#ffffff; --surface-2:#f5f7f9; --ink:#17202b; --muted:#5a6775; --line:#d2dae2;
+  --accent:#1d5fa8; --accent-ink:#ffffff; --accent-soft:#e2ebf6;
+  --bench-t:#cddfeb; --bench-f:#9db4c5; --bench-r:#8ca5b8; --bench-e:#7891a5; --floor:#ddd6c9;
+  --case-t:#eef1f4; --case-f:#dce1e6; --case-r:#bcc4cc; --case-e:#8e99a4; --case-panel:#cfd6dd; --case-acc:#2f6fb3;
+  --go-1:#2fae57; --go-2:#1d7a3b; --stop-1:#de3b30; --stop-2:#9b241c;
+  --lead-r:#d8352a; --lead-b:#2563c9; --lead-y:#f0bd2a; --lead-k:#25282c; --pwr:#2fb35a;
+  --alu-t:#eef1f4; --alu-f1:#d8dee4; --alu-f2:#b1bbc5; --alu-r:#a2adb8; --alu-e:#7a8794;
+  --anod-t:#89aedb; --anod-f1:#4f82bf; --anod-f2:#2c5a93; --anod-r:#254b7a;
+  --blk-t:#59606a; --blk-f:#272b31; --blk-r:#181b1f; --blk-e:#111316;
+  --stl-t:#b4bcc4; --stl-f:#868f99; --stl-r:#6b757f; --stl-e:#5a636d;
+  --rod-1:#6d7883; --rod-2:#eaedf0; --brass-1:#8c6a36; --brass-2:#e6cc93; --brass-t:#ecd6a3;
+  --rub:#30353b; --hole:#76838f; --beam:#ff3b2a;
+  --alu-top:#e6eaee; --alu-side:#c6cfd8; --alu-low:#a2aeba; --steel:#56606b; --housing:#22262c; --housing-2:#4a525c;
+  --anod:#3f6ea8; --anod-top:#7ba1cf; --anod-low:#2a5084; --hose:#3c4248; --bench-top:#e7ecf0;
+  --alu:#c5ced7; --alu-edge:#7d8a97; --bench:#d6dde4; --bench-edge:#9ba7b3;
+  --glider:#2a4a72; --flag:#3b4654; --gate:#2b2f35; --rubber:#3a3f46;
+  --thread:#2f3337; --mass:#9a7f52; --mass-edge:#5f4c2e;
+  --led:#ff3b2a; --led-off:rgba(255,59,42,.10); --display:#1e1314; --device:#e1e6eb; --device-edge:#a9b3bd;
+  --warn:#a84a14; --warn-soft:#fbede3; --ok:#2c7a4c; --ok-soft:#e5f3ea;
+  --f-ui:"Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --f-num:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --f-math:"STIX Two Text", "Times New Roman", Times, serif;
+}
+@media (prefers-color-scheme: dark) and (max-width: 0px){
+  :root:not([data-theme="light"]){
+    --bg:#0f141a; --surface:#171e27; --surface-2:#1c2530; --ink:#e2e8ee; --muted:#95a3b2; --line:#2c3846;
+    --accent:#6ea6e8; --accent-ink:#0b1622; --accent-soft:#1d2d42;
+    --bench-t:#23303c; --bench-f:#1a242e; --bench-r:#151d25; --bench-e:#3a4a59; --floor:#201f1c;
+    --case-t:#56616d; --case-f:#434d58; --case-r:#353e48; --case-e:#6e7a87; --case-panel:#3b444e; --case-acc:#4f8fd6;
+    --lead-r:#e2493d; --lead-b:#4a82e0; --lead-y:#f2c64a; --lead-k:#0d0f11; --pwr:#46c873;
+    --alu-t:#bcc5ce; --alu-f1:#9ca7b2; --alu-f2:#7a8692; --alu-r:#6b7783; --alu-e:#505c68;
+    --anod-t:#82a7d4; --anod-f1:#4a7ab6; --anod-f2:#2d5a92; --anod-r:#234978;
+    --blk-t:#626a75; --blk-f:#262a30; --blk-r:#17191d; --blk-e:#7a838e;
+    --stl-t:#a0a9b2; --stl-f:#77818b; --stl-r:#5f6973; --stl-e:#454e58;
+    --rod-1:#5b6570; --rod-2:#cfd6dc; --brass-1:#86663a; --brass-2:#dcc08a; --brass-t:#e2ca97;
+    --rub:#4b5159; --hole:#4f5b67; --beam:#ff4636;
+    --alu-top:#8b97a4; --alu-side:#66737f; --alu-low:#4c5764; --steel:#9aa4ae; --housing:#0b0d10; --housing-2:#6b7480;
+    --anod:#4f80bd; --anod-top:#8aaed9; --anod-low:#345a8f; --hose:#8a939c; --bench-top:#36414d;
+    --alu:#5c6976; --alu-edge:#9aa6b2; --bench:#2a343f; --bench-edge:#4c5866;
+    --glider:#7398c6; --flag:#a9b5c2; --gate:#d4dbe2; --rubber:#8a939c;
+    --thread:#d6dbe0; --mass:#b99a68; --mass-edge:#e0c79c;
+    --led:#ff4636; --led-off:rgba(255,70,54,.12); --display:#0b0707; --device:#222b35; --device-edge:#3c4856;
+    --warn:#eb9a63; --warn-soft:#3a2518; --ok:#6cc392; --ok-soft:#18301f;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f141a; --surface:#171e27; --surface-2:#1c2530; --ink:#e2e8ee; --muted:#95a3b2; --line:#2c3846;
+  --accent:#6ea6e8; --accent-ink:#0b1622; --accent-soft:#1d2d42;
+  --bench-t:#23303c; --bench-f:#1a242e; --bench-r:#151d25; --bench-e:#3a4a59; --floor:#201f1c;
+  --case-t:#56616d; --case-f:#434d58; --case-r:#353e48; --case-e:#6e7a87; --case-panel:#3b444e; --case-acc:#4f8fd6;
+  --lead-r:#e2493d; --lead-b:#4a82e0; --lead-y:#f2c64a; --lead-k:#0d0f11; --pwr:#46c873;
+  --alu-t:#bcc5ce; --alu-f1:#9ca7b2; --alu-f2:#7a8692; --alu-r:#6b7783; --alu-e:#505c68;
+  --anod-t:#82a7d4; --anod-f1:#4a7ab6; --anod-f2:#2d5a92; --anod-r:#234978;
+  --blk-t:#626a75; --blk-f:#262a30; --blk-r:#17191d; --blk-e:#7a838e;
+  --stl-t:#a0a9b2; --stl-f:#77818b; --stl-r:#5f6973; --stl-e:#454e58;
+  --rod-1:#5b6570; --rod-2:#cfd6dc; --brass-1:#86663a; --brass-2:#dcc08a; --brass-t:#e2ca97;
+  --rub:#4b5159; --hole:#4f5b67; --beam:#ff4636;
+  --alu-top:#8b97a4; --alu-side:#66737f; --alu-low:#4c5764; --steel:#9aa4ae; --housing:#0b0d10; --housing-2:#6b7480;
+  --anod:#4f80bd; --anod-top:#8aaed9; --anod-low:#345a8f; --hose:#8a939c; --bench-top:#36414d;
+  --alu:#5c6976; --alu-edge:#9aa6b2; --bench:#2a343f; --bench-edge:#4c5866;
+  --glider:#7398c6; --flag:#a9b5c2; --gate:#d4dbe2; --rubber:#8a939c;
+  --thread:#d6dbe0; --mass:#b99a68; --mass-edge:#e0c79c;
+  --led:#ff4636; --led-off:rgba(255,70,54,.12); --display:#0b0707; --device:#222b35; --device-edge:#3c4856;
+  --warn:#eb9a63; --warn-soft:#3a2518; --ok:#6cc392; --ok-soft:#18301f;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--bg); color:var(--ink); font-family:var(--f-ui); font-size:15px; line-height:1.5}
+.page{max-width:1520px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:12px 40px}
+
+header{display:grid; gap:4px; margin-bottom:18px}
+.eyebrow{font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+h1{font-size:clamp(22px, 2.4vw, 30px); line-height:1.15; margin:0; font-weight:700; text-wrap:balance}
+header p{margin:4px 0 0; color:var(--ink); font-size:16px}
+.mi{font-family:var(--f-math); font-size:1.12em}
+
+.main{display:grid; gap:18px; grid-template-columns:minmax(0,1fr)}
+@media (min-width:1180px){ .main{grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); align-items:start} }
+
+.card{background:var(--surface); border:1px solid var(--line); border-radius:10px}
+.bench{padding:14px}
+
+/* Escena: misma escala en el SVG del carril y en el de la caída (columnas 1500 : 300 mm) */
+.rig{display:grid; grid-template-columns:minmax(0,1500fr) minmax(0,300fr); grid-template-areas:"rail rail" "panel fall" "datos fall"; grid-template-rows:auto auto 1fr; column-gap:0}
+.rig svg.scene{display:block; width:100%; height:auto}
+#railSvg{grid-area:rail}
+#fallSvg{grid-area:fall; align-self:start}
+.panel{grid-area:panel; align-self:start; padding:16px 14px 0 0; display:grid; gap:12px; min-width:0}
+.datos{grid-area:datos; align-self:start; padding:25px 14px 0 0; min-width:0}
+@media (max-width:760px){
+  .rig{grid-template-areas:"rail rail" "panel fall" "datos datos"}
+  .panel{padding:12px 0 0}
+}
+
+/* SVG */
+.m-bench-t{fill:var(--bench-t)} .m-bench-f{fill:var(--bench-f)} .m-bench-r{fill:var(--bench-r)}
+[class^="m-bench"]{stroke:var(--bench-e); stroke-width:1.2; stroke-linejoin:round}
+.floor{fill:var(--floor)}
+.m-case-t{fill:var(--case-t)} .m-case-f{fill:var(--case-f)} .m-case-r{fill:var(--case-r)}
+[class^="m-case"]{stroke:var(--case-e); stroke-width:1.2; stroke-linejoin:round}
+.c-panel{fill:var(--case-panel); stroke:var(--case-e); stroke-width:1}
+.c-acc{fill:var(--case-acc)}
+.c-txt{font:600 15px var(--f-ui); fill:var(--ink); letter-spacing:.06em}
+.c-ttl{font:700 17px var(--f-ui); fill:var(--ink); letter-spacing:.12em}
+.c-lbl{font:600 18px var(--f-ui); fill:var(--ink); letter-spacing:.04em}
+.c-big{font:600 28px var(--f-ui); fill:var(--ink)}
+.c-bigit{font-family:var(--f-math); font-style:italic; font-weight:400; font-size:34px}
+.c-it{font-family:var(--f-math); font-style:italic; font-weight:400; font-size:15px}
+.pbtn{cursor:pointer}
+.pbtn .pb-top, .pbtn .pb-side{stroke-width:1.2}
+.pbtn.go .pb-top{fill:var(--go-1); stroke:var(--go-2)} .pbtn.go .pb-side{fill:var(--go-2); stroke:var(--go-2)}
+.pbtn.stop .pb-top{fill:var(--stop-1); stroke:var(--stop-2)} .pbtn.stop .pb-side{fill:var(--stop-2); stroke:var(--stop-2)}
+.pbtn.off{cursor:not-allowed; opacity:.4}
+.pbtn.press{transform:translateY(4px)}
+.pbtn:focus{outline:none}
+.pbtn:focus-visible .pb-top{stroke:var(--accent); stroke-width:3.5}
+.c-btn{fill:var(--case-r); stroke:var(--case-e); stroke-width:1}
+.lead{fill:none; stroke-width:3.4; stroke-linecap:round; stroke-linejoin:round}
+.lead.r{stroke:var(--lead-r)} .lead.b{stroke:var(--lead-b)} .lead.y{stroke:var(--lead-y)} .lead.k{stroke:var(--lead-k)}
+.plug.r{fill:var(--lead-r)} .plug.b{fill:var(--lead-b)} .plug.y{fill:var(--lead-y)} .plug.k{fill:var(--lead-k)}
+.pwr{fill:var(--pwr)}
+.horizon{stroke:var(--bench-e); stroke-width:1.5}
+.m-alu-t{fill:var(--alu-t)} .m-alu-f{fill:url(#gAlu)} .m-alu-r{fill:var(--alu-r)}
+.m-flag-t{fill:var(--alu-t)} .m-flag-f{fill:var(--alu-t)} .m-flag-r{fill:var(--alu-f2)}
+[class^="m-alu"], [class^="m-flag"]{stroke:var(--alu-e); stroke-width:1.2; stroke-linejoin:round}
+.m-anod-t{fill:var(--anod-t)} .m-anod-f{fill:url(#gAnod)} .m-anod-r{fill:var(--anod-r)}
+[class^="m-anod"]{stroke:var(--anod-r); stroke-width:1; stroke-linejoin:round}
+.m-blk-t{fill:var(--blk-t)} .m-blk-f{fill:var(--blk-f)} .m-blk-r{fill:var(--blk-r)}
+[class^="m-blk"]{stroke:var(--blk-e); stroke-width:1; stroke-linejoin:round}
+.m-stl-t{fill:var(--stl-t)} .m-stl-f{fill:var(--stl-f)} .m-stl-r{fill:var(--stl-r)}
+[class^="m-stl"]{stroke:var(--stl-e); stroke-width:1; stroke-linejoin:round}
+.m-rub-t, .m-rub-f, .m-rub-r{fill:var(--lead-r); stroke:#8f2018; stroke-width:1}
+.rod{fill:url(#gRod)} .rod-t{fill:var(--stl-t)}
+.mag{fill:url(#gMag)} .mag-r{fill:var(--blk-t); stroke:var(--blk-e); stroke-width:1}
+.brass{fill:url(#gBrass); stroke:var(--brass-1); stroke-width:1}
+.brass-t{fill:var(--brass-t); stroke:var(--brass-1); stroke-width:1}
+.hole{fill:var(--hole)}
+.ghole{fill:var(--anod-r); stroke:var(--anod-t); stroke-width:1}
+.hose{fill:none; stroke:var(--hose); stroke-width:10; stroke-linecap:round}
+.cable{fill:none; stroke:var(--blk-f); stroke-width:3.5; stroke-linecap:round}
+.beam{stroke:var(--beam); stroke-width:1.6; stroke-dasharray:3 3; opacity:.85}
+.led{fill:var(--led-off); stroke:var(--led); stroke-width:1.2}
+.led.on{fill:var(--led)}
+.pul{fill:var(--alu-t); stroke:var(--alu-e); stroke-width:2}
+.pul.warn{stroke:var(--warn); stroke-width:4}
+.pul-back{fill:var(--alu-r); stroke:var(--alu-e); stroke-width:1.5}
+.groove{fill:none; stroke:var(--alu-e); stroke-width:1.5}
+.spoke{stroke:var(--alu-e); stroke-width:3; stroke-linecap:round}
+.hook{fill:none; stroke:var(--stl-f); stroke-width:3}
+.s-scale{font:500 24px var(--f-num); fill:var(--ink)}
+.s-tick{stroke:var(--alu-edge); stroke-width:2}
+.s-tick.major{stroke:var(--ink); stroke-width:2.4}
+.s-label{font:500 23px var(--f-ui); fill:var(--muted)}
+.s-dim{stroke:var(--accent); stroke-width:2.4; fill:none}
+.s-dimext{stroke:var(--accent); stroke-width:1.5; stroke-dasharray:5 5; fill:none}
+.s-dimtext{font:600 34px var(--f-ui); fill:var(--accent)}
+.s-it{font-family:var(--f-math); font-style:italic; font-weight:400; font-size:38px}
+.s-thread{stroke:var(--thread); stroke-width:3.4; fill:none; stroke-linecap:round}
+.s-floor{stroke:var(--bench-edge); stroke-width:4}
+.s-ptr{fill:var(--accent)}
+.s-ptr.start{fill:var(--anod-f1)}
+.s-small{font:500 28px var(--f-ui); fill:var(--muted)}
+
+/* Contador */
+.cap{font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin-bottom:-6px}
+.device{background:var(--device); border:1px solid var(--device-edge); border-radius:8px; padding:10px 12px; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+.counter{display:grid; gap:4px; min-width:0}
+.counter .lbl{font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
+.counter .lbl b{color:var(--ink); font-weight:700}
+.counter .read{display:flex; align-items:flex-end; gap:6px}
+.counter svg{width:100%; max-width:176px; height:auto; display:block}
+.counter .unit{font:500 14px var(--f-num); color:var(--muted); padding-bottom:4px}
+.counter .sub{font-size:12px; color:var(--muted)}
+.seg{fill:var(--led-off)}
+.seg.on{fill:var(--led)}
+.dispbg{fill:var(--display)}
+
+.ctl{display:grid; gap:8px}
+.ctl-row{display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px}
+.ctl label.t, .ctl .t{font-size:13px; font-weight:600}
+.readout{font:500 14px var(--f-num); font-variant-numeric:tabular-nums; color:var(--ink)}
+.readout .s{font-family:var(--f-math); font-style:italic; font-size:17px}
+input[type=range]{width:100%; accent-color:var(--accent)}
+.chips{display:flex; flex-wrap:wrap; gap:6px; align-items:center}
+.chips .t{font-size:13px; color:var(--muted); font-weight:500; margin-right:2px}
+button{font:inherit; cursor:pointer}
+.chip{font:500 13px var(--f-num); padding:3px 9px; border-radius:999px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.chip.all{margin-left:10px; background:var(--accent); border-color:var(--accent); color:var(--accent-ink); font-family:var(--f-ui); font-weight:600; padding:3px 14px}
+.chip.rst{margin-left:4px; background:var(--surface); border-color:var(--stop-1); color:var(--stop-1); font-family:var(--f-ui); font-weight:600; padding:3px 14px}
+.chip.done{border-color:var(--ok); box-shadow:inset 0 0 0 1px var(--ok)}
+.nudge{font:500 12px var(--f-num); padding:3px 8px; border-radius:6px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink)}
+.btn{padding:9px 16px; border-radius:7px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink); font-weight:600; font-size:14px}
+.btn.go{background:var(--go-1); border-color:var(--go-2); color:#fff}
+.btn.stop{background:var(--stop-1); border-color:var(--stop-2); color:#fff}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:var(--accent-ink)}
+.btn:disabled, .chip:disabled, .nudge:disabled{opacity:.45; cursor:not-allowed}
+.btn:focus-visible, .chip:focus-visible, .nudge:focus-visible, input:focus-visible, .linkbtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.switch{display:inline-flex; align-items:center; gap:7px; font-size:13px; font-weight:500}
+.switch input{width:16px; height:16px; accent-color:var(--accent)}
+.status:empty{display:none}
+.status{font-size:13.5px; padding:8px 10px; border-radius:7px; background:var(--surface-2); border:1px solid var(--line); min-height:40px}
+.status.ok{background:var(--ok-soft); border-color:var(--ok); color:var(--ink)}
+.status.warn{background:var(--warn-soft); border-color:var(--warn); color:var(--ink)}
+.status b{font-variant-numeric:tabular-nums}
+
+.datos h3, .tablecard h2{margin:0; font-size:14px; font-weight:700}
+.datos dl{display:grid; grid-template-columns:auto minmax(0,1fr); gap:4px 12px; margin:8px 0 0; font-size:13.5px}
+.datos dt{color:var(--muted)}
+.datos dd{margin:0; font-variant-numeric:tabular-nums}
+.datos .eqs{margin-top:10px; font-size:14px; display:flex; flex-wrap:wrap; gap:6px 22px; color:var(--ink)}
+.linkbtn{background:none; border:none; padding:0; color:var(--accent); font-weight:600; font-size:13.5px; text-decoration:underline; text-underline-offset:2px}
+
+/* Tabla */
+.tablecard{padding:14px; display:grid; gap:12px; min-width:0}
+.tablecard .head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 16px; align-items:baseline}
+.tablecard .head p{margin:2px 0 0; font-size:13px; color:var(--muted)}
+.tools{display:flex; flex-wrap:wrap; gap:6px 8px; align-items:center}
+.tools .btn{padding:6px 11px; font-size:13px}
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:8px}
+table{border-collapse:collapse; width:100%; min-width:560px; font-size:13px}
+th, td{border-bottom:1px solid var(--line); padding:7px 8px; text-align:right; vertical-align:middle}
+th{background:var(--surface-2); font-weight:600; font-size:12.5px; vertical-align:bottom; text-align:center; line-height:1.25}
+th .u{display:block; font-weight:500; color:var(--muted); font-size:11.5px; margin-top:2px}
+th + th, td + td{border-left:1px solid var(--line)}
+td{font-family:var(--f-num); font-variant-numeric:tabular-nums; white-space:nowrap}
+td.trio > span{display:block; line-height:1.45}
+td.trio span.empty{color:var(--line)}
+td.calc{background:color-mix(in srgb, var(--accent-soft) 45%, transparent)}
+tr.active td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+tr.active td{background:color-mix(in srgb, var(--accent-soft) 55%, transparent)}
+tbody tr:last-child td{border-bottom:none}
+td .pm{color:var(--muted)}
+td.del{text-align:center; padding:4px}
+td.del button{border:none; background:none; color:var(--muted); font-size:16px; line-height:1; padding:4px 6px; border-radius:5px}
+td.del button:hover{color:var(--warn); background:var(--warn-soft)}
+.emptyrow td{text-align:center; font-family:var(--f-ui); color:var(--muted); padding:22px 12px; white-space:normal}
+table.nocalc .calc{display:none}
+.note{font-size:12.5px; color:var(--muted); margin:0}
+.log h3{margin:0 0 6px; font-size:13px; font-weight:700}
+.log ol{list-style:none; margin:0; padding:0; display:grid; gap:3px; font:13px var(--f-num); font-variant-numeric:tabular-nums}
+.log li{display:flex; gap:10px; flex-wrap:wrap}
+.log li .n{color:var(--muted); min-width:2.6em}
+.log li.bad{color:var(--warn)}
+.log li.skip{color:var(--muted)}
+.log .none{font-size:13px; color:var(--muted); font-family:var(--f-ui)}
+.confirm{color:var(--warn); border-color:var(--warn)}
+.copied{font-size:12.5px; color:var(--ok)}
+textarea.fallback{width:100%; min-height:90px; font:12px var(--f-num)}
+mjx-container{color:inherit}
+
+.datos{position:relative}
+.helpbtn{margin-left:auto; width:38px; height:38px; flex:none; border-radius:50%; border:2px solid var(--accent); background:var(--surface); color:var(--accent); font:700 24px var(--f-ui); line-height:1; display:grid; place-items:center}
+.helpbtn:hover, .helpbtn[aria-expanded="true"]{background:var(--accent); color:var(--accent-ink)}
+.helpbtn:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+.helppop{position:absolute; left:10px; right:10px; top:var(--hp-top, 120px); z-index:20; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:14px 16px; box-shadow:0 10px 30px rgba(15,25,40,.18); font-size:14px; line-height:1.5}
+.hp-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:15px}
+.hp-x{border:none; background:none; font-size:22px; line-height:1; color:var(--muted); padding:2px 6px; border-radius:5px}
+.hp-x:hover{background:var(--surface-2); color:var(--ink)}
+.helppop ol{margin:0 0 10px; padding-left:20px; display:grid; gap:4px}
+.helppop dl{display:grid; grid-template-columns:auto minmax(0,1fr); gap:6px 12px; margin:0; padding-top:10px; border-top:1px solid var(--line)}
+.helppop dt{font-weight:600; text-align:right}
+.helppop dd{margin:0}
+.helppop p{margin:0 0 8px}
+.hp-eqs{display:flex; flex-wrap:wrap; gap:6px 28px; align-items:center; margin:4px 0 8px; font-size:15px}
+.hp-small{font-size:13px; color:var(--muted)}
+.hp-key{background:var(--accent-soft); border-radius:7px; padding:8px 10px}
+.helppop{max-height:min(78vh, 760px); overflow:auto}
+.tablecard{position:relative}
+.toprow{display:flex; flex-wrap:wrap; align-items:center; gap:8px 18px}
+.parts{display:inline-flex; border:1px solid var(--accent); border-radius:8px; overflow:hidden}
+.partbtn{border:none; background:var(--surface); color:var(--accent); font-weight:600; font-size:13px; padding:4px 12px}
+.partbtn + .partbtn{border-left:1px solid var(--accent)}
+.partbtn[aria-selected="true"]{background:var(--accent); color:var(--accent-ink)}
+.partbtn:disabled{opacity:.5; cursor:not-allowed}
+.partbtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+body[data-part="1"] .p2only, body[data-part="2"] .p1only{display:none !important}
+.fits{grid-template-columns:minmax(0,1fr) !important; max-width:1040px}
+.fit{grid-template-columns:minmax(0,1fr) 300px; column-gap:56px; align-items:center}
+.fits .fit{column-gap:72px}
+.fitside{display:grid; gap:22px; align-content:center}
+.fittog{justify-self:center; font-size:14px}
+.fit h3{grid-column:1 / -1}
+@media (max-width:700px){ .fit{grid-template-columns:minmax(0,1fr)} }
+.tablecard{position:relative}
+.tablecard > .head{padding-right:50px}
+.tablecard.max > .head h2{font-size:18px}
+.maxbtn{position:absolute; top:12px; right:12px; width:38px; height:38px; border-radius:8px; border:1px solid var(--line); background:var(--surface-2); color:var(--ink); display:grid; place-items:center; padding:0}
+.maxbtn svg{width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round}
+.maxbtn:hover{border-color:var(--accent); color:var(--accent)}
+.maxbtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.tablecard.max{position:fixed; inset:0; z-index:50; border-radius:0; border:none; overflow:auto; padding-top:max(20px, env(safe-area-inset-top, 0px)); padding-bottom:max(20px, env(safe-area-inset-bottom, 0px)); padding-left:max(24px, env(safe-area-inset-left, 0px)); padding-right:max(24px, env(safe-area-inset-right, 0px)); align-content:start}
+.tablecard.max .maxbtn{top:max(16px, env(safe-area-inset-top, 0px)); right:max(20px, env(safe-area-inset-right, 0px))}
+.tablecard.max table{font-size:16px}
+.tablecard.max th{font-size:15px}
+body.tablemax{overflow:hidden}
+.bench{position:relative}
+.scenetop{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 -5.2%; position:relative; z-index:5}
+.stitle{font-size:clamp(15px, 1.4vw, 19px); font-weight:700; color:var(--ink); letter-spacing:.01em}
+/* Ajuste */
+.fitcard{grid-column:1 / -1; padding:14px; display:grid; gap:14px; min-width:0}
+.fitcard .head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px 16px; align-items:baseline}
+.fitcard h2{margin:0; font-size:14px; font-weight:700}
+.fitcard .head p{margin:2px 0 0; font-size:13px; color:var(--muted); max-width:75ch}
+.fits{display:grid; gap:18px; grid-template-columns:minmax(0,1fr)}
+@media (min-width:900px){ .fits{grid-template-columns:repeat(2, minmax(0,1fr))} }
+.fit{display:grid; gap:8px; align-content:start; min-width:0}
+.fit h3{margin:0; font-size:18px; font-weight:600}
+.chart{width:100%; height:auto; display:block; background:var(--surface-2); border:1px solid var(--line); border-radius:8px}
+.c-grid{stroke:var(--line); stroke-width:1}
+.c-axis{stroke:var(--muted); stroke-width:1.4}
+.c-tick{font:12px var(--f-num); fill:var(--muted)}
+.c-title{font:500 13px var(--f-ui); fill:var(--ink)}
+.c-title .it{font-family:var(--f-math); font-style:italic; font-size:15px}
+.c-pt{fill:var(--surface-2); stroke:var(--accent); stroke-width:1.6}
+.c-err{stroke:var(--accent); stroke-width:2}
+.c-dot{fill:var(--stop-1)}
+.c-line{stroke:var(--ink); stroke-width:1.8; fill:none}
+.c-zero{stroke:var(--muted); stroke-width:1; stroke-dasharray:4 4}
+.c-empty{font:13px var(--f-ui); fill:var(--muted)}
+.res{display:grid; grid-template-columns:auto minmax(0,1fr); gap:7px 14px; margin:0; font-size:14px}
+.res dt{font-family:var(--f-math); font-style:italic; font-size:20px}
+.res dt sub{font-style:normal; font-size:11px}
+.res dd{margin:0; font-family:var(--f-num); font-variant-numeric:tabular-nums; font-size:16px; align-self:center}
+.res dd .pm{color:var(--muted)}
+.res .sep{grid-column:1 / -1; border-top:1px solid var(--line); margin:3px 0}
+.res .msg{grid-column:1 / -1; font-family:var(--f-ui); color:var(--muted); font-size:13px}
+.fitcard.nofit .c-line, .fitcard.nofit .res{visibility:hidden}
+@media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto} }
+</style>
+<style>
+/* ---- Péndulos acoplados: añadidos al estilo común ---- */
+.pa-grid{display:grid; gap:14px; grid-template-columns:minmax(0,1fr)}
+.pa-grid > *{grid-area:auto !important; min-width:0}
+.viewwrap{position:relative; border:1px solid var(--line); border-radius:8px; background:linear-gradient(var(--surface-2), var(--surface)); overflow:hidden; touch-action:none}
+#scene{display:block; width:100%; height:auto; cursor:grab; user-select:none}
+#scene.drag{cursor:grabbing}
+.viewbar{position:absolute; top:10px; right:10px; display:flex; gap:6px; z-index:3}
+.viewbar .chip{background:var(--surface)}
+.viewhint{position:absolute; left:12px; bottom:10px; font-size:12.5px; color:var(--muted); pointer-events:none}
+.v-floor{fill:var(--bench-top); stroke:var(--bench-e); stroke-width:1}
+.v-grid{stroke:var(--line); stroke-width:1}
+.v-rod{stroke:var(--steel); stroke-linecap:round}
+.v-rodhi{stroke:var(--rod-2); stroke-linecap:round; opacity:.55}
+.v-base{fill:var(--housing-2); stroke:var(--housing); stroke-width:1}
+.v-base-t{fill:var(--stl-f); stroke:var(--stl-e); stroke-width:1}
+.v-clamp{fill:var(--blk-f); stroke:var(--blk-e); stroke-width:1}
+.v-thread{stroke:var(--thread); stroke-width:1.6; stroke-linecap:round}
+.v-eq{stroke:var(--muted); stroke-width:1; stroke-dasharray:4 5; opacity:.7}
+.v-cthread{fill:none; stroke:var(--thread); stroke-width:1.5; stroke-linejoin:round; stroke-linecap:round}
+.v-knot{fill:var(--thread)}
+.v-mass{fill:var(--stl-e); stroke:var(--blk-e); stroke-width:.8}
+.v-mass-t{fill:var(--steel); stroke:var(--blk-e); stroke-width:.8}
+.v-mtxt{font:italic 600 17px var(--f-math); fill:var(--ink)}
+.v-dim{stroke:var(--accent); stroke-width:1.6; fill:none}
+.v-dimtxt{font:600 15px var(--f-ui); fill:var(--accent)}
+.v-dimtxt .it{font-family:var(--f-math); font-style:italic; font-size:18px}
+.v-lbl{font:600 14px var(--f-ui); fill:var(--muted)}
+.v-hand{fill:var(--warn-soft); stroke:var(--warn); stroke-width:1.2}
+.trace{border:1px solid var(--line); border-radius:8px; background:var(--surface-2)}
+#traceSvg{display:block; width:100%; height:auto}
+.t-axis{stroke:var(--muted); stroke-width:1.2}
+.t-grid{stroke:var(--line); stroke-width:1}
+.t-tick{font:11.5px var(--f-num); fill:var(--muted)}
+.t-lbl{font:600 12.5px var(--f-ui)}
+.t-x1{fill:none; stroke:var(--accent); stroke-width:1.8}
+.t-x2{fill:none; stroke:#d9820b; stroke-width:1.8}
+.t-l1{fill:var(--accent)} .t-l2{fill:#d9820b}
+.t-mark{stroke:var(--stop-1); stroke-width:1.2; stroke-dasharray:3 3}
+.stage{display:grid; gap:14px; grid-template-columns:minmax(0,1fr); align-items:start}
+@media (min-width:720px){ .stage{grid-template-columns:minmax(0,1.75fr) minmax(250px,1fr)} }
+.side{display:grid; gap:12px; align-content:start}
+.side .chips{margin-top:6px}
+.sw{background:var(--device); border:1px solid var(--device-edge); border-radius:8px; padding:10px 12px; display:grid; gap:8px; align-content:start}
+.sw .top{display:flex; align-items:center; justify-content:space-between; gap:8px}
+.sw .lbl{font-size:12px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted)}
+.sw .disp{display:flex; align-items:flex-end; gap:8px}
+.sw .disp svg{width:100%; max-width:240px; height:auto; display:block}
+.sw .unit{font:500 14px var(--f-num); color:var(--muted); padding-bottom:6px}
+.sw .btns{display:flex; flex-wrap:wrap; gap:8px}
+.sw .btns .btn{padding:7px 14px}
+.sw .dest{font-size:13px; color:var(--ink)}
+.sw .dest b{font-weight:700}
+.sw .count{font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums}
+.sw .count b{color:var(--ink); font:600 15px var(--f-num)}
+.kbd{font:500 11.5px var(--f-num); border:1px solid var(--line); border-bottom-width:2px; border-radius:4px; padding:0 5px; background:var(--surface)}
+.modes .chip{font-family:var(--f-ui); font-weight:600}
+.subcap{font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted)}
+.rel{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+.autobox{display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding-top:10px; border-top:1px dashed var(--line)}
+.autobox .note{flex:1 1 220px}
+td.trio > span.bad{color:var(--warn)}
+.kpop{margin-top:6px; font-size:13.5px}
+.speed{display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden}
+.speed button{border:none; background:var(--surface-2); color:var(--ink); font:500 12.5px var(--f-num); padding:3px 9px}
+.speed button + button{border-left:1px solid var(--line)}
+.speed button[aria-pressed="true"]{background:var(--accent); color:var(--accent-ink)}
+body[data-part="1"] .p2only, body[data-part="2"] .p1only{display:none !important}
+</style>
+
+<div class="page">
+  <div class="main">
+    <section class="card bench" aria-label="Montaje experimental">
+      <div class="toprow" style="margin-bottom:10px">
+        <span class="stitle">Péndulos acoplados</span>
+        <div class="parts" role="tablist" aria-label="Parte de la práctica">
+          <button class="partbtn" id="part1" role="tab" data-part="1">1.ª parte · péndulo libre</button>
+          <button class="partbtn" id="part2" role="tab" data-part="2">2.ª parte · acoplados</button>
+        </div>
+        <button class="helpbtn" id="helpBtn" aria-expanded="false" aria-controls="helpPop" title="Ayuda">?</button>
+      </div>
+
+      <div class="pa-grid">
+        <div class="stage">
+          <div class="viewwrap">
+            <svg id="scene" viewBox="0 0 640 520" role="img" aria-label="Dos péndulos colgados de un soporte, unidos por un hilo del que cuelga una pesa. Arrastra para girar la vista.">
+              <defs>
+                <radialGradient id="gBob" cx="35%" cy="32%" r="70%"><stop offset="0" style="stop-color:var(--brass-t)"/><stop offset=".55" style="stop-color:var(--brass-2)"/><stop offset="1" style="stop-color:var(--brass-1)"/></radialGradient>
+              </defs>
+              <g id="sceneG"></g>
+            </svg>
+            <div class="viewbar" role="group" aria-label="Vista">
+              <button class="chip" data-view="front">Frente</button>
+              <button class="chip" data-view="side">Lado</button>
+              <button class="chip" data-view="persp">3D</button>
+            </div>
+            <div class="viewhint">Arrastra para girar la vista</div>
+          </div>
+
+          <div class="side">
+            <div class="p2only">
+              <div class="subcap">Pesa de acoplamiento</div>
+              <div class="chips" id="dChips"><span class="t"><i style="font-family:var(--f-math)">M</i> (g)</span></div>
+            </div>
+            <div>
+              <div class="subcap">Cómo se separan antes de soltar</div>
+              <div class="chips modes" id="modeChips"></div>
+            </div>
+            <div class="rel">
+              <button class="btn go" id="releaseBtn">Soltar</button>
+              <button class="btn" id="resetBtn">Parar y recolocar</button>
+            </div>
+            <div class="rel"><span class="subcap" style="margin-right:4px">Velocidad</span>
+              <span class="speed" role="group" aria-label="Velocidad de la simulación">
+                <button data-sp="0.25">×0,25</button><button data-sp="1" aria-pressed="true">×1</button><button data-sp="4">×4</button>
+              </span>
+            </div>
+            <div class="sw" aria-label="Cronómetro">
+              <div class="top"><span class="lbl">Cronómetro</span><span class="count" id="countTxt"></span></div>
+              <div class="disp"><svg id="swDisp"></svg><span class="unit">s</span></div>
+              <div class="btns">
+                <button class="btn go" id="swStart">Marcha / paro</button>
+                <button class="btn" id="swReset">A cero</button>
+              </div>
+              <div class="dest" id="destTxt"></div>
+              <div class="note">También con la tecla <span class="kbd">espacio</span>. Cuenta el tiempo de la simulación, así que sirve igual a otra velocidad.</div>
+            </div>
+            <div class="status" id="status" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="trace">
+          <svg id="traceSvg" viewBox="0 0 900 150" role="img" aria-label="Desplazamiento horizontal de cada masa frente al tiempo"></svg>
+        </div>
+
+        <div class="datos" style="padding:0">
+          <dl>
+            <dt>Longitud</dt><dd>\(L\) = 40,00 cm ± 0,05 cm (del punto de suspensión al centro de la masa)</dd>
+            <dt>Masa de cada péndulo</dt><dd>\(m\) = 70,0 g ± 0,1 g</dd>
+            <dt>Separación</dt><dd>10 cm entre los dos puntos de suspensión</dd>
+            <dt>Acoplamiento</dt><dd>hilo de 20 cm atado a los dos péndulos a \(l\) = 32,0 cm ± 0,1 cm del punto de suspensión, con la pesa \(M\) colgada en su centro</dd>
+          </dl>
+          <div class="eqs">
+            <span>\(\omega_1\simeq\omega_0=\sqrt{g/L}\)</span>
+            <span class="p2only">\(\omega_2^2=\omega_1^2+\dfrac{2\kappa\,l^2}{mL^2},\ \kappa\propto M\)</span>
+            <span class="p2only">\(T_b=\dfrac{T_1T_2}{T_1-T_2}\)</span>
+          </div>
+          <div class="autobox">
+            <button class="btn primary" id="autoOne">Medir automáticamente esta pesa</button>
+            <button class="btn" id="autoAll">Medir todo</button>
+            <p class="note">Por si no se puede hacer la práctica: el programa hace las medidas con cronómetro, con el error típico de una persona.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card tablecard" aria-label="Tabla de medidas">
+      <div class="head">
+        <div>
+          <h2>Tabla de medidas</h2>
+          <button class="maxbtn" id="maxBtn" aria-pressed="false" aria-label="Ampliar la tabla a pantalla completa" title="Ampliar"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="maxIcon" d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
+          <p class="p1only">Sin el hilo de acoplamiento: tres medidas del tiempo de 10 oscilaciones de un péndulo.</p>
+          <p class="p2only">Para cada pesa de acoplamiento: tres medidas de \(t_{10}\) en fase, tres en oposición y tres del periodo de batido.</p>
+        </div>
+        <div class="tools">
+          <label class="switch"><input type="checkbox" id="showCalc" checked> Columnas calculadas</label>
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table id="tbl"><thead id="thead"></thead><tbody id="tbody"></tbody></table>
+      </div>
+      <div class="tools">
+        <button class="btn" id="copy">Copiar tabla</button>
+        <button class="btn" id="undo">Borrar última medida</button>
+        <button class="btn" id="clear">Vaciar tabla</button>
+        <span class="copied" id="copied" aria-live="polite"></span>
+      </div>
+      <div id="fallbackBox" hidden><textarea class="fallback" id="fallbackTa" readonly></textarea></div>
+      <div class="helppop" id="helpPop" role="dialog" aria-label="Ayuda" hidden>
+        <div class="hp-head"><b>Qué ocurre en el experimento</b><button class="hp-x" id="helpClose" aria-label="Cerrar ayuda">×</button></div>
+        <div class="p1only">
+          <p>Sin el hilo de acoplamiento, cada péndulo es un péndulo simple. Para amplitudes pequeñas oscila con movimiento armónico simple de pulsación y periodo</p>
+          <div class="hp-eqs"><span>\(\omega_0=\sqrt{\dfrac{g}{L}}\)</span><span>\(T_0=\dfrac{2\pi}{\omega_0}\)</span></div>
+          <p class="hp-key">En esta parte se mide \(T_0\), que servirá para comparar con el modo en fase de la segunda parte.</p>
+          <div class="hp-head" style="margin-top:12px"><b>Cómo medir</b></div>
+          <ol>
+            <li>Elige <b>Separar el 1</b> y pulsa <b>Soltar</b>.</li>
+            <li>Pon en marcha el cronómetro cuando la masa llegue a un extremo y páralo cuando vuelva a ese extremo por décima vez: es \(t_{10}\). Se anota solo en la tabla.</li>
+            <li>Repite hasta tener tres medidas.</li>
+          </ol>
+        </div>
+        <div class="p2only">
+          <p>Un hilo atado a los dos péndulos a la distancia \(l\) del punto de suspensión forma una V, con la pesa \(M\) colgada en el centro. Si los péndulos se separan o se acercan, la V se abre o se cierra y la pesa sube o baja: el hilo con la pesa hace de muelle, de constante efectiva \(\kappa\) proporcional a \(M\). Para pequeñas oscilaciones hay dos <b>modos normales</b>:</p>
+          <ul style="margin:0 0 8px; padding-left:20px">
+            <li><b>En fase</b>: las dos masas se mueven juntas, la V no se deforma y \(\omega_1\simeq\omega_0\).</li>
+            <li><b>En oposición</b>: se mueven en sentidos contrarios, la V se abre y se cierra y la pulsación es mayor:</li>
+          </ul>
+          <div class="hp-eqs"><span>\(\omega_2^2=\omega_1^2+\dfrac{2\kappa\,l^2}{mL^2}\)</span></div>
+          <p>Si solo se separa el péndulo 1, el movimiento es la suma de los dos modos: la energía pasa de un péndulo al otro. El péndulo 1 se para y vuelve a oscilar cada <b>periodo de batido</b></p>
+          <div class="hp-eqs"><span>\(T_b=\dfrac{2\pi}{\omega_2-\omega_1}=\dfrac{T_1T_2}{T_1-T_2}\)</span></div>
+          <p class="hp-key">Representando \(\omega_2^2-\omega_1^2\) frente a \(M\) se obtiene una recta que pasa por el origen. De su pendiente, \(2(\kappa/M)\,l^2/(mL^2)\), sale la constante efectiva \(\kappa\): la del muelle que daría el mismo acoplamiento.</p>
+          <div class="hp-head" style="margin-top:12px"><b>Cómo medir, para cada pesa \(M\)</b></div>
+          <ol>
+            <li><b>En fase</b>: separa los dos hacia el mismo lado, suéltalos y mide \(t_{10}\) (tres veces).</li>
+            <li><b>En oposición</b>: separa cada uno hacia un lado, suéltalos y mide \(t_{10}\) (tres veces).</li>
+            <li><b>Separar el 1</b>: suéltalo y mide el tiempo entre dos paradas consecutivas del péndulo 1, \(T_b\) (tres veces). La gráfica de debajo de los péndulos ayuda a ver cuándo se para. Con ×4 se espera menos.</li>
+          </ol>
+          <dl>
+            <dt>\(t_{10}\)</dt><dd>Tiempo de 10 oscilaciones completas; \(T=t_{10}/10\).</dd>
+            <dt>\(T_b\)</dt><dd>Tiempo entre dos paradas consecutivas del péndulo 1.</dd>
+            <dt>\(l\)</dt><dd>Distancia del punto de suspensión al punto donde se ata el hilo de acoplamiento.</dd>
+            <dt>\(M\)</dt><dd>Pesa colgada en el centro del hilo. Si es demasiado grande, los péndulos cuelgan torcidos hacia dentro.</dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="card fitcard p2only" aria-label="Ajuste por mínimos cuadrados">
+      <div class="head">
+        <div>
+          <h2>Ajuste lineal por mínimos cuadrados</h2>
+          <p>Se recalcula con cada medida; hacen falta las tres pesas con \(T_1\) y \(T_2\) medidos.</p>
+        </div>
+      </div>
+      <div class="fits">
+        <div class="fit">
+          <h3>\(\omega_2^2-\omega_1^2\) frente a \(M\) · \(\omega_2^2-\omega_1^2=A\,M+B\)</h3>
+          <svg id="chart" class="chart" viewBox="0 0 560 360" role="img" aria-label="Gráfica de omega2 al cuadrado menos omega1 al cuadrado frente a la masa M"></svg>
+          <div class="fitside"><label class="switch fittog"><input type="checkbox" id="showFit"> Mostrar recta y resultados</label><dl class="res" id="res"></dl></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+const $ = id => document.getElementById(id);
+const fx = (x, dec) => x.toFixed(Math.max(0,dec)).replace('.', ',');
+function roundPair(v, e){
+  if(!(e > 0)) return { v: fx(v, 3), e: '' };
+  let p = Math.floor(Math.log10(e));
+  if(Math.round(e/Math.pow(10, p)) >= 10) p += 1;
+  const q = Math.pow(10, p);
+  return { v: fx(Math.round(v/q)*q, -p), e: fx(Math.round(e/q)*q, -p) };
+}
+function stats(arr, res){
+  const n = arr.length, m = arr.reduce((a,b)=>a+b,0)/n;
+  let eps = res;
+  if(n >= 2){ const sd = Math.sqrt(arr.reduce((a,x)=>a+(x-m)**2,0)/(n-1)); eps = Math.max(3*sd/Math.sqrt(n), res); }
+  return { m, eps };
+}
+function gauss(){ let u=0,v=0; while(!u) u=Math.random(); while(!v) v=Math.random(); return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v); }
+
+/* ---------- Física ---------- */
+// Geometría del montaje de PHYWE: péndulos de 40 cm separados 10 cm; hilo de acoplamiento
+// de 20 cm atado a l = 32 cm del punto de suspensión, con la pesa M colgada en su centro.
+const P = { g:9.80, L:0.400, m:0.070, sep:0.10, l:0.32, b:0.10, H:0.55, gam:0.006, Auno:0.04, Amode:0.02 };
+const DS = [10, 7, 4];   // pesas de acoplamiento (g)
+const w0 = Math.sqrt(P.g/P.L);
+let part = 1, dcm = 10, mode = 'uno', speed = 1;
+const Mkg = () => part === 2 ? dcm/1000 : 0;
+// posición (x, z) de la pesa, con z medido desde los puntos de suspensión (negativo hacia abajo)
+function attXZ(i, th){ const x0 = i === 1 ? -P.sep/2 : P.sep/2; return [x0 + P.l*Math.sin(th), -P.l*Math.cos(th)]; }
+function Qm(t1, t2){
+  const a = attXZ(1, t1), c = attXZ(2, t2), dx = c[0]-a[0], dz = c[1]-a[1], s = Math.hypot(dx, dz);
+  const h = Math.sqrt(Math.max(1e-10, P.b*P.b - s*s/4));
+  return [(a[0]+c[0])/2 + h*dz/s, (a[1]+c[1])/2 - h*dx/s];
+}
+function Vpot(t1, t2, M){ return -P.m*P.g*P.L*(Math.cos(t1)+Math.cos(t2)) + (M ? M*P.g*Qm(t1,t2)[1] : 0); }
+function jac(t1, t2){
+  const e = 1e-6, a = Qm(t1+e,t2), b = Qm(t1-e,t2), c = Qm(t1,t2+e), d = Qm(t1,t2-e);
+  return [[(a[0]-b[0])/(2*e), (c[0]-d[0])/(2*e)], [(a[1]-b[1])/(2*e), (c[1]-d[1])/(2*e)]];
+}
+// equilibrio: el hilo tira de los péndulos un poco hacia dentro (th1 = +e, th2 = -e)
+function eqAngle(M){
+  if(!M) return 0;
+  const dV = e => (Vpot(e+1e-6,-e-1e-6,M) - Vpot(e-1e-6,-e+1e-6,M));
+  let lo = 0, hi = 0.3;
+  for(let k=0;k<80;k++){ const mid = (lo+hi)/2; if(dV(mid) < 0) lo = mid; else hi = mid; }
+  return (lo+hi)/2;
+}
+// pulsaciones de los modos (linealizando alrededor del equilibrio)
+function modes(Mg){
+  const M = Mg/1000, e = eqAngle(M), h = 1e-4;
+  const Vd = (v) => (Vpot(e+h*v[0], -e+h*v[1], M) - 2*Vpot(e, -e, M) + Vpot(e-h*v[0], -e-h*v[1], M))/(h*h);
+  const J = jac(e, -e);
+  const T = v => P.m*P.L*P.L*(v[0]*v[0]+v[1]*v[1]) + M*((J[0][0]*v[0]+J[0][1]*v[1])**2 + (J[1][0]*v[0]+J[1][1]*v[1])**2);
+  return { eq:e, w1:Math.sqrt(Vd([1,1])/T([1,1])), w2:Math.sqrt(Vd([1,-1])/T([1,-1])) };
+}
+const MODES = {}; for(const d of DS) MODES[d] = modes(d);
+const w1of = Mg => MODES[Mg].w1, w2of = Mg => MODES[Mg].w2;
+const eqNow = () => part === 2 ? MODES[dcm].eq : 0;
+
+let S = null;            // estado: {th1, w1, th2, w2, t}
+let running = false, held = true;
+const ampNow = () => (part === 2 && mode !== 'uno') ? P.Amode : P.Auno;
+function holdState(){
+  const a = Math.asin(ampNow()/P.L), e = eqNow();
+  const j = () => 1 + 0.015*gauss();
+  let t1 = 0, t2 = 0;
+  if(part === 1){ t1 = -a; t2 = 0; }
+  else if(mode === 'fase'){ t1 = a*j(); t2 = a*j(); }
+  else if(mode === 'opos'){ t1 = -a*j(); t2 = a*j(); }
+  else { t1 = -a; t2 = 0; }
+  S = { th1:e+t1, w1:0, th2:-e+t2, w2:0, t:0 };
+  hist = [];
+}
+function deriv(s){
+  const M = Mkg(), L2 = P.m*P.L*P.L;
+  let g1 = P.m*P.g*P.L*Math.sin(s.th1), g2 = P.m*P.g*P.L*Math.sin(s.th2);
+  let m11 = L2, m12 = 0, m22 = L2;
+  if(M){
+    const J = jac(s.th1, s.th2);
+    // aceleración "centrípeta" de la pesa: segunda derivada de Q a lo largo de la velocidad
+    const v = Math.hypot(s.w1, s.w2) || 1, e = 1e-4/v;
+    const qa = Qm(s.th1+e*s.w1, s.th2+e*s.w2), q0 = Qm(s.th1, s.th2), qb = Qm(s.th1-e*s.w1, s.th2-e*s.w2);
+    const Hx = (qa[0]-2*q0[0]+qb[0])/(e*e), Hz = (qa[1]-2*q0[1]+qb[1])/(e*e);
+    g1 += M*P.g*J[1][0] + M*(J[0][0]*Hx + J[1][0]*Hz);
+    g2 += M*P.g*J[1][1] + M*(J[0][1]*Hx + J[1][1]*Hz);
+    m11 += M*(J[0][0]**2 + J[1][0]**2); m22 += M*(J[0][1]**2 + J[1][1]**2); m12 += M*(J[0][0]*J[0][1] + J[1][0]*J[1][1]);
+  }
+  const det = m11*m22 - m12*m12, r1 = -g1, r2 = -g2;
+  return {
+    a1: (m22*r1 - m12*r2)/det - P.gam*s.w1,
+    a2: (m11*r2 - m12*r1)/det - P.gam*s.w2
+  };
+}
+function step(dt){
+  const s = S;
+  const k1 = deriv(s);
+  const s2 = { th1:s.th1+s.w1*dt/2, w1:s.w1+k1.a1*dt/2, th2:s.th2+s.w2*dt/2, w2:s.w2+k1.a2*dt/2 };
+  const k2 = deriv(s2);
+  const s3 = { th1:s.th1+s2.w1*dt/2, w1:s.w1+k2.a1*dt/2, th2:s.th2+s2.w2*dt/2, w2:s.w2+k2.a2*dt/2 };
+  const k3 = deriv(s3);
+  const s4 = { th1:s.th1+s3.w1*dt, w1:s.w1+k3.a1*dt, th2:s.th2+s3.w2*dt, w2:s.w2+k3.a2*dt };
+  const k4 = deriv(s4);
+  s.th1 += dt/6*(s.w1 + 2*s2.w1 + 2*s3.w1 + s4.w1);
+  s.th2 += dt/6*(s.w2 + 2*s2.w2 + 2*s3.w2 + s4.w2);
+  s.w1 += dt/6*(k1.a1 + 2*k2.a1 + 2*k3.a1 + k4.a1);
+  s.w2 += dt/6*(k1.a2 + 2*k2.a2 + 2*k3.a2 + k4.a2);
+  s.t += dt;
+}
+
+/* ---------- Historial para la gráfica y el contador ---------- */
+let hist = [];           // {t, x1, x2}
+const WIN = 40;          // s visibles
+let lastSampleT = -1;
+function sample(){
+  if(S.t - lastSampleT < 0.04 && hist.length) return;
+  lastSampleT = S.t;
+  const e = eqNow(); hist.push({ t:S.t, x1:P.L*(Math.sin(S.th1)-Math.sin(e))*100, x2:P.L*(Math.sin(S.th2)+Math.sin(e))*100 });
+  while(hist.length && hist[0].t < S.t - WIN - 2) hist.shift();
+}
+
+/* ---------- Vista 3D (proyección ortográfica girable) ---------- */
+const svg = $('scene'), G = $('sceneG');
+const VIEWS = { front:{yaw:0, pitch:0.10}, side:{yaw:Math.PI/2, pitch:0.10}, persp:{yaw:0.62, pitch:0.36} };
+let cam = { yaw:0.62, pitch:0.36 }, camTo = null;
+let SC = 400, CX = 320, CY = 480;
+function rawProj(x, y, z){
+  const cy = Math.cos(cam.yaw), sy = Math.sin(cam.yaw), cp = Math.cos(cam.pitch), sp = Math.sin(cam.pitch);
+  const x1 = x*cy + y*sy, y1 = -x*sy + y*cy;
+  return [x1, -(z*cp + y1*sp), y1*cp - z*sp];
+}
+function proj(x, y, z){ const r = rawProj(x, y, z); return [CX + SC*r[0], CY + SC*r[1], r[2]]; }
+const VW = 640, VH = 520;
+function fitCam(){
+  const pts = [];
+  for(const x of [-0.17, 0.17]) for(const y of [-0.09, 0.09]) pts.push([x, y, 0]);
+  for(const x of [-0.14, 0.14]) pts.push([x, 0, P.H + 0.04]);
+  for(const x of [-0.12, 0.12]) pts.push([x, 0, P.H - P.L - 0.04]);
+  let x0=1e9, x1=-1e9, y0=1e9, y1=-1e9;
+  for(const p of pts){ const r = rawProj(...p); x0 = Math.min(x0, r[0]); x1 = Math.max(x1, r[0]); y0 = Math.min(y0, r[1]); y1 = Math.max(y1, r[1]); }
+  const mx = 30, myT = 46, myB = 34;
+  SC = Math.min((VW - 2*mx)/(x1 - x0), (VH - myT - myB)/(y1 - y0));
+  CX = VW/2 - SC*(x0 + x1)/2; CY = myT + (VH - myT - myB)/2 - SC*(y0 + y1)/2;
+}
+const f1 = v => v.toFixed(1);
+function bobPos(i){
+  const th = i === 1 ? S.th1 : S.th2, x0 = i === 1 ? -P.sep/2 : P.sep/2;
+  return [x0 + P.L*Math.sin(th), 0, P.H - P.L*Math.cos(th)];
+}
+function attPos(i){
+  const a = attXZ(i, i === 1 ? S.th1 : S.th2); return [a[0], 0, P.H + a[1]];
+}
+function drawScene(){
+  const items = [];
+  const add = (dep, s) => items.push({dep, s});
+  // suelo / mesa con cuadrícula
+  const fx0=-0.17, fx1=0.17, fy0=-0.09, fy1=0.09;
+  const corners = [[fx0,fy0],[fx1,fy0],[fx1,fy1],[fx0,fy1]].map(c => proj(c[0], c[1], 0));
+  let fl = `<polygon class="v-floor" points="${corners.map(p=>f1(p[0])+','+f1(p[1])).join(' ')}"/>`;
+  for(let x=-0.15; x<=0.151; x+=0.05){ const a=proj(x,fy0,0), b=proj(x,fy1,0); fl += `<line class="v-grid" x1="${f1(a[0])}" y1="${f1(a[1])}" x2="${f1(b[0])}" y2="${f1(b[1])}"/>`; }
+  for(let y=-0.05; y<=0.051; y+=0.05){ const a=proj(fx0,y,0), b=proj(fx1,y,0); fl += `<line class="v-grid" x1="${f1(a[0])}" y1="${f1(a[1])}" x2="${f1(b[0])}" y2="${f1(b[1])}"/>`; }
+  G.innerHTML = '';
+  // bases y varillas verticales
+  const box = (cx, cy, cz, sx, sy, sz, clsT, clsS) => {
+    const v = [];
+    for(const dx of [-1,1]) for(const dy of [-1,1]) for(const dz of [0,1]) v.push(proj(cx+dx*sx/2, cy+dy*sy/2, cz+dz*sz));
+    // caras: superior + laterales visibles (dibujamos las 4 laterales ordenadas)
+    const idx = (dx,dy,dz) => ((dx>0)<<2)|((dy>0)<<1)|(dz);
+    const face = (a,b,c,d,cls) => { const pts=[a,b,c,d].map(i=>v[i]); const dep=pts.reduce((s,p)=>s+p[2],0)/4; return {dep, s:`<polygon class="${cls}" points="${pts.map(p=>f1(p[0])+','+f1(p[1])).join(' ')}"/>`}; };
+    const fs = [
+      face(idx(-1,-1,0),idx(1,-1,0),idx(1,-1,1),idx(-1,-1,1),clsS),
+      face(idx(-1,1,0),idx(1,1,0),idx(1,1,1),idx(-1,1,1),clsS),
+      face(idx(-1,-1,0),idx(-1,1,0),idx(-1,1,1),idx(-1,-1,1),clsS),
+      face(idx(1,-1,0),idx(1,1,0),idx(1,1,1),idx(1,-1,1),clsS),
+    ].sort((a,b)=>b.dep-a.dep);
+    const top = face(idx(-1,-1,1),idx(1,-1,1),idx(1,1,1),idx(-1,1,1),clsT);
+    const dep = proj(cx,cy,cz+sz/2)[2];
+    return { dep, s: fs.slice(2).map(f=>f.s).join('') + top.s };
+  };
+  for(const xs of [-0.125, 0.125]){
+    const b = box(xs, 0, 0, 0.07, 0.13, 0.02, 'v-base-t', 'v-base'); add(b.dep+0.2, b.s);
+    const a = proj(xs, 0, 0.02), c = proj(xs, 0, P.H + 0.03);
+    add((a[2]+c[2])/2, `<line class="v-rod" x1="${f1(a[0])}" y1="${f1(a[1])}" x2="${f1(c[0])}" y2="${f1(c[1])}" stroke-width="9"/><line class="v-rodhi" x1="${f1(a[0]-2)}" y1="${f1(a[1])}" x2="${f1(c[0]-2)}" y2="${f1(c[1])}" stroke-width="2.5"/>`);
+    const k = proj(xs, 0, P.H); add(k[2]-0.01, `<circle class="v-clamp" cx="${f1(k[0])}" cy="${f1(k[1])}" r="9"/>`);
+  }
+  // barra horizontal
+  { const a = proj(-0.135, 0, P.H), c = proj(0.135, 0, P.H);
+    add((a[2]+c[2])/2 + 0.002, `<line class="v-rod" x1="${f1(a[0])}" y1="${f1(a[1])}" x2="${f1(c[0])}" y2="${f1(c[1])}" stroke-width="8"/><line class="v-rodhi" x1="${f1(a[0])}" y1="${f1(a[1]-2)}" x2="${f1(c[0])}" y2="${f1(c[1]-2)}" stroke-width="2.2"/>`); }
+  // péndulos
+  for(const i of [1,2]){
+    const x0 = i === 1 ? -P.sep/2 : P.sep/2;
+    const ee = i === 1 ? eqNow() : -eqNow(), pv = proj(x0, 0, P.H), eq = proj(x0 + (P.L+0.04)*Math.sin(ee), 0, P.H - (P.L+0.04)*Math.cos(ee));
+    add(pv[2] + 0.05, `<line class="v-eq" x1="${f1(pv[0])}" y1="${f1(pv[1])}" x2="${f1(eq[0])}" y2="${f1(eq[1])}"/>`);
+    const b = bobPos(i), bp = proj(...b);
+    add((pv[2]+bp[2])/2, `<line class="v-thread" x1="${f1(pv[0])}" y1="${f1(pv[1])}" x2="${f1(bp[0])}" y2="${f1(bp[1])}"/>`);
+    add(pv[2]-0.02, `<rect class="v-clamp" x="${f1(pv[0]-7)}" y="${f1(pv[1]-6)}" width="14" height="12" rx="2"/>`);
+    const r = SC*0.016;
+    add(bp[2], `<circle cx="${f1(bp[0])}" cy="${f1(bp[1])}" r="${f1(r)}" fill="url(#gBob)" stroke="var(--brass-1)" stroke-width="1"/><text class="v-lbl" x="${f1(bp[0]+r+5)}" y="${f1(bp[1]-r+2)}">${i}</text>`);
+    if(held && !running){
+      const th = i===1 ? S.th1 : S.th2;
+      const e0 = i === 1 ? eqNow() : -eqNow(), xe = x0 + P.L*Math.sin(e0);
+      if(Math.abs(th - e0) > 1e-4 && Math.abs(Math.sin(cam.yaw)) < 0.8){
+        const zb = b[2] - 0.065, p0 = proj(xe, 0, zb), p1 = proj(b[0], 0, zb), sg = Math.sign(p1[0]-p0[0]);
+        add(-0.5, `<line class="v-dim" x1="${f1(p0[0])}" y1="${f1(p0[1])}" x2="${f1(p1[0])}" y2="${f1(p1[1])}"/><path fill="var(--accent)" d="M${f1(p1[0])} ${f1(p1[1])} l${f1(-sg*9)} -4.5 v9 z"/><text class="v-dimtxt" x="${f1((p0[0]+p1[0])/2)}" y="${f1(p0[1]+20)}" text-anchor="middle">${fx(ampNow()*100,0)} cm</text>`);
+      }
+    }
+  }
+  // hilo de acoplamiento en V con la pesa M colgada en el centro
+  if(part === 2){
+    const a = attPos(1), c = attPos(2), q = Qm(S.th1, S.th2), k = [q[0], 0, P.H + q[1]];
+    const pa = proj(...a), pc = proj(...c), pk = proj(...k);
+    add((pa[2]+pc[2])/2 - 0.01, `<polyline class="v-cthread" points="${f1(pa[0])},${f1(pa[1])} ${f1(pk[0])},${f1(pk[1])} ${f1(pc[0])},${f1(pc[1])}"/>`);
+    for(const p of [pa, pc]) add(p[2]-0.012, `<circle class="v-knot" cx="${f1(p[0])}" cy="${f1(p[1])}" r="2.6"/>`);
+    const sz = 0.008 + 0.0012*dcm, zt = k[2] - 0.012;
+    const hk = proj(k[0], 0, zt);
+    add(pk[2]-0.011, `<line class="v-cthread" x1="${f1(pk[0])}" y1="${f1(pk[1])}" x2="${f1(hk[0])}" y2="${f1(hk[1])}"/>`);
+    const bx = box(k[0], 0, zt - sz, sz, sz, sz, 'v-mass-t', 'v-mass'); add(bx.dep - 0.012, bx.s);
+    const ml = proj(k[0] + sz, 0, zt - sz/2);
+    if(Math.abs(Math.sin(cam.yaw)) < 0.85) add(-1, `<text class="v-mtxt" x="${f1(ml[0]+8)}" y="${f1(ml[1]+6)}">M</text>`);
+    // cota l sobre el hilo 1
+    if(Math.abs(Math.sin(cam.yaw)) < 0.85){
+      const x0 = -P.sep/2 - 0.04, top = proj(x0, 0, P.H), bot = proj(x0, 0, P.H - P.l);
+      add(-1, `<line class="v-dim" x1="${f1(top[0])}" y1="${f1(top[1])}" x2="${f1(bot[0])}" y2="${f1(bot[1])}"/><line class="v-dim" x1="${f1(top[0]-6)}" y1="${f1(top[1])}" x2="${f1(top[0]+6)}" y2="${f1(top[1])}"/><line class="v-dim" x1="${f1(bot[0]-6)}" y1="${f1(bot[1])}" x2="${f1(bot[0]+6)}" y2="${f1(bot[1])}"/><text class="v-dimtxt" x="${f1((top[0]+bot[0])/2 - 8)}" y="${f1((top[1]+bot[1])/2 + 6)}" text-anchor="end"><tspan class="it">l</tspan></text>`);
+    }
+  }
+  items.sort((p,q) => q.dep - p.dep);
+  G.innerHTML = fl + items.map(i => i.s).join('');
+}
+
+/* Girar la vista con el ratón o el dedo */
+(function(){
+  let drag = null;
+  svg.addEventListener('pointerdown', e => { drag = { x:e.clientX, y:e.clientY, yaw:cam.yaw, pitch:cam.pitch }; camTo = null; svg.setPointerCapture(e.pointerId); svg.classList.add('drag'); });
+  svg.addEventListener('pointermove', e => {
+    if(!drag) return;
+    const k = 0.009;
+    cam.yaw = drag.yaw - (e.clientX - drag.x)*k;
+    cam.pitch = Math.max(-0.05, Math.min(0.9, drag.pitch + (e.clientY - drag.y)*k));
+    fitCam(); if(!running) drawScene();
+  });
+  const end = () => { drag = null; svg.classList.remove('drag'); };
+  svg.addEventListener('pointerup', end); svg.addEventListener('pointercancel', end);
+  document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => { camTo = Object.assign({}, VIEWS[b.dataset.view]); if(!running) animCam(); }));
+})();
+function camStep(){
+  if(!camTo) return false;
+  let dy = camTo.yaw - cam.yaw;
+  dy = Math.atan2(Math.sin(dy), Math.cos(dy));
+  const dp = camTo.pitch - cam.pitch;
+  if(Math.abs(dy) < 0.003 && Math.abs(dp) < 0.003){ cam.yaw = camTo.yaw; cam.pitch = camTo.pitch; camTo = null; fitCam(); return true; }
+  cam.yaw += dy*0.15; cam.pitch += dp*0.15; fitCam(); return true;
+}
+function animCam(){ if(running) return; if(camStep()){ drawScene(); requestAnimationFrame(animCam); } }
+
+/* ---------- Gráfica de desplazamientos ---------- */
+const tsvg = $('traceSvg');
+function drawTrace(){
+  const cw = tsvg.clientWidth || 900, W = cw < 640 ? 560 : 900, H = cw < 640 ? 190 : 150;
+  tsvg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const _u=0, ml=46, mr=14, mt=14, mb=26, pw=W-ml-mr, ph=H-mt-mb;
+  const tEnd = Math.max(WIN, S.t), t0 = tEnd - WIN;
+  const ymax = P.Auno*100*1.15;
+  const X = t => ml + (t - t0)/WIN*pw, Y = y => mt + ph/2 - y/ymax*ph/2;
+  let h = '';
+  for(let s = Math.ceil(t0/5)*5; s <= tEnd + 1e-6; s += 5) h += `<line class="t-grid" x1="${f1(X(s))}" y1="${mt}" x2="${f1(X(s))}" y2="${mt+ph}"/><text class="t-tick" x="${f1(X(s))}" y="${H-8}" text-anchor="middle">${s}</text>`;
+  for(const v of [-4, 0, 4]) h += `<text class="t-tick" x="${ml-6}" y="${f1(Y(v)+4)}" text-anchor="end">${v}</text>`;
+  h += `<line class="t-axis" x1="${ml}" y1="${f1(Y(0))}" x2="${ml+pw}" y2="${f1(Y(0))}"/><line class="t-axis" x1="${ml}" y1="${mt}" x2="${ml}" y2="${mt+ph}"/>`;
+  h += `<text class="t-tick" x="${W-mr-4}" y="${f1(Y(0)-6)}" text-anchor="end">t (s)</text><text class="t-tick" x="${ml+4}" y="${mt+10}">x (cm)</text>`;
+  const pts = k => hist.filter(p => p.t >= t0).map(p => f1(X(p.t))+','+f1(Y(p[k]))).join(' ');
+  h += `<polyline class="t-x1" points="${pts('x1')}"/>`;
+  if(part === 2) h += `<polyline class="t-x2" points="${pts('x2')}"/>`;
+  if(sw.on || sw.t > 0){ const a = sw.t0Sim; if(a >= t0) h += `<line class="t-mark" x1="${f1(X(a))}" y1="${mt}" x2="${f1(X(a))}" y2="${mt+ph}"/>`; }
+  h += `<rect x="${W-mr-170}" y="${mt-2}" width="170" height="20" fill="var(--surface-2)"/><circle class="t-l1" cx="${W-mr-160}" cy="${mt+8}" r="5"/><text class="t-lbl t-l1" x="${W-mr-150}" y="${mt+12}">péndulo 1</text>`;
+  if(part === 2) h += `<circle class="t-l2" cx="${W-mr-80}" cy="${mt+8}" r="5"/><text class="t-lbl t-l2" x="${W-mr-70}" y="${mt+12}">péndulo 2</text>`;
+  tsvg.innerHTML = h;
+}
+
+/* ---------- Cronómetro (7 segmentos) ---------- */
+const SEGMAP = {'0':'abcdef','1':'bc','2':'abged','3':'abgcd','4':'fgbc','5':'afgcd','6':'afgedc','7':'abc','8':'abcdefg','9':'abcfgd','-':'g',' ':''};
+function buildDisplay(el, n){
+  const T = 6, x0=7, x1=31, y0=6, y1=33, y2=60, gp=1.6;
+  const Hs = (a,b,y) => `${a},${y} ${a+T/2},${y-T/2} ${b-T/2},${y-T/2} ${b},${y} ${b-T/2},${y+T/2} ${a+T/2},${y+T/2}`;
+  const V = (x,a,b) => `${x},${a} ${x+T/2},${a+T/2} ${x+T/2},${b-T/2} ${x},${b} ${x-T/2},${b-T/2} ${x-T/2},${a+T/2}`;
+  const segs = { a:Hs(x0+gp,x1-gp,y0), g:Hs(x0+gp,x1-gp,y1), d:Hs(x0+gp,x1-gp,y2), f:V(x0,y0+gp,y1-gp), b:V(x1,y0+gp,y1-gp), e:V(x0,y1+gp,y2-gp), c:V(x1,y1+gp,y2-gp) };
+  const W = n*42 + 14;
+  el.setAttribute('viewBox', `0 0 ${W} 74`);
+  let html = `<rect class="dispbg" x="0" y="0" width="${W}" height="74" rx="6"/>`;
+  for(let i=0;i<n;i++){
+    html += `<g transform="translate(${i*42+9},5) skewX(-6)">`;
+    for(const k in segs) html += `<polygon class="seg" data-d="${i}" data-s="${k}" points="${segs[k]}"/>`;
+    html += `<circle class="seg" data-d="${i}" data-s="p" cx="${x1+6}" cy="${y2}" r="3.2"/></g>`;
+  }
+  el.innerHTML = html;
+  const digits = [];
+  for(let i=0;i<n;i++){ const o = {}; el.querySelectorAll(`[data-d="${i}"]`).forEach(q => o[q.dataset.s] = q); digits.push(o); }
+  return digits;
+}
+function setDisplay(digits, str){
+  const cells = [];
+  for(const ch of str){ if(ch === '.' && cells.length) cells[cells.length-1].dp = true; else cells.push({ ch, dp:false }); }
+  while(cells.length < digits.length) cells.unshift({ ch:' ', dp:false });
+  digits.forEach((dg, i) => { const c = cells[i]; const on = SEGMAP[c.ch] || ''; for(const k of 'abcdefg') dg[k].classList.toggle('on', on.includes(k)); dg.p.classList.toggle('on', c.dp); });
+}
+const SWD = buildDisplay($('swDisp'), 5);
+const sw = { on:false, t:0, t0Sim:0, count:0, prevV:0 };
+function swShow(){ const t = Math.min(sw.t, 999.99); setDisplay(SWD, (Math.floor(t*100+1e-9)/100).toFixed(2)); }
+swShow();
+function destInfo(){
+  if(part === 1) return { key:'t', txt:'t₁₀ del péndulo libre' };
+  if(mode === 'fase') return { key:'f', txt:`t₁₀ en fase (M = ${dcm} g)` };
+  if(mode === 'opos') return { key:'o', txt:`t₁₀ en oposición (M = ${dcm} g)` };
+  return { key:'b', txt:`T_b, periodo de batido (M = ${dcm} g)` };
+}
+function updDest(){
+  const d = destInfo();
+  $('destTxt').innerHTML = `Al parar se anota en: <b>${d.txt.replace('t₁₀','t<sub>10</sub>').replace('T_b','T<sub>b</sub>')}</b>`;
+}
+function swToggle(){
+  if(!running && !sw.on){ msg('Primero suelta los péndulos.', 'warn'); return; }
+  if(!sw.on){ sw.on = true; sw.t = 0; sw.t0Sim = S.t; sw.count = 0; sw.prevV = S.w1; msg(''); }
+  else { sw.on = false; swShow(); record(sw.t); }
+  $('swStart').classList.toggle('stop', sw.on); $('swStart').classList.toggle('go', !sw.on);
+}
+$('swStart').addEventListener('click', swToggle);
+$('swReset').addEventListener('click', () => { if(sw.on) return; sw.t = 0; sw.count = 0; swShow(); $('countTxt').textContent = ''; });
+document.addEventListener('keydown', e => {
+  if(e.code !== 'Space' || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+  e.preventDefault(); if(!e.repeat) swToggle();
+}, true);
+document.addEventListener('keyup', e => { if(e.code === 'Space' && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) e.preventDefault(); }, true);
+
+/* ---------- Datos guardados ---------- */
+const KEY = 'pendulos-acoplados-hilo-v1';
+let store = { p1:{ t:[] }, p2:{}, hist:[], showCalc:true, showFit:false, part:1, d:10 };
+try { const raw = localStorage.getItem(KEY); if(raw) store = Object.assign(store, JSON.parse(raw)); } catch(e){}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(store)); } catch(e){} }
+part = store.part === 2 ? 2 : 1; dcm = DS.includes(store.d) ? store.d : 10;
+const row = d => (store.p2[d] = store.p2[d] || { f:[], o:[], b:[] });
+
+function record(t){
+  const d = destInfo();
+  if(t < 2){ msg('Medida demasiado corta: no se anota.', 'warn'); return; }
+  let arr;
+  if(d.key === 't') arr = store.p1.t; else arr = row(dcm)[d.key];
+  if(arr.length >= 3){ msg('Ya hay tres medidas de esa magnitud. Borra la última si quieres repetirla.', 'warn'); return; }
+  arr.push(Math.round(t*100)/100);
+  store.hist.push({ part, d: dcm, key: d.key });
+  save(); renderTable(); renderFit();
+  // aviso si la medida parece mal hecha
+  let ref = null;
+  if(d.key === 't') ref = 10*2*Math.PI/w0;
+  if(d.key === 'f') ref = 10*2*Math.PI/w1of(dcm);
+  if(d.key === 'o') ref = 10*2*Math.PI/w2of(dcm);
+  if(d.key === 'b') ref = 2*Math.PI/(w2of(dcm) - w1of(dcm));
+  const rel = Math.abs(t - ref)/ref;
+  if(rel > 0.06) msg(`Anotado ${fx(t,2)} s. Parece lejos de lo esperado: ¿contaste bien${d.key==='b'?' las paradas':' las 10 oscilaciones'}?`, 'warn');
+  else msg(`Anotado ${fx(t,2)} s en ${d.txt}.`, 'ok');
+}
+
+/* ---------- Medida automática (con error humano) ---------- */
+function autoFill(dlist, both){
+  const tH = () => 0.07*gauss();
+  if(part === 1 || both){ while(store.p1.t.length < 3) store.p1.t.push(Math.round((10*2*Math.PI/w0 + tH())*100)/100); }
+  if(part === 2 || both) for(const d of dlist){
+    const r = row(d), T1 = 2*Math.PI/w1of(d), T2 = 2*Math.PI/w2of(d), Tb = 2*Math.PI/(w2of(d) - w1of(d));
+    while(r.f.length < 3) r.f.push(Math.round((10*T1 + tH())*100)/100);
+    while(r.o.length < 3) r.o.push(Math.round((10*T2 + tH())*100)/100);
+    while(r.b.length < 3) r.b.push(Math.round((Tb*(1 + 0.02*gauss()) + 0.25*gauss())*100)/100);
+  }
+  store.hist = store.hist.filter(h => false);
+  save(); renderTable(); renderFit();
+  msg('Medidas simuladas añadidas a la tabla.', 'ok');
+}
+$('autoOne').addEventListener('click', () => { autoFill([dcm]); buildChips(); });
+$('autoAll').addEventListener('click', () => { autoFill(DS, true); buildChips(); });
+
+/* ---------- Tabla ---------- */
+const trio = (arr, dec) => `<td class="trio">${[0,1,2].map(i => arr[i] != null ? `<span>${fx(arr[i], dec)}</span>` : `<span class="empty">—</span>`).join('')}</td>`;
+const pmCell = (v, e, cls='calc') => { if(v == null) return `<td class="${cls}"><span class="pm">—</span></td>`; const r = roundPair(v, e); return `<td class="${cls}">${r.v} <span class="pm">± ${r.e}</span></td>`; };
+function calcRow(r){
+  const c = {};
+  if(r.f.length){ const s = stats(r.f, 0.01); c.T1 = s.m/10; c.eT1 = s.eps/10; c.w1 = 2*Math.PI/c.T1; c.ew1 = 2*Math.PI*c.eT1/c.T1**2; }
+  if(r.o.length){ const s = stats(r.o, 0.01); c.T2 = s.m/10; c.eT2 = s.eps/10; c.w2 = 2*Math.PI/c.T2; c.ew2 = 2*Math.PI*c.eT2/c.T2**2; }
+  if(c.T1 && c.T2){ c.D = c.w2**2 - c.w1**2; c.eD = 2*c.w2*c.ew2 + 2*c.w1*c.ew1; if(c.T1 > c.T2){ c.Tbc = c.T1*c.T2/(c.T1 - c.T2); c.eTbc = (c.T2**2*c.eT1 + c.T1**2*c.eT2)/(c.T1 - c.T2)**2; } }
+  if(r.b.length){ const s = stats(r.b, 0.01); c.Tb = s.m; c.eTb = s.eps; }
+  return c;
+}
+function renderTable(){
+  const th = (t, u, cls='') => `<th class="${cls}">${t}<span class="u">${u}</span></th>`;
+  let H = '', B = '';
+  if(part === 1){
+    H = `<tr>${th('t<sub>10, 1,2,3</sub>','s')}${th('t̄<sub>10</sub>','s','calc')}${th('T<sub>0</sub> = t̄<sub>10</sub>/10','s','calc')}${th('ω<sub>0</sub> = 2π/T<sub>0</sub>','rad/s','calc')}</tr>`;
+    const a = store.p1.t;
+    if(!a.length) B = `<tr class="emptyrow"><td colspan="4">Todavía no hay medidas. Suelta el péndulo y mide 10 oscilaciones con el cronómetro.</td></tr>`;
+    else { const s = stats(a, 0.01); const T = s.m/10, eT = s.eps/10; B = `<tr>${trio(a,2)}${pmCell(s.m, s.eps)}${pmCell(T, eT)}${pmCell(2*Math.PI/T, 2*Math.PI*eT/T**2)}</tr>`; }
+  } else {
+    H = `<tr>${th('M','g')}${th('t<sub>10</sub> en fase','s')}${th('t<sub>10</sub> en oposición','s')}${th('T<sub>b</sub>','s')}${th('T<sub>1</sub>','s','calc')}${th('T<sub>2</sub>','s','calc')}${th('ω<sub>2</sub>² − ω<sub>1</sub>²','s⁻²','calc')}${th('T̄<sub>b</sub> medido','s','calc')}${th('T<sub>b</sub> = T<sub>1</sub>T<sub>2</sub>/(T<sub>1</sub>−T<sub>2</sub>)','s','calc')}</tr>`;
+    for(const d of DS){
+      const r = row(d), c = calcRow(r);
+      B += `<tr class="${d === dcm ? 'active' : ''}"><td>${d},0 <span class="pm">± 0,1</span></td>${trio(r.f,2)}${trio(r.o,2)}${trio(r.b,2)}${pmCell(c.T1,c.eT1)}${pmCell(c.T2,c.eT2)}${pmCell(c.D,c.eD)}${pmCell(c.Tb,c.eTb)}${pmCell(c.Tbc,c.eTbc)}</tr>`;
+    }
+  }
+  $('thead').innerHTML = H; $('tbody').innerHTML = B;
+  $('tbl').classList.toggle('nocalc', !store.showCalc);
+}
+$('showCalc').checked = store.showCalc !== false;
+$('showCalc').addEventListener('change', e => { store.showCalc = e.target.checked; save(); renderTable(); });
+$('undo').addEventListener('click', () => {
+  const h = store.hist.pop();
+  if(h){ if(h.part === 1) store.p1.t.pop(); else row(h.d)[h.key].pop(); }
+  else if(part === 1) store.p1.t.pop();
+  else { const r = row(dcm); (r.b.length ? r.b : r.o.length ? r.o : r.f).pop(); }
+  save(); renderTable(); renderFit();
+});
+let clearArm = false;
+$('clear').addEventListener('click', () => {
+  if(!clearArm){ clearArm = true; $('clear').classList.add('confirm'); $('clear').textContent = '¿Seguro? Pulsa otra vez'; setTimeout(() => { clearArm = false; $('clear').classList.remove('confirm'); $('clear').textContent = 'Vaciar tabla'; }, 3000); return; }
+  clearArm = false; $('clear').classList.remove('confirm'); $('clear').textContent = 'Vaciar tabla';
+  if(part === 1) store.p1.t = []; else store.p2 = {};
+  store.hist = store.hist.filter(h => h.part !== part); save(); renderTable(); renderFit();
+});
+function tsv(){
+  const L = [];
+  if(part === 1){ L.push(['t10_1 (s)','t10_2 (s)','t10_3 (s)'].join('\t')); L.push(store.p1.t.map(v => fx(v,2)).join('\t')); }
+  else {
+    L.push(['M (g)','t10 fase 1','t10 fase 2','t10 fase 3','t10 opos 1','t10 opos 2','t10 opos 3','Tb 1','Tb 2','Tb 3'].join('\t'));
+    for(const d of DS){ const r = row(d); const c = a => [0,1,2].map(i => a[i] != null ? fx(a[i],2) : ''); L.push([fx(d,1), ...c(r.f), ...c(r.o), ...c(r.b)].join('\t')); }
+  }
+  return L.join('\n');
+}
+$('copy').addEventListener('click', () => {
+  const text = tsv();
+  const done = () => { $('copied').textContent = 'Copiada. Pégala en la hoja de cálculo.'; setTimeout(() => $('copied').textContent = '', 3500); };
+  const fail = () => { $('fallbackBox').hidden = false; const ta = $('fallbackTa'); ta.value = text; ta.focus(); ta.select(); $('copied').textContent = 'Selecciona el texto y cópialo.'; };
+  try { navigator.clipboard.writeText(text).then(done, fail); } catch(e){ fail(); }
+});
+
+/* ---------- Ajuste ---------- */
+function linfit(pts){
+  const n = pts.length; let Sx=0, Sy=0, Sxx=0, Sxy=0, Syy=0;
+  for(const p of pts){ Sx+=p.x; Sy+=p.y; Sxx+=p.x*p.x; Sxy+=p.x*p.y; Syy+=p.y*p.y; }
+  const D = n*Sxx - Sx*Sx, A = (n*Sxy - Sx*Sy)/D, B = (Sxx*Sy - Sx*Sxy)/D;
+  let SS = 0; for(const p of pts) SS += (p.y - A*p.x - B)**2;
+  const sig = Math.sqrt(SS/Math.max(1, n-2));
+  return { A, B, eA: sig*Math.sqrt(n/D), eB: sig*Math.sqrt(Sxx/D), r: (n*Sxy - Sx*Sy)/Math.sqrt((n*Sxx - Sx*Sx)*(n*Syy - Sy*Sy)), n };
+}
+function niceStep(range){ const raw = range/5, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw/p; return (f < 1.5 ? 1 : f < 3 ? 2 : f < 7 ? 5 : 10)*p; }
+function drawChart(el, pts, fit, xT, yT){
+  const W=560, H=360, ml=64, mr=18, mt=16, mb=52, pw=W-ml-mr, ph=H-mt-mb;
+  if(pts.length < 3){ el.innerHTML = `<text class="c-empty" x="${W/2}" y="${H/2}" text-anchor="middle">Faltan datos: se necesitan las tres pesas (llevas ${pts.length}).</text>`; return; }
+  const xa = 0, xb = Math.max(...pts.map(p=>p.x+p.ex));
+  const xs = niceStep(xb*1.08), x0 = 0, xm = Math.ceil(xb*1.08/xs)*xs;
+  const fy = x => fit.A*x + fit.B;
+  const ya = Math.min(0, ...pts.map(p=>p.y-p.ey), fy(x0)), yb = Math.max(...pts.map(p=>p.y+p.ey), fy(xm));
+  const ys = niceStep((yb - ya)*1.1); const yLo = Math.floor(ya/ys)*ys, yHi = Math.ceil(yb*1.05/ys)*ys;
+  const X = x => ml + (x - x0)/(xm - x0)*pw, Y = y => mt + (yHi - y)/(yHi - yLo)*ph;
+  const dec = st => Math.max(0, -Math.floor(Math.log10(st) + 1e-9));
+  let h = '';
+  for(let v=x0; v<=xm+xs*1e-6; v+=xs) h += `<line class="c-grid" x1="${X(v)}" y1="${mt}" x2="${X(v)}" y2="${mt+ph}"/><text class="c-tick" x="${X(v)}" y="${mt+ph+17}" text-anchor="middle">${fx(Math.abs(v)<1e-12?0:v, dec(xs))}</text>`;
+  for(let v=yLo; v<=yHi+ys*1e-6; v+=ys) h += `<line class="c-grid" x1="${ml}" y1="${Y(v)}" x2="${ml+pw}" y2="${Y(v)}"/><text class="c-tick" x="${ml-7}" y="${Y(v)+4}" text-anchor="end">${fx(Math.abs(v)<1e-12?0:v, dec(ys))}</text>`;
+  h += `<line class="c-axis" x1="${ml}" y1="${mt}" x2="${ml}" y2="${mt+ph}"/><line class="c-axis" x1="${ml}" y1="${mt+ph}" x2="${ml+pw}" y2="${mt+ph}"/>`;
+  h += `<text class="c-title" x="${ml+pw/2}" y="${H-10}" text-anchor="middle">${xT}</text><text class="c-title" transform="translate(16,${mt+ph/2}) rotate(-90)" text-anchor="middle">${yT}</text>`;
+  if(fit) h += `<line class="c-line" x1="${X(x0)}" y1="${Y(fy(x0))}" x2="${X(xm)}" y2="${Y(fy(xm))}"/>`;
+  for(const p of pts){
+    const cx = X(p.x), cy = Y(p.y), dy = Math.abs(Y(p.y+p.ey) - cy), dx = Math.abs(X(p.x+p.ex) - cx);
+    h += `<line class="c-err" x1="${cx}" y1="${cy-dy}" x2="${cx}" y2="${cy+dy}"/><line class="c-err" x1="${cx-5}" y1="${cy-dy}" x2="${cx+5}" y2="${cy-dy}"/><line class="c-err" x1="${cx-5}" y1="${cy+dy}" x2="${cx+5}" y2="${cy+dy}"/>`;
+    h += `<line class="c-err" x1="${cx-dx}" y1="${cy}" x2="${cx+dx}" y2="${cy}"/><circle class="c-dot" cx="${cx}" cy="${cy}" r="3"/>`;
+  }
+  el.innerHTML = h;
+}
+const pmv = (v, e, unit) => { const r = roundPair(v, e); return `<dd>${r.v} <span class="pm">± ${r.e}</span> ${unit}</dd>`; };
+function renderFit(){
+  if(part !== 2) return;
+  const pts = [];
+  for(const d of DS){ const c = calcRow(row(d)); if(c.D != null){ pts.push({ x:d, ex:0.1, y: c.D, ey: c.eD }); } }
+  const f = pts.length >= 3 ? linfit(pts) : null;
+  drawChart($('chart'), pts, f, 'M (g)', 'ω₂² − ω₁² (s⁻²)');
+  if(!f){ $('res').innerHTML = `<div class="msg">Los resultados aparecen con las tres pesas medidas.</div>`; return; }
+  const K = 10*P.m*P.L*P.L/(2*P.l*P.l), k = f.A*K;
+  const ek = k*(f.eA/Math.abs(f.A) + 0.0001/P.m + 2*0.0005/P.L + 2*0.001/P.l);
+  $('res').innerHTML = [
+    `<dt>A</dt>` + pmv(f.A, f.eA, 's⁻² g⁻¹'), `<dt>B</dt>` + pmv(f.B, f.eB, 's⁻²'), `<dt>r</dt><dd>${fx(f.r, 5)}</dd>`,
+    `<div class="sep"></div>`,
+    `<dt>κ (M = 10 g)</dt>` + pmv(k, ek, 'N/m'),
+    `<div class="msg">\\(\\kappa=A\\,M\\,mL^2/(2l^2)\\) con \\(M\\) = 10 g: la constante del muelle que daría el mismo acoplamiento. \\(B\\) debería salir próximo a cero.</div>`
+  ].join('');
+  typeset($('res'));
+}
+$('showFit').checked = store.showFit === true;
+document.querySelector('.fitcard').classList.toggle('nofit', !$('showFit').checked);
+$('showFit').addEventListener('change', e => { store.showFit = e.target.checked; save(); document.querySelector('.fitcard').classList.toggle('nofit', !e.target.checked); });
+
+
+function typeset(el){ try { if(window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise([el]); } catch(e){} }
+
+/* ---------- Controles ---------- */
+function msg(t, cls){ const s = $('status'); s.textContent = t || ''; s.className = 'status' + (cls ? ' ' + cls : ''); }
+function buildChips(){
+  const dc = $('dChips'); dc.querySelectorAll('.chip').forEach(c => c.remove());
+  for(const d of DS){
+    const b = document.createElement('button'); b.className = 'chip'; b.textContent = d; b.setAttribute('aria-pressed', d === dcm ? 'true' : 'false');
+    const r = row(d); if(r.f.length >= 3 && r.o.length >= 3 && r.b.length >= 3) b.classList.add('done');
+    b.addEventListener('click', () => { dcm = d; store.d = d; save(); stop(); buildChips(); renderTable(); });
+    dc.appendChild(b);
+  }
+  const mc = $('modeChips'); mc.innerHTML = '';
+  const M = part === 1 ? [['uno','Separar el péndulo 1']] : [['fase','En fase'],['opos','En oposición'],['uno','Separar solo el 1']];
+  if(part === 1) mode = 'uno';
+  for(const [k, t] of M){
+    const b = document.createElement('button'); b.className = 'chip'; b.textContent = t; b.setAttribute('aria-pressed', k === mode ? 'true' : 'false');
+    b.addEventListener('click', () => { mode = k; stop(); buildChips(); });
+    mc.appendChild(b);
+  }
+  updDest();
+}
+function stop(){
+  running = false; held = true; sw.on = false;
+  $('swStart').classList.add('go'); $('swStart').classList.remove('stop');
+  holdState(); lastSampleT = -1; sample(); drawScene(); drawTrace();
+  $('releaseBtn').disabled = false; $('countTxt').textContent = '';
+}
+$('releaseBtn').addEventListener('click', () => {
+  if(running) return;
+  running = true; held = false; $('releaseBtn').disabled = true;
+  msg(part === 1 || mode !== 'uno' ? 'Pon en marcha el cronómetro al llegar a un extremo y páralo tras 10 oscilaciones.' : 'Mide el tiempo entre dos paradas consecutivas del péndulo 1.');
+  last = null; requestAnimationFrame(loop);
+});
+$('resetBtn').addEventListener('click', stop);
+document.querySelectorAll('[data-sp]').forEach(b => b.addEventListener('click', () => {
+  speed = parseFloat(b.dataset.sp);
+  document.querySelectorAll('[data-sp]').forEach(o => o.setAttribute('aria-pressed', o === b ? 'true' : 'false'));
+}));
+
+/* Bucle principal */
+let last = null;
+function loop(ts){
+  if(!running) return;
+  if(last == null) last = ts;
+  let dtw = Math.min(0.05, (ts - last)/1000); last = ts;
+  let simdt = dtw*speed; const h = 1/1000;
+  while(simdt > 1e-9){
+    const dt = Math.min(h, simdt);
+    const v0 = S.w1; step(dt); simdt -= dt;
+    if(sw.on){
+      sw.t += dt;
+      if(v0 > 0 && S.w1 <= 0) sw.count++;    // un extremo (derecho) por oscilación
+    }
+    sample();
+  }
+  camStep();
+  drawScene(); drawTrace();
+  if(sw.on){ swShow(); $('countTxt').innerHTML = (part === 2 && mode === 'uno') ? '' : `oscilaciones completas: <b>${sw.count}</b>`; }
+  requestAnimationFrame(loop);
+}
+
+/* Parte de la práctica */
+function setPart(n){
+  part = n; store.part = n; save();
+  document.body.dataset.part = String(n);
+  document.querySelectorAll('.partbtn').forEach(b => b.setAttribute('aria-selected', b.dataset.part === String(n) ? 'true' : 'false'));
+  mode = n === 1 ? 'uno' : 'fase';
+  buildChips(); stop(); renderTable(); renderFit(); msg('');
+}
+document.querySelectorAll('.partbtn').forEach(b => b.addEventListener('click', () => setPart(parseInt(b.dataset.part, 10))));
+
+/* Tabla a pantalla completa */
+(function(){
+  const card = document.querySelector('.tablecard'), btn = $('maxBtn'), icon = $('maxIcon');
+  const set = on => { card.classList.toggle('max', on); document.body.classList.toggle('tablemax', on); btn.setAttribute('aria-pressed', on ? 'true' : 'false'); icon.setAttribute('d', on ? 'M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5' : 'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5'); };
+  btn.addEventListener('click', () => set(!card.classList.contains('max')));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape' && card.classList.contains('max')) set(false); });
+})();
+/* Ayuda */
+(function(){
+  const pop = $('helpPop'), btn = $('helpBtn');
+  const set = on => { pop.hidden = !on; btn.setAttribute('aria-expanded', on ? 'true' : 'false'); if(on){ const r = document.querySelector('.tablecard').getBoundingClientRect(); pop.style.setProperty('--hp-top', '12px'); typeset(pop); } };
+  btn.addEventListener('click', () => set(pop.hidden));
+  $('helpClose').addEventListener('click', () => set(false));
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') set(false); });
+})();
+
+fitCam();
+setPart(part);
+cam = Object.assign({}, VIEWS.persp);
+fitCam(); drawScene();
+})();
+</script>
+
+
+
+
+
+
+
+<!--sfoot--><footer class="sfoot"><div class="in" style="max-width:1520px"><span>INNOVA-FIS-LAB · Grupo de Innovación Docente en Laboratorios de Física · Universidad Rey Juan Carlos</span><span>Materiales con licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span></div></footer><!--/sfoot-->
+</body></html>
