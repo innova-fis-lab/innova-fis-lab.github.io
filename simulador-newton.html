@@ -461,9 +461,8 @@ table.ft .emptyrow td{padding:.8em;font-family:var(--f-ui)}
 <div class="panel">
 <div class="ctl">
 <div class="ctl-row" style="justify-content:space-between"><label class="t" for="gate">Puerta fotoeléctrica</label><span class="readout" id="gateReadout"></span></div>
-<input type="range" id="gate" min="50" max="90" step="1" value="50" aria-describedby="gateReadout">
-<div class="ctl-row"><div class="chips" id="chips"><span class="t"><i style="font-family:var(--f-math)">s</i> (cm)</span></div></div>
-<label class="switch"><input type="checkbox" id="slow"> Cámara lenta (×0,2)</label>
+<input type="range" id="gate" min="50" max="70" step="1" value="50" aria-describedby="gateReadout">
+<div class="ctl-row"><div class="chips" id="chips"><span class="t"><i style="font-family:var(--f-math)">s</i> (cm)</span></div><label class="switch" style="margin-left:.8em"><input type="checkbox" id="slow"> Cámara lenta (×0,2)</label></div>
 </div>
 <div class="rd"><div><span class="l">Distancia \(s\)</span><b id="rS">–</b></div><div><span class="l">Contador izq., \(t\)</span><b id="rT">–</b></div><div><span class="l">Contador dcho., \(\Delta t\)</span><b id="rDT">–</b></div><div class="p1only"><span class="l">\(t'=t+\Delta t/2\)</span><b id="rTp">–</b></div><div class="p2only"><span class="l">\(v=\Delta s/\Delta t\)</span><b id="rV">–</b></div></div>
 <dl class="datos2"><dt>Masa colgante</dt><dd>\(m_1\) = 20 g + 1 g del portapesas = 21 g</dd><dt>Deslizador</dt><dd>\(m_2\) = 400 g, sin pesas</dd>
@@ -955,7 +954,7 @@ function rowCalc(row){
   const v = P.dsRead/DT.m, ev = v*(P.dsErr/P.dsRead + DT.eps/DT.m);
   return { T, DT, tp, etp, tp2: tp*tp, etp2: 2*tp*etp, v, ev };
 }
-const ALLOWED = [30, 40, 50, 60, 70];
+const ALLOWED = [30, 40, 50];
 const okKey = k => ALLOWED.some(a => Math.abs(parseFloat(k) - a) < 0.05);
 // filas de relleno (no son medidas): solo para enseñar la forma de la tabla, difuminadas
 function fakeRow(sc){ let z = sc*9301 + 49297; const rnd = () => { z = (z*9301 + 49297) % 233280; return z/233280; };
@@ -990,8 +989,7 @@ const chipsEl = $('chips');
 for(let s=30; s<=70; s+=10){
   const b = document.createElement('button');
   b.className = 'chip'; b.dataset.s = s; b.textContent = s; b.setAttribute('aria-pressed','false');
-  if(!ALLOWED.includes(s)) continue;
-  if(false){ b.classList.add('locked'); b.disabled = true; b.title = 'Esta posición se mide en el laboratorio'; b.setAttribute('aria-label', `s = ${s} cm: se mide en el laboratorio`); chipsEl.appendChild(b); continue; }
+  if(!ALLOWED.includes(s)){ b.classList.add('locked'); b.disabled = true; b.title = 'Esta posición se mide en el laboratorio'; b.setAttribute('aria-label', `s = ${s} cm: se mide en el laboratorio`); chipsEl.appendChild(b); continue; }
   b.setAttribute('aria-label', `Colocar la puerta en s = ${s} cm`);
   b.addEventListener('click', () => { gateInp.value = (s + P.start).toFixed(1); onGate(); });
   chipsEl.appendChild(b);
