@@ -372,7 +372,7 @@ body.tablemax{overflow:hidden}
 .vlb .vw:fullscreen{width:100vw;height:100vh;border-radius:0;display:flex;flex-direction:column}
 .vlb .vw:fullscreen video{flex:1;min-height:0;aspect-ratio:auto;object-fit:contain}
 .vlb .x{position:absolute;top:12px;right:16px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#111;font:700 26px/44px sans-serif;cursor:pointer}</style><style>
-:root{--f-ui:Inter,system-ui,sans-serif;--navy:#17324d;--paper:#f6f7f9;--W:min(60vw,calc((100vh - 128px)*1800/1510))}
+:root{--f-ui:Inter,system-ui,sans-serif;--navy:#17324d;--paper:#f6f7f9;--W:min(70vw,calc((100vh - 100px)*1800/1400))}
 html,body{margin:0;height:100%;overflow:hidden;background:#fff}
 body{display:flex;flex-direction:column;font-family:var(--f-ui);color:var(--ink);line-height:1.4}
 header.top{flex:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;padding:6px 18px;border-bottom:1px solid var(--line)}
@@ -389,21 +389,23 @@ main.app{flex:1;min-height:0;display:grid;grid-template-columns:calc(var(--W) + 
 .ctl{gap:.5em}.ctl label.t,.ctl .t,.switch,.chips .t{font-size:1em}
 .readout{font-size:1.05em}.chip{font-size:1em;padding:.2em .8em}.chip.all,.chip.rst{padding:.2em .9em}
 .datos2{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.25em 1em;margin:0;font-size:1em}
-.datos2 dt{color:var(--muted)}.datos2 dd{margin:0;font-variant-numeric:tabular-nums}
+.datos2 dt{color:var(--muted)}
+.rd{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.35em .6em}.rd div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:.2em .6em;display:flex;justify-content:space-between;align-items:baseline;gap:.5em;white-space:nowrap}.rd .l{color:var(--muted);font-weight:600}.rd b{color:var(--navy);font-family:var(--f-num);font-variant-numeric:tabular-nums}
+.panel .note{font-size:.8em}.datos2 dd{margin:0;font-variant-numeric:tabular-nums}
 .linkbtn{font-size:1em}
 .note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--muted)}
 .side{min-height:0;overflow:hidden;font-size:16px}
 .side h2{font-size:1.15em;margin:0 0 .3em;color:var(--navy)}
 .side p{margin:0 0 .5em}.side ol{margin:0 0 .6em;padding-left:1.4em}.side li{margin-bottom:.25em}
 .side .eq{text-align:center;font-size:1.15em;margin:.1em 0 .5em}.side .eq .katex-display{margin:0}
-#tbl{min-width:0;font-size:.85em;background:#fff;border:1px solid #9aa3ae}
-#tbl th,#tbl td{padding:.3em .35em;border:1px solid #c3cad3}
-#tbl th{background:#fff0c1;font-size:1em;font-weight:600;vertical-align:middle}
-#tbl th .u{font-size:.85em}
-#tbl td{text-align:center;font-family:var(--f-num)}
-#tbl td .pm{display:block;font-size:.85em}
-#tbl .emptyrow td{padding:.8em;font-family:var(--f-ui)}
-@media(max-width:820px){html,body{overflow:auto;height:auto}main.app{grid-template-columns:1fr}:root{--W:calc(100vw - 50px)}.side{overflow-x:auto}#tbl{font-size:12px}}
+table.ft{min-width:0;font-size:.85em;background:#fff;border:1px solid #9aa3ae}
+table.ft th,table.ft td{padding:.3em .35em;border:1px solid #c3cad3}
+table.ft th{background:#fff0c1;font-size:1em;font-weight:600;vertical-align:middle}
+table.ft th .u{font-size:.85em}
+table.ft td{text-align:center;font-family:var(--f-num);height:1.6em}
+table.ft td .pm{display:block;font-size:.85em}
+table.ft .emptyrow td{padding:.8em;font-family:var(--f-ui)}
+@media(max-width:820px){html,body{overflow:auto;height:auto}main.app{grid-template-columns:1fr}:root{--W:calc(100vw - 50px)}.side{overflow-x:auto}table.ft{font-size:12px}}
 </style></head><body data-part="1">
 <header class="top"><div class="hl"><h1>Leyes de Newton</h1>
 <div class="parts" role="tablist" aria-label="Parte de la práctica"><button class="partbtn" id="part1" role="tab" data-part="1">1.ª parte: espacio y tiempo</button><button class="partbtn" id="part2" role="tab" data-part="2">2.ª parte: velocidad y tiempo</button></div>
@@ -448,9 +450,9 @@ main.app{flex:1;min-height:0;display:grid;grid-template-columns:calc(var(--W) + 
         </svg>
 
         <!-- Caída de la masa colgante, misma escala -->
-        <svg id="fallSvg" class="scene" viewBox="1500 450 300 860" role="img" aria-label="Portapesas colgando de la polea junto al extremo de la mesa">
+        <svg id="fallSvg" class="scene" viewBox="1500 450 300 750" role="img" aria-label="Portapesas colgando de la polea junto al extremo de la mesa">
           <g id="fallBack"></g>
-          <text class="s-small" x="1700" y="1262">suelo</text>
+          <text class="s-small" x="1515" y="1192">suelo</text>
           <g transform="translate(0,-45)">
             <line id="threadV" class="s-thread" x1="0" y1="0" x2="0" y2="0"/>
             <g id="massG"></g>
@@ -459,30 +461,27 @@ main.app{flex:1;min-height:0;display:grid;grid-template-columns:calc(var(--W) + 
 <div class="panel">
 <div class="ctl">
 <div class="ctl-row" style="justify-content:space-between"><label class="t" for="gate">Puerta fotoeléctrica</label><span class="readout" id="gateReadout"></span></div>
-<input type="range" id="gate" min="50" max="60" step="10" value="50" aria-describedby="gateReadout">
+<input type="range" id="gate" min="50" max="90" step="1" value="50" aria-describedby="gateReadout">
 <div class="ctl-row"><div class="chips" id="chips"><span class="t"><i style="font-family:var(--f-math)">s</i> (cm)</span></div></div>
 <label class="switch"><input type="checkbox" id="slow"> Cámara lenta (×0,2)</label>
 </div>
+<div class="rd"><div><span class="l">Distancia \(s\)</span><b id="rS">–</b></div><div><span class="l">Contador izq., \(t\)</span><b id="rT">–</b></div><div><span class="l">Contador dcho., \(\Delta t\)</span><b id="rDT">–</b></div><div class="p1only"><span class="l">\(t'=t+\Delta t/2\)</span><b id="rTp">–</b></div><div class="p2only"><span class="l">\(v=\Delta s/\Delta t\)</span><b id="rV">–</b></div></div>
 <dl class="datos2"><dt>Masa colgante</dt><dd>\(m_1\) = 20 g + 1 g del portapesas = 21 g</dd><dt>Deslizador</dt><dd>\(m_2\) = 400 g, sin pesas</dd>
 <dt class="p2only">Pantalla</dt><dd class="p2only" id="dsCell"><button class="linkbtn" id="calibre">Medir Δs con el calibre</button></dd></dl>
+<p class="note">Se pulsa el botón verde SOLTAR o la barra espaciadora. Los valores de los contadores son de ejemplo. · CC BY-NC-SA 4.0</p>
 </div>
-</div></div>
-<p class="note">Se pulsa SOLTAR (o la barra espaciadora). En la simulación solo se mide en 30 y 40 cm; el resto se mide en el laboratorio. · CC BY-NC-SA 4.0</p></section>
-<section class="side card"><h2>Qué se observa</h2><p>La masa colgante \(m_1\) cae y, a través del hilo y la polea, arrastra al deslizador, de masa \(m_2\), que flota sobre el colchón de aire casi sin rozamiento. La fuerza que acelera el conjunto, el peso \(m_1g\), es constante: el deslizador sale del reposo con aceleración constante</p>
+</div></div></section>
+<section class="side card"><h2>Qué se observa</h2>
+<p>La masa colgante \(m_1\) cae y, por el hilo y la polea, arrastra al deslizador \(m_2\), que flota sobre el colchón de aire. El peso \(m_1g\) es constante, así que el deslizador sale del reposo con aceleración constante</p>
 <div class="eq">\[a=\frac{m_1\,g}{m_1+m_2}\]</div>
-<div class="p1only"><p>y el espacio que recorre crece con el cuadrado del tiempo:</p>
-<div class="eq">\[s=\tfrac12\,a\,t'^2\]</div>
-<p>Aquí \(s\) es la distancia del centro de la pantalla del deslizador, en reposo, a la puerta fotoeléctrica; \(t\), el tiempo del contador izquierdo, desde que se suelta el deslizador hasta que la pantalla empieza a tapar el haz; \(\Delta t\), el del contador derecho, lo que tarda la pantalla en cruzar el haz; y \(t'=\bar t+\overline{\Delta t}/2\), el instante en que el centro de la pantalla pasa por la puerta. La barra indica la media de los tres lanzamientos.</p></div>
-<div class="p2only"><p>y su velocidad crece en proporción al tiempo:</p>
-<div class="eq">\[v=a\,t'\]</div>
-<p>Aquí \(v=\Delta s/\overline{\Delta t}\) es la velocidad al cruzar la puerta, con \(\Delta s\) la anchura de la pantalla y \(\Delta t\) el tiempo del contador derecho, lo que tarda la pantalla en cruzar el haz; \(t\) es el tiempo del contador izquierdo, desde que se suelta el deslizador hasta que la pantalla empieza a tapar el haz; y \(t'=\bar t+\overline{\Delta t}/2\), el instante en que el centro de la pantalla pasa por la puerta. La barra indica la media de los tres lanzamientos.</p></div>
+<div class="p1only"><p>y el espacio recorrido crece con el cuadrado del tiempo:</p><div class="eq">\[s=\tfrac12\,a\,t'^2\]</div></div>
+<div class="p2only"><p>y su velocidad crece en proporción al tiempo:</p><div class="eq">\[v=a\,t'\]</div></div>
+<h2>Dónde se mide cada magnitud</h2>
+<p>\(s\): en la regla, del centro de la pantalla en reposo a la puerta (cota azul). \(t\): contador izquierdo, desde que se suelta hasta que la pantalla corta el haz. \(\Delta t\): contador derecho, lo que tarda la pantalla en cruzar el haz. \(t'=t+\Delta t/2\): instante en que el centro de la pantalla pasa por la puerta.<span class="p2only"> \(v=\Delta s/\Delta t\), con \(\Delta s\) la anchura de la pantalla, medida con el calibre.</span></p>
 <h2>Qué hay que medir</h2>
-<ol><li class="p2only">Medir la anchura de la pantalla, \(\Delta s\), con el calibre.</li>
-<li>Colocar la puerta en \(s\) = 30 cm, con los botones o arrastrando la puerta.</li>
-<li>Pulsar el botón verde SOLTAR tres veces. Cada lanzamiento anota \(t\) y \(\Delta t\) en la tabla.</li>
-<li>Repetir en \(s\) = 40 cm. En el laboratorio se mide de 30 a 70 cm, de 10 en 10.</li></ol>
+<p>Para cada posición de la puerta, de 30 a 70 cm, tres lanzamientos: se anotan \(t\) y \(\Delta t\) y se calculan sus medias.<span class="p2only"> Antes, medir \(\Delta s\) con el calibre.</span></p>
 <h2>Tabla de la ficha</h2>
-<table id="tbl"><thead><tr>
+<table class="ft"><thead><tr>
 <th>\(s\)<span class="u">cm</span></th>
 <th>\(t_1,\,t_2,\,t_3\)<span class="u">s</span></th>
 <th class="calc">\(\bar t\)<span class="u">s</span></th>
@@ -491,8 +490,8 @@ main.app{flex:1;min-height:0;display:grid;grid-template-columns:calc(var(--W) + 
 <th class="calc">\(t'\)<span class="u">s</span></th>
 <th class="calc p1only">\(t'^2\)<span class="u">s²</span></th>
 <th class="calc p2only">\(v\)<span class="u">m/s</span></th>
-</tr></thead><tbody id="tbody"></tbody></table></section></main>
-<div hidden><input type="checkbox" id="showCalc" checked><button id="copy"></button><button id="undo"></button><button id="clear"></button><span id="copied"></span><div id="fallbackBox"><textarea id="fallbackTa"></textarea></div></div>
+</tr></thead><tbody><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody></table></section></main>
+<div hidden><table id="tbl"><tbody id="tbody"></tbody></table><input type="checkbox" id="showCalc" checked><button id="copy"></button><button id="undo"></button><button id="clear"></button><span id="copied"></span><div id="fallbackBox"><textarea id="fallbackTa"></textarea></div></div>
 <script>
 function fitSide(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=9,hi=30;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
 function tex(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})}
@@ -862,7 +861,7 @@ function pressSvg(id, fn){
 function launch(){
   if(state !== 'ready') return;
   const sCm = Math.round((parseFloat(gateInp.value) - P.start)*10)/10;
-  if(!okKey(sCm)) return;
+  
   L = makeLaunch(sCm, true);
   sim = 0; last = null; state = 'running';
   setDisplay(D1, '0.000'); setDisplay(D2, '0.000');
@@ -956,7 +955,7 @@ function rowCalc(row){
   const v = P.dsRead/DT.m, ev = v*(P.dsErr/P.dsRead + DT.eps/DT.m);
   return { T, DT, tp, etp, tp2: tp*tp, etp2: 2*tp*etp, v, ev };
 }
-const ALLOWED = [30, 40];
+const ALLOWED = [30, 40, 50, 60, 70];
 const okKey = k => ALLOWED.some(a => Math.abs(parseFloat(k) - a) < 0.05);
 // filas de relleno (no son medidas): solo para enseñar la forma de la tabla, difuminadas
 function fakeRow(sc){ let z = sc*9301 + 49297; const rnd = () => { z = (z*9301 + 49297) % 233280; return z/233280; };
@@ -966,39 +965,15 @@ function fakeRow(sc){ let z = sc*9301 + 49297; const rnd = () => { z = (z*9301 +
 const LOCKED_ROWS = () => '';
 const _old_locked = () => [50, 60, 70].map(fakeRow).join('') + `<tr class="lockmsg"><td colspan="8"><span style="position:sticky;left:12px">🔒 Las filas de 50, 60 y 70 cm se rellenan en el laboratorio.</span></td></tr>`;
 function renderTable(){
-  const tb = $('tbody');
-  const keys = Object.keys(cur().rows).filter(okKey).sort((a,b)=>parseFloat(a)-parseFloat(b));
   const curS = Math.round((parseFloat(gateInp.value) - P.start)*10)/10;
-  $('tbl').classList.toggle('nocalc', !store.showCalc);
-  if(!keys.length){
-    tb.innerHTML = `<tr class="emptyrow"><td colspan="8">Aún no hay lanzamientos. Cada lanzamiento anota t y Δt en la fila de su posición.</td></tr>`;
-  } else {
-    tb.innerHTML = keys.map(k => {
-      const row = cur().rows[k], c = rowCalc(row);
-      const tbar = c ? roundPair(c.T.m, c.T.eps) : null;
-      const dtbar = c ? roundPair(c.DT.m, c.DT.eps) : null;
-      const vr = c && store.calibre ? roundPair(c.v, c.ev) : null;
-      const tpr = c ? roundPair(c.tp, c.etp) : null;
-      const tp2r = c ? roundPair(c.tp2, c.etp2) : null;
-      const pm = r => r ? `${r.v} <span class="pm">± ${r.e}</span>` : '';
-      return `<tr class="${Math.abs(row.s - curS) < 0.05 ? 'active' : ''}">
-        <td>${fx(row.s,1)} <span class="pm">± 0,1</span></td>
-        <td class="trio">${trio(row.t,3)}</td>
-        <td class="calc">${pm(tbar)}</td>
-        <td class="trio">${trio(row.dt,3)}</td>
-        <td class="calc">${pm(dtbar)}</td>
-        <td class="calc">${pm(tpr)}</td>
-        <td class="calc p1only">${pm(tp2r)}</td>
-        <td class="calc p2only">${vr ? pm(vr) : '<span class="pm">mide Δs</span>'}</td>
-      </tr>`;
-    }).join('') + LOCKED_ROWS();
-  }
-  // chips completados
-  document.querySelectorAll('#chips .chip[data-s]').forEach(ch => {
-    const r = cur().rows[parseFloat(ch.dataset.s).toFixed(1)];
-    ch.classList.toggle('done', !!(r && r.t.length >= 3));
-  });
-  renderFit();
+  const e = store.log[0], ok = e && !e.bad && Math.abs(e.s - curS) < 0.05 && state !== 'running';
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+  set('rS', fx(curS, 1) + ' cm');
+  set('rT', ok ? fx(e.t, 3) + ' s' : '–'); set('rDT', ok ? fx(e.dt, 3) + ' s' : '–');
+  set('rTp', ok ? fx(e.t + e.dt/2, 3) + ' s' : '–');
+  set('rV', ok ? (store.calibre ? fx(P.dsRead/e.dt, 3) + ' m/s' : 'mide Δs') : '–');
+  document.querySelectorAll('#chips .chip[data-s]').forEach(ch => ch.setAttribute('aria-pressed', Math.abs(parseFloat(ch.dataset.s) - curS) < 0.05 ? 'true' : 'false'));
+  if(window.fitSide) fitSide();
 }
 function renderLog(){
   const ol = $('log'); if(!ol) return;
@@ -1021,39 +996,7 @@ for(let s=30; s<=70; s+=10){
   b.addEventListener('click', () => { gateInp.value = (s + P.start).toFixed(1); onGate(); });
   chipsEl.appendChild(b);
 }
-{
-  const all = document.createElement('button');
-  all.className = 'chip all'; all.id = 'measureAll'; all.textContent = 'Medir todo';
-  all.setAttribute('aria-label', 'Hacer automáticamente tres lanzamientos en 30 y 40 cm');
-  all.addEventListener('click', () => {
-    if(state !== 'ready' && state !== 'done') return;
-    if(part === 2 && !store.calibre){ store.calibre = true; showCalibre(); }
-    for(const sc of ALLOWED){
-      const key = sc.toFixed(1);
-      const row = cur().rows[key] || (cur().rows[key] = { s: sc, t: [], dt: [] });
-      while(row.t.length < 3){
-        const Lm = makeLaunch(sc, true);
-        if(Lm.fail) continue;                       // lanzamiento no válido: se repite
-        row.t.push(Lm.c1); row.dt.push(Lm.c2); cur().history.push(key);
-      }
-    }
-    save(); renderTable();
-  });
-  chipsEl.appendChild(all);
-  const rst = document.createElement('button');
-  rst.className = 'chip rst'; rst.id = 'resetAll'; rst.textContent = 'Reset';
-  rst.setAttribute('aria-label', 'Borrar todas las medidas de la tabla de esta parte');
-  let armed = false, tmr = null;
-  rst.addEventListener('click', () => {
-    if(state !== 'ready' && state !== 'done') return;
-    if(!armed){ armed = true; rst.textContent = '¿Borrar la tabla?'; tmr = setTimeout(() => { armed = false; rst.textContent = 'Reset'; }, 3000); return; }
-    clearTimeout(tmr); armed = false; rst.textContent = 'Reset';
-    store['p' + part] = { rows: {}, history: [] };
-    save(); renderTable();
-  });
-  chipsEl.appendChild(rst);
-}
-function onGate(){ store.gate = parseFloat(gateInp.value); save(); drawGate(); drawScene(); }
+function onGate(){ store.gate = parseFloat(gateInp.value); save(); drawGate(); drawScene(); renderTable(); }
 gateInp.addEventListener('input', onGate);
 pressSvg('pbGo', launch);
 document.addEventListener('keydown', e => {
