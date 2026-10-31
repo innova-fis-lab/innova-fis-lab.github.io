@@ -1,0 +1,104 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lectura del osciloscopio (OWON SDS1022) · INNOVA-FIS-LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{--bg:#fff;--paper:#f6f7f9;--ink:#1b2430;--slate:#4a5566;--line:#d9dee5;--b:#1d5fa8;--o:#d9820b;--g:#1b7a43;--navy:#17324d}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.4}
+body{display:flex;flex-direction:column}
+header{flex:none;display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:8px 18px;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:clamp(17px,2.6vh,24px);color:var(--navy)}header a{color:var(--navy);text-decoration:none;font-weight:600;font-size:clamp(12px,1.7vh,15px);white-space:nowrap}
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:14px;padding:10px 14px}
+.left{display:flex;flex-direction:column;min-height:0;gap:6px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px}
+.left .card{flex:1;min-height:0;display:flex;flex-direction:column}
+svg.sim{flex:1;min-height:0;width:100%;height:100%;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:8px;font-size:clamp(13px,1.9vh,17px)}
+.ctrl,.read{display:contents}
+.bar label{font-weight:600;display:flex;align-items:center;gap:8px}
+.bar input[type=range]{width:clamp(120px,14vw,240px);accent-color:var(--b)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:4px 11px;cursor:pointer}
+.btn.on{background:var(--navy);color:#fff}
+.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;align-items:baseline;gap:8px}
+.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums;display:inline-block;min-width:4.5em;white-space:nowrap}.read div{white-space:nowrap}
+.read span{font-size:.85em;color:var(--slate);font-weight:600}
+.note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--slate)}
+.side{min-height:0;overflow:hidden;font-size:16px}
+h2{font-size:1.15em;margin:0 0 .3em;color:var(--navy)}
+.side p{margin:0 0 .6em}.side ol{margin:0 0 .7em;padding-left:1.4em}.side li{margin-bottom:.3em}
+.eq{text-align:center;font-size:1.2em;margin:.2em 0 .6em}.eq .katex-display{margin:0}
+table.t{border-collapse:collapse;width:100%;background:#fff;font-size:.88em}
+table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:center}table.t th{background:#fff0c1}
+.nb{display:inline-grid;place-items:center;width:1.35em;height:1.35em;border-radius:50%;background:#d9820b;color:#fff;font-weight:800;font-size:.85em;vertical-align:.08em}
+.side .note{font-size:.85em;margin:-.3em 0 .6em}
+@media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
+</style></head><body>
+<header><h1>Lectura del osciloscopio (OWON SDS1022)</h1><a href="laboratorios.html#fai">← Laboratorio de FAI · INNOVA-FIS-LAB</a></header>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 900 540"></svg>
+<div class="bar"><div class="ctrl"><label>Voltios por cuadro <select id="V" class="btn"><option>0.5</option><option>1</option><option selected>2</option><option>5</option></select></label><label>Tiempo por cuadro <select id="Tm" class="btn"><option>10</option><option>20</option><option selected>50</option><option>100</option></select></label><label><input type="checkbox" id="sh" checked> Mostrar la medida</label></div><div class="read"><div><span>Pico <i>V</i><sub>0</sub></span><b id="rv" style="min-width:10.5em">–</b></div><div><span>5 periodos</span><b id="rt" style="min-width:10.5em">–</b></div></div></div></div><p class="note">Señal parecida a la del laboratorio, con L = 10 mH y C ≈ 3 nF. · CC BY-NC-SA 4.0</p></section>
+<section class="side card"><h2>Qué indica cada número</h2><p><span class="nb">1</span> <b id="xM">M: 50us</b>, la base de tiempos: cada cuadro grande en horizontal son <span id="xM2">50 µs</span>. <span class="nb">2</span> <b id="xV">1 2.00V</b>, la escala del canal 1: cada cuadro grande en vertical son <span id="xV2">2 V</span>. Las rayitas de los ejes centrales dividen cada cuadro en 5, es decir, en pasos de 0,2 cuadros.</p><p><span class="nb">3</span> <b>0.20div</b>, la posición del cero del canal 1, marcado con el «1» amarillo de la izquierda: está 0,2 cuadros por encima del centro. <span class="nb">4</span> <b>388.337Hz</b>, la frecuencia de la onda cuadrada del generador, no la de la oscilación del circuito. <span class="nb">5</span> <b>CH1:DC ↗ −2.56V</b>, el disparo: la imagen se fija cuando el canal 1 pasa por −2,56 V, nivel que marca el triángulo amarillo de la derecha. El resto (10MS/s, Depth, T) no hace falta para la práctica.</p><h2>Cómo se mide</h2><p>Se cuentan cuadros y se multiplican por la escala, en vertical para la tensión y en horizontal para el tiempo:</p><div class="eq" data-tex="V=\text{cuadros}\times\text{voltios por cuadro}"></div><div class="eq" data-tex="t=\text{cuadros}\times\text{tiempo por cuadro}"></div><p>Las alturas de los picos se miden desde el valor final, la línea discontinua a la que tiende la señal. Si la señal baja en vez de subir, los máximos son los picos hacia abajo y se miden igual. Para el periodo se mide el tiempo de 5 periodos, del primer pico al quinto siguiente del mismo lado, y se divide entre 5. Conviene elegir la escala con la que la señal ocupe casi toda la pantalla sin salirse: así se cuentan mejor los cuadros.</p></section></main>
+<script>
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
+function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'})}
+addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
+document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
+function fmt(x,d){return x.toFixed(d).replace('.',',')}
+let playing=true,last=null;function loop(step){function f(ts){if(last===null)last=ts;let dt=Math.min(0.05,(ts-last)/1000);last=ts;if(playing&&!document.hidden)step(dt);requestAnimationFrame(f)}requestAnimationFrame(f)}
+(function(){const pp=document.getElementById('pp');if(!pp)return;const set=p=>{playing=p;pp.textContent=p?'Parar':'Continuar';pp.classList.toggle('on',!p)};
+pp.onclick=()=>set(!playing);document.addEventListener('click',e=>{const t=e.target.closest('button');if(t&&t!==pp)set(true)},true)})();
+
+const svg=$('svg.sim'),D=54,X0=40,Y0=50,W=15.2*D,H=8*D,XC=X0+7.6*D,YC=Y0+4*D,K='#1b2430',Y='#f5e43a',GL='#5f9fd6';
+const Vi=2.5,Vf=-2.1,T=35e-6,w=2*Math.PI/T,b=-Math.log(0.8)/T,POS=0.2,TE=1.2;
+mk('rect',{x:10,y:6,width:880,height:528,rx:12,fill:'#e6e8eb'});
+mk('rect',{x:22,y:14,width:856,height:516,rx:6,fill:'#0b1838'});
+const T_=(x,y,t,o)=>{const e=mk('text',Object.assign({x,y,'font-size':17,fill:'#fff','font-family':'Inter,sans-serif'},o||{}));e.textContent=t;return e};
+T_(X0,40,'owon',{fill:'#f2d21b','font-weight':800,'font-size':24});mk('path',{d:'M128 24 l14 9 l-14 9 z',fill:'#3ccf4e'});T_(160,40,'Trig');T_(700,40,'T:294.0us');
+const cl=mk('clipPath',{id:'scr'});mk('rect',{x:X0,y:Y0,width:W,height:H},cl);
+mk('rect',{x:X0,y:Y0,width:W,height:H,fill:'none',stroke:GL,'stroke-width':1.5});
+for(let k=1;k<=7;k++)[-1,1].forEach(sg=>mk('path',{d:`M${XC+sg*k*D} ${Y0} V${Y0+H}`,stroke:GL,'stroke-width':1,opacity:.75}));
+for(let k=1;k<=3;k++)[-1,1].forEach(sg=>mk('path',{d:`M${X0} ${YC+sg*k*D} H${X0+W}`,stroke:GL,'stroke-width':1,opacity:.75}));
+mk('path',{d:`M${XC} ${Y0} V${Y0+H} M${X0} ${YC} H${X0+W}`,stroke:'#cfe2f3','stroke-width':1.6,'stroke-dasharray':'2 6'});
+for(let i=-38;i<=38;i++){const x=XC+i*D/5;mk('path',{d:`M${x} ${YC-4} v8 M${x} ${Y0} v6 M${x} ${Y0+H} v-6`,stroke:'#cfe2f3','stroke-width':1})}
+for(let i=-20;i<=20;i++){const y=YC+i*D/5;mk('path',{d:`M${XC-4} ${y} h8 M${X0} ${y} h6 M${X0+W} ${y} h-6`,stroke:'#cfe2f3','stroke-width':1})}
+const g0=mk('path',{fill:Y}),g0t=T_(0,0,'1',{fill:'#0b1838','font-size':14,'font-weight':800});
+const trg=mk('path',{fill:Y});
+const tr=mk('path',{fill:'none',stroke:Y,'stroke-width':2.4,'clip-path':'url(#scr)','stroke-linejoin':'round'});
+const fl=mk('path',{stroke:'#fff','stroke-width':1.6,'stroke-dasharray':'7 5','clip-path':'url(#scr)'});
+const av=mk('path',{stroke:'#ff9d2e','stroke-width':2.5,fill:'none'}),ah=mk('path',{stroke:'#ff9d2e','stroke-width':2.5,fill:'none'});
+const lb=[0,1].map(()=>{const r=mk('rect',{rx:5,fill:'#ff9d2e'});const t=T_(0,0,'',{fill:K,'font-weight':700,'font-size':16});return[r,t]});
+mk('rect',{x:X0-8,y:Y0+H+6,width:W+16,height:58,rx:4,fill:'#6aaee0'});
+const iM=T_(X0,Y0+H+24,''),iS=T_(X0+190,Y0+H+24,''),iD=T_(X0+360,Y0+H+24,'Depth:10K');
+const iV=T_(X0+22,Y0+H+52,''),iP=T_(X0+190,Y0+H+52,'0.20div'),iF=T_(X0+330,Y0+H+52,'388.337Hz'),iT=T_(X0+560,Y0+H+38,'CH1:DC ↗ −2.56V');
+mk('rect',{x:X0,y:Y0+H+38,width:17,height:19,rx:2,fill:Y});T_(X0+4,Y0+H+53,'1',{fill:K,'font-size':14,'font-weight':800});
+const NB=(n,x,y)=>{mk('circle',{cx:x,cy:y,r:12,fill:'#d9820b',stroke:'#fff','stroke-width':1.5});T_(x,y+5,n,{'text-anchor':'middle','font-size':14,'font-weight':800})};
+NB('1',X0+150,Y0+H+18);NB('2',X0+145,Y0+H+46);NB('3',X0+292,Y0+H+46);NB('4',X0+520,Y0+H+46);NB('5',X0+780,Y0+H+33);NB('3',X0-6,0);
+const nb3=svg.lastChild.previousSibling,nb3t=svg.lastChild;
+function V(t){if(t<0)return Vi;const e=Math.exp(-b*t);return Vf+(Vi-Vf)*e*(Math.cos(w*t)+b/w*Math.sin(w*t))}
+function sx(t,td){return X0+(TE+t/td)*D}function sy(v,vd){return YC-(v/vd+POS)*D}
+function lab(i,x,y,txt){const[r,t]=lb[i];t.textContent=txt;t.setAttribute('x',x);t.setAttribute('y',y);const bb=t.getBBox();r.setAttribute('x',bb.x-6);r.setAttribute('y',bb.y-3);r.setAttribute('width',bb.width+12);r.setAttribute('height',bb.height+6)}
+function vis(e,on){e.setAttribute('visibility',on?'visible':'hidden')}
+function upd(){const vd=+$('#V').value,td=+$('#Tm').value*1e-6,tdu=+$('#Tm').value,on=$('#sh').checked;
+ iM.textContent='M: '+tdu+'us';$('#xM').textContent='M: '+tdu+'us';$('#xM2').textContent=tdu+' µs';$('#xV').textContent='1 '+vd.toFixed(2)+'V';$('#xV2').textContent=fmt(vd,1).replace(',0','')+' V';iS.textContent='('+(500/tdu)+'MS/s)';iV.textContent=vd.toFixed(2)+'V~';
+ let d='';for(let i=0;i<=1600;i++){const x=X0+i/1600*W,t=((x-X0)/D-TE)*td;d+=(i?'L':'M')+x.toFixed(1)+' '+sy(V(t),vd).toFixed(1)}tr.setAttribute('d',d);
+ const yg=sy(0,vd);g0.setAttribute('d',`M${X0-22} ${yg-9} h14 l8 9 l-8 9 h-14 z`);g0t.setAttribute('x',X0-19);g0t.setAttribute('y',yg+5);
+ nb3.setAttribute('cx',X0-32);nb3.setAttribute('cy',yg-22);nb3t.setAttribute('x',X0-32);nb3t.setAttribute('y',yg-17);
+ const yt=Math.max(Y0,Math.min(Y0+H,sy(-2.56,vd)));trg.setAttribute('d',`M${X0+W+20} ${yt-9} l-16 9 l16 9 z`);
+ const yf=sy(Vf,vd);fl.setAttribute('d',`M${X0} ${yf} H${X0+W}`);
+ const t1=Math.PI/w,v1=V(t1),x1=sx(t1,td),y1=sy(v1,vd),ny=Math.round(Math.abs(v1-Vf)/vd*10)/10,inY=y1>=Y0&&y1<=Y0+H&&yf>=Y0&&yf<=Y0+H;
+ const t6=t1+5*T,x6=sx(t6,td),nx=Math.round(5*T/td*10)/10,inX=x6<=X0+W;
+ [fl,av,ah,...lb.flat()].forEach(e=>vis(e,on));
+ if(inY){av.setAttribute('d',`M${x1} ${yf} V${y1} M${x1-7} ${y1+12} L${x1} ${y1} L${x1+7} ${y1+12} M${x1-7} ${yf-12} L${x1} ${yf} L${x1+7} ${yf-12}`);lab(0,x1+14,(yf+y1)/2+6,fmt(ny,1)+' cuadros');
+  $('#rv').textContent=fmt(ny,1)+' × '+fmt(vd,1)+' V = '+fmt(ny*vd,1)+' V'}
+ else{av.setAttribute('d','');lab(0,X0+20,Y0+30,'El pico se sale de la pantalla: sube los voltios por cuadro');$('#rv').textContent='se sale'}
+ const yb=Y0+H-26;
+ if(inX){ah.setAttribute('d',`M${x1} ${yb} H${x6} M${x1} ${yb-10} v20 M${x6} ${yb-10} v20 M${x1} ${y1} V${yb} M${x6} ${sy(V(t6),vd)} V${yb}`);ah.setAttribute('stroke-dasharray','');lab(1,(x1+x6)/2-60,yb-10,'5 T = '+fmt(nx,1)+' cuadros');
+  $('#rt').textContent=fmt(nx,1)+' × '+tdu+' µs = '+fmt(nx*tdu,0)+' µs'}
+ else{ah.setAttribute('d','');lab(1,X0+20,yb,'No caben 5 periodos: sube el tiempo por cuadro');$('#rt').textContent='no caben'}
+ if(!on){$('#rv').textContent='–';$('#rt').textContent='–'}}
+['#V','#Tm','#sh'].forEach(i=>$(i).onchange=upd);upd();
+
+</script></body></html>
