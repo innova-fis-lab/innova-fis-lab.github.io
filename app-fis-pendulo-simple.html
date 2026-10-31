@@ -1,0 +1,83 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Péndulo simple · INNOVA-FIS-LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{--bg:#fff;--paper:#f6f7f9;--ink:#1b2430;--slate:#4a5566;--line:#d9dee5;--b:#1d5fa8;--o:#d9820b;--g:#1b7a43;--navy:#17324d}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.4}
+body{display:flex;flex-direction:column}
+header{flex:none;display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:8px 18px;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:clamp(17px,2.6vh,24px);color:var(--navy)}header a{color:var(--navy);text-decoration:none;font-weight:600;font-size:clamp(12px,1.7vh,15px);white-space:nowrap}
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:14px;padding:10px 14px}
+.left{display:flex;flex-direction:column;min-height:0;gap:6px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px}
+.left .card{flex:1;min-height:0;display:flex;flex-direction:column}
+svg.sim{flex:1;min-height:0;width:100%;height:100%;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:8px;font-size:clamp(13px,1.9vh,17px)}
+.ctrl,.read{display:contents}
+.bar label{font-weight:600;display:flex;align-items:center;gap:8px}
+.bar input[type=range]{width:clamp(120px,14vw,240px);accent-color:var(--b)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:4px 11px;cursor:pointer}
+.btn.on{background:var(--navy);color:#fff}
+.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;align-items:baseline;gap:8px}
+.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums;display:inline-block;min-width:4.5em;white-space:nowrap}.read div{white-space:nowrap}
+.read span{font-size:.85em;color:var(--slate);font-weight:600}
+.note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--slate)}
+.side{min-height:0;overflow:hidden;font-size:16px}
+h2{font-size:1.15em;margin:0 0 .3em;color:var(--navy)}
+.side p{margin:0 0 .6em}.side ol{margin:0 0 .7em;padding-left:1.4em}.side li{margin-bottom:.3em}
+.eq{text-align:center;font-size:1.2em;margin:.2em 0 .6em}.eq .katex-display{margin:0}
+table.t{border-collapse:collapse;width:100%;background:#fff;font-size:.88em}
+table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:center}table.t th{background:#fff0c1}
+.nb{display:inline-grid;place-items:center;width:1.35em;height:1.35em;border-radius:50%;background:#d9820b;color:#fff;font-weight:800;font-size:.85em;vertical-align:.08em}
+.ct{color:#b0308f}.cv{color:#1f8a45}
+body[data-part="1"] .p2,body[data-part="2"] .p1{display:none!important}
+.side .note{font-size:.85em;margin:-.3em 0 .6em}
+@media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
+</style></head><body>
+<header><h1>Péndulo simple</h1><a href="laboratorios.html#fisica">← Laboratorio de Física · INNOVA-FIS-LAB</a></header>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="40 20 820 450"></svg>
+<div class="bar"><div class="ctrl"><label>Longitud <i>l</i> <input id="L" type="range" min="0.2" max="0.8" step="0.1" value="0.8"><b id="Lv"></b></label><button class="btn" id="go" data-alt="Volver a empezar">Soltar</button><button class="btn" id="pp" data-alt="Continuar">Parar</button></div><div class="read"><div><span>Último periodo <i>T</i></span><b id="T">–</b></div></div></div></div><p class="note">La esfera se suelta desde unos 7°, un ángulo pequeño. Valores de ejemplo con g = 9,80 m/s². · CC BY-NC-SA 4.0</p></section>
+<section class="side card"><h2>Qué se observa</h2><p>La esfera oscila colgada del hilo. Si la amplitud es pequeña, el periodo no depende de la masa ni de la amplitud, solo de la longitud del hilo: al acortarlo, la esfera oscila más deprisa.</p><div class="eq" data-tex="T=2\pi\sqrt{\frac{l}{g}}"></div><p>Aquí <i>T</i> es el periodo, el tiempo de una oscilación completa de ida y vuelta; <i>l</i>, la longitud del péndulo, desde el punto de fijación hasta el centro de la esfera; y <i>g</i>, la aceleración de la gravedad. La puerta fotoeléctrica mide el periodo: cuenta desde que la esfera corta el haz hasta que lo vuelve a cortar moviéndose en el mismo sentido.</p><h2>Qué hay que medir</h2><ol><li>Ajustar la longitud <i>l</i>, de 20 a 80 cm en pasos de 10 cm.</li><li>Separar la esfera un ángulo pequeño, soltarla y leer cinco periodos, <i>T</i><sub>1</sub> a <i>T</i><sub>5</sub>, en la puerta fotoeléctrica.</li><li>Calcular la media <i>T̄</i>, ln <i>T̄</i> y ln <i>l</i>.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>l</i> (m)</th><th><i>T</i>₁…₅ (s)</th><th><i>T̄</i> (s)</th><th>ln <i>T̄</i></th><th>ln <i>l</i></th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
+<script>
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
+function lockBar(){const bar=document.querySelector('.bar');if(!bar||!document.querySelector('.pt'))return;bar.style.minHeight='';if(innerWidth<=820)return;const cur=document.body.dataset.part;let h=0;['1','2'].forEach(p=>{document.body.dataset.part=p;h=Math.max(h,bar.offsetHeight)});document.body.dataset.part=cur;bar.style.minHeight=h+'px'}
+function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'});lockBar()}
+addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
+document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
+function fmt(x,d){return x.toFixed(d).replace('.',',')}
+let playing=true,last=null;function loop(step){function f(ts){if(last===null)last=ts;let dt=Math.min(0.05,(ts-last)/1000);last=ts;if(playing&&!document.hidden)step(dt);requestAnimationFrame(f)}requestAnimationFrame(f)}
+(function(){const pp=document.getElementById('pp');if(!pp)return;const set=p=>{playing=p;pp.textContent=p?'Parar':'Continuar';pp.classList.toggle('on',!p)};
+pp.onclick=()=>set(!playing);document.addEventListener('click',e=>{const t=e.target.closest('button');if(t&&t!==pp)set(true)},true)})();
+
+const g=9.80,O={x:300,y:40},S=470,K='#1b2430';let L,th=0,w=0,th0=0.12,t=0,lastCross=null,run=false,Ts=[];
+const T_=(x,y,t,o)=>{const e=mk('text',Object.assign({x,y,'font-size':16,fill:K},o||{}));e.textContent=t;return e};
+mk('path',{d:'M200 40 H400',stroke:K,'stroke-width':3});for(let i=0;i<12;i++)mk('path',{d:`M${204+i*17} 40 l-8 -9`,stroke:K,'stroke-width':1.2});
+const vert=mk('path',{stroke:'#8a94a3','stroke-dasharray':'5 4','stroke-width':1.2});
+const dim=mk('path',{stroke:'#1d5fa8','stroke-width':1.6,fill:'none'}),dimt=T_(0,0,'l',{'font-style':'italic','font-size':22,'font-weight':700,fill:'#1d5fa8'});
+const gate=mk('rect',{width:16,height:34,rx:3,fill:'#5b6676'}),gate2=mk('rect',{width:16,height:34,rx:3,fill:'#5b6676'});
+const beam=mk('path',{stroke:'#c0392b','stroke-width':2,opacity:.35});
+const str=mk('path',{stroke:K,'stroke-width':2}),bob=mk('circle',{r:15,fill:'#1d5fa8'});
+const lab=T_(0,0,'puerta fotoeléctrica',{fill:'#4a5566'});
+// registro de periodos
+const RX=560,RY=90,RW=250;mk('rect',{x:RX-20,y:RY-50,width:RW+40,height:330,rx:10,fill:'#f6f7f9',stroke:'#d9dee5'});
+T_(RX+RW/2,RY-20,'Periodos medidos',{'text-anchor':'middle','font-weight':700});
+const cells=[];for(let i=0;i<5;i++){const y=RY+i*52;mk('rect',{x:RX,y,width:RW,height:44,rx:6,fill:'#fff',stroke:'#d9dee5'});T_(RX+16,y+29,'T',{'font-style':'italic','font-size':19});T_(RX+29,y+34,String(i+1),{'font-size':13});cells.push(T_(RX+RW-16,y+29,'–',{'text-anchor':'end','font-size':19,'font-weight':700,fill:'#17324d','font-family':'IBM Plex Mono,monospace'}))}
+function geom(){L=+$('#L').value;$('#Lv').textContent=Math.round(L*100)+' cm';const ly=O.y+L*S;
+ vert.setAttribute('d',`M${O.x} ${O.y} V${ly+40}`);dim.setAttribute('d',`M${O.x-60} ${O.y} V${ly} M${O.x-66} ${O.y} h12 M${O.x-66} ${ly} h12`);dimt.setAttribute('x',O.x-82);dimt.setAttribute('y',O.y+L*S/2+6);
+ gate.setAttribute('x',O.x-48);gate.setAttribute('y',ly-17);gate2.setAttribute('x',O.x+32);gate2.setAttribute('y',ly-17);beam.setAttribute('d',`M${O.x-32} ${ly} H${O.x+32}`);
+ lab.setAttribute('x',O.x+56);lab.setAttribute('y',Math.min(ly+8,462))}
+function draw(){const bx=O.x+L*S*Math.sin(th),by=O.y+L*S*Math.cos(th);str.setAttribute('d',`M${O.x} ${O.y} L${bx} ${by}`);bob.setAttribute('cx',bx);bob.setAttribute('cy',by)}
+function reset(){geom();th=th0;w=0;t=0;lastCross=null;Ts=[];run=false;cells.forEach(c=>c.textContent='–');$('#T').textContent='–';$('#go').textContent='Soltar';draw()}
+$('#L').oninput=reset;$('#go').onclick=()=>{if(run){reset()}else{run=true;$('#go').textContent='Volver a empezar'}};reset();
+loop(dt=>{if(!run)return;const n=20,h=dt/n;for(let i=0;i<n;i++){const f=a=>-g/L*Math.sin(a);
+ const k1=w,l1=f(th),k2=w+h/2*l1,l2=f(th+h/2*k1),k3=w+h/2*l2,l3=f(th+h/2*k2),k4=w+h*l3,l4=f(th+h*k3);
+ const thn=th+h/6*(k1+2*k2+2*k3+k4);w=w+h/6*(l1+2*l2+2*l3+l4);t+=h;
+ if(th<0&&thn>=0){const tc=t-h*thn/(thn-th);if(lastCross!==null&&Ts.length<5){const Tm=Math.round((tc-lastCross)*1000)/1000;Ts.push(Tm);cells[Ts.length-1].textContent=fmt(Tm,3)+' s';$('#T').textContent=fmt(Tm,3)+' s'}lastCross=tc;beam.setAttribute('opacity',1);setTimeout(()=>beam.setAttribute('opacity',.35),120)}
+ th=thn}draw()});
+
+</script></body></html>

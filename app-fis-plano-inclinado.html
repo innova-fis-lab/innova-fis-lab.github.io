@@ -1,0 +1,108 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plano inclinado · INNOVA-FIS-LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{--bg:#fff;--paper:#f6f7f9;--ink:#1b2430;--slate:#4a5566;--line:#d9dee5;--b:#1d5fa8;--o:#d9820b;--g:#1b7a43;--navy:#17324d}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.4}
+body{display:flex;flex-direction:column}
+header{flex:none;display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:8px 18px;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:clamp(17px,2.6vh,24px);color:var(--navy)}header a{color:var(--navy);text-decoration:none;font-weight:600;font-size:clamp(12px,1.7vh,15px);white-space:nowrap}
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:14px;padding:10px 14px}
+.left{display:flex;flex-direction:column;min-height:0;gap:6px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px}
+.left .card{flex:1;min-height:0;display:flex;flex-direction:column}
+svg.sim{flex:1;min-height:0;width:100%;height:100%;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:8px;font-size:clamp(13px,1.9vh,17px)}
+.ctrl,.read{display:contents}
+.bar label{font-weight:600;display:flex;align-items:center;gap:8px}
+.bar input[type=range]{width:clamp(120px,14vw,240px);accent-color:var(--b)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:4px 11px;cursor:pointer}
+.btn.on{background:var(--navy);color:#fff}
+.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;align-items:baseline;gap:8px}
+.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums;display:inline-block;min-width:4.5em;white-space:nowrap}.read div{white-space:nowrap}
+.read span{font-size:.85em;color:var(--slate);font-weight:600}
+.note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--slate)}
+.side{min-height:0;overflow:hidden;font-size:16px}
+h2{font-size:1.15em;margin:0 0 .3em;color:var(--navy)}
+.side p{margin:0 0 .6em}.side ol{margin:0 0 .7em;padding-left:1.4em}.side li{margin-bottom:.3em}
+.eq{text-align:center;font-size:1.2em;margin:.2em 0 .6em}.eq .katex-display{margin:0}
+table.t{border-collapse:collapse;width:100%;background:#fff;font-size:.88em}
+table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:center}table.t th{background:#fff0c1}
+.nb{display:inline-grid;place-items:center;width:1.35em;height:1.35em;border-radius:50%;background:#d9820b;color:#fff;font-weight:800;font-size:.85em;vertical-align:.08em}
+.ct{color:#b0308f}.cv{color:#1f8a45}
+body[data-part="1"] .p2,body[data-part="2"] .p1{display:none!important}
+.side .note{font-size:.85em;margin:-.3em 0 .6em}
+@media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
+</style></head><body>
+<header><h1>Plano inclinado</h1><a href="laboratorios.html#fisica">← Laboratorio de Física · INNOVA-FIS-LAB</a></header>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="20 10 840 455"></svg>
+<div class="bar"><div class="ctrl"><button class="btn pt on" data-p="1">Parte I: fuerza tangencial</button><button class="btn pt" data-p="2">Parte II: fuerza normal</button><label>Ángulo α <input id="al" type="range" min="0" max="60" step="1" value="20"><b id="alv"></b></label><label>Masa del carro <i>m</i> <input id="M" type="range" min="0.20" max="0.40" step="0.05" value="0.20"><b id="Mv"></b></label></div><div class="read"><div class="p1"><span>Dinamómetro de 2 N, <i>F</i></span><b id="rF">–</b></div><div class="p2"><span>Dinamómetro de 5 N, <i>N</i></span><b id="rN">–</b></div></div></div></div><p class="note">Las flechas son las componentes del peso: P en negro, la tangencial F en azul y la normal N en verde. Valores de ejemplo con g = 9,80 m/s². · CC BY-NC-SA 4.0</p></section>
+<section class="side card"><h2>Qué se observa</h2><p>El peso del carro, <i>P</i> = <i>mg</i>, se descompone en una parte paralela al plano, que tira del carro cuesta abajo, y otra perpendicular, que lo aprieta contra el plano. Al subir el ángulo crece la primera y disminuye la segunda.</p><p class="p1">El dinamómetro paralelo al plano sujeta el carro y mide la componente tangencial:</p><div class="p1"><div class="eq" data-tex="F=m\,g\,\mathrm{sen}\,\alpha"></div></div><p class="p2">El segundo dinamómetro, perpendicular al plano, mide la fuerza necesaria para despegar el carro, igual a la componente normal:</p><div class="p2"><div class="eq" data-tex="N=m\,g\cos\alpha"></div></div><p>Aquí <i>m</i> es la masa del carro con sus pesas, <i>g</i> la aceleración de la gravedad y α el ángulo del plano, que se lee en la escala graduada.</p><h2>Qué hay que medir</h2><ol><li>Fijar un ángulo α y poner a cero el dinamómetro en esa posición.</li><li class="p1">Medir <i>F</i> con el carro solo, de 200 g, y añadiendo una a una las pesas de 50 g, hasta 400 g.</li><li class="p2">Tirar del carro con el dinamómetro de 5 N, perpendicular al plano, y anotar <i>N</i> cuando el carro empieza a despegarse. Repetir añadiendo pesas de 50 g, hasta 400 g.</li></ol><h2>Tabla de la ficha</h2><div class="p1"><table class="t"><tr><th><i>m</i> (kg)</th><th><i>F</i> (N)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr></table></div><div class="p2"><table class="t"><tr><th><i>m</i> (kg)</th><th><i>N</i> (N)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr></table></div></section></main>
+<script>
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
+function lockBar(){const bar=document.querySelector('.bar');if(!bar||!document.querySelector('.pt'))return;bar.style.minHeight='';if(innerWidth<=820)return;const cur=document.body.dataset.part;let h=0;['1','2'].forEach(p=>{document.body.dataset.part=p;h=Math.max(h,bar.offsetHeight)});document.body.dataset.part=cur;bar.style.minHeight=h+'px'}
+function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'});lockBar()}
+addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
+document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
+function fmt(x,d){return x.toFixed(d).replace('.',',')}
+let playing=true,last=null;function loop(step){function f(ts){if(last===null)last=ts;let dt=Math.min(0.05,(ts-last)/1000);last=ts;if(playing&&!document.hidden)step(dt);requestAnimationFrame(f)}requestAnimationFrame(f)}
+(function(){const pp=document.getElementById('pp');if(!pp)return;const set=p=>{playing=p;pp.textContent=p?'Parar':'Continuar';pp.classList.toggle('on',!p)};
+pp.onclick=()=>set(!playing);document.addEventListener('click',e=>{const t=e.target.closest('button');if(t&&t!==pp)set(true)},true)})();
+
+const g=9.80,K='#1b2430',P0={x:70,y:440},LP=490,DC=240;let al,m,part=1;
+const T=(x,y,t,o,par)=>{const e=mk('text',Object.assign({x,y,'font-size':16,fill:K},o||{}),par);e.textContent=t;return e};
+mk('rect',{x:30,y:P0.y,width:540,height:12,rx:2,fill:'#9aa3ae'});
+// transportador
+const AR=150;let ad='';for(let d=0;d<=90;d+=5){const a=d*Math.PI/180,r1=AR,r2=AR-(d%10?6:12);ad+=`M${P0.x+r1*Math.cos(a)} ${P0.y-r1*Math.sin(a)} L${P0.x+r2*Math.cos(a)} ${P0.y-r2*Math.sin(a)} `}
+mk('path',{d:`M${P0.x+AR} ${P0.y} A${AR} ${AR} 0 0 0 ${P0.x} ${P0.y-AR}`,fill:'none',stroke:'#8a94a3','stroke-width':1.2});mk('path',{d:ad,stroke:'#8a94a3','stroke-width':1});
+for(let d=0;d<=90;d+=30){const a=d*Math.PI/180;T(P0.x+(AR+16)*Math.cos(a),P0.y-(AR+16)*Math.sin(a)+5,d+'°',{'font-size':13,'text-anchor':'middle',fill:'#4a5566'})}
+const arcA=mk('path',{fill:'none',stroke:'#d9820b','stroke-width':2.4}),alT=T(0,0,'α',{'font-size':20,'font-style':'italic',fill:'#a35f00','font-weight':700});
+const PL=mk('g',{});
+mk('rect',{x:0,y:-10,width:LP,height:10,rx:2,fill:'#c9ced6',stroke:'#8a94a3'},PL);
+mk('rect',{x:LP-8,y:-58,width:8,height:48,fill:'#5b6676'},PL);// tope donde se engancha el dinamómetro
+const cart=mk('g',{},PL);mk('rect',{x:-36,y:-34,width:72,height:22,rx:4,fill:'#c9ced6',stroke:'#5b6676'},cart);
+[-22,22].forEach(x=>{mk('circle',{cx:x,cy:-8,r:7,fill:'#3c4654'},cart);mk('circle',{cx:x,cy:-8,r:2.5,fill:'#c9ced6'},cart)});
+const wts=mk('g',{},cart);
+// dinamómetro paralelo
+function dynGroup(par){const G=mk('g',{},par);const body=mk('rect',{rx:5,fill:'#f2f4f6',stroke:K,'stroke-width':1.4},G);const sc=mk('g',{},G);const ind=mk('rect',{fill:'#c0392b'},G);const rod=mk('path',{stroke:K,'stroke-width':2.4},G);return{G,body,sc,ind,rod}}
+const D1=dynGroup(PL);
+const D2g=mk('g',{},PL);const D2=dynGroup(D2g);const hand=mk('path',{stroke:K,'stroke-width':2.4},D2g);
+const vec=mk('g',{});
+function arrow(x1,y1,x2,y2,c,w){const a=Math.atan2(y2-y1,x2-x1),h=11;mk('path',{d:`M${x1} ${y1} L${x2} ${y2} M${x2-h*Math.cos(a-0.4)} ${y2-h*Math.sin(a-0.4)} L${x2} ${y2} L${x2-h*Math.cos(a+0.4)} ${y2-h*Math.sin(a+0.4)}`,stroke:c,'stroke-width':w||2.6,fill:'none','stroke-linecap':'round'},vec)}
+// lupa del dinamómetro
+const ZX=650,ZY=60,ZH=330;mk('rect',{x:ZX-60,y:ZY-40,width:200,height:ZH+80,rx:10,fill:'#f6f7f9',stroke:'#d9dee5'});
+const zT=T(ZX+40,ZY-14,'',{'text-anchor':'middle','font-size':15,'font-weight':700});
+const zb=mk('rect',{x:ZX,y:ZY,width:44,height:ZH,rx:6,fill:'#fff',stroke:K,'stroke-width':1.4});const zsc=mk('g',{});const zind=mk('rect',{x:ZX-6,width:56,height:3,fill:'#c0392b'});
+const zR=T(ZX+40,ZY+ZH+28,'',{'text-anchor':'middle','font-size':17,'font-weight':700,fill:'#c0392b'});
+function zoom(max,div,val){zsc.innerHTML='';const n=Math.round(max/div),maj=max>2?20:10;for(let i=0;i<=n;i++){const y=ZY+8+i/n*(ZH-16),big=i%maj==0,mid=i%(maj/2)==0;
+ mk('path',{d:`M${ZX+44} ${y} h${big?-22:mid?-15:-8}`,stroke:K,'stroke-width':1},zsc);if(big)T(ZX+52,y+5,fmt(i*div,max>2?0:1),{'font-size':13},zsc)}
+ const v=Math.min(val,max);zind.setAttribute('y',ZY+8+v/max*(ZH-16)-1.5);zT.textContent='Dinamómetro de '+max+' N';
+ zR.textContent=val>max?'fuera de escala':fmt(val,2)+' N'}
+function dyn(D,x0,len,max,val,yoff){// a lo largo del eje x local, desde x0 hacia x0+len
+ D.body.setAttribute('x',x0);D.body.setAttribute('y',yoff-9);D.body.setAttribute('width',len);D.body.setAttribute('height',18);
+ D.sc.innerHTML='';const n=max>2?5:10;for(let i=0;i<=n;i++){const x=x0+len-10-i/n*(len-20);mk('path',{d:`M${x} ${yoff-9} v${i%(max>2?1:5)?5:9}`,stroke:K,'stroke-width':1},D.sc)}
+ const v=Math.min(val,max),xi=x0+len-10-v/max*(len-20);D.ind.setAttribute('x',xi-1.5);D.ind.setAttribute('y',yoff-9);D.ind.setAttribute('width',3);D.ind.setAttribute('height',18)}
+function draw(){al=+$('#al').value;m=+$('#M').value;$('#alv').textContent=al+'°';$('#Mv').textContent=Math.round(m*1000)+' g';
+ const a=al*Math.PI/180,F=m*g*Math.sin(a),N=m*g*Math.cos(a);
+ PL.setAttribute('transform',`translate(${P0.x} ${P0.y}) rotate(${-al})`);cart.setAttribute('transform',`translate(${DC} 0)`);
+ wts.innerHTML='';const nw=Math.round((m-0.2)/0.05);for(let i=0;i<nw;i++)mk('rect',{x:-30+i*15,y:-46,width:12,height:12,rx:2,fill:'#5b6676'},wts);
+ // dinamómetro 1: del carro (x=DC+36) al tope (x=LP-8)
+ const x1=DC+44,x2=LP-12;dyn(D1,x1+30,x2-x1-34,2,F,-26);D1.rod.setAttribute('d',`M${DC+36} -26 H${x1+30} M${x1+30+(x2-x1-34)} -26 H${LP-8}`);
+ D2g.setAttribute('visibility',part==2?'visible':'hidden');
+ if(part==2){D2g.setAttribute('transform',`translate(${DC} -34) rotate(-90)`);dyn(D2,40,130,5,N,0);D2.rod.setAttribute('d','M0 0 H40');hand.setAttribute('d','M170 0 H200')}
+ const r=60;arcA.setAttribute('d',`M${P0.x+r} ${P0.y} A${r} ${r} 0 0 0 ${P0.x+r*Math.cos(a)} ${P0.y-r*Math.sin(a)}`);alT.setAttribute('x',P0.x+r+8);alT.setAttribute('y',P0.y-8);
+ // vectores
+ vec.innerHTML='';const cx=P0.x+DC*Math.cos(a)+23*Math.sin(a),cy=P0.y-DC*Math.sin(a)-23*Math.cos(a),sc=55;const P=m*g;
+ arrow(cx,cy,cx,cy+P*sc,K,2.8);T(cx-20,cy+P*sc+4,'P',{'font-style':'italic','font-weight':700},vec);
+ const ux=-Math.cos(a),uy=Math.sin(a);if(F>0.02){arrow(cx,cy,cx+F*sc*ux,cy+F*sc*uy,'#1d5fa8');T(cx+F*sc*ux-22,cy+F*sc*uy+4,'F',{'font-style':'italic','font-weight':700,fill:'#1d5fa8'},vec)}
+ const nx=Math.sin(a),ny=Math.cos(a);if(N>0.02){arrow(cx,cy,cx+N*sc*nx,cy+N*sc*ny,'#1b7a43');T(cx+N*sc*nx+6,cy+N*sc*ny+16,'N',{'font-style':'italic','font-weight':700,fill:'#1b7a43'},vec)}
+ if(part==1){zoom(2,0.02,F);$('#rF').textContent=F>2?'fuera de escala':fmt(F,2)+' N'}else{zoom(5,0.05,N);$('#rN').textContent=fmt(N,2)+' N'}}
+document.querySelectorAll('.pt').forEach(b=>b.onclick=()=>{part=+b.dataset.p;document.body.dataset.part=part;document.querySelectorAll('.pt').forEach(c=>c.classList.toggle('on',c===b));draw();fit()});
+document.body.dataset.part=1;$('#al').oninput=draw;$('#M').oninput=draw;draw();
+
+</script></body></html>

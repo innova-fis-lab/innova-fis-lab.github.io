@@ -1,0 +1,105 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Principio de Arquímedes · INNOVA-FIS-LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{--bg:#fff;--paper:#f6f7f9;--ink:#1b2430;--slate:#4a5566;--line:#d9dee5;--b:#1d5fa8;--o:#d9820b;--g:#1b7a43;--navy:#17324d}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.4}
+body{display:flex;flex-direction:column}
+header{flex:none;display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:8px 18px;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:clamp(17px,2.6vh,24px);color:var(--navy)}header a{color:var(--navy);text-decoration:none;font-weight:600;font-size:clamp(12px,1.7vh,15px);white-space:nowrap}
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:14px;padding:10px 14px}
+.left{display:flex;flex-direction:column;min-height:0;gap:6px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px}
+.left .card{flex:1;min-height:0;display:flex;flex-direction:column}
+svg.sim{flex:1;min-height:0;width:100%;height:100%;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:8px;font-size:clamp(13px,1.9vh,17px)}
+.ctrl,.read{display:contents}
+.bar label{font-weight:600;display:flex;align-items:center;gap:8px}
+.bar input[type=range]{width:clamp(120px,14vw,240px);accent-color:var(--b)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:4px 11px;cursor:pointer}
+.btn.on{background:var(--navy);color:#fff}
+.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;align-items:baseline;gap:8px}
+.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums;display:inline-block;min-width:4.5em;white-space:nowrap}.read div{white-space:nowrap}
+.read span{font-size:.85em;color:var(--slate);font-weight:600}
+.note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--slate)}
+.side{min-height:0;overflow:hidden;font-size:16px}
+h2{font-size:1.15em;margin:0 0 .3em;color:var(--navy)}
+.side p{margin:0 0 .6em}.side ol{margin:0 0 .7em;padding-left:1.4em}.side li{margin-bottom:.3em}
+.eq{text-align:center;font-size:1.2em;margin:.2em 0 .6em}.eq .katex-display{margin:0}
+table.t{border-collapse:collapse;width:100%;background:#fff;font-size:.88em}
+table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:center}table.t th{background:#fff0c1}
+.nb{display:inline-grid;place-items:center;width:1.35em;height:1.35em;border-radius:50%;background:#d9820b;color:#fff;font-weight:800;font-size:.85em;vertical-align:.08em}
+.ct{color:#b0308f}.cv{color:#1f8a45}
+body[data-part="1"] .p2,body[data-part="2"] .p1{display:none!important}
+.side .note{font-size:.85em;margin:-.3em 0 .6em}
+@media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
+</style></head><body>
+<header><h1>Principio de Arquímedes</h1><a href="laboratorios.html#fisica">← Laboratorio de Física · INNOVA-FIS-LAB</a></header>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="20 10 840 460"></svg>
+<div class="bar"><div class="ctrl"><button class="btn pt on" data-p="1">Parte I: esferas</button><button class="btn pt" data-p="2">Parte III: cilindros</button><label class="p1">Esfera <select id="E" class="btn"><option value="0">E₁ aluminio</option><option value="1">E₂ hierro</option><option value="2">E₃ latón</option><option value="3">E₄ plomo</option></select></label><label class="p2">Pesas de 20 g <input id="NP" type="range" min="0" max="5" step="1" value="2"><b id="NPv"></b></label><button class="btn" id="go" data-alt="Sacar del agua">Sumergir</button></div><div class="read"><div><span>Dinamómetro</span><b id="rd">–</b></div><div class="p2"><span>Volumen en la probeta</span><b id="rv">–</b></div></div></div></div><p class="note">Valores de ejemplo: esferas de 2,50 cm de diámetro; pesas y portapesas de latón (8400 kg/m³), portapesas de 10 g. · CC BY-NC-SA 4.0</p></section>
+<section class="side card"><h2>Qué se observa</h2><p class="p1">Al sumergir la esfera, el dinamómetro marca menos: el agua la empuja hacia arriba con una fuerza, el empuje, igual al peso del agua que desaloja. Las cuatro esferas tienen el mismo volumen, así que todas reciben el mismo empuje aunque pesen distinto.</p><div class="p1"><div class="eq" data-tex="F=P-\rho_a\,g\,V"></div><p>Aquí <i>P</i> es el peso de la esfera en el aire; <i>F</i>, su peso aparente, lo que marca el dinamómetro con la esfera sumergida; ρ<sub>a</sub>, la densidad del agua; y <i>V</i>, el volumen de la esfera, que se calcula con su diámetro <i>D</i>, medido con el calibre.</p></div><p class="p2">Las pesas apiladas en el portapesas forman cilindros cada vez mayores. Al sumergir uno, el agua de la probeta sube: la subida es el volumen del cilindro, <i>V</i> = <i>V</i><sub>f</sub> − <i>V</i><sub>0</sub>. El dinamómetro marca el peso menos el empuje.</p><div class="p2"><div class="eq" data-tex="F=(\rho_s-\rho_a)\,g\,V"></div><p>Aquí <i>F</i> es el peso aparente, lo que marca el dinamómetro con el cilindro sumergido; ρ<sub>s</sub>, la densidad del material de las pesas; ρ<sub>a</sub>, la del agua; y <i>V</i>, el volumen del cilindro.</p></div><h2>Qué hay que medir</h2><ol class="p1"><li>Medir con el calibre el diámetro <i>D</i> de cada esfera.</li><li>Colgarla del dinamómetro y leer su peso <i>P</i>.</li><li>Sumergirla por completo, sin que toque las paredes ni el fondo, y leer <i>F</i>.</li></ol><ol class="p2"><li>Llenar la probeta hasta 70 ml, <i>V</i><sub>0</sub>.</li><li>Sumergir el portapesas solo, sin tocar las paredes ni el fondo, y leer <i>V</i><sub>f</sub> en la probeta y <i>F</i> en el dinamómetro.</li><li>Repetir añadiendo una a una las pesas de 20 g.</li></ol><h2>Tabla de la ficha</h2><div class="p1"><table class="t"><tr><th>Esfera</th><th><i>D</i> (m)</th><th><i>P</i> (N)</th><th><i>F</i> (N)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></div><div class="p2"><table class="t"><tr><th>Cilindro</th><th><i>V</i><sub>0</sub> (ml)</th><th><i>V</i><sub>f</sub> (ml)</th><th><i>V</i> (ml)</th><th><i>F</i> (N)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></div></section></main>
+<script>
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
+function lockBar(){const bar=document.querySelector('.bar');if(!bar||!document.querySelector('.pt'))return;bar.style.minHeight='';if(innerWidth<=820)return;const cur=document.body.dataset.part;let h=0;['1','2'].forEach(p=>{document.body.dataset.part=p;h=Math.max(h,bar.offsetHeight)});document.body.dataset.part=cur;bar.style.minHeight=h+'px'}
+function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'});lockBar()}
+addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
+document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
+function fmt(x,d){return x.toFixed(d).replace('.',',')}
+let playing=true,last=null;function loop(step){function f(ts){if(last===null)last=ts;let dt=Math.min(0.05,(ts-last)/1000);last=ts;if(playing&&!document.hidden)step(dt);requestAnimationFrame(f)}requestAnimationFrame(f)}
+(function(){const pp=document.getElementById('pp');if(!pp)return;const set=p=>{playing=p;pp.textContent=p?'Parar':'Continuar';pp.classList.toggle('on',!p)};
+pp.onclick=()=>set(!playing);document.addEventListener('click',e=>{const t=e.target.closest('button');if(t&&t!==pp)set(true)},true)})();
+
+const g=9.80,RA=1000,K='#1b2430',BLUE='#cfe6f7';let part=1,u=0,target=0,P=0,lvl=70;
+const T_=(x,y,t,o,p)=>{const e=mk('text',Object.assign({x,y,'font-size':15,fill:K},o||{}),p);e.textContent=t;return e};
+const MAT=[['aluminio',2700,'#b8c0c8'],['hierro',7870,'#5b6676'],['latón',8500,'#c9a24a'],['plomo',11340,'#767c86']],Vs=Math.PI*0.025**3/6;
+// soporte
+mk('rect',{x:40,y:452,width:360,height:10,rx:2,fill:'#9aa3ae'});mk('rect',{x:62,y:30,width:10,height:424,fill:'#8a94a3'});mk('rect',{x:62,y:30,width:200,height:9,fill:'#8a94a3'});
+const DX=240;mk('path',{d:`M${DX} 39 V52`,stroke:K,'stroke-width':2});
+const dB=mk('rect',{x:DX-11,y:52,width:22,height:150,rx:5,fill:'#f2f4f6',stroke:K,'stroke-width':1.4});for(let i=0;i<=10;i++)mk('path',{d:`M${DX+11} ${60+i*13.4} h${i%5?-5:-9}`,stroke:K});
+const dI=mk('rect',{x:DX-11,width:22,height:3,fill:'#c0392b'});const dR=mk('path',{stroke:K,'stroke-width':2});T_(DX-18,120,'dinamómetro',{'text-anchor':'end'});
+const thr=mk('path',{stroke:K,'stroke-width':1.4});
+// recipientes
+const vaso=mk('g',{}),prob=mk('g',{});
+const VW=180,VX=DX-VW/2,VT=290,VB=448,VL=322;
+mk('rect',{x:VX,y:VL,width:VW,height:VB-VL,fill:BLUE},vaso);mk('path',{d:`M${VX} ${VT} V${VB} H${VX+VW} V${VT}`,fill:'none',stroke:K,'stroke-width':2.4},vaso);T_(VX+VW+8,VB-6,'vaso con agua',{},vaso);
+const PW=56,PXL=DX-PW/2,PT=222,PB=446,PPM=2.15,Y0ML=PB;// 1 ml = 2,15 px
+const water=mk('rect',{x:PXL,width:PW,fill:BLUE},prob);mk('path',{d:`M${PXL} ${PT} V${PB} H${PXL+PW} V${PT}`,fill:'none',stroke:K,'stroke-width':2.4},prob);
+for(let ml=0;ml<=100;ml+=2){const y=Y0ML-ml*PPM;if(y<PT+4)break;mk('path',{d:`M${PXL+PW} ${y} h${ml%10?-6:-14}`,stroke:K,'stroke-width':ml%10?.8:1.2},prob);if(ml%10==0)T_(PXL+PW+6,y+5,String(ml),{'font-size':12},prob)}
+T_(PXL+PW+34,PT+10,'probeta (ml)',{'font-size':13,fill:'#4a5566'},prob);
+const obj=mk('g',{});
+// paneles ampliados
+const Z1=560,Z2=730,ZY=50,ZH=330;
+function panel(x,title){const G=mk('g',{});mk('rect',{x:x-70,y:ZY-36,width:150,height:ZH+80,rx:10,fill:'#f6f7f9',stroke:'#d9dee5'},G);T_(x+5,ZY-14,title,{'text-anchor':'middle','font-weight':700},G);return G}
+const P1=panel(Z1,'Dinamómetro 2 N');mk('rect',{x:Z1-20,y:ZY,width:40,height:ZH,rx:6,fill:'#fff',stroke:K},P1);
+for(let i=0;i<=100;i++){const y=ZY+8+i/100*(ZH-16);mk('path',{d:`M${Z1+20} ${y} h${i%10==0?-20:i%5==0?-13:-7}`,stroke:K,'stroke-width':i%10==0?1.2:.7},P1);if(i%10==0)T_(Z1+26,y+5,fmt(i/50,1),{'font-size':12},P1)}
+const zI=mk('rect',{x:Z1-26,width:52,height:3,fill:'#c0392b'},P1);const zR=T_(Z1+5,ZY+ZH+28,'',{'text-anchor':'middle','font-size':17,'font-weight':700,fill:'#c0392b'},P1);
+const P2=panel(Z2,'Probeta, ampliada');const ZC=ZY+ZH/2,ZS=16;mk('rect',{x:Z2-40,y:ZY,width:80,height:ZH,fill:'#fff',stroke:K},P2);
+const zW=mk('rect',{x:Z2-40,width:80,fill:BLUE},P2);const zg=mk('g',{},P2);const zR2=T_(Z2+5,ZY+ZH+28,'',{'text-anchor':'middle','font-size':17,'font-weight':700,fill:'#1d5fa8'},P2);
+function setObj(){obj.innerHTML='';if(part==1){const e=MAT[+$('#E').value];P=e[1]*Vs*g;mk('circle',{cx:0,cy:0,r:26,fill:e[2],stroke:K,'stroke-width':1.2},obj);return{top:-26,h:52,V:Vs*1e6}}
+ const n=+$('#NP').value;$('#NPv').textContent=n;const mtot=0.010+0.020*n;P=mtot*g;const V=mtot/8400*1e6;// ml
+ const ph=10;mk('path',{d:`M0 ${-n*ph-14} V2`,stroke:K,'stroke-width':2.4},obj);for(let i=0;i<n;i++)mk('rect',{x:-17,y:-(i+1)*ph-1,width:34,height:ph-1.5,rx:1.5,fill:'#c9a24a',stroke:'#8a6d2a','stroke-width':.8},obj);mk('rect',{x:-19,y:0,width:38,height:5,rx:1,fill:'#8a6d2a'},obj);
+ return{top:-n*ph-14,h:n*ph+19,V}}
+let geo;function upd(){geo=setObj();draw()}
+function sub(yb){// volumen sumergido (ml) con el fondo del objeto en yb
+ if(part==1){const r=26,lev=VL,h=Math.max(0,Math.min(2*r,yb-lev));return geo.V*(h*h*(3*r-h))/(4*r**3)}
+ let L=Y0ML-70*PPM;for(let k=0;k<8;k++){const h=Math.max(0,Math.min(geo.h,yb-L));const Vsub=geo.V*h/geo.h;L=Y0ML-(70+Vsub)*PPM}return Math.max(0,(Y0ML-L)/PPM-70)}
+function draw(){const top=part==1?296:PT-6,bot=part==1?VB-40:PB-24;const yb=top+(bot-top)*u;const ycen=yb-(part==1?26:5);obj.setAttribute('transform',`translate(${DX} ${ycen})`);
+ const Vsub=sub(yb),F=P-RA*g*Vsub*1e-6,ext=F/2*130;dI.setAttribute('y',58+ext);dR.setAttribute('d',`M${DX} ${60+ext} V${210}`);thr.setAttribute('d',`M${DX} 210 V${ycen+geo.top}`);
+ zI.setAttribute('y',ZY+8+F/2*(ZH-16)-1.5);zR.textContent=fmt(F,2)+' N';$('#rd').textContent=fmt(F,2)+' N';
+ if(part==2){lvl=70+Vsub;const yl=Y0ML-lvl*PPM;water.setAttribute('y',yl);water.setAttribute('height',PB-yl);
+  zg.innerHTML='';zW.setAttribute('y',ZC);zW.setAttribute('height',ZY+ZH-ZC);for(let ml=40;ml<=100;ml++){const y=ZC+(lvl-ml)*ZS;if(y<ZY+4||y>ZY+ZH-4)continue;mk('path',{d:`M${Z2+40} ${y} h${ml%10==0?-34:ml%5==0?-24:-14}`,stroke:K,'stroke-width':ml%5?1:1.6},zg);if(ml%5==0)T_(Z2+46,y+5,String(ml),{'font-size':13},zg)}
+  zR2.textContent=fmt(lvl,1)+' ml';$('#rv').textContent=fmt(lvl,1)+' ml'}}
+function setPart(p){part=p;document.body.dataset.part=p;document.querySelectorAll('.pt').forEach(c=>c.classList.toggle('on',+c.dataset.p===p));
+ vaso.setAttribute('visibility',p==1?'visible':'hidden');prob.setAttribute('visibility',p==2?'visible':'hidden');P2.setAttribute('visibility',p==2?'visible':'hidden');
+ P1.setAttribute('transform',p==1?`translate(${(Z2-Z1)/2} 0)`:'');u=0;target=0;$('#go').textContent='Sumergir';upd();fixBtn();fit()}
+document.querySelectorAll('.pt').forEach(b=>b.onclick=()=>setPart(+b.dataset.p));
+$('#E').onchange=()=>{u=0;target=0;$('#go').textContent='Sumergir';upd()};$('#NP').oninput=()=>{u=0;target=0;$('#go').textContent='Sumergir';upd()};
+$('#go').onclick=()=>{target=target?0:1;$('#go').textContent=target?'Sacar del agua':'Sumergir'};setPart(1);
+loop(dt=>{if(u===target)return;u+=Math.sign(target-u)*Math.min(Math.abs(target-u),dt*0.5);draw()});
+
+</script></body></html>

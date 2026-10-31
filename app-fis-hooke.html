@@ -1,0 +1,90 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ley de Hooke · INNOVA-FIS-LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{--bg:#fff;--paper:#f6f7f9;--ink:#1b2430;--slate:#4a5566;--line:#d9dee5;--b:#1d5fa8;--o:#d9820b;--g:#1b7a43;--navy:#17324d}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.4}
+body{display:flex;flex-direction:column}
+header{flex:none;display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:8px 18px;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:clamp(17px,2.6vh,24px);color:var(--navy)}header a{color:var(--navy);text-decoration:none;font-weight:600;font-size:clamp(12px,1.7vh,15px);white-space:nowrap}
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:14px;padding:10px 14px}
+.left{display:flex;flex-direction:column;min-height:0;gap:6px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px}
+.left .card{flex:1;min-height:0;display:flex;flex-direction:column}
+svg.sim{flex:1;min-height:0;width:100%;height:100%;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:8px;font-size:clamp(13px,1.9vh,17px)}
+.ctrl,.read{display:contents}
+.bar label{font-weight:600;display:flex;align-items:center;gap:8px}
+.bar input[type=range]{width:clamp(120px,14vw,240px);accent-color:var(--b)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:4px 11px;cursor:pointer}
+.btn.on{background:var(--navy);color:#fff}
+.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;align-items:baseline;gap:8px}
+.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums;display:inline-block;min-width:4.5em;white-space:nowrap}.read div{white-space:nowrap}
+.read span{font-size:.85em;color:var(--slate);font-weight:600}
+.note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--slate)}
+.side{min-height:0;overflow:hidden;font-size:16px}
+h2{font-size:1.15em;margin:0 0 .3em;color:var(--navy)}
+.side p{margin:0 0 .6em}.side ol{margin:0 0 .7em;padding-left:1.4em}.side li{margin-bottom:.3em}
+.eq{text-align:center;font-size:1.2em;margin:.2em 0 .6em}.eq .katex-display{margin:0}
+table.t{border-collapse:collapse;width:100%;background:#fff;font-size:.88em}
+table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:center}table.t th{background:#fff0c1}
+.nb{display:inline-grid;place-items:center;width:1.35em;height:1.35em;border-radius:50%;background:#d9820b;color:#fff;font-weight:800;font-size:.85em;vertical-align:.08em}
+.ct{color:#b0308f}.cv{color:#1f8a45}
+body[data-part="1"] .p2,body[data-part="2"] .p1{display:none!important}
+.side .note{font-size:.85em;margin:-.3em 0 .6em}
+@media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
+</style></head><body>
+<header><h1>Ley de Hooke</h1><a href="laboratorios.html#fisica">← Laboratorio de Física · INNOVA-FIS-LAB</a></header>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="60 20 800 450"></svg>
+<div class="bar"><div class="ctrl"><button class="btn pt on" data-p="1">Parte I: alargamiento</button><button class="btn pt" data-p="2">Parte II: periodo</button><label>Muelle <select id="K" class="btn"><option value="10">rojo</option><option value="20">azul</option></select></label><label>Pesas de 10 g <input id="N" type="range" min="0" max="8" step="1" value="3"><b id="Nv"></b></label><button class="btn p2" id="go" data-alt="Volver a empezar">Bajar y soltar</button><button class="btn p2" id="pp" data-alt="Continuar">Parar</button></div><div class="read"><div><span>Masa colgada <i>m</i></span><b id="rm">–</b></div><div class="p1"><span>Fuerza <i>F</i> = <i>mg</i></span><b id="rF">–</b></div><div class="p1"><span>Alargamiento <i>x</i></span><b id="rx">–</b></div><div class="p2"><span>Oscilaciones</span><b id="cnt">0</b></div><div class="p2"><span>Cronómetro</span><b id="tt">0,00 s</b></div></div></div></div><p class="note">Valores de ejemplo: portapesas de 10 g, muelle rojo k = 10 N/m y azul k = 20 N/m. · CC BY-NC-SA 4.0</p></section>
+<section class="side card"><h2>Qué se observa</h2><p class="p1">Al colgar pesas, el muelle se alarga y el índice rojo baja por la escala. El alargamiento es proporcional a la fuerza: con el doble de peso, el muelle se alarga el doble. El muelle azul es más duro que el rojo y se alarga menos.</p><div class="p1"><div class="eq" data-tex="F=k\,x"></div><p>Aquí <i>F</i> = <i>mg</i> es el peso de lo que cuelga, portapesas incluido; <i>x</i>, el alargamiento, que se lee directamente en la escala en mm porque el índice marca 0 sin carga; y <i>k</i>, la constante elástica del muelle.</p></div><p class="p2">Si se baja un poco la masa y se suelta, oscila arriba y abajo. Con más masa oscila más despacio; con el muelle más duro, más deprisa.</p><div class="p2"><div class="eq" data-tex="T=2\pi\sqrt{\frac{m}{k}}"></div><p>Aquí <i>T</i> es el periodo, el tiempo de una oscilación completa; <i>m</i>, la masa colgada, portapesas incluido; y <i>k</i>, la constante elástica. Una oscilación se cuenta cada vez que la masa vuelve al punto más bajo.</p></div><h2>Qué hay que medir</h2><ol><li>Pesar el portapesas en la báscula y colgarlo.</li><li class="p1">Leer el alargamiento <i>x</i> en la escala.</li><li class="p1">Añadir una a una las 8 pesas de 10 g, pesando cada vez la masa total y leyendo <i>x</i>.</li><li class="p2">Bajar un poco la masa, soltarla y medir con el cronómetro el tiempo de 30 oscilaciones, <i>t</i><sub>30</sub>. El periodo es <i>T</i> = <i>t</i><sub>30</sub>/30.</li><li class="p2">Repetir añadiendo una a una las 8 pesas de 10 g.</li></ol><h2>Tabla de la ficha</h2><div class="p1"><table class="t"><tr><th><i>m</i> (kg)</th><th><i>F</i> (N)</th><th><i>x</i> (m)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></div><div class="p2"><table class="t"><tr><th><i>m</i> (kg)</th><th><i>t</i>₃₀ (s)</th><th><i>T</i> (s)</th><th><i>T</i>² (s²)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></div></section></main>
+<script>
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
+function lockBar(){const bar=document.querySelector('.bar');if(!bar||!document.querySelector('.pt'))return;bar.style.minHeight='';if(innerWidth<=820)return;const cur=document.body.dataset.part;let h=0;['1','2'].forEach(p=>{document.body.dataset.part=p;h=Math.max(h,bar.offsetHeight)});document.body.dataset.part=cur;bar.style.minHeight=h+'px'}
+function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'});lockBar()}
+addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
+document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
+function fmt(x,d){return x.toFixed(d).replace('.',',')}
+let playing=true,last=null;function loop(step){function f(ts){if(last===null)last=ts;let dt=Math.min(0.05,(ts-last)/1000);last=ts;if(playing&&!document.hidden)step(dt);requestAnimationFrame(f)}requestAnimationFrame(f)}
+(function(){const pp=document.getElementById('pp');if(!pp)return;const set=p=>{playing=p;pp.textContent=p?'Parar':'Continuar';pp.classList.toggle('on',!p)};
+pp.onclick=()=>set(!playing);document.addEventListener('click',e=>{const t=e.target.closest('button');if(t&&t!==pp)set(true)},true)})();
+
+const g=9.80,MP=0.010,X0=200,TOP=40,NAT=96,S=2900,K='#1b2430';let part=1,k,m,y=0,v=0,run=false,t=0,cnt=0,hist=[];
+const T_=(x,y,t,o,p)=>{const e=mk('text',Object.assign({x,y,'font-size':15,fill:K},o||{}),p);e.textContent=t;return e};
+mk('path',{d:'M120 40 H300',stroke:K,'stroke-width':3});for(let i=0;i<11;i++)mk('path',{d:`M${124+i*17} 40 l-8 -9`,stroke:K,'stroke-width':1.2});
+// escala en mm del dispositivo
+const SX=250,SY0=TOP+NAT+12;mk('rect',{x:SX,y:SY0-10,width:46,height:0.1*S+20,fill:'#fff8e1',stroke:K});
+for(let i=0;i<=100;i+=2){const yy=SY0+i/1000*S;mk('path',{d:`M${SX} ${yy} h${i%10==0?16:i%5==0?11:6}`,stroke:K,'stroke-width':i%10==0?1.2:.8});if(i%10==0)T_(SX+20,yy+5,String(i),{'font-size':12})}
+T_(SX+50,SY0+4,'mm',{'font-size':13,fill:'#4a5566'});
+const spr=mk('path',{fill:'none','stroke-width':2}),rod=mk('path',{stroke:K,'stroke-width':3}),ptr=mk('path',{stroke:'#c0392b','stroke-width':2.6}),hang=mk('g',{});
+// panel derecho: lupa de la escala (parte I) o registro (parte II)
+const PX=420,PY=60,PW=420,PH=360;mk('rect',{x:PX,y:PY-30,width:PW,height:PH+50,rx:10,fill:'#f6f7f9',stroke:'#d9dee5'});
+const pt1=mk('g',{}),pt2=mk('g',{});
+T_(PX+PW/2,PY-6,'Lectura de la escala, ampliada',{'text-anchor':'middle','font-weight':700},pt1);
+const ZC=PY+170,ZS=9;const zsc=mk('g',{},pt1);mk('rect',{x:PX+150,y:PY+10,width:120,height:PH-30,fill:'#fff8e1',stroke:K},pt1);
+const zg=mk('g',{},pt1);mk('path',{d:`M${PX+60} ${ZC} H${PX+150}`,stroke:'#c0392b','stroke-width':3},pt1);T_(PX+56,ZC+5,'índice',{'text-anchor':'end',fill:'#c0392b','font-weight':700},pt1);
+const zr=T_(PX+PW/2,PY+PH+12,'',{'text-anchor':'middle','font-size':18,'font-weight':700,fill:'#c0392b'},pt1);
+T_(PX+PW/2,PY-6,'Posición de la masa en los últimos 6 s',{'text-anchor':'middle','font-weight':700},pt2);
+const gx=PX+20,gw=PW-40,gy=PY+PH/2,gh=PH-40;mk('rect',{x:gx,y:gy-gh/2,width:gw,height:gh,fill:'#fff',stroke:'#d9dee5'},pt2);mk('path',{d:`M${gx} ${gy} H${gx+gw}`,stroke:'#cfd5dc'},pt2);
+const tr=mk('path',{fill:'none',stroke:'#1d5fa8','stroke-width':2},pt2);
+function setm(){k=+$('#K').value;const n=+$('#N').value;m=MP+0.010*n;$('#Nv').textContent=n;$('#rm').textContent=Math.round(m*1000)+' g';
+ spr.setAttribute('stroke',k==10?'#c0392b':'#1d5fa8');hang.innerHTML='';
+ const PL=8*7+4;mk('path',{d:`M${X0} -2 V${PL}`,stroke:K,'stroke-width':3},hang);for(let i=0;i<n;i++)mk('rect',{x:X0-20,y:PL-(i+1)*7,width:40,height:6,rx:1.5,fill:'#5b6676'},hang);mk('rect',{x:X0-25,y:PL,width:50,height:6,rx:2,fill:'#3c4654'},hang);
+ const x=m*g/k;$('#rF').textContent=fmt(m*g,3)+' N';$('#rx').textContent=Math.round(x*1000)+' mm';
+ zg.innerHTML='';for(let i=0;i<=1000;i++){const yy=ZC+(i/10-x*1000)*ZS;if(yy<PY+12||yy>PY+PH-22)continue;const mm=i%10==0;mk('path',{d:`M${PX+150} ${yy} h${mm?(i%100==0?40:i%50==0?28:18):0}`,stroke:K,'stroke-width':i%100==0?1.6:1},zg);if(i%50==0&&mm)T_(PX+200,yy+6,String(i/10),{'font-size':16},zg)}
+ zr.textContent='x = '+Math.round(x*1000)+' mm'}
+function draw(){const ext=m*g/k+y,yb=TOP+NAT+ext*S;let d=`M${X0} ${TOP} V${TOP+10}`;const N=36;for(let i=1;i<N;i++){const yy=TOP+10+(yb-TOP-20)*i/N;d+=` L${X0+(i%2?11:-11)} ${yy}`}d+=` L${X0} ${yb-10} V${yb}`;
+ spr.setAttribute('d',d);rod.setAttribute('d',`M${X0} ${yb} V${yb+12}`);ptr.setAttribute('d',`M${X0} ${yb+12} H${SX+12}`);hang.setAttribute('transform',`translate(0 ${yb+12})`)}
+function reset(){setm();y=0;v=0;t=0;cnt=0;run=false;hist=[];tr.setAttribute('d','');$('#cnt').textContent='0';$('#tt').textContent='0,00 s';$('#go').textContent='Bajar y soltar';draw()}
+function setPart(p){part=p;document.body.dataset.part=p;document.querySelectorAll('.pt').forEach(c=>c.classList.toggle('on',+c.dataset.p===p));pt1.setAttribute('visibility',p==1?'visible':'hidden');pt2.setAttribute('visibility',p==2?'visible':'hidden');reset();fixBtn();fit()}
+document.querySelectorAll('.pt').forEach(b=>b.onclick=()=>setPart(+b.dataset.p));
+$('#N').oninput=reset;$('#K').onchange=reset;$('#go').onclick=()=>{if(run){reset()}else{y=0.012;v=0;run=true;$('#go').textContent='Volver a empezar'}};setPart(1);
+loop(dt=>{if(!run)return;const n=20,h=dt/n,om2=k/m;for(let i=0;i<n;i++){const vn=v-om2*y*h,yn=y+vn*h;if(v>0&&vn<=0){cnt++;$('#cnt').textContent=cnt}v=vn;y=yn;t+=h}
+ $('#tt').textContent=fmt(t,2)+' s';hist.push([t,y]);if(hist.length>900)hist.shift();let d='';hist.forEach(p=>{if(p[0]>=t-6)d+=(d?'L':'M')+(gx+(p[0]-Math.max(0,t-6))/6*gw).toFixed(1)+' '+(gy+p[1]/0.014*gh/2).toFixed(1)});tr.setAttribute('d',d);draw()});
+
+</script></body></html>
