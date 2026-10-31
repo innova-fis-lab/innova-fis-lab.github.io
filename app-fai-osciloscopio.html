@@ -37,8 +37,8 @@ table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:cent
 </style></head><body>
 <header><h1>Lectura del osciloscopio (OWON SDS1022)</h1><a href="laboratorios.html#fai">← Laboratorio de FAI · INNOVA-FIS-LAB</a></header>
 <main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 900 540"></svg>
-<div class="bar"><div class="ctrl"><label>Voltios por cuadro <select id="V" class="btn"><option value="0.5">0,5 V</option><option value="1">1 V</option><option value="2" selected>2 V</option><option value="5">5 V</option></select></label><label>Tiempo por cuadro <select id="Tm" class="btn"><option value="10">10 µs</option><option value="20">20 µs</option><option value="50" selected>50 µs</option><option value="100">100 µs</option></select></label><label><input type="checkbox" id="sh" checked> Mostrar la medida</label></div><div class="read"><div><span>Altura del primer pico</span><b id="rv" style="min-width:14em">–</b></div><div><span>5 periodos</span><b id="rt" style="min-width:14em">–</b></div></div></div></div><p class="note">Señal parecida a la del laboratorio, con L = 10 mH y C ≈ 3 nF. · CC BY-NC-SA 4.0</p></section>
-<section class="side card"><h2>Cuánto mide cada cuadro</h2><p>Abajo a la izquierda, el osciloscopio escribe las dos escalas. <b class="ct" id="xM">M: 50us</b> quiere decir que cada cuadro, en horizontal, son <b class="ct" id="xM2">50 µs</b>. <b class="cv" id="xV">2.00V</b> quiere decir que cada cuadro, en vertical, son <b class="cv" id="xV2">2 V</b>.</p><p>En los ejes centrales cada cuadro está dividido en 5 rayitas, así que se cuenta de 0,2 en 0,2 cuadros: una rayita son <b class="ct" id="xR1">10 µs</b> en horizontal y <b class="cv" id="xR2">0,4 V</b> en vertical.</p><h2>Cómo se mide</h2><p>La línea base es el valor final, al que tiende la señal (línea blanca discontinua). La altura de un pico se cuenta en cuadros desde la línea base hasta el pico; aquí la señal baja, así que los picos que se miden son los de abajo. El tiempo se cuenta en cuadros en horizontal; para el periodo se mide de un pico al quinto siguiente del mismo lado y se divide entre 5.</p><div class="eq" data-tex="V=\text{cuadros}\times\text{voltios por cuadro}"></div><div class="eq" data-tex="t=\text{cuadros}\times\text{tiempo por cuadro}"></div><p>Conviene elegir la escala con la que la señal ocupe casi toda la pantalla sin salirse.</p></section></main>
+<div class="bar"><div class="ctrl"><label>Voltios por cuadro <select id="V" class="btn"><option value="0.5">0,5 V</option><option value="1">1 V</option><option value="2" selected>2 V</option><option value="5">5 V</option></select></label><label>Tiempo por cuadro <select id="Tm" class="btn"><option value="10">10 µs</option><option value="20">20 µs</option><option value="50" selected>50 µs</option><option value="100">100 µs</option></select></label><label><input type="checkbox" id="sh" checked> Mostrar la medida</label></div><div class="read"><div><span>Altura del primer pico</span><b id="rv" style="min-width:14em;color:#1f8a45">–</b></div><div><span>5 periodos</span><b id="rt" style="min-width:14em;color:#b0308f">–</b></div></div></div></div><p class="note">Señal parecida a la del laboratorio, con L = 10 mH y C ≈ 3 nF. · CC BY-NC-SA 4.0</p></section>
+<section class="side card"><h2>Cuánto mide cada cuadro</h2><p>Abajo a la izquierda, el osciloscopio escribe las dos escalas. <b class="ct" id="xM">M: 50us</b> quiere decir que cada cuadro, en horizontal, son <b class="ct" id="xM2">50 µs</b>. <b class="cv" id="xV">2.00V</b> quiere decir que cada cuadro, en vertical, son <b class="cv" id="xV2">2 V</b>.</p><p>En los ejes centrales cada cuadro está dividido en 5 rayitas, así que se cuenta de 0,2 en 0,2 cuadros: una rayita son <b class="ct" id="xR1">10 µs</b> en horizontal y <b class="cv" id="xR2">0,4 V</b> en vertical.</p><h2>Cómo se mide</h2><p>La línea base es el valor final, al que tiende la señal (línea blanca discontinua). La altura de un pico se cuenta en cuadros desde la línea base hasta el pico; aquí la señal baja, así que los picos que se miden son los de abajo. El tiempo se cuenta en cuadros en horizontal; para el periodo se mide de un pico al quinto siguiente del mismo lado y se divide entre 5.</p><div class="eq" data-tex="\color{#1f8a45}{V=\text{cuadros en vertical}\times\text{voltios por cuadro}}"></div><div class="eq" data-tex="\color{#b0308f}{t=\text{cuadros en horizontal}\times\text{tiempo por cuadro}}"></div><p>Conviene elegir la escala con la que la señal ocupe casi toda la pantalla sin salirse.</p></section></main>
 <script>
 function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
 if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
@@ -53,7 +53,7 @@ let playing=true,last=null;function loop(step){function f(ts){if(last===null)las
 pp.onclick=()=>set(!playing);document.addEventListener('click',e=>{const t=e.target.closest('button');if(t&&t!==pp)set(true)},true)})();
 
 const D=54,X0=40,Y0=50,W=15.2*D,H=8*D,XC=X0+7.6*D,YC=Y0+4*D,K='#1b2430',Y='#f5e43a',GL='#5f9fd6',CT='#ff8ad8',CV='#7dffa0';
-const Vi=2.5,Vf=-2.1,T=35e-6,w=2*Math.PI/T,b=-Math.log(0.8)/T,POS=0.2,TE=1.2;
+const T=34e-6,w=2*Math.PI/T,b=-Math.log(0.8)/T,Vf=-2.0,Vi=Vf+4.0/Math.exp(-b*T/2),POS=0.2,TE=1.2;
 mk('rect',{x:10,y:6,width:880,height:528,rx:12,fill:'#e6e8eb'});
 mk('rect',{x:22,y:14,width:856,height:516,rx:6,fill:'#0b1838'});
 const T_=(x,y,t,o)=>{const e=mk('text',Object.assign({x,y,'font-size':17,fill:'#fff','font-family':'Inter,sans-serif'},o||{}));e.textContent=t;return e};
@@ -81,8 +81,8 @@ mk('path',{d:`M${vx-6} ${vy} h-10 v${D/5} h10`,stroke:CV,'stroke-width':2,fill:'
 const tr=mk('path',{fill:'none',stroke:Y,'stroke-width':2.4,'clip-path':'url(#scr)','stroke-linejoin':'round'});
 const fl=mk('path',{stroke:'#fff','stroke-width':1.6,'stroke-dasharray':'7 5','clip-path':'url(#scr)'});
 const flt=T_(X0+W-8,0,'línea base (valor final)',{'text-anchor':'end','font-size':15,'font-weight':600});
-const av=mk('path',{stroke:'#fff','stroke-width':2.4,fill:'none'}),ah=mk('path',{stroke:'#fff','stroke-width':2.4,fill:'none'});
-const pA=pill(0,0,'#fff'),pB=pill(0,0,'#fff');
+const av=mk('path',{stroke:CV,'stroke-width':2.4,fill:'none'}),ah=mk('path',{stroke:CT,'stroke-width':2.4,fill:'none'});
+const pA=pill(0,0,CV),pB=pill(0,0,CT);
 // barra inferior, como en el aparato
 mk('rect',{x:X0-8,y:Y0+H+6,width:W+16,height:58,rx:4,fill:'#6aaee0'});
 const iM=T_(X0+4,Y0+H+26,''),iS=T_(X0+190,Y0+H+26,''),iD=T_(X0+360,Y0+H+26,'Depth:10K');
@@ -103,14 +103,14 @@ function upd(){const vd=+$('#V').value,tdu=+$('#Tm').value,td=tdu*1e-6,on=$('#sh
  const yg=Math.max(Y0,Math.min(Y0+H,sy(0,vd)));g0.setAttribute('d',`M${X0-20} ${yg-8} h12 l8 8 l-8 8 h-12 z`);
  const yt=Math.max(Y0,Math.min(Y0+H,sy(-2.56,vd)));trg.setAttribute('d',`M${X0+W+18} ${yt-8} l-14 8 l14 8 z`);
  const yf=sy(Vf,vd);fl.setAttribute('d',`M${X0} ${yf} H${X0+W}`);flt.setAttribute('y',yf+22);
- const t1=Math.PI/w,v1=V(t1),x1=sx(t1,td),ny=r02(Math.abs(v1-Vf)/vd),y1=yf+ny*D,inY=y1<=Y0+H&&yf>=Y0&&yf<=Y0+H;
- const nx=r02(5*T/td),x6=x1+nx*D,inX=x6<=X0+W;
+ const t1=Math.PI/w,v1=V(t1),x1=sx(t1,td),ny=Math.abs(v1-Vf)/vd,y1=sy(v1,vd),inY=y1<=Y0+H&&yf>=Y0&&yf<=Y0+H;
+ const t6=t1+5*T,nx=5*T/td,x6=sx(t6,td),y6=sy(V(t6),vd),inX=x6<=X0+W;
  [fl,flt,av,ah,pA.g,pB.g].forEach(e=>vis(e,on));
  if(inY){av.setAttribute('d',dbl(x1,yf,x1,y1));pA.set(fmt(ny,1)+' cuadros',x1+12,(yf+y1)/2+6);
   $('#rv').textContent=fmt(ny,1)+' cuadros × '+vs+' = '+fmt(ny*vd,1)+' V'}
  else{av.setAttribute('d','');pA.set('El pico se sale de la pantalla: sube los voltios por cuadro',X0+16,Y0+H-16);$('#rv').textContent='se sale de la pantalla'}
- const yb=Math.min(Y0+H-14,y1+26);
- if(inX){ah.setAttribute('d',dbl(x1,yb,x6,yb)+` M${x6} ${sy(V(t1+5*T),vd)} V${yb+8}`);pB.set('5 periodos = '+fmt(nx,1)+' cuadros',x6+12,yb+6);
+ const yb=Math.min(Y0+H-14,Math.max(y1,y6)+26);
+ if(inX){ah.setAttribute('d',dbl(x1,yb,x6,yb)+` M${x1} ${y1} V${yb+8} M${x6} ${y6} V${yb+8}`);pB.set('5 periodos = '+fmt(nx,1)+' cuadros',x6+12,yb+6);
   $('#rt').textContent=fmt(nx,1)+' cuadros × '+ts+' = '+fmt(nx*tdu,0)+' µs'}
  else{ah.setAttribute('d','');pB.set('No caben 5 periodos: sube el tiempo por cuadro',X0+16,Y0+H-48);$('#rt').textContent='no caben en la pantalla'}
  if(!on){$('#rv').textContent='–';$('#rt').textContent='–'}}
