@@ -47,6 +47,8 @@ const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
 function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
 function fmt(x,d){return x.toFixed(d).replace('.',',')}
 let playing=true,last=null;function loop(step){function f(ts){if(last===null)last=ts;let dt=Math.min(0.05,(ts-last)/1000);last=ts;if(playing&&!document.hidden)step(dt);requestAnimationFrame(f)}requestAnimationFrame(f)}
+(function(){const pp=document.getElementById('pp');if(!pp)return;const set=p=>{playing=p;pp.textContent=p?'Parar':'Continuar';pp.classList.toggle('on',!p)};
+pp.onclick=()=>set(!playing);document.addEventListener('click',e=>{const t=e.target.closest('button');if(t&&t!==pp)set(true)},true)})();
 
 const Lm=1.0,M=0.100,mu=0.0012,g=9.81,v=Math.sqrt(M*g/mu),f1=v/(2*Lm),kap=2*Math.PI*f1/(80*v);let ph=0;
 const K='#1b2430',G='#5b6676',x0=255,yc=150,pr=24,px=745,py=yc+pr,x1=px,A=1.6,TY=300;
