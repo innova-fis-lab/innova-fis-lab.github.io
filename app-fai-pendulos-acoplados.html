@@ -54,7 +54,9 @@ const s=[mk('path',{stroke:'#1b2430','stroke-width':2}),mk('path',{stroke:'#1b24
 hk=mk('path',{stroke:'#1b2430','stroke-width':1.5}),mm=mk('rect',{width:22,height:18,rx:2,fill:'#8a94a3'}),
 b=[mk('circle',{r:16,fill:'#1d5fa8'}),mk('circle',{r:16,fill:'#d9820b'})];
 const n1=mk('text',{x:ax[0],y:TOP+S+48,'text-anchor':'middle','font-size':17,fill:'#1b2430'});n1.textContent='1';const n2=mk('text',{x:ax[1],y:TOP+S+48,'text-anchor':'middle','font-size':17,fill:'#1b2430'});n2.textContent='2';
-const GY=[150,345],gh=150,gx=480,gw=410,GT=60;GY.forEach((gy,i)=>{mk('rect',{x:gx,y:gy-gh/2,width:gw,height:gh,fill:'#fff',stroke:'#d9dee5'});mk('path',{d:`M${gx} ${gy} H${gx+gw}`,stroke:'#cfd5dc'});const e=mk('text',{x:gx,y:gy-gh/2-7,'font-size':15,fill:'#1b2430'});e.textContent='Péndulo '+(i+1)+': desplazamiento en los últimos 60 s'});
+const GY=[250,250],gh=330,gx=480,gw=410,GT=60;mk('rect',{x:gx,y:250-gh/2,width:gw,height:gh,fill:'#fff',stroke:'#d9dee5'});mk('path',{d:`M${gx} 250 H${gx+gw}`,stroke:'#cfd5dc'});
+{const e=mk('text',{x:gx,y:250-gh/2-30,'font-size':15,fill:'#1b2430'});e.textContent='Desplazamiento en los últimos 60 s';
+[['Péndulo 1','#1d5fa8'],['Péndulo 2','#d9820b']].forEach(([t,c],i)=>{const x=gx+i*120;mk('path',{d:`M${x} ${250-gh/2-12} h22`,stroke:c,'stroke-width':3});const l=mk('text',{x:x+28,y:250-gh/2-7,'font-size':15,fill:'#1b2430'});l.textContent=t})}
 
 const tr=[mk('path',{fill:'none',stroke:'#1d5fa8','stroke-width':1.6}),mk('path',{fill:'none',stroke:'#d9820b','stroke-width':1.6})];
 let a1=0,a2=0,p1=0,p2=0;
@@ -67,7 +69,7 @@ function draw(){const x=pos(),P=[0,1].map(i=>[ax[i]+x[i]*S*EX/L*0+x[i]*EX*S/1,TO
  [0,1].forEach(i=>{s[i].setAttribute('d',`M${ax[i]} ${TOP} L${B[i][0]} ${B[i][1]}`);b[i].setAttribute('cx',B[i][0]);b[i].setAttribute('cy',B[i][1])});
  const d=Math.max(1,K[1][0]-K[0][0]),half=95,dy=Math.sqrt(Math.max(1,half*half-(d/2)**2)),vx=(K[0][0]+K[1][0])/2,vy=K[0][1]+dy;
  vv.setAttribute('d',`M${K[0][0]} ${K[0][1]} L${vx} ${vy} L${K[1][0]} ${K[1][1]}`);hk.setAttribute('d',`M${vx} ${vy} V${vy+20}`);mm.setAttribute('x',vx-11);mm.setAttribute('y',vy+20);
- [0,1].forEach(i=>{let dd='';const t0=Math.max(0,t-GT);hist.forEach(p=>{if(p[0]>=t0)dd+=(dd?'L':'M')+(gx+(p[0]-t0)/GT*gw)+' '+(GY[i]-p[1+i]/A0*gh/2.3)});tr[i].setAttribute('d',dd)});
+ [0,1].forEach(i=>{let dd='';const t0=Math.max(0,t-GT);hist.forEach(p=>{if(p[0]>=t0)dd+=(dd?'L':'M')+(gx+(p[0]-t0)/GT*gw)+' '+(GY[i]-p[1+i]/A0*gh/2.2)});tr[i].setAttribute('d',dd)});
  $('#tt').textContent=fmt(t,1)+' s'}
 $('#M').oninput=()=>{setM();if(mode)start(mode)};document.querySelectorAll('.md').forEach(x=>x.onclick=()=>start(+x.dataset.m));setM();start(3);
 loop(dt=>{t+=dt*(+$('#sp').value);const x=pos();hist.push([t,x[0],x[1]]);if(hist.length>6000)hist.shift();draw()});
