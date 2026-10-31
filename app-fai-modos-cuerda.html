@@ -5,40 +5,41 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <style>
 :root{--bg:#fff;--paper:#f6f7f9;--ink:#1b2430;--slate:#4a5566;--line:#d9dee5;--b:#1d5fa8;--o:#d9820b;--g:#1b7a43;--navy:#17324d}
-*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.5}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 24px;border-bottom:1px solid var(--line)}
-header a{color:var(--navy);text-decoration:none;font-weight:700}header .t{font-size:13px;color:var(--slate);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
-main{max-width:1320px;margin:0 auto;padding:18px 24px 40px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px}
-h1{font-size:28px;margin:0 0 4px;color:var(--navy);grid-column:1/-1}.sub{grid-column:1/-1;margin:-6px 0 0;color:var(--slate)}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}
-svg.sim{width:100%;height:auto;max-height:max(260px,calc(100vh - 340px));display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
-.ctrl{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin-top:14px}
-.ctrl label{font-weight:600;display:flex;align-items:center;gap:10px}
-.ctrl input[type=range]{width:200px;accent-color:var(--b)}
-.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:7px 14px;cursor:pointer}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.4}
+body{display:flex;flex-direction:column}
+header{flex:none;display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:8px 18px;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:clamp(17px,2.6vh,24px);color:var(--navy)}header a{color:var(--navy);text-decoration:none;font-weight:600;font-size:clamp(12px,1.7vh,15px);white-space:nowrap}
+main{flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);gap:14px;padding:10px 14px}
+.left{display:flex;flex-direction:column;min-height:0;gap:6px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px}
+.left .card{flex:1;min-height:0;display:flex;flex-direction:column}
+svg.sim{flex:1;min-height:0;width:100%;height:100%;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.bar{flex:none;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:8px;font-size:clamp(13px,1.9vh,17px)}
+.ctrl,.read{display:contents}
+.bar label{font-weight:600;display:flex;align-items:center;gap:8px}
+.bar input[type=range]{width:clamp(120px,14vw,240px);accent-color:var(--b)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:4px 11px;cursor:pointer}
 .btn.on{background:var(--navy);color:#fff}
-.read{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
-.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 14px;min-width:140px}
-.read b{display:block;font-size:22px;color:var(--navy);font-variant-numeric:tabular-nums}
-.read span{font-size:14px;color:var(--slate);font-weight:600}
-h2{font-size:20px;margin:0 0 8px;color:var(--navy)}
-.side p{margin:0 0 14px}.side ol{margin:0 0 16px;padding-left:24px}.side li{margin-bottom:8px}
-.eq{text-align:center;font-size:21px;margin:6px 0 16px}
-table.t{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
-table.t th,table.t td{border:1px solid #9aa3ae;padding:7px 6px;text-align:center}table.t th{background:#fff0c1}
-.note{font-size:14px;color:var(--slate)}
-footer{text-align:center;font-size:13px;color:var(--slate);padding:14px;border-top:1px solid var(--line)}
-main>section:first-of-type{position:sticky;top:8px;align-self:start}
-@media(max-height:900px){html,body{font-size:15px}h1{font-size:22px}.sub{font-size:15px}header{padding:8px 20px}main{padding-top:10px;gap:20px}.read b{font-size:18px}.read div{padding:5px 10px;min-width:120px}.ctrl{margin-top:8px;gap:8px 16px}.read{margin-top:8px}.card{padding:12px}.btn{padding:5px 11px}}
-@media(max-width:900px){main{grid-template-columns:1fr;padding:14px 16px}main>section:first-of-type{position:static}svg.sim{max-height:none}}
+.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;align-items:baseline;gap:8px}
+.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums}
+.read span{font-size:.85em;color:var(--slate);font-weight:600}
+.note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--slate)}
+.side{min-height:0;overflow:hidden;font-size:16px}
+h2{font-size:1.15em;margin:0 0 .3em;color:var(--navy)}
+.side p{margin:0 0 .6em}.side ol{margin:0 0 .7em;padding-left:1.4em}.side li{margin-bottom:.3em}
+.eq{text-align:center;font-size:1.2em;margin:.2em 0 .6em}.eq .katex-display{margin:0}
+table.t{border-collapse:collapse;width:100%;background:#fff;font-size:.88em}
+table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:center}table.t th{background:#fff0c1}
+.side .note{font-size:.85em;margin:-.3em 0 .6em}
+@media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
 </style></head><body>
-<header><a href="laboratorios.html#fai">← Laboratorio de Física Aplicada a la Ingeniería</a><span class="t">INNOVA-FIS-LAB · App de la práctica</span></header>
-<main><h1>Modos normales de una cuerda tensa</h1><p class="sub">La cuerda solo vibra con gran amplitud a ciertas frecuencias: las de sus modos normales.</p>
-<section><div class="card"><svg class="sim" viewBox="0 0 640 330"></svg>
-<div class="ctrl"><label>Frecuencia del generador <input id="F" type="range" min="5" max="100" step="0.1" value="10" style="width:280px"><b id="Fv"></b></label><button class="btn" id="m">−0,1 Hz</button><button class="btn" id="p">+0,1 Hz</button></div><div class="read"><div><span>Vientres que se ven</span><b id="nv">–</b></div></div></div><p class="note">El movimiento se muestra ralentizado: la cuerda real vibra decenas de veces por segundo. Valores de ejemplo: L = 1 m, M = 100 g.</p></section>
+<header><h1>Modos normales de una cuerda tensa</h1><a href="laboratorios.html#fai">← Laboratorio de FAI · INNOVA-FIS-LAB</a></header>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 640 330"></svg>
+<div class="bar"><div class="ctrl"><label>Frecuencia del generador <input id="F" type="range" min="5" max="100" step="0.1" value="10" style="width:280px"><b id="Fv"></b></label><button class="btn" id="m">−0,1 Hz</button><button class="btn" id="p">+0,1 Hz</button></div><div class="read"><div><span>Vientres que se ven</span><b id="nv">–</b></div></div></div></div><p class="note">El movimiento se muestra ralentizado: la cuerda real vibra decenas de veces por segundo. Valores de ejemplo: L = 1 m, M = 100 g. · CC BY-NC-SA 4.0</p></section>
 <section class="side card"><h2>Qué se observa</h2><p>El vibrador mueve un extremo de la cuerda. A la mayoría de las frecuencias la cuerda apenas se mueve, pero al acercarse a la frecuencia de un modo normal entra en resonancia y aparecen 1, 2, 3… vientres separados por nodos que no se mueven.</p><div class="eq" data-tex="f_n=\frac{n}{2L}\sqrt{\frac{T}{\mu}}"></div><h2>Qué hay que medir</h2><ol><li>Anotar la masa colgada <i>M</i> y medir la longitud <i>L</i> entre el vibrador y la polea.</li><li>Subir la frecuencia despacio. En cada modo, ajustarla hasta que los vientres tengan la máxima amplitud, contar los vientres y anotar la frecuencia.</li><li>Anotar también la frecuencia más baja y la más alta a las que la amplitud se ve máxima, para el error.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>n</i></th><th><i>f</i><sub>n</sub> (Hz)</th><th>ε<sub>f</sub> (Hz)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
-<footer>INNOVA-FIS-LAB · Universidad Rey Juan Carlos · CC BY-NC-SA 4.0</footer>
 <script>
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let f=19;e.style.fontSize=f+'px';while(e.scrollHeight>e.clientHeight+1&&f>10){f-=0.5;e.style.fontSize=f+'px'}}
+addEventListener('resize',fit);setTimeout(fit,50);setTimeout(fit,600);
 document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
 const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
 function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
