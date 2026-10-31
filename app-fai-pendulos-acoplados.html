@@ -34,11 +34,12 @@ table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:cent
 @media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
 </style></head><body>
 <header><h1>Péndulos acoplados: modos normales y batidos</h1><a href="laboratorios.html#fai">← Laboratorio de FAI · INNOVA-FIS-LAB</a></header>
-<main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 560 560"></svg>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="105 20 800 430"></svg>
 <div class="bar"><div class="ctrl"><span style="font-weight:600">Soltar</span><button class="btn md" data-m="1">En fase</button><button class="btn md" data-m="2">En oposición</button><button class="btn md" data-m="3">Solo el 1 (batido)</button><label>Masa del centro <i>M</i> <input id="M" type="range" min="30" max="60" step="10" value="60"><b id="Mv"></b></label><label>Velocidad <select id="sp" class="btn"><option value="1">×1</option><option value="2">×2</option><option value="4">×4</option></select></label></div><div class="read"><div><span>Cronómetro</span><b id="tt">0,0 s</b></div></div></div></div><p class="note">Los desplazamientos están exagerados en el dibujo para que se vean. Valores de ejemplo: péndulos de 78 cm, separados 22 cm. · CC BY-NC-SA 4.0</p></section>
 <section class="side card"><h2>Qué se observa</h2><p>Si se sueltan los dos péndulos hacia el mismo lado, se mueven juntos y la V no se deforma: es el modo en fase. Si se sueltan hacia lados opuestos, la V se abre y se cierra y oscilan algo más deprisa: es el modo en oposición. Si se suelta uno solo, la oscilación pasa de un péndulo al otro y vuelve: son los batidos. Con más masa en el centro el acoplamiento es más fuerte y el batido más corto.</p><div class="eq" data-tex="T_b=\frac{2\pi}{\omega_2-\omega_1}"></div><p>Aquí ω<sub>1</sub> y ω<sub>2</sub> son las frecuencias angulares del modo en fase y del modo en oposición, ω = 2π/<i>T</i>, donde <i>T</i><sub>1</sub> y <i>T</i><sub>2</sub> son sus periodos, el tiempo de una oscilación completa. <i>T</i><sub>b</sub> es el periodo de batido, el tiempo entre dos paradas seguidas del péndulo 1. Como ω<sub>1</sub> y ω<sub>2</sub> son muy parecidas, <i>T</i><sub>b</sub> es mucho mayor que <i>T</i><sub>1</sub> y <i>T</i><sub>2</sub>.</p><h2>Qué hay que medir</h2><ol><li>En fase: separar los dos péndulos lo mismo hacia el mismo lado, soltarlos a la vez y medir el tiempo de 10 oscilaciones.</li><li>En oposición: lo mismo hacia lados opuestos, para cuatro masas <i>M</i> del centro.</li><li>Batidos: con <i>M</i> = 60 g, medir el tiempo entre dos paradas del péndulo 1 y contar sus oscilaciones en ese tiempo.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>M</i> (g)</th><th><i>t</i>₁₀,₁ (s)</th><th><i>t</i>₁₀,₂ (s)</th><th><i>t</i>₁₀,₃ (s)</th><th><i>T</i>₂ (s)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
 <script>
-function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let f=19;e.style.fontSize=f+'px';while(e.scrollHeight>e.clientHeight+1&&f>10){f-=0.5;e.style.fontSize=f+'px'}}
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
 function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'})}
 addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
 document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
@@ -53,8 +54,8 @@ const s=[mk('path',{stroke:'#1b2430','stroke-width':2}),mk('path',{stroke:'#1b24
 hk=mk('path',{stroke:'#1b2430','stroke-width':1.5}),mm=mk('rect',{width:22,height:18,rx:2,fill:'#8a94a3'}),
 b=[mk('circle',{r:16,fill:'#1d5fa8'}),mk('circle',{r:16,fill:'#d9820b'})];
 const n1=mk('text',{x:ax[0],y:TOP+S+48,'text-anchor':'middle','font-size':17,fill:'#1b2430'});n1.textContent='1';const n2=mk('text',{x:ax[1],y:TOP+S+48,'text-anchor':'middle','font-size':17,fill:'#1b2430'});n2.textContent='2';
-const gy=500,gh=70,gx=30,gw=500,GT=60;mk('rect',{x:gx,y:gy-gh/2,width:gw,height:gh,fill:'#fff',stroke:'#d9dee5'});mk('path',{d:`M${gx} ${gy} H${gx+gw}`,stroke:'#cfd5dc'});
-const gl=mk('text',{x:gx,y:gy-gh/2-6,'font-size':13,fill:'#4a5566'});gl.textContent='desplazamiento de cada péndulo en los últimos 60 s';
+const GY=[150,345],gh=150,gx=480,gw=410,GT=60;GY.forEach((gy,i)=>{mk('rect',{x:gx,y:gy-gh/2,width:gw,height:gh,fill:'#fff',stroke:'#d9dee5'});mk('path',{d:`M${gx} ${gy} H${gx+gw}`,stroke:'#cfd5dc'});const e=mk('text',{x:gx,y:gy-gh/2-7,'font-size':15,fill:'#1b2430'});e.textContent='Péndulo '+(i+1)+': desplazamiento en los últimos 60 s'});
+
 const tr=[mk('path',{fill:'none',stroke:'#1d5fa8','stroke-width':1.6}),mk('path',{fill:'none',stroke:'#d9820b','stroke-width':1.6})];
 let a1=0,a2=0,p1=0,p2=0;
 function setM(){M=+$('#M').value;$('#Mv').textContent=M+' g';w2=Math.sqrt(w1*w1+c*M)}
@@ -66,7 +67,7 @@ function draw(){const x=pos(),P=[0,1].map(i=>[ax[i]+x[i]*S*EX/L*0+x[i]*EX*S/1,TO
  [0,1].forEach(i=>{s[i].setAttribute('d',`M${ax[i]} ${TOP} L${B[i][0]} ${B[i][1]}`);b[i].setAttribute('cx',B[i][0]);b[i].setAttribute('cy',B[i][1])});
  const d=Math.max(1,K[1][0]-K[0][0]),half=95,dy=Math.sqrt(Math.max(1,half*half-(d/2)**2)),vx=(K[0][0]+K[1][0])/2,vy=K[0][1]+dy;
  vv.setAttribute('d',`M${K[0][0]} ${K[0][1]} L${vx} ${vy} L${K[1][0]} ${K[1][1]}`);hk.setAttribute('d',`M${vx} ${vy} V${vy+20}`);mm.setAttribute('x',vx-11);mm.setAttribute('y',vy+20);
- [0,1].forEach(i=>{let dd='';const t0=Math.max(0,t-GT);hist.forEach(p=>{if(p[0]>=t0)dd+=(dd?'L':'M')+(gx+(p[0]-t0)/GT*gw)+' '+(gy-p[1+i]/A0*gh/2.3)});tr[i].setAttribute('d',dd)});
+ [0,1].forEach(i=>{let dd='';const t0=Math.max(0,t-GT);hist.forEach(p=>{if(p[0]>=t0)dd+=(dd?'L':'M')+(gx+(p[0]-t0)/GT*gw)+' '+(GY[i]-p[1+i]/A0*gh/2.3)});tr[i].setAttribute('d',dd)});
  $('#tt').textContent=fmt(t,1)+' s'}
 $('#M').oninput=()=>{setM();if(mode)start(mode)};document.querySelectorAll('.md').forEach(x=>x.onclick=()=>start(+x.dataset.m));setM();start(3);
 loop(dt=>{t+=dt*(+$('#sp').value);const x=pos();hist.push([t,x[0],x[1]]);if(hist.length>6000)hist.shift();draw()});

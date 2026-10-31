@@ -34,11 +34,12 @@ table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:cent
 @media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
 </style></head><body>
 <header><h1>Péndulo simple</h1><a href="laboratorios.html#fai">← Laboratorio de FAI · INNOVA-FIS-LAB</a></header>
-<main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 560 470"></svg>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="0 20 860 450"></svg>
 <div class="bar"><div class="ctrl"><label>Longitud <i>L</i> <input id="L" type="range" min="0.2" max="0.8" step="0.1" value="0.8"><b id="Lv"></b></label><label>Separación <i>x</i> <input id="X" type="range" min="0.05" max="0.55" step="0.05" value="0.05"><b id="Xv"></b></label><button class="btn" id="go" data-alt="Volver a empezar">Soltar</button></div><div class="read"><div><span>Amplitud θ₀</span><b id="th">–</b></div><div><span>Periodo (puerta fotoeléctrica)</span><b id="T">–</b></div></div></div></div><p class="note">Simulación con la ecuación exacta del péndulo, sin aproximar sen θ ≈ θ. · CC BY-NC-SA 4.0</p></section>
 <section class="side card"><h2>Qué se observa</h2><p>La esfera oscila colgada del hilo. Con amplitud pequeña, el periodo solo depende de la longitud: al acortar el hilo, oscila más deprisa. Si se separa mucho la esfera, el periodo crece un poco.</p><div class="eq" data-tex="T_0=2\pi\sqrt{\frac{L}{g}}"></div><p>Aquí <i>T</i><sub>0</sub> es el periodo para oscilaciones pequeñas, el tiempo de una oscilación completa de ida y vuelta; <i>L</i> es la longitud del hilo hasta el centro de la esfera, y <i>g</i>, la aceleración de la gravedad. Si la amplitud θ<sub>0</sub> no es pequeña, el periodo <i>T</i> sale algo mayor que <i>T</i><sub>0</sub>.</p><h2>Qué hay que medir</h2><ol><li>Para siete longitudes, de 20 a 80 cm, separar la esfera unos centímetros, soltarla y leer cinco veces el periodo en la puerta fotoeléctrica.</li><li>Con <i>L</i> = 80 cm, soltar la esfera desde varias separaciones <i>x</i> y medir el periodo de la primera oscilación.</li><li>La amplitud sale del triángulo: sen θ₀ = <i>x</i>/<i>L</i>.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>L</i> (m)</th><th><i>T</i>₁ (s)</th><th><i>T</i>₂ (s)</th><th>…</th><th><i>T</i>₀ (s)</th><th><i>T</i>₀² (s²)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
 <script>
-function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let f=19;e.style.fontSize=f+'px';while(e.scrollHeight>e.clientHeight+1&&f>10){f-=0.5;e.style.fontSize=f+'px'}}
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
 function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'})}
 addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
 document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
@@ -56,19 +57,27 @@ const gate=mk('rect',{width:16,height:34,rx:3,fill:'#5b6676'}),gate2=mk('rect',{
 const beam=mk('path',{stroke:'#c0392b','stroke-width':2,opacity:.35});
 const str=mk('path',{stroke:'#1b2430','stroke-width':2}),bob=mk('circle',{r:15,fill:'#1d5fa8'});
 const lab=mk('text',{x:470,y:445,'font-size':16,fill:'#4a5566'});lab.textContent='puerta fotoeléctrica';
+const cx0=600,cy0=400,cw=230,ch=260;mk('rect',{x:cx0,y:cy0-ch,width:cw,height:ch,fill:'#fff',stroke:'#d9dee5'});
+const ct=mk('text',{x:cx0,y:cy0-ch-10,'font-size':15,fill:'#1b2430'});ct.textContent='T / T₀ frente a la amplitud';
+const CX=d=>cx0+d/45*cw,CY=r=>cy0-(r-1)/0.045*ch;
+for(const d of [0,15,30,45]){mk('path',{d:`M${CX(d)} ${cy0} v5`,stroke:'#1b2430'});const t=mk('text',{x:CX(d),y:cy0+20,'font-size':13,'text-anchor':'middle',fill:'#1b2430'});t.textContent=d+'°'}
+for(const r of [1,1.02,1.04]){mk('path',{d:`M${cx0-5} ${CY(r)} h5`,stroke:'#1b2430'});const t=mk('text',{x:cx0-8,y:CY(r)+4,'font-size':13,'text-anchor':'end',fill:'#1b2430'});t.textContent=fmt(r,2)}
+let cd='';for(let d=0;d<=45;d+=1){const a=d*Math.PI/180,r=1+a*a/16+11*a**4/3072;cd+=(d?'L':'M')+CX(d)+' '+CY(r)}mk('path',{d:cd,fill:'none',stroke:'#8a94a3','stroke-width':2,'stroke-dasharray':'5 4'});
+const cl=mk('text',{x:cx0+8,y:cy0-ch+18,'font-size':13,fill:'#4a5566'});cl.textContent='teoría (línea) y medida (punto)';
+const cpt=mk('circle',{r:6,fill:'#1d5fa8',opacity:0});
 function geom(){L=+$('#L').value;X=Math.min(+$('#X').value,0.95*L);$('#Lv').textContent=Math.round(L*100)+' cm';$('#Xv').textContent=Math.round(X*100)+' cm';
  const ly=O.y+L*S;vert.setAttribute('d',`M${O.x} ${O.y} V${ly+40}`);
  gate.setAttribute('x',O.x-48);gate.setAttribute('y',ly-17);gate2.setAttribute('x',O.x+32);gate2.setAttribute('y',ly-17);beam.setAttribute('d',`M${O.x-32} ${ly} H${O.x+32}`);
  lab.setAttribute('y',Math.min(ly+48,462));lab.setAttribute('x',O.x+56);
  const a=Math.asin(X/L),bx=O.x+L*S*Math.sin(a),by=O.y+L*S*Math.cos(a);tri.setAttribute('d',`M${O.x} ${by} H${bx}`);triT.setAttribute('x',(O.x+bx)/2);triT.setAttribute('y',by-8);}
 function draw(){const bx=O.x+L*S*Math.sin(th),by=O.y+L*S*Math.cos(th);str.setAttribute('d',`M${O.x} ${O.y} L${bx} ${by}`);bob.setAttribute('cx',bx);bob.setAttribute('cy',by);}
-function reset(){geom();th0=Math.asin(X/L);th=th0;w=0;t=0;lastCross=null;Tm=null;run=false;$('#th').textContent=fmt(th0*180/Math.PI,1)+'°';$('#T').textContent='–';$('#go').textContent='Soltar';draw();}
+function reset(){geom();cpt.setAttribute('opacity',0);th0=Math.asin(X/L);th=th0;w=0;t=0;lastCross=null;Tm=null;run=false;$('#th').textContent=fmt(th0*180/Math.PI,1)+'°';$('#T').textContent='–';$('#go').textContent='Soltar';draw();}
 $('#L').oninput=reset;$('#X').oninput=reset;$('#go').onclick=()=>{if(run){reset()}else{run=true;$('#go').textContent='Volver a empezar'}};
 reset();
 loop(dt=>{if(!run)return;const n=20,h=dt/n;for(let i=0;i<n;i++){const f=(a)=>-g/L*Math.sin(a);
  const k1=w,l1=f(th),k2=w+h/2*l1,l2=f(th+h/2*k1),k3=w+h/2*l2,l3=f(th+h/2*k2),k4=w+h*l3,l4=f(th+h*k3);
  const thn=th+h/6*(k1+2*k2+2*k3+k4);w=w+h/6*(l1+2*l2+2*l3+l4);t+=h;
- if(th<0&&thn>=0){const tc=t-h*thn/(thn-th);if(lastCross!==null){Tm=tc-lastCross;$('#T').textContent=fmt(Tm,3)+' s'}lastCross=tc;beam.setAttribute('opacity',1);setTimeout(()=>beam.setAttribute('opacity',.35),120)}
+ if(th<0&&thn>=0){const tc=t-h*thn/(thn-th);if(lastCross!==null){Tm=tc-lastCross;$('#T').textContent=fmt(Tm,3)+' s';const r=Tm/(2*Math.PI*Math.sqrt(L/g));cpt.setAttribute('cx',CX(th0*180/Math.PI));cpt.setAttribute('cy',CY(Math.min(r,1.045)));cpt.setAttribute('opacity',1)}lastCross=tc;beam.setAttribute('opacity',1);setTimeout(()=>beam.setAttribute('opacity',.35),120)}
  th=thn}draw()});
 
 </script></body></html>

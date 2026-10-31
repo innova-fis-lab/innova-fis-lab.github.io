@@ -34,11 +34,12 @@ table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:cent
 @media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
 </style></head><body>
 <header><h1>Ley de Hooke: periodo de oscilación</h1><a href="laboratorios.html#fai">← Laboratorio de FAI · INNOVA-FIS-LAB</a></header>
-<main><section class="left"><div class="card"><svg class="sim" viewBox="110 20 300 440"></svg>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="110 20 690 440"></svg>
 <div class="bar"><div class="ctrl"><label>Pesas de 10 g <input id="N" type="range" min="0" max="5" step="1" value="2"><b id="Nv"></b></label><button class="btn" id="go" data-alt="Volver a empezar">Bajar 1 cm y soltar</button></div><div class="read"><div><span>Masa colgada <i>m</i></span><b id="m">–</b></div><div><span>Oscilaciones contadas</span><b id="cnt">0</b></div><div><span>Cronómetro</span><b id="tt">0,00 s</b></div></div></div></div><p class="note">El cronómetro y el contador funcionan como en el laboratorio: cuentan una oscilación cada vez que la masa llega abajo. · CC BY-NC-SA 4.0</p></section>
 <section class="side card"><h2>Qué se observa</h2><p>Al colgar más pesas el muelle se alarga y, al soltarlo, la masa oscila arriba y abajo cada vez más despacio. El periodo no depende de cuánto se baje la masa al principio.</p><div class="eq" data-tex="T=2\pi\sqrt{\frac{m+m_0}{k}}"></div><p>Aquí <i>T</i> es el periodo, el tiempo de una oscilación completa; <i>m</i> es la masa colgada; <i>k</i>, la constante elástica del muelle, que mide lo que cuesta estirarlo; y <i>m</i><sub>0</sub>, una masa adicional que oscila con las pesas, la de la varilla del índice y la del propio muelle.</p><h2>Qué hay que medir</h2><ol><li>Medir con la báscula la masa colgada <i>m</i>, portapesas más pesas.</li><li>Bajar la masa un centímetro, soltarla y medir tres veces el tiempo de 20 oscilaciones. Una oscilación termina cada vez que la masa vuelve al punto más bajo.</li><li>Repetir añadiendo pesas de 10 g, hasta seis masas.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>m</i> (kg)</th><th><i>t</i>₂₀,₁ (s)</th><th><i>t</i>₂₀,₂ (s)</th><th><i>t</i>₂₀,₃ (s)</th><th><i>T</i> (s)</th><th><i>T</i>² (s²)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
 <script>
-function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let f=19;e.style.fontSize=f+'px';while(e.scrollHeight>e.clientHeight+1&&f>10){f-=0.5;e.style.fontSize=f+'px'}}
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
 function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'})}
 addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
 document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
@@ -52,15 +53,17 @@ mk('path',{d:'M150 40 H330',stroke:'#1b2430','stroke-width':3});for(let i=0;i<11
 mk('rect',{x:300,y:190,width:52,height:250,fill:'#fff8e1',stroke:'#1b2430'});
 for(let i=0;i<=16;i++){const yy=TOP+nat+10+i*14;mk('path',{d:`M300 ${yy} h${i%2?8:16}`,stroke:'#1b2430','stroke-width':1});if(i%2==0){const tx=mk('text',{x:324,y:yy+5,'font-size':13,fill:'#1b2430'});tx.textContent=String(i)}}
 const ul=mk('text',{x:360,y:TOP+nat+15,'font-size':13,fill:'#4a5566'});ul.textContent='cm';
+const gx=440,gw=340,gy=250,gh=220;mk('rect',{x:gx,y:gy-gh/2,width:gw,height:gh,fill:'#fff',stroke:'#d9dee5'});mk('path',{d:`M${gx} ${gy} H${gx+gw}`,stroke:'#cfd5dc'});
+const gl=mk('text',{x:gx,y:gy-gh/2-10,'font-size':15,fill:'#1b2430'});gl.textContent='Posición de la masa en los últimos 6 s';const tr=mk('path',{fill:'none',stroke:'#1d5fa8','stroke-width':2});let hist=[];
 const spr=mk('path',{stroke:'#1b2430','stroke-width':1.8,fill:'none'}),rod=mk('path',{stroke:'#1b2430','stroke-width':3});
 const ptr=mk('path',{stroke:'#c0392b','stroke-width':2}),hang=mk('g',{});
 function setm(){const n=+$('#N').value;m=0.010+0.010*n;$('#Nv').textContent=n;$('#m').textContent=Math.round(m*1000)+' g';hang.innerHTML='';
  for(let i=0;i<n+1;i++)mk('rect',{x:X0-24,y:i*9,width:48,height:7,rx:2,fill:i==0?'#5b6676':'#1d5fa8'},hang);}
 function draw(){const ext=m*g/k+y,yb=TOP+nat+ext*S;let d=`M${X0} ${TOP} V${TOP+12}`;const N=40;for(let i=1;i<N;i++){const yy=TOP+12+(yb-TOP-24)*i/N;d+=` L${X0+(i%2?12:-12)} ${yy}`}d+=` L${X0} ${yb-12} V${yb}`;
  spr.setAttribute('d',d);rod.setAttribute('d',`M${X0} ${yb} V${yb+30}`);ptr.setAttribute('d',`M${X0} ${yb+10} H300`);hang.setAttribute('transform',`translate(0 ${yb+30})`);}
-function reset(){setm();y=0;v=0;t=0;cnt=0;run=false;$('#cnt').textContent='0';$('#tt').textContent='0,00 s';$('#go').textContent='Bajar 1 cm y soltar';draw()}
+function reset(){setm();y=0;v=0;t=0;cnt=0;run=false;hist=[];tr.setAttribute('d','');$('#cnt').textContent='0';$('#tt').textContent='0,00 s';$('#go').textContent='Bajar 1 cm y soltar';draw()}
 $('#N').oninput=reset;$('#go').onclick=()=>{if(run){reset()}else{y=0.01;v=0;run=true;$('#go').textContent='Volver a empezar'}};reset();
 loop(dt=>{if(!run)return;const n=20,h=dt/n,om2=k/(m+m0);for(let i=0;i<n;i++){const vn=v-om2*y*h;const yn=y+vn*h;if(v>0&&vn<=0){cnt++;$('#cnt').textContent=cnt}v=vn;y=yn;t+=h}
- $('#tt').textContent=fmt(t,2)+' s';draw()});
+ $('#tt').textContent=fmt(t,2)+' s';hist.push([t,y]);if(hist.length>800)hist.shift();let d='';hist.forEach(p=>{if(p[0]>=t-6)d+=(d?'L':'M')+(gx+(p[0]-Math.max(0,t-6))/6*gw)+' '+(gy+p[1]/0.012*gh/2)});tr.setAttribute('d',d);draw()});
 
 </script></body></html>

@@ -34,11 +34,12 @@ table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:cent
 @media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
 </style></head><body>
 <header><h1>Circuito RLC: oscilaciones amortiguadas y resistencia crítica</h1><a href="laboratorios.html#fai">← Laboratorio de FAI · INNOVA-FIS-LAB</a></header>
-<main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 560 470"></svg>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 860 470"></svg>
 <div class="bar"><div class="ctrl"><label>Resistencia de la caja <i>R</i> <input id="R" type="range" min="0" max="6000" step="50" value="200"><b id="Rv"></b></label><label>Tiempo por cuadro <select id="TD" class="btn"><option>10</option><option selected>20</option><option>50</option><option>100</option></select> µs</label></div><div class="read"><div><span>¿Se pasa del valor final?</span><b id="ov">–</b></div><div><span>Máximos que se ven</span><b id="nm">–</b></div></div></div></div><p class="note">Valores de ejemplo: L = 10 mH, C = 3 nF más la capacidad del osciloscopio. En tu puesto la capacidad puede ser otra. · CC BY-NC-SA 4.0</p></section>
 <section class="side card"><h2>Qué se observa</h2><p>Con poca resistencia la tensión del condensador oscila alrededor de su valor final y las oscilaciones se van apagando, como un péndulo que se frena. Al subir <i>R</i> se apagan antes. Con la resistencia crítica la tensión llega a su valor final sin pasarse, y con más resistencia llega más despacio.</p><div class="eq" data-tex="L\,\ddot q+R_T\,\dot q+\frac{q}{C}=V(t)"></div><p>Aquí <i>q</i> es la carga del condensador, cuya tensión es <i>V</i><sub>C</sub> = <i>q</i>/<i>C</i>; <i>L</i>, la inductancia de la bobina; <i>C</i>, la capacidad del condensador; <i>R</i><sub>T</sub>, la resistencia total (caja, bobina y generador); y <i>V</i>(<i>t</i>), la onda cuadrada del generador. Es la ecuación de un oscilador amortiguado: <i>L</i> hace de masa, 1/<i>C</i> de muelle y <i>R</i><sub>T</sub> de rozamiento.</p><h2>Qué hay que medir</h2><ol><li>Elegir una <i>R</i> con la que se vean al menos 5 oscilaciones claras antes de que la señal se quede en su valor final.</li><li>Contando cuadros, medir el tiempo de 5 periodos y las alturas de los máximos sobre el valor final, <i>V</i>₀ a <i>V</i>₄.</li><li>Subir <i>R</i> y anotar el último valor con el que la tensión todavía se pasa del valor final y el primero con el que ya no se pasa.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>n</i></th><th><i>V</i><sub>n</sub> (V)</th><th>ln <i>V</i><sub>n</sub></th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
 <script>
-function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let f=19;e.style.fontSize=f+'px';while(e.scrollHeight>e.clientHeight+1&&f>10){f-=0.5;e.style.fontSize=f+'px'}}
+function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=10,hi=34;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+if(document.fonts)document.fonts.ready.then(()=>{fixBtn();fit()});
 function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'})}
 addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
 document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
@@ -54,10 +55,19 @@ for(let i=0;i<NX*5;i++)mk('path',{d:`M${ox+i*dv/5} ${oy+4*dv-3} v6`,stroke:'#9aa
 const fin=mk('path',{stroke:'#1b2430','stroke-dasharray':'6 4','stroke-width':1.2}),tr=mk('path',{fill:'none',stroke:'#1d5fa8','stroke-width':2.4}),dots=mk('g',{});
 const l1=mk('text',{x:ox,y:oy+dv*NY+30,'font-size':17,fill:'#1b2430'});l1.textContent='CH1  200 mV';const l2=mk('text',{x:ox+dv*NX,y:oy+dv*NY+30,'font-size':17,'text-anchor':'end',fill:'#1b2430'});
 const fl=mk('text',{'font-size':14,'text-anchor':'end',fill:'#1b2430'});fl.textContent='valor final';
+(function(){const K='#1b2430',X1=600,X2=820,Y1=90,Y2=380;const P=(d,w)=>mk('path',{d,stroke:K,'stroke-width':w||2,fill:'none'});
+P(`M${X1} ${Y2} V${Y1} H${X1+40}`);let z=`M${X1+40} ${Y1}`;for(let i=0;i<8;i++)z+=` L${X1+46+i*8} ${Y1+(i%2?8:-8)}`;z+=` L${X1+110} ${Y1} H${X1+130}`;P(z);
+let c=`M${X1+130} ${Y1}`;for(let i=0;i<4;i++)c+=` a9 9 0 0 1 18 0`;P(c);P(`M${X1+202} ${Y1} H${X2} V${(Y1+Y2)/2-8}`);
+P(`M${X2-18} ${(Y1+Y2)/2-8} h36 M${X2-18} ${(Y1+Y2)/2+8} h36`,3);P(`M${X2} ${(Y1+Y2)/2+8} V${Y2} H${X1}`);
+mk('circle',{cx:X1,cy:(Y1+Y2)/2,r:22,fill:'#fff',stroke:K,'stroke-width':2});P(`M${X1-10} ${(Y1+Y2)/2+8} v-16 h10 v16 h10 v-16`,1.6);
+const T=(x,y,t,a)=>{const e=mk('text',{x,y,'font-size':16,fill:K,'text-anchor':a||'middle'});e.textContent=t;return e};
+T(X1+75,Y1-18,'R (caja)');T(X1+166,Y1-18,'L = 10 mH');T(X2+26,(Y1+Y2)/2+6,'C','start');{const g=T(X1-30,(Y1+Y2)/2,'generador','middle');g.setAttribute('transform',`rotate(-90 ${X1-30} ${(Y1+Y2)/2})`)}
+window.rlab=T(X1+75,Y1+34,'');mk('path',{d:`M${X2} ${(Y1+Y2)/2-40} h-40 M${X2} ${(Y1+Y2)/2+40} h-40`,stroke:'#1d5fa8','stroke-width':1.5,'stroke-dasharray':'5 4'});
+const o=T(X2-44,(Y1+Y2)/2+4,'osciloscopio','end');o.setAttribute('fill','#1d5fa8');o.setAttribute('font-size',14)})();
 function vc(t,RT){const a=RT/(2*L),w0=1/Math.sqrt(L*C);if(a<w0*0.999){const wd=Math.sqrt(w0*w0-a*a);return V0*(1-Math.exp(-a*t)*(Math.cos(wd*t)+a/wd*Math.sin(wd*t)))}
  if(a<=w0*1.001)return V0*(1-(1+a*t)*Math.exp(-a*t));const s=Math.sqrt(a*a-w0*w0),r1=-a+s,r2=-a-s;return V0*(1+(r2*Math.exp(r1*t)-r1*Math.exp(r2*t))/(r1-r2))}
 const base=oy+7*dv,Y=v=>base-v/VD*dv;
-function draw(){const R=+$('#R').value,RT=R+RL+Rg,td=+$('#TD').value*1e-6;$('#Rv').textContent=R+' Ω';l2.textContent=$('#TD').value+' µs';
+function draw(){const R=+$('#R').value,RT=R+RL+Rg,td=+$('#TD').value*1e-6;$('#Rv').textContent=R+' Ω';rlab.textContent=R+' Ω';l2.textContent=$('#TD').value+' µs';
  let d='',mx=[],prev=null,pp=null,over=false;const t0=dv;for(let px=0;px<=dv*NX;px+=1){const t=(px-t0)/dv*td,v=t<0?0:vc(t,RT);d+=(px?'L':'M')+(ox+px)+' '+Y(v);
   if(v>V0*1.001)over=true;if(pp!==null&&prev>pp&&prev>v&&prev>V0*1.003)mx.push([ox+px-1,Y(prev)]);pp=prev;prev=v}
  tr.setAttribute('d',d);fin.setAttribute('d',`M${ox} ${Y(V0)} H${ox+dv*NX}`);fl.setAttribute('x',ox+dv*NX-6);fl.setAttribute('y',Y(V0)+20);
