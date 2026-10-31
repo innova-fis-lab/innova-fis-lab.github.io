@@ -1,180 +1,10 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<style id="snav-css">
-  .snav { display: block; margin: 0; position: sticky; top: 0; z-index: 50; background: #ffffff; border-bottom: 1px solid #e2e6eb; }
-  .snav .in { width: 100%; max-width: 1100px; margin: 0 auto; padding: 10px 28px; display: flex; align-items: center; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; }
-  .snav .br { display: flex; align-items: center; gap: 10px; color: #1b2430; text-decoration: none; font-family: "InterD","InterT",sans-serif; font-weight: 700; font-size: 1rem; letter-spacing: .02em; }
-  .snav .bl { display: flex; align-items: center; gap: 8px 18px; flex-wrap: wrap; }
-  .snav .fi { color: #5b6676; font-size: .85rem; text-underline-offset: 3px; }
-  .snav .fi:hover { color: #1b2430; }
-  .snav nav { display: flex; gap: 2px 22px; flex-wrap: wrap; }
-  .snav nav a { color: #5b6676; text-decoration: none; font-size: .93rem; font-weight: 600; padding: 4px 0; border-bottom: 2px solid transparent; }
-  .snav nav a:hover { color: #1b2430; }
-  .snav nav a[aria-current="page"] { color: #1b2430; border-bottom-color: #1b2430; }
-  .sfoot { border-top: 1px solid #e2e6eb; color: #5b6676; font-size: .88rem; }
-  .sfoot .in { max-width: 1100px; margin: 0 auto; padding: 22px 28px 30px; display: flex; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; }
-  .sfoot a { color: inherit; }
-  .itabs { display: inline-flex; gap: 8px; margin: 0 0 14px; }
-  .itabs a { display: inline-flex; align-items: center; gap: 10px; padding: 6px 16px 6px 8px; border: 1.5px solid #e2e6eb; border-radius: 12px; background: #fff; font-size: .95rem; font-weight: 600; color: #5b6676; text-decoration: none; }
-  .itabs a:hover { border-color: #b9c3ce; color: #1b2430; }
-  .itabs a[aria-current="page"] { border-color: #1f4e79; background: #eaf1f8; color: #163a5c; }
-  .itabs .ii { width: 44px; height: 32px; border-radius: 8px; background: #f6f7f9; display: grid; place-items: center; }
-  .itabs a[aria-current="page"] .ii { background: #fff; }
-  .itabs .ii svg { width: 34px; height: 26px; }
-  @media (max-width: 640px) { .snav .in, .sfoot .in { padding-left: 16px; padding-right: 16px; } }
-</style>
-<style id="vlbcss">.vthumb{display:block;position:relative;width:100%;padding:0;border:1px solid #d5dbe3;border-radius:8px;overflow:hidden;background:#eef3f9;cursor:pointer;aspect-ratio:16/9}
-.vthumb .vt{position:absolute;left:0;top:0;right:0;padding:8% 8% 0;text-align:left;font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:4px}.vthumb .va{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5b6676}.vthumb .vb{font-size:19px;font-weight:800;line-height:1.1;color:#17324d}.vthumb .vc{font-size:12px;font-weight:600;color:#1b7a43}
-.vthumb .pl{position:absolute;right:12px;bottom:12px;width:30px;height:30px;border-radius:50%;border:1.5px solid #9aa7b6;background:#fff;display:grid;place-items:center;transition:border-color .15s}
-.vthumb .pl::after{content:"";border-left:9px solid #7a8696;border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;margin-left:2px;transition:border-left-color .15s}
-.vthumb:hover{border-color:#b9c4d2}.vthumb:hover .pl{border-color:#17324d}.vthumb:hover .pl::after{border-left-color:#17324d}
-.vlb{position:fixed;inset:0;background:rgba(5,10,20,.75);display:none;align-items:center;justify-content:center;z-index:99999}
-.vlb.on{display:flex}
-.vlb .vw{width:min(86vw,1100px,calc(74vh*16/9));background:#000;border-radius:8px;overflow:hidden}
-.vlb video{display:block;width:100%;aspect-ratio:16/9;background:#000;cursor:pointer}
-.vlb .cb{display:flex;align-items:center;gap:12px;padding:8px 14px;background:#111821;color:#dfe5ec;font:600 13px Inter,sans-serif}
-.vlb .pp{width:30px;height:30px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
-.vlb .pp::after{content:"";border-left:11px solid #dfe5ec;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
-.vlb .pp.on::after{border:0;margin:0;width:10px;height:13px;background:linear-gradient(90deg,#dfe5ec 0 35%,transparent 35% 65%,#dfe5ec 65%)}
-.vlb .bar{flex:1;height:5px;border-radius:3px;background:#3a4553;position:relative;cursor:pointer}
-.vlb .bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:#dfe5ec}
-.vlb .bar::before{content:"";position:absolute;left:0;right:0;top:-8px;bottom:-8px}
-.vlb .tm{min-width:88px;text-align:right;font-variant-numeric:tabular-nums}
-.vlb .fs{width:30px;height:30px;border:0;background:transparent;cursor:pointer;padding:0;display:grid;place-items:center}
-.vlb .fs svg{width:18px;height:18px;stroke:#dfe5ec;fill:none;stroke-width:2}
-.vlb .vw:fullscreen{width:100vw;height:100vh;border-radius:0;display:flex;flex-direction:column}
-.vlb .vw:fullscreen video{flex:1;min-height:0;aspect-ratio:auto;object-fit:contain}
-.vlb .x{position:absolute;top:12px;right:16px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#111;font:700 26px/44px sans-serif;cursor:pointer}</style></head><body>
-<!--snav--><header class="snav"><div class="in" style="max-width:1520px"><div class="bl"><a class="br" href="index.html"><svg width="28" height="28" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="8" fill="#070c15"/><rect x="7" y="7" width="2.4" height="20" fill="#7a5cff"/><rect x="11.5" y="7" width="2.4" height="20" fill="#2fb7e8"/><rect x="17" y="7" width="2.4" height="20" fill="#57d163"/><rect x="21" y="7" width="2.4" height="20" fill="#f4a62a"/><rect x="25.5" y="7" width="2.4" height="20" fill="#ff4d4d"/></svg>INNOVA-FIS-LAB</a></div><nav aria-label="Secciones de la web"><a href="index.html">Inicio</a><a href="calibre.html">Instrumentos de medida</a><a href="errores.html">Errores</a><a href="novedades.html">Novedades</a><a href="colaboracion.html">Colaboración</a></nav></div></header><!--/snav-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<title>Simulación: leyes de Newton · INNOVA-FIS-LAB</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Public+Sans:wght@400;500;600;700&family=STIX+Two+Text:ital@1&display=swap">
-<script>
-window.MathJax = {
-  tex: { inlineMath: [['\\(', '\\)']] },
-  svg: { fontCache: 'global' },
-  options: { enableMenu: false }
-};
-</script>
-<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" defer></script>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leyes de Newton · INNOVA-FIS-LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=STIX+Two+Text:ital@1&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 <style>
 /* Layout: banco de laboratorio a escala (carril arriba, caída de m1 a la derecha, contadores debajo) junto a la tabla de medidas */
 :root{
@@ -520,23 +350,67 @@ body.tablemax{overflow:hidden}
 .lockover div{pointer-events:auto; background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:16px 22px; max-width:520px; font-size:15px; line-height:1.5; text-align:center; box-shadow:0 6px 20px #0002}
 .lockover b{display:block; font-size:16px; margin-bottom:4px}
 @media (prefers-reduced-motion: reduce){ *{scroll-behavior:auto} }
-</style>
-
-<div class="page">
-
-  <div class="main">
-    <section class="card bench" aria-label="Montaje experimental">
-      <div class="scenetop">
-        <span class="stitle">Leyes de Newton</span>
-        <div class="parts" role="tablist" aria-label="Parte de la práctica">
-          <button class="partbtn" id="part1" role="tab" data-part="1">1.ª parte</button>
-          <button class="partbtn" id="part2" role="tab" data-part="2">2.ª parte</button>
-        </div>
-        <button class="helpbtn" id="helpBtn" aria-expanded="false" aria-controls="helpPop" title="Ayuda">?</button>
-      </div>
-      <div class="rig">
-        <!-- Carril, deslizador, disparador, puerta y polea (unidades: mm) -->
-        <svg id="railSvg" class="scene" viewBox="0 -200 1800 650" role="img" aria-label="Carril de aire sobre la mesa con deslizador, disparador magnético, puerta fotoeléctrica y polea">
+</style><style id="vlbcss">.vthumb{display:block;position:relative;width:100%;padding:0;border:1px solid #d5dbe3;border-radius:8px;overflow:hidden;background:#eef3f9;cursor:pointer;aspect-ratio:16/9}
+.vthumb .vt{position:absolute;left:0;top:0;right:0;padding:8% 8% 0;text-align:left;font-family:Inter,sans-serif;display:flex;flex-direction:column;gap:4px}.vthumb .va{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#5b6676}.vthumb .vb{font-size:19px;font-weight:800;line-height:1.1;color:#17324d}.vthumb .vc{font-size:12px;font-weight:600;color:#1b7a43}
+.vthumb .pl{position:absolute;right:12px;bottom:12px;width:30px;height:30px;border-radius:50%;border:1.5px solid #9aa7b6;background:#fff;display:grid;place-items:center;transition:border-color .15s}
+.vthumb .pl::after{content:"";border-left:9px solid #7a8696;border-top:5.5px solid transparent;border-bottom:5.5px solid transparent;margin-left:2px;transition:border-left-color .15s}
+.vthumb:hover{border-color:#b9c4d2}.vthumb:hover .pl{border-color:#17324d}.vthumb:hover .pl::after{border-left-color:#17324d}
+.vlb{position:fixed;inset:0;background:rgba(5,10,20,.75);display:none;align-items:center;justify-content:center;z-index:99999}
+.vlb.on{display:flex}
+.vlb .vw{width:min(86vw,1100px,calc(74vh*16/9));background:#000;border-radius:8px;overflow:hidden}
+.vlb video{display:block;width:100%;aspect-ratio:16/9;background:#000;cursor:pointer}
+.vlb .cb{display:flex;align-items:center;gap:12px;padding:8px 14px;background:#111821;color:#dfe5ec;font:600 13px Inter,sans-serif}
+.vlb .pp{width:30px;height:30px;border:0;border-radius:50%;background:transparent;cursor:pointer;display:grid;place-items:center;padding:0}
+.vlb .pp::after{content:"";border-left:11px solid #dfe5ec;border-top:7px solid transparent;border-bottom:7px solid transparent;margin-left:3px}
+.vlb .pp.on::after{border:0;margin:0;width:10px;height:13px;background:linear-gradient(90deg,#dfe5ec 0 35%,transparent 35% 65%,#dfe5ec 65%)}
+.vlb .bar{flex:1;height:5px;border-radius:3px;background:#3a4553;position:relative;cursor:pointer}
+.vlb .bar i{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:3px;background:#dfe5ec}
+.vlb .bar::before{content:"";position:absolute;left:0;right:0;top:-8px;bottom:-8px}
+.vlb .tm{min-width:88px;text-align:right;font-variant-numeric:tabular-nums}
+.vlb .fs{width:30px;height:30px;border:0;background:transparent;cursor:pointer;padding:0;display:grid;place-items:center}
+.vlb .fs svg{width:18px;height:18px;stroke:#dfe5ec;fill:none;stroke-width:2}
+.vlb .vw:fullscreen{width:100vw;height:100vh;border-radius:0;display:flex;flex-direction:column}
+.vlb .vw:fullscreen video{flex:1;min-height:0;aspect-ratio:auto;object-fit:contain}
+.vlb .x{position:absolute;top:12px;right:16px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#111;font:700 26px/44px sans-serif;cursor:pointer}</style><style>
+:root{--f-ui:Inter,system-ui,sans-serif;--navy:#17324d;--paper:#f6f7f9;--W:min(60vw,calc((100vh - 128px)*1800/1510))}
+html,body{margin:0;height:100%;overflow:hidden;background:#fff}
+body{display:flex;flex-direction:column;font-family:var(--f-ui);color:var(--ink);line-height:1.4}
+header.top{flex:none;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 18px;padding:6px 18px;border-bottom:1px solid var(--line)}
+header.top .hl{display:flex;align-items:center;gap:10px 18px;flex-wrap:wrap}
+header.top h1{margin:0;font-size:clamp(17px,2.6vh,24px);color:var(--navy);font-weight:700}
+header.top a{color:var(--navy);text-decoration:none;font-weight:600;font-size:clamp(12px,1.7vh,15px);white-space:nowrap}
+.partbtn{font-size:clamp(13px,1.8vh,16px);padding:3px 14px}
+.vthumb.hv{display:inline;width:auto;aspect-ratio:auto;border:0;background:none;padding:0;color:var(--navy);font-weight:600;font-size:clamp(12px,1.7vh,15px);overflow:visible;text-decoration:underline;text-underline-offset:3px}
+main.app{flex:1;min-height:0;display:grid;grid-template-columns:calc(var(--W) + 22px) minmax(0,1fr);gap:14px;padding:10px 14px}
+.left{display:flex;flex-direction:column;min-height:0;gap:6px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px}
+.rig{width:var(--W);background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;grid-template-rows:auto 1fr;grid-template-areas:"rail rail" "panel fall"}
+.panel{grid-area:panel;align-self:stretch;padding:calc(var(--W)*.012) calc(var(--W)*.02) 6px;display:flex;flex-direction:column;justify-content:space-evenly;gap:6px;font-size:clamp(12px,calc(var(--W)*.0225),18px)}
+.ctl{gap:.5em}.ctl label.t,.ctl .t,.switch,.chips .t{font-size:1em}
+.readout{font-size:1.05em}.chip{font-size:1em;padding:.2em .8em}.chip.all,.chip.rst{padding:.2em .9em}
+.datos2{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.25em 1em;margin:0;font-size:1em}
+.datos2 dt{color:var(--muted)}.datos2 dd{margin:0;font-variant-numeric:tabular-nums}
+.linkbtn{font-size:1em}
+.note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--muted)}
+.side{min-height:0;overflow:hidden;font-size:16px}
+.side h2{font-size:1.15em;margin:0 0 .3em;color:var(--navy)}
+.side p{margin:0 0 .5em}.side ol{margin:0 0 .6em;padding-left:1.4em}.side li{margin-bottom:.25em}
+.side .eq{text-align:center;font-size:1.15em;margin:.1em 0 .5em}.side .eq .katex-display{margin:0}
+#tbl{min-width:0;font-size:.85em;background:#fff;border:1px solid #9aa3ae}
+#tbl th,#tbl td{padding:.3em .35em;border:1px solid #c3cad3}
+#tbl th{background:#fff0c1;font-size:1em;font-weight:600;vertical-align:middle}
+#tbl th .u{font-size:.85em}
+#tbl td{text-align:center;font-family:var(--f-num)}
+#tbl td .pm{display:block;font-size:.85em}
+#tbl .emptyrow td{padding:.8em;font-family:var(--f-ui)}
+@media(max-width:820px){html,body{overflow:auto;height:auto}main.app{grid-template-columns:1fr}:root{--W:calc(100vw - 50px)}.side{overflow-x:auto}#tbl{font-size:12px}}
+</style></head><body data-part="1">
+<header class="top"><div class="hl"><h1>Leyes de Newton</h1>
+<div class="parts" role="tablist" aria-label="Parte de la práctica"><button class="partbtn" id="part1" role="tab" data-part="1">1.ª parte: espacio y tiempo</button><button class="partbtn" id="part2" role="tab" data-part="2">2.ª parte: velocidad y tiempo</button></div>
+<button type="button" class="vthumb hv" data-src="videos/newton1.mp4">Vídeo: cómo se usa</button></div>
+<a href="laboratorios.html">← Laboratorios · INNOVA-FIS-LAB</a></header>
+<main class="app"><section class="left"><div class="card"><div class="rig">
+<svg id="railSvg" class="scene" viewBox="0 -200 1800 650" role="img" aria-label="Carril de aire sobre la mesa con deslizador, disparador magnético, puerta fotoeléctrica y polea">
           <defs>
             <linearGradient id="gAlu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--alu-f1)"/><stop offset="1" style="stop-color:var(--alu-f2)"/></linearGradient>
             <linearGradient id="gAnod" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--anod-f1)"/><stop offset="1" style="stop-color:var(--anod-f2)"/></linearGradient>
@@ -582,152 +456,48 @@ body.tablemax{overflow:hidden}
             <g id="massG"></g>
           </g>
         </svg>
-
-        <div class="panel">
-
-          <div class="ctl">
-            <div class="ctl-row" style="justify-content:space-between">
-              <span class="ctl-row" style="gap:6px 22px"><label class="t" for="gate">Puerta fotoeléctrica</label><label class="switch"><input type="checkbox" id="slow"> Cámara lenta (×0,2)</label></span>
-              <span class="readout" id="gateReadout"></span>
-            </div>
-            <input type="range" id="gate" min="50" max="60" step="10" value="50" aria-describedby="gateReadout">
-            <div class="ctl-row">
-              <div class="chips" id="chips"><span class="t"><i style="font-family:var(--f-math)">s</i> (cm)</span></div>
-            </div>
-            <div class="demonote">En la simulación solo se mide en <b>30 y 40 cm</b>, para ver cómo se rellena la tabla. El resto de posiciones y el ajuste se hacen con las medidas del laboratorio.</div>
-          </div>
-        </div>
-
-        <div class="datos">
-          <dl>
-            <dt>Masa colgante</dt><dd>\(m_1\) = 20 g + 1 g del portapesas = 21 g</dd>
-            <dt>Deslizador</dt><dd>\(m_2\) = 400 g, sin pesas</dd>
-            <dt class="p2only">Pantalla</dt><dd class="p2only" id="dsCell"><button class="linkbtn" id="calibre">Medir Δs con el calibre</button></dd>
-          </dl>
-          <div class="eqs">
-            <span>\(a=\dfrac{m_1 g}{m_1+m_2}\)</span>
-            <span class="p1only">\(s=\tfrac12\,a\,t'^2\)</span>
-            <span class="p2only">\(v=a\,t'\)</span>
-            <span class="p2only">\(v\simeq \Delta s/\overline{\Delta t}\)</span>
-          </div>
-          <div class="appvid"><div style="max-width:300px"><button type="button" class="vthumb" data-src="videos/newton1.mp4" aria-label="Ver el vídeo: cómo se usa el simulador"><span class="vt"><span class="va">App · vídeo</span><span class="vb">Cómo se usa</span><span class="vc">el simulador</span></span><span class="pl"></span></button></div><p>Vídeo: cómo se usa el simulador.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="card tablecard" aria-label="Tabla de medidas">
-      <div class="head">
-        <div>
-          <h2>Tabla de medidas</h2>
-          <button class="maxbtn" id="maxBtn" aria-pressed="false" aria-label="Ampliar la tabla a pantalla completa" title="Ampliar"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="maxIcon" d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
-          <p>En el laboratorio, de 30 a 70 cm en pasos de 10 cm, tres lanzamientos por posición. Aquí se miden 30 y 40 cm.</p>
-        </div>
-        <div class="tools">
-          <label class="switch"><input type="checkbox" id="showCalc" checked> Columnas calculadas</label>
-        </div>
-      </div>
-      <div class="tablewrap">
-        <table id="tbl">
-          <thead>
-            <tr>
-              <th>\(s\,(\pm\varepsilon_s)\)<span class="u">cm</span></th>
-              <th>\(t_{1,2,3}\,(\pm\varepsilon_{t_i})\)<span class="u">s</span></th>
-              <th class="calc">\(\bar t\,(\pm\varepsilon_{\bar t})\)<span class="u">s</span></th>
-              <th>\(\Delta t_{1,2,3}\,(\pm\varepsilon_{\Delta t_i})\)<span class="u">s</span></th>
-              <th class="calc">\(\overline{\Delta t}\,(\pm\varepsilon_{\overline{\Delta t}})\)<span class="u">s</span></th>
-              <th class="calc">\(t'=\bar t+\overline{\Delta t}/2\)<span class="u">s</span></th>
-              <th class="calc p1only">\(t'^2\,(\pm\varepsilon_{t'^2})\)<span class="u">s²</span></th>
-              <th class="calc p2only">\(v=\Delta s/\overline{\Delta t}\)<span class="u">m/s</span></th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
-      <div class="tools" hidden>
-        <button class="btn" id="copy">Copiar tabla</button>
-        <button class="btn" id="undo">Borrar última medida</button>
-        <button class="btn" id="clear">Vaciar tabla</button>
-        <span class="copied" id="copied" aria-live="polite"></span>
-      </div>
-      <div id="fallbackBox" hidden><textarea class="fallback" id="fallbackTa" readonly></textarea></div>
-      <div class="helppop" id="helpPop" role="dialog" aria-label="Ayuda" hidden>
-            <div class="hp-head"><b>Qué ocurre en el experimento</b><button class="hp-x" id="helpClose" aria-label="Cerrar ayuda">×</button></div>
-            <div class="p1only">
-              <p>La masa colgante \(m_1\) cae y, a través del hilo y la polea, arrastra al deslizador \(m_2\), que flota sobre el colchón de aire sin apenas rozamiento. La única fuerza que acelera el conjunto es el peso \(m_1 g\), que es constante, así que el deslizador parte del reposo y se mueve con <b>movimiento rectilíneo uniformemente acelerado</b> (MRUA) de aceleración</p>
-              <div class="hp-eqs"><span>\(a=\dfrac{m_1\,g}{m_1+m_2}\)</span></div>
-              <p>Por ser un MRUA que parte del reposo, el espacio recorrido crece con el cuadrado del tiempo:</p>
-              <div class="hp-eqs"><span>\(s=\tfrac12\,a\,t^2\)</span></div>
-              <p class="hp-small">\(m_1\): masa colgante (21 g) · \(m_2\): masa del deslizador (400 g) · \(g\): gravedad · \(a\): aceleración del deslizador · \(s\): espacio recorrido · \(t\): tiempo empleado.</p>
-              <div class="hp-head" style="margin-top:12px"><b>Objetivo</b></div>
-              <p>Comprobar que \(s\) es proporcional a \(t^2\), obtener \(a\) y, a partir de ella, la aceleración de la gravedad \(g\).</p>
-              <p class="hp-key">Vamos a calcular \(a\) mediante un <b>ajuste lineal de \(s\) frente a \(t^2\)</b>. Para ello hay que medir, para varias distancias \(s\), el tiempo que tarda el deslizador en recorrerlas.</p>
-              <div class="hp-head" style="margin-top:12px"><b>Cómo medir</b></div>
-              <ol>
-                <li>Coloca la puerta fotoeléctrica con el deslizador o con los botones de \(s\) (30 y 40 cm en la simulación).</li>
-                <li>Pulsa el botón verde <b>SOLTAR</b> de la mesa (o la barra espaciadora). El contador da \(t\) y \(\Delta t\), que se anotan solos en la tabla.</li>
-                <li>Haz tres lanzamientos en cada posición para obtener la media.</li>
-                <li>Con varias posiciones medidas aparecen la gráfica y los resultados del ajuste.</li>
-              </ol>
-              <dl>
-                <dt>\(s\)</dt><dd>Distancia del centro de la pantalla en reposo a la puerta fotoeléctrica.</dd>
-                <dt>\(t\)</dt><dd>Contador izquierdo: desde que se suelta el deslizador hasta que la pantalla empieza a tapar el haz.</dd>
-                <dt>\(\Delta t\)</dt><dd>Contador derecho: tiempo que la pantalla tarda en atravesar el haz.</dd>
-                <dt>\(t'\)</dt><dd>\(t'=\bar t+\overline{\Delta t}/2\): instante en que el centro de la pantalla pasa por la puerta. Es el tiempo que corresponde a \(s\).</dd>
-              </dl>
-            </div>
-            <div class="p2only">
-              <p>La masa colgante \(m_1\) cae y, a través del hilo y la polea, arrastra al deslizador \(m_2\), que flota sobre el colchón de aire sin apenas rozamiento. La única fuerza que acelera el conjunto es el peso \(m_1 g\), que es constante, así que el deslizador parte del reposo y se mueve con <b>movimiento rectilíneo uniformemente acelerado</b> (MRUA) de aceleración</p>
-              <div class="hp-eqs"><span>\(a=\dfrac{m_1\,g}{m_1+m_2}\)</span></div>
-              <p>Por ser un MRUA que parte del reposo, la velocidad crece linealmente con el tiempo:</p>
-              <div class="hp-eqs"><span>\(v=a\,t\)</span></div>
-              <p class="hp-small">\(m_1\): masa colgante (21 g) · \(m_2\): masa del deslizador (400 g) · \(g\): gravedad · \(a\): aceleración del deslizador · \(v\): velocidad · \(t\): tiempo empleado.</p>
-              <div class="hp-head" style="margin-top:12px"><b>Objetivo</b></div>
-              <p>Comprobar que \(v\) es proporcional a \(t\), obtener \(a\) y, a partir de ella, la aceleración de la gravedad \(g\).</p>
-              <p class="hp-key">Vamos a calcular \(a\) mediante un <b>ajuste lineal de \(v\) frente a \(t\)</b>. Para ello hay que medir la velocidad del deslizador en varios instantes, con la puerta en distintas posiciones.</p>
-              <div class="hp-head" style="margin-top:12px"><b>Cómo medir</b></div>
-              <ol>
-                <li>Mide la anchura de la pantalla, \(\Delta s\), con <b>Medir Δs con el calibre</b>.</li>
-                <li>Coloca la puerta fotoeléctrica con el deslizador o con los botones de \(s\) (30 y 40 cm en la simulación).</li>
-                <li>Pulsa el botón verde <b>SOLTAR</b> de la mesa (o la barra espaciadora). El contador da \(t\) y \(\Delta t\), que se anotan solos en la tabla.</li>
-                <li>Haz tres lanzamientos en cada posición para obtener la media.</li>
-                <li>Con varias posiciones medidas aparecen la gráfica y los resultados del ajuste.</li>
-              </ol>
-              <dl>
-                <dt>\(\Delta s\)</dt><dd>Anchura de la pantalla que lleva el deslizador.</dd>
-                <dt>\(t\)</dt><dd>Contador izquierdo: desde que se suelta el deslizador hasta que la pantalla empieza a tapar el haz.</dd>
-                <dt>\(\Delta t\)</dt><dd>Contador derecho: tiempo que la pantalla tarda en atravesar el haz.</dd>
-                <dt>\(v\)</dt><dd>\(v=\Delta s/\overline{\Delta t}\): velocidad al cruzar la puerta. Como \(\Delta t\) es pequeño, es prácticamente la velocidad instantánea.</dd>
-                <dt>\(t'\)</dt><dd>\(t'=\bar t+\overline{\Delta t}/2\): instante en que el centro de la pantalla pasa por la puerta, al que se asigna \(v\).</dd>
-              </dl>
-            </div>
-          </div>
-    </section>
-
-    <section class="card fitcard" aria-label="Ajuste por mínimos cuadrados">
-      <div class="head">
-        <div>
-          <h2>Ajuste lineal por mínimos cuadrados</h2>
-          <p>En la simulación el ajuste aparece difuminado: hazlo en Excel con tus medidas del laboratorio.</p>
-        </div>
-      </div>
-      <div class="fits locked">
-        <div class="fit p1only">
-          <h3>Espacio frente al cuadrado del tiempo · \(s=A_1\,t'^2+B_1\)</h3>
-          <svg id="chart1" class="chart" viewBox="0 0 560 360" role="img" aria-label="Gráfica de s frente a t' al cuadrado"></svg>
-          <div class="fitside"><label class="switch fittog p1only"><input type="checkbox" class="showFit" data-p="1"> Mostrar recta y resultados</label><dl class="res" id="res1"></dl></div>
-        </div>
-        <div class="fit p2only">
-          <h3>Velocidad frente al tiempo · \(v=A_2\,t'+B_2\)</h3>
-          <svg id="chart2" class="chart" viewBox="0 0 560 360" role="img" aria-label="Gráfica de v frente a t'"></svg>
-          <div class="fitside"><label class="switch fittog p2only"><input type="checkbox" class="showFit" data-p="2"> Mostrar recta y resultados</label><dl class="res" id="res2"></dl></div>
-        </div>
-        <div class="lockover"><div><b>El ajuste se hace con los datos del laboratorio</b>Copia en Excel tus medidas reales y usa ESTIMACION.LINEAL. Cómo se hace, en el vídeo de la página <a href="errores.html#ajuste">Errores</a>.</div></div>
-      </div>
-    </section>
-  </div>
+<div class="panel">
+<div class="ctl">
+<div class="ctl-row" style="justify-content:space-between"><label class="t" for="gate">Puerta fotoeléctrica</label><span class="readout" id="gateReadout"></span></div>
+<input type="range" id="gate" min="50" max="60" step="10" value="50" aria-describedby="gateReadout">
+<div class="ctl-row"><div class="chips" id="chips"><span class="t"><i style="font-family:var(--f-math)">s</i> (cm)</span></div></div>
+<label class="switch"><input type="checkbox" id="slow"> Cámara lenta (×0,2)</label>
 </div>
-
+<dl class="datos2"><dt>Masa colgante</dt><dd>\(m_1\) = 20 g + 1 g del portapesas = 21 g</dd><dt>Deslizador</dt><dd>\(m_2\) = 400 g, sin pesas</dd>
+<dt class="p2only">Pantalla</dt><dd class="p2only" id="dsCell"><button class="linkbtn" id="calibre">Medir Δs con el calibre</button></dd></dl>
+</div>
+</div></div>
+<p class="note">Se pulsa SOLTAR (o la barra espaciadora). En la simulación solo se mide en 30 y 40 cm; el resto se mide en el laboratorio. · CC BY-NC-SA 4.0</p></section>
+<section class="side card"><h2>Qué se observa</h2><p>La masa colgante \(m_1\) cae y, a través del hilo y la polea, arrastra al deslizador, de masa \(m_2\), que flota sobre el colchón de aire casi sin rozamiento. La fuerza que acelera el conjunto, el peso \(m_1g\), es constante: el deslizador sale del reposo con aceleración constante</p>
+<div class="eq">\[a=\frac{m_1\,g}{m_1+m_2}\]</div>
+<div class="p1only"><p>y el espacio que recorre crece con el cuadrado del tiempo:</p>
+<div class="eq">\[s=\tfrac12\,a\,t'^2\]</div>
+<p>Aquí \(s\) es la distancia del centro de la pantalla del deslizador, en reposo, a la puerta fotoeléctrica; \(t\), el tiempo del contador izquierdo, desde que se suelta el deslizador hasta que la pantalla empieza a tapar el haz; \(\Delta t\), el del contador derecho, lo que tarda la pantalla en cruzar el haz; y \(t'=\bar t+\overline{\Delta t}/2\), el instante en que el centro de la pantalla pasa por la puerta. La barra indica la media de los tres lanzamientos.</p></div>
+<div class="p2only"><p>y su velocidad crece en proporción al tiempo:</p>
+<div class="eq">\[v=a\,t'\]</div>
+<p>Aquí \(v=\Delta s/\overline{\Delta t}\) es la velocidad al cruzar la puerta, con \(\Delta s\) la anchura de la pantalla y \(\Delta t\) el tiempo del contador derecho, lo que tarda la pantalla en cruzar el haz; \(t\) es el tiempo del contador izquierdo, desde que se suelta el deslizador hasta que la pantalla empieza a tapar el haz; y \(t'=\bar t+\overline{\Delta t}/2\), el instante en que el centro de la pantalla pasa por la puerta. La barra indica la media de los tres lanzamientos.</p></div>
+<h2>Qué hay que medir</h2>
+<ol><li class="p2only">Medir la anchura de la pantalla, \(\Delta s\), con el calibre.</li>
+<li>Colocar la puerta en \(s\) = 30 cm, con los botones o arrastrando la puerta.</li>
+<li>Pulsar el botón verde SOLTAR tres veces. Cada lanzamiento anota \(t\) y \(\Delta t\) en la tabla.</li>
+<li>Repetir en \(s\) = 40 cm. En el laboratorio se mide de 30 a 70 cm, de 10 en 10.</li></ol>
+<h2>Tabla de la ficha</h2>
+<table id="tbl"><thead><tr>
+<th>\(s\)<span class="u">cm</span></th>
+<th>\(t_1,\,t_2,\,t_3\)<span class="u">s</span></th>
+<th class="calc">\(\bar t\)<span class="u">s</span></th>
+<th>\(\Delta t_1,\,\Delta t_2,\,\Delta t_3\)<span class="u">s</span></th>
+<th class="calc">\(\overline{\Delta t}\)<span class="u">s</span></th>
+<th class="calc">\(t'\)<span class="u">s</span></th>
+<th class="calc p1only">\(t'^2\)<span class="u">s²</span></th>
+<th class="calc p2only">\(v\)<span class="u">m/s</span></th>
+</tr></thead><tbody id="tbody"></tbody></table></section></main>
+<div hidden><input type="checkbox" id="showCalc" checked><button id="copy"></button><button id="undo"></button><button id="clear"></button><span id="copied"></span><div id="fallbackBox"><textarea id="fallbackTa"></textarea></div></div>
 <script>
+function fitSide(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let lo=9,hi=30;for(let i=0;i<10;i++){const m=(lo+hi)/2;e.style.fontSize=m+'px';if(e.scrollHeight>e.clientHeight+1||e.scrollWidth>e.clientWidth+1)hi=m;else lo=m}e.style.fontSize=lo+'px'}
+function tex(){if(window.renderMathInElement)renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})}
+tex();addEventListener('resize',fitSide);if(document.fonts)document.fonts.ready.then(fitSide);setTimeout(fitSide,60);setTimeout(fitSide,700);
+</script><script>
 (function(){
 'use strict';
 
@@ -1176,7 +946,7 @@ function cellPair(arr, res, scale){
 }
 function trio(arr, dec){
   let h = '';
-  for(let i=0;i<3;i++) h += arr[i] !== undefined ? `<span>${fx(arr[i], dec)} <span class="pm">± 0,001</span></span>` : `<span class="empty">·</span>`;
+  for(let i=0;i<3;i++) h += arr[i] !== undefined ? `<span>${fx(arr[i], dec)}</span>` : `<span class="empty">·</span>`;
   return h;
 }
 function rowCalc(row){
@@ -1193,14 +963,15 @@ function fakeRow(sc){ let z = sc*9301 + 49297; const rnd = () => { z = (z*9301 +
   const f = (a,b,d) => fx(a + (b-a)*rnd(), d);
   const tr3 = () => [0,1,2].map(() => `<span>${f(0.2,0.9,3)} <span class="pm">± 0,001</span></span>`).join('');
   return `<tr class="locked" aria-hidden="true"><td>${fx(sc,1)} <span class="pm">± 0,1</span></td><td class="trio">${tr3()}</td><td class="calc">${f(0.2,0.9,3)} <span class="pm">± 0,004</span></td><td class="trio">${tr3()}</td><td class="calc">${f(0.02,0.09,3)} <span class="pm">± 0,002</span></td><td class="calc">${f(0.2,0.9,3)} <span class="pm">± 0,005</span></td><td class="calc p1only">${f(0.1,0.8,3)} <span class="pm">± 0,008</span></td><td class="calc p2only">${f(0.1,0.9,2)} <span class="pm">± 0,02</span></td></tr>`; }
-const LOCKED_ROWS = () => [50, 60, 70].map(fakeRow).join('') + `<tr class="lockmsg"><td colspan="8"><span style="position:sticky;left:12px">🔒 Las filas de 50, 60 y 70 cm se rellenan en el laboratorio.</span></td></tr>`;
+const LOCKED_ROWS = () => '';
+const _old_locked = () => [50, 60, 70].map(fakeRow).join('') + `<tr class="lockmsg"><td colspan="8"><span style="position:sticky;left:12px">🔒 Las filas de 50, 60 y 70 cm se rellenan en el laboratorio.</span></td></tr>`;
 function renderTable(){
   const tb = $('tbody');
   const keys = Object.keys(cur().rows).filter(okKey).sort((a,b)=>parseFloat(a)-parseFloat(b));
   const curS = Math.round((parseFloat(gateInp.value) - P.start)*10)/10;
   $('tbl').classList.toggle('nocalc', !store.showCalc);
   if(!keys.length){
-    tb.innerHTML = `<tr class="emptyrow"><td colspan="8">Todavía no hay lanzamientos en esta parte. Cada lanzamiento escribe t y Δt en la fila de su posición; con tres lanzamientos la fila queda completa.</td></tr>`;
+    tb.innerHTML = `<tr class="emptyrow"><td colspan="8">Aún no hay lanzamientos. Cada lanzamiento anota t y Δt en la fila de su posición.</td></tr>`;
   } else {
     tb.innerHTML = keys.map(k => {
       const row = cur().rows[k], c = rowCalc(row);
@@ -1244,7 +1015,8 @@ const chipsEl = $('chips');
 for(let s=30; s<=70; s+=10){
   const b = document.createElement('button');
   b.className = 'chip'; b.dataset.s = s; b.textContent = s; b.setAttribute('aria-pressed','false');
-  if(!ALLOWED.includes(s)){ b.classList.add('locked'); b.disabled = true; b.title = 'Esta posición se mide en el laboratorio'; b.setAttribute('aria-label', `s = ${s} cm: se mide en el laboratorio`); chipsEl.appendChild(b); continue; }
+  if(!ALLOWED.includes(s)) continue;
+  if(false){ b.classList.add('locked'); b.disabled = true; b.title = 'Esta posición se mide en el laboratorio'; b.setAttribute('aria-label', `s = ${s} cm: se mide en el laboratorio`); chipsEl.appendChild(b); continue; }
   b.setAttribute('aria-label', `Colocar la puerta en s = ${s} cm`);
   b.addEventListener('click', () => { gateInp.value = (s + P.start).toFixed(1); onGate(); });
   chipsEl.appendChild(b);
@@ -1385,23 +1157,7 @@ function drawChart(svg, pts, fit, xT, yT){
 }
 const sym = (b, i) => `<dt>${b}<sub>${i}</sub></dt>`;
 const pmv = (v, e, unit) => { const r = roundPair(v, e); return `<dd>${r.v} <span class="pm">± ${r.e}</span> ${unit}</dd>`; };
-function renderFit(){
-  // En la simulación no se muestra el ajuste real: se dibuja con datos de relleno y queda difuminado.
-  const fk = [0.1, 0.2, 0.3, 0.4, 0.5].map((x,i) => ({ x, ex: 0.01, y: 0.35*x + 0.02 + [0.01,-0.012,0.006,-0.004,0.009][i], ey: 0.01 }));
-  const ff = linfit(fk);
-  const res = sym('A','') + `<dd>0,00 <span class="pm">± 0,00</span> m/s²</dd>` + sym('B','') + `<dd>0,00 <span class="pm">± 0,00</span> m</dd>` + sym('r','') + `<dd>0,00000</dd>`;
-  drawChart($('chart1'), fk, ff, `t′² (s²)`, `s (m)`); $('res1').innerHTML = res;
-  drawChart($('chart2'), fk, ff, `t′ (s)`, `v (m/s)`); $('res2').innerHTML = res;
-}
-document.querySelectorAll('.showFit').forEach(c => {
-  c.checked = store.showFit === true;
-  c.addEventListener('change', e => {
-    store.showFit = e.target.checked; save();
-    document.querySelectorAll('.showFit').forEach(o => o.checked = e.target.checked);
-    document.querySelector('.fitcard').classList.toggle('nofit', !e.target.checked);
-  });
-});
-document.querySelector('.fitcard').classList.toggle('nofit', store.showFit !== true);
+function renderFit(){ if(window.fitSide) fitSide(); }
 $('copy').addEventListener('click', () => {
   const text = tsv();
   const done = () => { $('copied').textContent = 'Copiada. Pégala en la hoja de cálculo.'; setTimeout(() => $('copied').textContent = '', 3500); };
@@ -1409,7 +1165,7 @@ $('copy').addEventListener('click', () => {
   try { navigator.clipboard.writeText(text).then(done, fail); } catch(e){ fail(); }
 });
 
-function showCalibre(){ $('dsCell').innerHTML = `Δs = 100,05 mm ± 0,05 mm <span style="color:var(--muted)">(calibre, nonio de 0,05 mm)</span>`; }
+function showCalibre(){ $('dsCell').innerHTML = `<i>Δs</i> = 100,05 ± 0,05 mm`; }
 $('calibre').addEventListener('click', () => { store.calibre = true; save(); showCalibre(); renderTable(); });
 if(store.calibre) showCalibre();
 
@@ -1425,37 +1181,6 @@ document.querySelectorAll('.partbtn').forEach(b => b.addEventListener('click', (
 document.body.dataset.part = String(part);
 document.querySelectorAll('.partbtn').forEach(b => b.setAttribute('aria-selected', b.dataset.part === String(part) ? 'true' : 'false'));
 
-/* Tabla a pantalla completa */
-(function(){
-  const card = document.querySelector('.tablecard'), btn = $('maxBtn'), icon = $('maxIcon');
-  const set = on => {
-    card.classList.toggle('max', on); document.body.classList.toggle('tablemax', on);
-    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-    btn.setAttribute('aria-label', on ? 'Volver la tabla a su sitio' : 'Ampliar la tabla a pantalla completa');
-    btn.title = on ? 'Reducir' : 'Ampliar';
-    icon.setAttribute('d', on ? 'M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5' : 'M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5');
-  };
-  btn.addEventListener('click', () => set(!card.classList.contains('max')));
-  document.addEventListener('keydown', e => { if(e.key === 'Escape' && card.classList.contains('max')) set(false); });
-})();
-
-/* Ayuda */
-(function(){
-  const btn = $('helpBtn'), pop = $('helpPop');
-  const set = open => {
-    if(open){
-      // se despliega sobre la tabla, justo debajo de su cabecera, para que se vean las magnitudes que se miden
-      const card = document.querySelector('.tablecard'), th = document.querySelector('#tbl thead');
-      const top = th.getBoundingClientRect().bottom - card.getBoundingClientRect().top + 8;
-      pop.style.setProperty('--hp-top', top + 'px');
-    }
-    pop.hidden = !open; btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  };
-  btn.addEventListener('click', e => { e.stopPropagation(); set(pop.hidden); });
-  $('helpClose').addEventListener('click', () => { set(false); btn.focus(); });
-  document.addEventListener('click', e => { if(!pop.hidden && !pop.contains(e.target)) set(false); });
-  document.addEventListener('keydown', e => { if(e.key === 'Escape' && !pop.hidden){ set(false); btn.focus(); } });
-})();
 /* ---------- Inicio ---------- */
 {
   // solo las cinco posiciones de la práctica: s = 30, 40, 50, 60 y 70 cm
@@ -1466,74 +1191,12 @@ document.querySelectorAll('.partbtn').forEach(b => b.setAttribute('aria-selected
   }
   const g = Math.round(((store.gate || 50) - 50)/10)*10 + 50;
   gateInp.value = String(Math.min(90, Math.max(50, g)));
-  save();
+  store.showCalc = true; save();
 }
 setDisplay(D1, '0.000'); setDisplay(D2, '0.000');
 drawGate(); drawScene(); renderLog(); setControls(); readyMsg();
 })();
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--sfoot--><footer class="sfoot"><div class="in" style="max-width:1520px"><span>INNOVA-FIS-LAB · Grupo de Innovación Docente en Laboratorios de Física · Universidad Rey Juan Carlos</span><span>Materiales con licencia <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a></span></div></footer><!--/sfoot-->
-<script id="vlbjs">(function(){var box=document.createElement("div");box.className="vlb";box.innerHTML='<button class="x" aria-label="Cerrar vídeo">×</button><div class="vw"><video playsinline></video><div class="cb"><button class="pp" aria-label="Reproducir o pausar"></button><div class="bar"><i></i></div><span class="tm">0:00 / 0:00</span><button class="fs" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></div>';document.body.appendChild(box);
+</script><script id="vlbjs">(function(){var box=document.createElement("div");box.className="vlb";box.innerHTML='<button class="x" aria-label="Cerrar vídeo">×</button><div class="vw"><video playsinline></video><div class="cb"><button class="pp" aria-label="Reproducir o pausar"></button><div class="bar"><i></i></div><span class="tm">0:00 / 0:00</span><button class="fs" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button></div></div>';document.body.appendChild(box);
 var v=box.querySelector("video"),pp=box.querySelector(".pp"),bar=box.querySelector(".bar"),fill=bar.querySelector("i"),tm=box.querySelector(".tm");
 function f(t){t=Math.floor(t||0);return Math.floor(t/60)+":"+("0"+t%60).slice(-2)}
 function upd(){var d=v.duration||0;fill.style.width=(d?100*v.currentTime/d:0)+"%";tm.textContent=f(v.currentTime)+" / "+f(d);pp.classList.toggle("on",!v.paused)}
@@ -1546,4 +1209,5 @@ function close(){if(document.fullscreenElement&&document.exitFullscreen)document
 function open(src){v.src=src;box.classList.add("on");var p=v.play();if(p&&p.catch)p.catch(function(){v.muted=true;v.play().catch(function(){})});}
 document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest(".vthumb");if(b){e.preventDefault();open(b.getAttribute("data-src"));}});
 box.addEventListener("click",function(e){if(e.target===box||e.target.classList.contains("x"))close()});
-document.addEventListener("keydown",function(e){if(!box.classList.contains("on"))return;if(e.key==="Escape")close();else if(e.key===" "){e.preventDefault();tog()}});})();</script></body></html>
+document.addEventListener("keydown",function(e){if(!box.classList.contains("on"))return;if(e.key==="Escape")close();else if(e.key===" "){e.preventDefault();tog()}});})();</script>
+</body></html>
