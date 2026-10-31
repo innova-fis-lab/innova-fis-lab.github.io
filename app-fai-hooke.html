@@ -1,0 +1,62 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ley de Hooke: periodo de oscilación · INNOVA-FIS-LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{--bg:#fff;--paper:#f6f7f9;--ink:#1b2430;--slate:#4a5566;--line:#d9dee5;--b:#1d5fa8;--o:#d9820b;--g:#1b7a43;--navy:#17324d}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.5}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 24px;border-bottom:1px solid var(--line)}
+header a{color:var(--navy);text-decoration:none;font-weight:700}header .t{font-size:13px;color:var(--slate);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+main{max-width:1320px;margin:0 auto;padding:18px 24px 40px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px}
+h1{font-size:28px;margin:0 0 4px;color:var(--navy);grid-column:1/-1}.sub{grid-column:1/-1;margin:-6px 0 0;color:var(--slate)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}
+svg.sim{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.ctrl{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin-top:14px}
+.ctrl label{font-weight:600;display:flex;align-items:center;gap:10px}
+.ctrl input[type=range]{width:200px;accent-color:var(--b)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:7px 14px;cursor:pointer}
+.btn.on{background:var(--navy);color:#fff}
+.read{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 14px;min-width:140px}
+.read b{display:block;font-size:22px;color:var(--navy);font-variant-numeric:tabular-nums}
+.read span{font-size:14px;color:var(--slate);font-weight:600}
+h2{font-size:20px;margin:0 0 8px;color:var(--navy)}
+.side p{margin:0 0 14px}.side ol{margin:0 0 16px;padding-left:24px}.side li{margin-bottom:8px}
+.eq{text-align:center;font-size:21px;margin:6px 0 16px}
+table.t{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
+table.t th,table.t td{border:1px solid #9aa3ae;padding:7px 6px;text-align:center}table.t th{background:#fff0c1}
+.note{font-size:14px;color:var(--slate)}
+footer{text-align:center;font-size:13px;color:var(--slate);padding:14px;border-top:1px solid var(--line)}
+@media(max-width:900px){main{grid-template-columns:1fr;padding:14px 16px}}
+</style></head><body>
+<header><a href="laboratorios.html#fai">← Laboratorio de Física Aplicada a la Ingeniería</a><span class="t">INNOVA-FIS-LAB · App de la práctica</span></header>
+<main><h1>Ley de Hooke: periodo de oscilación</h1><p class="sub">Una masa colgada de un muelle oscila con un periodo que crece con la masa.</p>
+<section><div class="card"><svg class="sim" viewBox="0 0 520 470"></svg>
+<div class="ctrl"><label>Pesas de 10 g <input id="N" type="range" min="0" max="5" step="1" value="2"><b id="Nv"></b></label><button class="btn" id="go">Bajar 1 cm y soltar</button></div><div class="read"><div><span>Masa colgada <i>m</i></span><b id="m">–</b></div><div><span>Oscilaciones contadas</span><b id="cnt">0</b></div><div><span>Cronómetro</span><b id="tt">0,00 s</b></div></div></div><p class="note">El cronómetro y el contador funcionan como en el laboratorio: cuentan una oscilación cada vez que la masa llega abajo.</p></section>
+<section class="side card"><h2>Qué se observa</h2><p>Al colgar más pesas el muelle se alarga y, al soltarlo, la masa oscila arriba y abajo cada vez más despacio. El periodo no depende de cuánto se baje la masa al principio.</p><div class="eq" data-tex="T=2\pi\sqrt{\frac{m+m_0}{k}}"></div><p class="note">m₀ es la masa adicional que oscila con las pesas: la varilla del índice y el propio muelle.</p><h2>Qué hay que medir</h2><ol><li>Medir con la báscula la masa colgada <i>m</i>, portapesas más pesas.</li><li>Bajar la masa un centímetro, soltarla y medir tres veces el tiempo de 20 oscilaciones. Una oscilación termina cada vez que la masa vuelve al punto más bajo.</li><li>Repetir añadiendo pesas de 10 g, hasta seis masas.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>m</i> (kg)</th><th><i>t</i>₂₀,₁ (s)</th><th><i>t</i>₂₀,₂ (s)</th><th><i>t</i>₂₀,₃ (s)</th><th><i>T</i> (s)</th><th><i>T</i>² (s²)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
+<footer>INNOVA-FIS-LAB · Universidad Rey Juan Carlos · CC BY-NC-SA 4.0</footer>
+<script>
+document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
+function fmt(x,d){return x.toFixed(d).replace('.',',')}
+let playing=true,last=null;function loop(step){function f(ts){if(last===null)last=ts;let dt=Math.min(0.05,(ts-last)/1000);last=ts;if(playing&&!document.hidden)step(dt);requestAnimationFrame(f)}requestAnimationFrame(f)}
+
+const g=9.81,k=8,m0=0.012,S=1400,X0=230,TOP=40,nat=150;let m,y=0,v=0,run=false,t=0,cnt=0;
+mk('path',{d:'M150 40 H330',stroke:'#1b2430','stroke-width':3});for(let i=0;i<11;i++)mk('path',{d:`M${154+i*17} 40 l-8 -9`,stroke:'#1b2430','stroke-width':1.2});
+mk('rect',{x:300,y:190,width:52,height:250,fill:'#fff8e1',stroke:'#1b2430'});
+for(let i=0;i<=16;i++){const yy=TOP+nat+10+i*14;mk('path',{d:`M300 ${yy} h${i%2?8:16}`,stroke:'#1b2430','stroke-width':1});if(i%2==0){const tx=mk('text',{x:324,y:yy+5,'font-size':13,fill:'#1b2430'});tx.textContent=String(i)}}
+const ul=mk('text',{x:360,y:TOP+nat+15,'font-size':13,fill:'#4a5566'});ul.textContent='cm';
+const spr=mk('path',{stroke:'#1b2430','stroke-width':1.8,fill:'none'}),rod=mk('path',{stroke:'#1b2430','stroke-width':3});
+const ptr=mk('path',{stroke:'#c0392b','stroke-width':2}),hang=mk('g',{});
+function setm(){const n=+$('#N').value;m=0.010+0.010*n;$('#Nv').textContent=n;$('#m').textContent=Math.round(m*1000)+' g';hang.innerHTML='';
+ for(let i=0;i<n+1;i++)mk('rect',{x:X0-24,y:i*9,width:48,height:7,rx:2,fill:i==0?'#5b6676':'#1d5fa8'},hang);}
+function draw(){const ext=m*g/k+y,yb=TOP+nat+ext*S;let d=`M${X0} ${TOP} V${TOP+12}`;const N=40;for(let i=1;i<N;i++){const yy=TOP+12+(yb-TOP-24)*i/N;d+=` L${X0+(i%2?12:-12)} ${yy}`}d+=` L${X0} ${yb-12} V${yb}`;
+ spr.setAttribute('d',d);rod.setAttribute('d',`M${X0} ${yb} V${yb+30}`);ptr.setAttribute('d',`M${X0} ${yb+10} H300`);hang.setAttribute('transform',`translate(0 ${yb+30})`);}
+function reset(){setm();y=0;v=0;t=0;cnt=0;run=false;$('#cnt').textContent='0';$('#tt').textContent='0,00 s';$('#go').textContent='Bajar 1 cm y soltar';draw()}
+$('#N').oninput=reset;$('#go').onclick=()=>{if(run){reset()}else{y=0.01;v=0;run=true;$('#go').textContent='Volver a empezar'}};reset();
+loop(dt=>{if(!run)return;const n=20,h=dt/n,om2=k/(m+m0);for(let i=0;i<n;i++){const vn=v-om2*y*h;const yn=y+vn*h;if(v>0&&vn<=0){cnt++;$('#cnt').textContent=cnt}v=vn;y=yn;t+=h}
+ $('#tt').textContent=fmt(t,2)+' s';draw()});
+
+</script></body></html>

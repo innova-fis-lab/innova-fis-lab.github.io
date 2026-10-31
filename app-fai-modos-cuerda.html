@@ -1,0 +1,62 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Modos normales de una cuerda tensa · INNOVA-FIS-LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{--bg:#fff;--paper:#f6f7f9;--ink:#1b2430;--slate:#4a5566;--line:#d9dee5;--b:#1d5fa8;--o:#d9820b;--g:#1b7a43;--navy:#17324d}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.5}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 24px;border-bottom:1px solid var(--line)}
+header a{color:var(--navy);text-decoration:none;font-weight:700}header .t{font-size:13px;color:var(--slate);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+main{max-width:1320px;margin:0 auto;padding:18px 24px 40px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px}
+h1{font-size:28px;margin:0 0 4px;color:var(--navy);grid-column:1/-1}.sub{grid-column:1/-1;margin:-6px 0 0;color:var(--slate)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}
+svg.sim{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.ctrl{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin-top:14px}
+.ctrl label{font-weight:600;display:flex;align-items:center;gap:10px}
+.ctrl input[type=range]{width:200px;accent-color:var(--b)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:7px 14px;cursor:pointer}
+.btn.on{background:var(--navy);color:#fff}
+.read{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 14px;min-width:140px}
+.read b{display:block;font-size:22px;color:var(--navy);font-variant-numeric:tabular-nums}
+.read span{font-size:14px;color:var(--slate);font-weight:600}
+h2{font-size:20px;margin:0 0 8px;color:var(--navy)}
+.side p{margin:0 0 14px}.side ol{margin:0 0 16px;padding-left:24px}.side li{margin-bottom:8px}
+.eq{text-align:center;font-size:21px;margin:6px 0 16px}
+table.t{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
+table.t th,table.t td{border:1px solid #9aa3ae;padding:7px 6px;text-align:center}table.t th{background:#fff0c1}
+.note{font-size:14px;color:var(--slate)}
+footer{text-align:center;font-size:13px;color:var(--slate);padding:14px;border-top:1px solid var(--line)}
+@media(max-width:900px){main{grid-template-columns:1fr;padding:14px 16px}}
+</style></head><body>
+<header><a href="laboratorios.html#fai">← Laboratorio de Física Aplicada a la Ingeniería</a><span class="t">INNOVA-FIS-LAB · App de la práctica</span></header>
+<main><h1>Modos normales de una cuerda tensa</h1><p class="sub">La cuerda solo vibra con gran amplitud a ciertas frecuencias: las de sus modos normales.</p>
+<section><div class="card"><svg class="sim" viewBox="0 0 640 330"></svg>
+<div class="ctrl"><label>Frecuencia del generador <input id="F" type="range" min="5" max="100" step="0.1" value="10" style="width:280px"><b id="Fv"></b></label><button class="btn" id="m">−0,1 Hz</button><button class="btn" id="p">+0,1 Hz</button></div><div class="read"><div><span>Vientres que se ven</span><b id="nv">–</b></div></div></div><p class="note">El movimiento se muestra ralentizado: la cuerda real vibra decenas de veces por segundo. Valores de ejemplo: L = 1 m, M = 100 g.</p></section>
+<section class="side card"><h2>Qué se observa</h2><p>El vibrador mueve un extremo de la cuerda. A la mayoría de las frecuencias la cuerda apenas se mueve, pero al acercarse a la frecuencia de un modo normal entra en resonancia y aparecen 1, 2, 3… vientres separados por nodos que no se mueven.</p><div class="eq" data-tex="f_n=\frac{n}{2L}\sqrt{\frac{T}{\mu}}"></div><h2>Qué hay que medir</h2><ol><li>Anotar la masa colgada <i>M</i> y medir la longitud <i>L</i> entre el vibrador y la polea.</li><li>Subir la frecuencia despacio. En cada modo, ajustarla hasta que los vientres tengan la máxima amplitud, contar los vientres y anotar la frecuencia.</li><li>Anotar también la frecuencia más baja y la más alta a las que la amplitud se ve máxima, para el error.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>n</i></th><th><i>f</i><sub>n</sub> (Hz)</th><th>ε<sub>f</sub> (Hz)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
+<footer>INNOVA-FIS-LAB · Universidad Rey Juan Carlos · CC BY-NC-SA 4.0</footer>
+<script>
+document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
+function fmt(x,d){return x.toFixed(d).replace('.',',')}
+let playing=true,last=null;function loop(step){function f(ts){if(last===null)last=ts;let dt=Math.min(0.05,(ts-last)/1000);last=ts;if(playing&&!document.hidden)step(dt);requestAnimationFrame(f)}requestAnimationFrame(f)}
+
+const Lm=1.0,M=0.100,mu=0.0012,g=9.81,f1=0.5/Lm*Math.sqrt(M*g/mu),Q=60,x0=90,x1=560,yc=130,NM=10;let ph=0;
+mk('rect',{x:30,y:95,width:58,height:70,rx:4,fill:'#8a94a3'});const vt=mk('text',{x:59,y:85,'text-anchor':'middle','font-size':14,fill:'#1b2430'});vt.textContent='vibrador';
+mk('circle',{cx:x1+10,cy:yc+10,r:10,fill:'none',stroke:'#1b2430','stroke-width':2});mk('path',{d:`M${x1+10} ${yc+10} V230 M${x1-40} 230 H${x1+22}`,stroke:'#1b2430','stroke-width':2.5});
+mk('path',{d:`M${x1+20} ${yc+10} V250`,stroke:'#1b2430','stroke-width':1.5});mk('rect',{x:x1+10,y:250,width:20,height:28,rx:2,fill:'#1d5fa8'});const mt=mk('text',{x:x1+36,y:270,'font-size':16,fill:'#1b2430'});mt.textContent='M';
+const pt=mk('text',{x:x1+30,y:yc-14,'font-size':14,fill:'#1b2430'});pt.textContent='polea';
+mk('path',{d:`M${x0} ${yc} H${x1}`,stroke:'#cfd5dc'});const s1=mk('path',{fill:'none',stroke:'#1d5fa8','stroke-width':2.5});
+mk('path',{d:`M${x0} 300 H${x1}`,stroke:'#1b2430','marker-start':''});const lt=mk('text',{x:(x0+x1)/2,y:296,'text-anchor':'middle','font-size':18,'font-style':'italic',fill:'#1b2430'});lt.textContent='L';
+const disp=mk('text',{x:30,y:230,'font-size':15,fill:'#1b2430'});
+function amps(f){const A=[];for(let n=1;n<=NM;n++){const fn=n*f1,re=fn*fn-f*f,im=f*fn/Q,den=re*re+im*im;A.push([fn*fn*re/den,-fn*fn*im/den])}return A}
+function upd(){const f=+$('#F').value;$('#Fv').textContent=fmt(f,1)+' Hz';disp.textContent=fmt(f,1)+' Hz';
+ const A=amps(f);let best=0,bn=0;A.forEach((a,i)=>{const m=Math.hypot(a[0],a[1]);if(m>best){best=m;bn=i+1}});$('#nv').textContent=best>8?bn:'–'}
+$('#F').oninput=upd;$('#m').onclick=()=>{$('#F').value=(+$('#F').value-0.1).toFixed(1);upd()};$('#p').onclick=()=>{$('#F').value=(+$('#F').value+0.1).toFixed(1);upd()};upd();
+loop(dt=>{ph+=dt*2*Math.PI*1.2;const A=amps(+$('#F').value),c=Math.cos(ph),s=Math.sin(ph);let d='';
+ for(let i=0;i<=200;i++){const u=i/200;let y=0;A.forEach((a,k)=>{y+=(a[0]*c-a[1]*s)*Math.sin((k+1)*Math.PI*u)});y=Math.max(-55,Math.min(55,y*0.9));d+=(i?'L':'M')+(x0+u*(x1-x0))+' '+(yc+y)}
+ s1.setAttribute('d',d)});
+
+</script></body></html>

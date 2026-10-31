@@ -1,0 +1,63 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Circuito RLC: oscilaciones amortiguadas y resistencia crítica · INNOVA-FIS-LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<style>
+:root{--bg:#fff;--paper:#f6f7f9;--ink:#1b2430;--slate:#4a5566;--line:#d9dee5;--b:#1d5fa8;--o:#d9820b;--g:#1b7a43;--navy:#17324d}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;font-size:17px;line-height:1.5}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 24px;border-bottom:1px solid var(--line)}
+header a{color:var(--navy);text-decoration:none;font-weight:700}header .t{font-size:13px;color:var(--slate);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+main{max-width:1320px;margin:0 auto;padding:18px 24px 40px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px}
+h1{font-size:28px;margin:0 0 4px;color:var(--navy);grid-column:1/-1}.sub{grid-column:1/-1;margin:-6px 0 0;color:var(--slate)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}
+svg.sim{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+.ctrl{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin-top:14px}
+.ctrl label{font-weight:600;display:flex;align-items:center;gap:10px}
+.ctrl input[type=range]{width:200px;accent-color:var(--b)}
+.btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:7px 14px;cursor:pointer}
+.btn.on{background:var(--navy);color:#fff}
+.read{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 14px;min-width:140px}
+.read b{display:block;font-size:22px;color:var(--navy);font-variant-numeric:tabular-nums}
+.read span{font-size:14px;color:var(--slate);font-weight:600}
+h2{font-size:20px;margin:0 0 8px;color:var(--navy)}
+.side p{margin:0 0 14px}.side ol{margin:0 0 16px;padding-left:24px}.side li{margin-bottom:8px}
+.eq{text-align:center;font-size:21px;margin:6px 0 16px}
+table.t{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
+table.t th,table.t td{border:1px solid #9aa3ae;padding:7px 6px;text-align:center}table.t th{background:#fff0c1}
+.note{font-size:14px;color:var(--slate)}
+footer{text-align:center;font-size:13px;color:var(--slate);padding:14px;border-top:1px solid var(--line)}
+@media(max-width:900px){main{grid-template-columns:1fr;padding:14px 16px}}
+</style></head><body>
+<header><a href="laboratorios.html#fai">← Laboratorio de Física Aplicada a la Ingeniería</a><span class="t">INNOVA-FIS-LAB · App de la práctica</span></header>
+<main><h1>Circuito RLC: oscilaciones amortiguadas y resistencia crítica</h1><p class="sub">En el osciloscopio se ve la tensión del condensador tras cada salto de la onda cuadrada. Al subir la resistencia, las oscilaciones se apagan antes y, a partir de la resistencia crítica, desaparecen.</p>
+<section><div class="card"><svg class="sim" viewBox="0 0 560 470"></svg>
+<div class="ctrl"><label>Resistencia de la caja <i>R</i> <input id="R" type="range" min="0" max="6000" step="50" value="200"><b id="Rv"></b></label><label>Tiempo por cuadro <select id="TD" class="btn"><option>10</option><option selected>20</option><option>50</option><option>100</option></select> µs</label></div><div class="read"><div><span>¿Se pasa del valor final?</span><b id="ov">–</b></div><div><span>Máximos que se ven</span><b id="nm">–</b></div></div></div><p class="note">Valores de ejemplo: L = 10 mH, C = 3 nF más la capacidad del osciloscopio. En tu puesto la capacidad puede ser otra.</p></section>
+<section class="side card"><h2>Qué se observa</h2><p>Con poca resistencia la tensión del condensador oscila alrededor de su valor final y las oscilaciones se van apagando, como un péndulo que se frena. Al subir <i>R</i> se apagan antes. Con la resistencia crítica la tensión llega a su valor final sin pasarse, y con más resistencia llega más despacio.</p><div class="eq" data-tex="L\,\ddot q+R_T\,\dot q+\frac{q}{C}=V(t)"></div><h2>Qué hay que medir</h2><ol><li>Elegir una <i>R</i> con la que se vean al menos 5 oscilaciones claras antes de que la señal se quede en su valor final.</li><li>Contando cuadros, medir el tiempo de 5 periodos y las alturas de los máximos sobre el valor final, <i>V</i>₀ a <i>V</i>₄.</li><li>Subir <i>R</i> y anotar el último valor con el que la tensión todavía se pasa del valor final y el primero con el que ya no se pasa.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>n</i></th><th><i>V</i><sub>n</sub> (V)</th><th>ln <i>V</i><sub>n</sub></th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
+<footer>INNOVA-FIS-LAB · Universidad Rey Juan Carlos · CC BY-NC-SA 4.0</footer>
+<script>
+document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
+const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
+function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
+function fmt(x,d){return x.toFixed(d).replace('.',',')}
+let playing=true,last=null;function loop(step){function f(ts){if(last===null)last=ts;let dt=Math.min(0.05,(ts-last)/1000);last=ts;if(playing&&!document.hidden)step(dt);requestAnimationFrame(f)}requestAnimationFrame(f)}
+
+const L=0.010,C=3.02e-9,RL=30,Rg=50,V0=0.6,ox=30,oy=20,dv=50,NX=10,NY=8,VD=0.2;
+mk('rect',{x:ox,y:oy,width:dv*NX,height:dv*NY,fill:'#fff',stroke:'#1b2430','stroke-width':1.5});
+for(let i=1;i<NX;i++)mk('path',{d:`M${ox+i*dv} ${oy} V${oy+dv*NY}`,stroke:'#cfd5dc'});for(let j=1;j<NY;j++)mk('path',{d:`M${ox} ${oy+j*dv} H${ox+dv*NX}`,stroke:'#cfd5dc'});
+for(let i=0;i<NX*5;i++)mk('path',{d:`M${ox+i*dv/5} ${oy+4*dv-3} v6`,stroke:'#9aa3ae'});for(let j=0;j<NY*5;j++)mk('path',{d:`M${ox+5*dv-3} ${oy+j*dv/5} h6`,stroke:'#9aa3ae'});
+const fin=mk('path',{stroke:'#1b2430','stroke-dasharray':'6 4','stroke-width':1.2}),tr=mk('path',{fill:'none',stroke:'#1d5fa8','stroke-width':2.4}),dots=mk('g',{});
+const l1=mk('text',{x:ox,y:oy+dv*NY+30,'font-size':17,fill:'#1b2430'});l1.textContent='CH1  200 mV';const l2=mk('text',{x:ox+dv*NX,y:oy+dv*NY+30,'font-size':17,'text-anchor':'end',fill:'#1b2430'});
+const fl=mk('text',{'font-size':14,'text-anchor':'end',fill:'#1b2430'});fl.textContent='valor final';
+function vc(t,RT){const a=RT/(2*L),w0=1/Math.sqrt(L*C);if(a<w0*0.999){const wd=Math.sqrt(w0*w0-a*a);return V0*(1-Math.exp(-a*t)*(Math.cos(wd*t)+a/wd*Math.sin(wd*t)))}
+ if(a<=w0*1.001)return V0*(1-(1+a*t)*Math.exp(-a*t));const s=Math.sqrt(a*a-w0*w0),r1=-a+s,r2=-a-s;return V0*(1+(r2*Math.exp(r1*t)-r1*Math.exp(r2*t))/(r1-r2))}
+const base=oy+7*dv,Y=v=>base-v/VD*dv;
+function draw(){const R=+$('#R').value,RT=R+RL+Rg,td=+$('#TD').value*1e-6;$('#Rv').textContent=R+' Ω';l2.textContent=$('#TD').value+' µs';
+ let d='',mx=[],prev=null,pp=null,over=false;const t0=dv;for(let px=0;px<=dv*NX;px+=1){const t=(px-t0)/dv*td,v=t<0?0:vc(t,RT);d+=(px?'L':'M')+(ox+px)+' '+Y(v);
+  if(v>V0*1.001)over=true;if(pp!==null&&prev>pp&&prev>v&&prev>V0*1.003)mx.push([ox+px-1,Y(prev)]);pp=prev;prev=v}
+ tr.setAttribute('d',d);fin.setAttribute('d',`M${ox} ${Y(V0)} H${ox+dv*NX}`);fl.setAttribute('x',ox+dv*NX-6);fl.setAttribute('y',Y(V0)+20);
+ dots.innerHTML='';mx.forEach(p=>mk('circle',{cx:p[0],cy:p[1],r:4,fill:'#1b2430'},dots));$('#ov').textContent=over?'sí':'no';$('#nm').textContent=mx.length}
+$('#R').oninput=draw;$('#TD').onchange=draw;draw();
+
+</script></body></html>
