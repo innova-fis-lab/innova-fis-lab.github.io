@@ -11,7 +11,7 @@ header a{color:var(--navy);text-decoration:none;font-weight:700}header .t{font-s
 main{max-width:1320px;margin:0 auto;padding:18px 24px 40px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px}
 h1{font-size:28px;margin:0 0 4px;color:var(--navy);grid-column:1/-1}.sub{grid-column:1/-1;margin:-6px 0 0;color:var(--slate)}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px}
-svg.sim{width:100%;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
+svg.sim{width:100%;height:auto;max-height:max(260px,calc(100vh - 340px));display:block;background:#fff;border:1px solid var(--line);border-radius:10px}
 .ctrl{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;margin-top:14px}
 .ctrl label{font-weight:600;display:flex;align-items:center;gap:10px}
 .ctrl input[type=range]{width:200px;accent-color:var(--b)}
@@ -28,7 +28,9 @@ table.t{border-collapse:collapse;width:100%;background:#fff;font-size:15px}
 table.t th,table.t td{border:1px solid #9aa3ae;padding:7px 6px;text-align:center}table.t th{background:#fff0c1}
 .note{font-size:14px;color:var(--slate)}
 footer{text-align:center;font-size:13px;color:var(--slate);padding:14px;border-top:1px solid var(--line)}
-@media(max-width:900px){main{grid-template-columns:1fr;padding:14px 16px}}
+main>section:first-of-type{position:sticky;top:8px;align-self:start}
+@media(max-height:900px){html,body{font-size:15px}h1{font-size:22px}.sub{font-size:15px}header{padding:8px 20px}main{padding-top:10px;gap:20px}.read b{font-size:18px}.read div{padding:5px 10px;min-width:120px}.ctrl{margin-top:8px;gap:8px 16px}.read{margin-top:8px}.card{padding:12px}.btn{padding:5px 11px}}
+@media(max-width:900px){main{grid-template-columns:1fr;padding:14px 16px}main>section:first-of-type{position:static}svg.sim{max-height:none}}
 </style></head><body>
 <header><a href="laboratorios.html#fai">← Laboratorio de Física Aplicada a la Ingeniería</a><span class="t">INNOVA-FIS-LAB · App de la práctica</span></header>
 <main><h1>Péndulo de Pohl: oscilaciones amortiguadas</h1><p class="sub">Con el freno encendido la amplitud se apaga, y más deprisa cuanto mayor es la tensión del freno.</p>
