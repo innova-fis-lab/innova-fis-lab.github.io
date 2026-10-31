@@ -21,7 +21,7 @@ svg.sim{flex:1;min-height:0;width:100%;height:100%;display:block;background:#fff
 .btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:4px 11px;cursor:pointer}
 .btn.on{background:var(--navy);color:#fff}
 .read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;align-items:baseline;gap:8px}
-.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums}
+.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums;display:inline-block;min-width:4.5em;white-space:nowrap}.read div{white-space:nowrap}
 .read span{font-size:.85em;color:var(--slate);font-weight:600}
 .note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--slate)}
 .side{min-height:0;overflow:hidden;font-size:16px}
@@ -35,11 +35,12 @@ table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:cent
 </style></head><body>
 <header><h1>Péndulo simple</h1><a href="laboratorios.html#fai">← Laboratorio de FAI · INNOVA-FIS-LAB</a></header>
 <main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 560 470"></svg>
-<div class="bar"><div class="ctrl"><label>Longitud <i>L</i> <input id="L" type="range" min="0.2" max="0.8" step="0.1" value="0.8"><b id="Lv"></b></label><label>Separación <i>x</i> <input id="X" type="range" min="0.05" max="0.55" step="0.05" value="0.05"><b id="Xv"></b></label><button class="btn" id="go">Soltar</button></div><div class="read"><div><span>Amplitud θ₀</span><b id="th">–</b></div><div><span>Periodo (puerta fotoeléctrica)</span><b id="T">–</b></div></div></div></div><p class="note">Simulación con la ecuación exacta del péndulo, sin aproximar sen θ ≈ θ. · CC BY-NC-SA 4.0</p></section>
+<div class="bar"><div class="ctrl"><label>Longitud <i>L</i> <input id="L" type="range" min="0.2" max="0.8" step="0.1" value="0.8"><b id="Lv"></b></label><label>Separación <i>x</i> <input id="X" type="range" min="0.05" max="0.55" step="0.05" value="0.05"><b id="Xv"></b></label><button class="btn" id="go" data-alt="Volver a empezar">Soltar</button></div><div class="read"><div><span>Amplitud θ₀</span><b id="th">–</b></div><div><span>Periodo (puerta fotoeléctrica)</span><b id="T">–</b></div></div></div></div><p class="note">Simulación con la ecuación exacta del péndulo, sin aproximar sen θ ≈ θ. · CC BY-NC-SA 4.0</p></section>
 <section class="side card"><h2>Qué se observa</h2><p>La esfera oscila colgada del hilo. Con amplitud pequeña, el periodo solo depende de la longitud: al acortar el hilo, oscila más deprisa. Si se separa mucho la esfera, el periodo crece un poco.</p><div class="eq" data-tex="T_0=2\pi\sqrt{\frac{L}{g}}"></div><h2>Qué hay que medir</h2><ol><li>Para siete longitudes, de 20 a 80 cm, separar la esfera unos centímetros, soltarla y leer cinco veces el periodo en la puerta fotoeléctrica.</li><li>Con <i>L</i> = 80 cm, soltar la esfera desde varias separaciones <i>x</i> y medir el periodo de la primera oscilación.</li><li>La amplitud sale del triángulo: sen θ₀ = <i>x</i>/<i>L</i>.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>L</i> (m)</th><th><i>T</i>₁ (s)</th><th><i>T</i>₂ (s)</th><th>…</th><th><i>T</i>₀ (s)</th><th><i>T</i>₀² (s²)</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
 <script>
 function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let f=19;e.style.fontSize=f+'px';while(e.scrollHeight>e.clientHeight+1&&f>10){f-=0.5;e.style.fontSize=f+'px'}}
-addEventListener('resize',fit);setTimeout(fit,50);setTimeout(fit,600);
+function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'})}
+addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
 document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
 const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
 function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}

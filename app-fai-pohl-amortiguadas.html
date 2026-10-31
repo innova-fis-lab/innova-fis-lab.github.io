@@ -21,7 +21,7 @@ svg.sim{flex:1;min-height:0;width:100%;height:100%;display:block;background:#fff
 .btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:4px 11px;cursor:pointer}
 .btn.on{background:var(--navy);color:#fff}
 .read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;align-items:baseline;gap:8px}
-.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums}
+.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums;display:inline-block;min-width:4.5em;white-space:nowrap}.read div{white-space:nowrap}
 .read span{font-size:.85em;color:var(--slate);font-weight:600}
 .note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--slate)}
 .side{min-height:0;overflow:hidden;font-size:16px}
@@ -34,12 +34,13 @@ table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:cent
 @media(max-width:820px){html,body{overflow:auto;height:auto}main{grid-template-columns:1fr}svg.sim{height:auto;flex:none}.side{overflow:visible}}
 </style></head><body>
 <header><h1>Péndulo de Pohl: oscilaciones amortiguadas</h1><a href="laboratorios.html#fai">← Laboratorio de FAI · INNOVA-FIS-LAB</a></header>
-<main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 560 500"></svg>
-<div class="bar"><div class="ctrl"><span style="font-weight:600">Freno</span><button class="btn vb" data-v="0">0 V</button><button class="btn vb" data-v="4">4 V</button><button class="btn vb" data-v="6">6 V</button><button class="btn vb" data-v="8">8 V</button><button class="btn" id="go">Girar a 15 div y soltar</button></div><div class="read"><div><span>Corriente del freno <i>I</i><sub>B</sub></span><b id="I">–</b></div><div style="flex:1"><span>Máximos a la derecha, <i>x</i><sub>n</sub> (div)</span><b id="mx" style="font-size:18px">–</b></div></div></div></div><p class="note">Valores de ejemplo: el amortiguamiento real depende de cada péndulo. · CC BY-NC-SA 4.0</p></section>
+<main><section class="left"><div class="card"><svg class="sim" viewBox="0 0 560 545"></svg>
+<div class="bar"><div class="ctrl"><span style="font-weight:600">Freno</span><button class="btn vb" data-v="0">0 V</button><button class="btn vb" data-v="4">4 V</button><button class="btn vb" data-v="6">6 V</button><button class="btn vb" data-v="8">8 V</button><button class="btn" id="go" data-alt="Volver a soltar">Girar a 15 div y soltar</button></div><div class="read"><div><span>Corriente del freno <i>I</i><sub>B</sub></span><b id="I">–</b></div></div></div></div><p class="note">Valores de ejemplo: el amortiguamiento real depende de cada péndulo. · CC BY-NC-SA 4.0</p></section>
 <section class="side card"><h2>Qué se observa</h2><p>La rueda oscila alrededor del cero de la escala. Sin freno apenas pierde amplitud. Con el freno, cada máximo es menor que el anterior en la misma proporción: la amplitud decae exponencialmente.</p><div class="eq" data-tex="x(t)=A\,e^{-\gamma t/2}\cos(\omega t+\varphi)"></div><h2>Qué hay que medir</h2><ol><li>Con el freno apagado, medir cinco veces el tiempo de 20 oscilaciones para obtener el periodo propio <i>T</i>₀.</li><li>Poner el freno a 4, 6 y 8 V y anotar la corriente <i>I</i><sub>B</sub>.</li><li>Girar la rueda hasta 15 divisiones, soltarla y leer los máximos sucesivos a la derecha, <i>x</i>₀, <i>x</i>₁, <i>x</i>₂…, hasta que sean menores que 1 división.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>n</i></th><th><i>x</i><sub>n</sub> (4 V)</th><th>ln <i>x</i><sub>n</sub> (4 V)</th><th><i>x</i><sub>n</sub> (6 V)</th><th>…</th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
 <script>
 function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let f=19;e.style.fontSize=f+'px';while(e.scrollHeight>e.clientHeight+1&&f>10){f-=0.5;e.style.fontSize=f+'px'}}
-addEventListener('resize',fit);setTimeout(fit,50);setTimeout(fit,600);
+function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'})}
+addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
 document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
 const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
 function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
@@ -58,14 +59,18 @@ const mag=mk('rect',{x:cx-30,y:cy+R-6,width:60,height:22,rx:3,fill:'#8a94a3'});c
 const gy=400,gh=90,gx=40,gw=480,GT=20;mk('rect',{x:gx,y:gy-gh/2,width:gw,height:gh,fill:'#fff',stroke:'#d9dee5'});mk('path',{d:`M${gx} ${gy} H${gx+gw}`,stroke:'#8a94a3'});
 const gl=mk('text',{x:gx,y:gy-gh/2-6,'font-size':13,fill:'#4a5566'});gl.textContent='x(t) en las últimas 20 s';
 const tr=mk('path',{fill:'none',stroke:'#1d5fa8','stroke-width':2}),dots=mk('g',{});
+const NB=12,bw=40,bx0=40,by0=478;const tl=mk('text',{x:bx0,y:by0-6,'font-size':13,fill:'#4a5566'});tl.textContent='Máximos a la derecha, x_n (div)';
+const cells=[];for(let i=0;i<NB;i++){mk('rect',{x:bx0+i*bw,y:by0,width:bw,height:20,fill:'#fff0c1',stroke:'#9aa3ae'});const h=mk('text',{x:bx0+i*bw+bw/2,y:by0+15,'font-size':13,'text-anchor':'middle',fill:'#1b2430'});h.textContent=i;
+ mk('rect',{x:bx0+i*bw,y:by0+20,width:bw,height:24,fill:'#fff',stroke:'#9aa3ae'});cells.push(mk('text',{x:bx0+i*bw+bw/2,y:by0+38,'font-size':14,'text-anchor':'middle',fill:'#17324d','font-weight':700}))}
+function showMax(){cells.forEach((c,i)=>c.textContent=i<maxs.length?fmt(maxs[i][1],1):'')}
 function setV(nv){V=nv;document.querySelectorAll('.vb').forEach(b=>b.classList.toggle('on',+b.dataset.v==V));$('#I').textContent=fmt(C[V][0],2)+' A';reset()}
-function reset(){x=0;v=0;t=0;hist=[];maxs=[];run=false;$('#mx').textContent='–';$('#go').textContent='Girar a 15 div y soltar';draw()}
+function reset(){x=0;v=0;t=0;hist=[];maxs=[];run=false;showMax();$('#go').textContent='Girar a 15 div y soltar';draw()}
 function draw(){wheel.setAttribute('transform',`translate(${cx} ${cy}) rotate(${x*DEG})`);
  if(hist.length){let d='';const t0=Math.max(0,t-GT);hist.forEach((p,i)=>{if(p[0]>=t0)d+=(d?'L':'M')+(gx+(p[0]-t0)/GT*gw)+' '+(gy-p[1]/16*gh/2)});tr.setAttribute('d',d);
  dots.innerHTML='';maxs.forEach(p=>{if(p[0]>=t0)mk('circle',{cx:gx+(p[0]-t0)/GT*gw,cy:gy-p[1]/16*gh/2,r:4,fill:'#1b2430'},dots)})}else{tr.setAttribute('d','');dots.innerHTML=''}}
 document.querySelectorAll('.vb').forEach(b=>b.onclick=()=>setV(+b.dataset.v));
-$('#go').onclick=()=>{reset();x=15;run=true;maxs.push([0,15]);$('#mx').textContent='15';$('#go').textContent='Volver a soltar'};setV(4);
-loop(dt=>{if(!run)return;const g=C[V][1],n=20,h=dt/n;for(let i=0;i<n;i++){const a=-w0*w0*x-g*v,vn=v+a*h;if(v>0&&vn<=0&&x>0.6){maxs.push([t,x]);$('#mx').textContent=maxs.map(p=>fmt(p[1],1)).join('  ·  ')}v=vn;x+=v*h;t+=h}
+$('#go').onclick=()=>{reset();x=15;run=true;maxs.push([0,15]);showMax();$('#go').textContent='Volver a soltar'};setV(4);
+loop(dt=>{if(!run)return;const g=C[V][1],n=20,h=dt/n;for(let i=0;i<n;i++){const a=-w0*w0*x-g*v,vn=v+a*h;if(v>0&&vn<=0&&x>0.6){maxs.push([t,x]);showMax()}v=vn;x+=v*h;t+=h}
  hist.push([t,x]);if(hist.length>4000)hist.shift();draw()});
 
 </script></body></html>

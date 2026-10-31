@@ -21,7 +21,7 @@ svg.sim{flex:1;min-height:0;width:100%;height:100%;display:block;background:#fff
 .btn{font:inherit;font-weight:700;border:1.5px solid var(--navy);background:#fff;color:var(--navy);border-radius:8px;padding:4px 11px;cursor:pointer}
 .btn.on{background:var(--navy);color:#fff}
 .read div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:3px 10px;display:flex;align-items:baseline;gap:8px}
-.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums}
+.read b{font-size:1.15em;color:var(--navy);font-variant-numeric:tabular-nums;display:inline-block;min-width:4.5em;white-space:nowrap}.read div{white-space:nowrap}
 .read span{font-size:.85em;color:var(--slate);font-weight:600}
 .note{flex:none;margin:0;font-size:clamp(11px,1.5vh,13px);color:var(--slate)}
 .side{min-height:0;overflow:hidden;font-size:16px}
@@ -39,7 +39,8 @@ table.t th,table.t td{border:1px solid #9aa3ae;padding:.3em .3em;text-align:cent
 <section class="side card"><h2>Qué se observa</h2><p>Con poca resistencia la tensión del condensador oscila alrededor de su valor final y las oscilaciones se van apagando, como un péndulo que se frena. Al subir <i>R</i> se apagan antes. Con la resistencia crítica la tensión llega a su valor final sin pasarse, y con más resistencia llega más despacio.</p><div class="eq" data-tex="L\,\ddot q+R_T\,\dot q+\frac{q}{C}=V(t)"></div><h2>Qué hay que medir</h2><ol><li>Elegir una <i>R</i> con la que se vean al menos 5 oscilaciones claras antes de que la señal se quede en su valor final.</li><li>Contando cuadros, medir el tiempo de 5 periodos y las alturas de los máximos sobre el valor final, <i>V</i>₀ a <i>V</i>₄.</li><li>Subir <i>R</i> y anotar el último valor con el que la tensión todavía se pasa del valor final y el primero con el que ya no se pasa.</li></ol><h2>Tabla de la ficha</h2><table class="t"><tr><th><i>n</i></th><th><i>V</i><sub>n</sub> (V)</th><th>ln <i>V</i><sub>n</sub></th></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></section></main>
 <script>
 function fit(){const e=document.querySelector('.side');if(innerWidth<=820){e.style.fontSize='';return}let f=19;e.style.fontSize=f+'px';while(e.scrollHeight>e.clientHeight+1&&f>10){f-=0.5;e.style.fontSize=f+'px'}}
-addEventListener('resize',fit);setTimeout(fit,50);setTimeout(fit,600);
+function fixBtn(){document.querySelectorAll('[data-alt]').forEach(e=>{e.style.minWidth='';const t=e.textContent;const w1=e.offsetWidth;e.textContent=e.dataset.alt;const w2=e.offsetWidth;e.textContent=t;e.style.minWidth=Math.max(w1,w2)+'px'})}
+addEventListener('resize',()=>{fixBtn();fit()});setTimeout(fixBtn,0);setTimeout(fixBtn,500);setTimeout(fit,50);setTimeout(fit,600);
 document.querySelectorAll('[data-tex]').forEach(e=>{try{katex.render(e.dataset.tex,e,{displayMode:e.classList.contains('eq'),throwOnError:false})}catch(x){e.textContent=e.dataset.tex}});
 const $=s=>document.querySelector(s),NS='http://www.w3.org/2000/svg';
 function mk(tag,at,par){const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);(par||$('svg.sim')).appendChild(e);return e}
