@@ -62,7 +62,7 @@ const gl=mk('text',{x:gx,y:gy-gh/2-10,'font-size':15,fill:'#1b2430'});gl.textCon
 const spr=mk('path',{stroke:'#1b2430','stroke-width':1.8,fill:'none'}),rod=mk('path',{stroke:'#1b2430','stroke-width':3});
 const ptr=mk('path',{stroke:'#c0392b','stroke-width':2}),hang=mk('g',{});
 function setm(){const n=+$('#N').value;m=0.010+0.010*n;$('#Nv').textContent=n;$('#m').textContent=Math.round(m*1000)+' g';hang.innerHTML='';
- for(let i=0;i<n+1;i++)mk('rect',{x:X0-24,y:i*9,width:48,height:7,rx:2,fill:i==0?'#5b6676':'#1d5fa8'},hang);}
+ const PL=5*9+4;mk('path',{d:`M${X0} -2 V${PL}`,stroke:'#1b2430','stroke-width':3},hang);for(let i=0;i<n;i++)mk('rect',{x:X0-22,y:PL-(i+1)*9,width:44,height:8,rx:2,fill:'#1d5fa8'},hang);mk('rect',{x:X0-27,y:PL,width:54,height:7,rx:2,fill:'#5b6676'},hang);}
 function draw(){const ext=m*g/k+y,yb=TOP+nat+ext*S;let d=`M${X0} ${TOP} V${TOP+12}`;const N=40;for(let i=1;i<N;i++){const yy=TOP+12+(yb-TOP-24)*i/N;d+=` L${X0+(i%2?12:-12)} ${yy}`}d+=` L${X0} ${yb-12} V${yb}`;
  spr.setAttribute('d',d);rod.setAttribute('d',`M${X0} ${yb} V${yb+30}`);ptr.setAttribute('d',`M${X0} ${yb+10} H300`);hang.setAttribute('transform',`translate(0 ${yb+30})`);}
 function reset(){setm();y=0;v=0;t=0;cnt=0;run=false;hist=[];tr.setAttribute('d','');$('#cnt').textContent='0';$('#tt').textContent='0,00 s';$('#go').textContent='Bajar 1 cm y soltar';draw()}
